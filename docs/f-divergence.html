@@ -622,7 +622,8 @@ where <span class="math inline">\(\mathrm{co}\)</span> denotes the convex hull w
 a natural extension of convex operations to
 <span class="math inline">\([0, \infty]^2\)</span>. In particular,</p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(\mathrm{co}(\mathcal R_2) \subset\mathcal R_4\)</span>.</li>
+<li><span class="math inline">\(\mathrm{co}(\mathcal R_2) \subset\mathcal R_4\)</span>:
+standard latent variable argument.</li>
 <li><span class="math inline">\(\mathcal R_k \subset \mathrm{co}(\mathcal R_2) = \mathcal R_4\)</span>.</li>
 <li><span class="math inline">\(\mathcal R = \mathcal R_4\)</span>: the approximation
 theorem already implies <span class="math inline">\(\mathcal R = \overline{\bigcup_k \mathcal R_k}\)</span>;
@@ -633,7 +634,7 @@ the closure is technical.</li>
 <summary>
 Proof
 </summary>
-First consider claim <span class="math inline">\(1\)</span>.
+<p>First consider claim <span class="math inline">\(1\)</span>.
 Construct a convex divergence as follows:
 for two pairs of distributions <span class="math inline">\((P_0, Q_0)\)</span> and
 <span class="math inline">\((P_1, Q_1)\)</span> on <span class="math inline">\(\mathcal X\)</span> and <span class="math inline">\(\lambda \in [0, 1]\)</span>.
@@ -643,7 +644,18 @@ Applying the conditional divergence to obtain
 <span class="math display">\[
     D_f(P_{XB} \| Q_{XB})
     = \bar \alpha D_f(P_0\|Q_0) + \alpha D_f(P_1 \| Q_1)
+    \implies \mathrm{co}(\mathcal R_2)\subset \mathcal R_4
 \]</span>
+Onto the most nontrivial claim <span class="math inline">\(2\)</span>: fixing <span class="math inline">\(k\)</span> and
+distributions <span class="math inline">\(P, Q\)</span> on <span class="math inline">\([k]\)</span> with distributions <span class="math inline">\((p_j), (q_j)\)</span>,
+w.l.o.g. make <span class="math inline">\(q_{j&gt;1}&gt;0\)</span> and concentrate <span class="math inline">\(q_1=0\)</span> (i.e. concentrate
+all empty points onto <span class="math inline">\(j=1\)</span>. Let <span class="math inline">\(\phi_{j&gt;1} = p_j / q_j\)</span> and consider
+[
+S = {
+Q = (q_j)_{j}:
+q_j, q_j=1, q_1=0,
+}</p>
+]
 </summary>
 </div>
 <div id="rényi-divergence" class="section level2 unnumbered hasAnchor">

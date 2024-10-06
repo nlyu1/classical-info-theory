@@ -46,7 +46,21 @@ link-citations: true
 
 
 # Preface {-}
-Placeholder. 
+
+The recurring themes in this book include: 
+
+1. Divergence as a fundamental concept in information theory. 
+    a. Quantifies difference between distributions; 
+    the choice of this quantification depends on our problem. 
+2. **Convexity** of $f$ for $f$-divergence is mathematically equivalent 
+    to our information intuitions: data-processing inequality, monotonicity, etc. 
+    a. KL-divergence (and Rényi) is special because its $\log$ form 
+    admits additive decomposition of joint divergence. 
+3. Convexity of information measures correspond to **variational characterizations**, 
+    which are important because: 
+    a. They provide bounds: choose the varied quantity to be our friend! 
+    b. Provide tractable variational approximations 
+    using numerical optimization methods (e.g. VAE, GAN). 
 
 ## Administrative trivia {-}
 Professor email: `yp@mit.edu`. 
