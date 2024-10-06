@@ -1,0 +1,202 @@
+# Lecture notes 
+
+## Oct 2: Fisher information, classical minimax estimation {-}
+
+Agenda: 
+
+1. $\chi^2$ variational characterization. 
+2. $1$-parameter families; minimax rate. 
+3. HCR, and Fisher information. 
+4. Cramer-Rau; van Trees inequality. 
+
+
+Key takeaways: 
+
+1. $R_n^*$ is the minimax rate of parameterization. 
+2. LeCam-Hajek theory: $R_n^* = \df{1+o(1)}{n \min_\theta I_F(\theta)}$. 
+3. To obtain more well-behaved inequalities, expand a single extremum 
+    into a nested one (e.g. scalar multiple) then solve the closed form 
+    of the inner optimization. 
+4. All $f$-divergences are locally quadratic in parameteric families 
+    with Hessian given by Fisher information. 
+5. Cramer-Rau is an application of the variational characterization 
+    of $\chi^2$. 
+
+### Main content {-}
+
+Recalling the variational characterization: 
+\[ 
+    D_f(P\|Q) = \sup_g \Exp_p g - \Exp_Q f^*\circ g
+\] 
+where the convex conjugate is given by 
+\[ 
+    f^*(h) = \sup_{t\in \R} th - f(t), \quad 
+    f(t) = \sup_{h\in \R} th - f^*(h)
+\] 
+Recall that Donsker-varadhan is not linear in $\Exp_Q$, 
+but there is a standard trick to rewrite the expectation. 
+
+We now apply the variational characterization to $\chi^2$; 
+
+:::{.proposition name="variational characterization of χ²"}
+$\chi^2(P \|Q) 
+= \sup_{h:\mca X\to \R} \Exp_p h(X) - \Exp_Q \left[
+    h(X) + \df{h(X)^2}{4}
+\right]$
+:::
+Expanding this out, the first term is very useful; 
+but the second is not. The first step is to break a single 
+extrema into two: 
+\begin{align}
+    \chi^2(P \|Q) 
+    &= \sup_h \left[
+        \Exp_p h - \Exp_Q h 
+    \right] - \df 1 4 \Exp_Q h^2 \\ 
+    &= \sup_g \sup_{\lambda\in \R} \lambda \left(
+        \Exp_P g - \Exp_Q g 
+    \right) - \df{\lambda^2}{4} \Exp_Q g^2  
+    = \sup_g \df{(\Exp_p g - \Exp_Q g)^2}{\Exp_q g^2} 
+\end{align}
+As a consequence, we obtain 
+\[ 
+    \left(
+        \Exp_P g - \Exp_Q g 
+    \right)^2 \leq \chi^2(P \|Q) \Exp_Q g^2 
+\] 
+In fact, this equation is invariant under $g\mapsto g + c$, yielding 
+\[ 
+    \left(
+        \Exp_P g - \Exp_Q g 
+    \right)^2 \leq \chi^2(P \|Q) \Var_Q g^2 
+\] 
+
+<span style="color:green">
+Exercise: $\forall g>0$, we have 
+$\Exp_P g \leq 2\Exp_Q g + 2_? H^2(P, Q)$. 
+</span>
+
+### One-parameter families; minimax rates {-}
+
+Statisticians care about sub-manifolds 
+of the probability simplex. 
+
+For one-parameter families, we typically have 
+\[ 
+    P^\theta(dx) = p^\theta(x) \mu(dx) 
+\] 
+For discrete, $\mu$ is counting; 
+for real-valued, $\mu$ is Lebesgue. 
+
+
+**Parameter estimation**: given $X_1, \cdots, X_n \sim P^\theta$; 
+find function $\hat \theta(X_1, \cdots, X_n)$ such that 
+$\hat \theta \approx \theta$; here $\approx$ is defined w.r.t. 
+a risk function 
+\[ 
+    R(\hat \theta, \theta) = \Exp_{X^n} (\theta - \hat \theta(X^n))^2
+\] 
+Note that the first argument is a function, while the second is a 
+parameter coordinate. 
+
+Example: $\hat \theta_0 = \df 1 n \sum X_j$ for Bernoulli 
+parameter estimation; we can compute 
+\[ 
+    R(\hat \theta, \theta) = \df{\theta \bar \theta}{n}
+\] 
+Recall that it's MLE and unbiased. To get mid of the 
+$\theta$-dependence, we can consider 
+\[ 
+    R^{\mrm{max}}(\hat \theta) 
+    = \sup_\theta R(\hat \theta_1, \theta)
+\] 
+
+Consider a naive estimator $\hat \theta_1 = 1/2$ 
+(this has definite bias but not variance) and 
+\[ 
+    \hat \theta_\lambda = \lambda \hat \theta_1 
+    + \bar \lambda \hat \theta_{\mrm{MLE}}
+\] 
+One can compute risk = bias^2 +variance^2 
+and choose an optimal $\lambda_n^*= \df 1 {1 + \sqrt n}$; 
+this allows one to optimize the risk everywhere. 
+
+**Theorem** The optimal shrinkage estimator 
+$\hat \lambda_{\lambda_n^*}$ saturates the minimax risk 
+\[ 
+    \inf_{\hat \theta} R^{\mrm{max}}(\hat \theta) 
+    = \df 1 {4(1 + \sqrt n)^2}
+\] 
+_Key idea:_ obtain MLE; identify points of worst 
+performance (minimum Fisher information), then bias 
+towards it. 
+
+The optimal minimax risk profile (minimax rate) is 
+\[ 
+    R_n^* = \inf_{\hat \theta} \sup_\theta R(\hat \theta, \theta) 
+\] 
+
+### HCR inequality; Fisher information{-}
+
+:::{.proposition}
+$\forall \hat \theta$ and $\theta, \theta_0$ we have
+\[ 
+    R_n^* \geq \Var_{P^\theta} \geq \df{
+        \left(\Exp_{P^\theta} \hat \theta 
+        - \Exp_{P^{\theta_0}} \hat \theta\right)^2
+    }{
+    \chi^2(P^{\theta \otimes n}\| P^{\theta_0 \otimes n})
+    }
+\] 
+:::
+_Proof:_ The first inequality follows from 
+bias-variance decomposition. For the second, take 
+$g(X^n) = \hat \theta(X^n)$ in the variational characterization 
+of $\chi^2$. 
+
+To bring Fisher information into the picture, consider 
+\[ 
+    \chi^2 (P^\theta \| P^{\theta_0}) 
+    = \sum \df{P^\theta(x)^2}{P^{\theta_0}(x)} - 1
+\] 
+Take $\theta = \theta_0 + \epsilon$ for small $\epsilon$; 
+Taylor-expand to obtain 
+\begin{align}
+    P^\theta(x) = P^{\theta_0}(x) 
+    + \pd \theta P^\theta \big|_{\theta = \theta_0} (x)\epsilon + 
+    \cdots 
+\end{align}
+Substitute this into the expression for $\chi^2$ to obtain 
+\[ 
+    \chi^2 = \sum_x \df{\left[
+        P^{\theta_0}(x) + \epsilon \pd \theta P^\theta(x)
+    \right]^2}{P^{\theta_0}(x)} - 1 + o(\epsilon^2)
+\] 
+Expanding the term, the linear term is $0$ (pull $\pd \theta$ out): 
+\[ 
+    \sum_x \pd \theta P^{\theta}(x) \big|_{\theta = \theta_0} 
+    = 0 
+\] 
+The null term sums to $1$, cancelling the $-1$, yielding the 
+local definition of $\chi^2$ 
+\[ 
+    \chi^2 = \epsilon^2 \sum_x 
+    \df{\left[\pd \theta P^{\theta_0}(x)\right]^2}
+    {P^{\theta_0}(x)} + o(\epsilon^2)
+\] 
+
+Recall that the **Fisher information** is given by 
+\[ 
+    \mca I_F(\theta; \{P^\theta\}_{\theta \in \Theta}) 
+    = \int \df{\left[\pd \theta P^\theta(x)\right]^2}{P^\theta(x)} \, \mu(dx)
+\] 
+
+
+There are two notions of distance: 
+Fisher information tells us, when we nudge 
+$\theta \mapsto \theta + \epsilon$, 
+how much is the statistical distance between $P^\theta$ 
+and $P^{\theta + \epsilon}$. 
+
+Moreover, Fisher information is additive under 
+tensorization: KL is additive under tensorization 
+and apply the locality principle. 

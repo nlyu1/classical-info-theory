@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Divergence | 6.7480 Notes</title>
+  <meta name="description" content="3 Divergence | 6.7480 Notes" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Divergence | 6.7480 Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Divergence | 6.7480 Notes" />
+  
+  
+  
+
+<meta name="author" content="Nicholas Lyu" />
+
+
+<meta name="date" content="2024-10-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="entropy-method-in-combinatorics-and-geometry.html"/>
+<link rel="next" href="mutual-information.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
+<ul>
+<li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#basics"><i class="fa fa-check"></i>Basics</a></li>
+<li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#combinatorial-properties"><i class="fa fa-check"></i>Combinatorial properties</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics and geometry</a>
+<ul>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#brégmans-theorem"><i class="fa fa-check"></i>Brégman’s theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
+<ul>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#kl-divergence"><i class="fa fa-check"></i>KL-Divergence</a></li>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#markov-kernels"><i class="fa fa-check"></i>Markov Kernels</a></li>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#conditional-divergence-chain-rule-dpi"><i class="fa fa-check"></i>Conditional divergence, Chain Rule, DPI</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
+<ul>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mutual-information-graphical-models"><i class="fa fa-check"></i>Conditional mutual information, graphical models</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#sufficient-statistic"><i class="fa fa-check"></i>Sufficient statistic</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html"><i class="fa fa-check"></i><b>5</b> Variational Measures of Information</a>
+<ul>
+<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#geometric-interpretations-of-mi"><i class="fa fa-check"></i>Geometric interpretations of MI</a></li>
+<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#lower-variational-bounds"><i class="fa fa-check"></i>Lower variational bounds</a></li>
+<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#continuity"><i class="fa fa-check"></i>Continuity</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extremization.html"><a href="extremization.html"><i class="fa fa-check"></i><b>6</b> Extremization</a>
+<ul>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#convexity"><i class="fa fa-check"></i>Convexity</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#minimax-and-saddle-point"><i class="fa fa-check"></i>Minimax and saddle-point</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-saddle-point-of-mi"><i class="fa fa-check"></i>Capacity, Saddle point of MI</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#gaussian-saddle-point"><i class="fa fa-check"></i>Gaussian saddle point</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
+<li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
+<ul>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#information-properties"><i class="fa fa-check"></i>Information properties</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#tv-and-hellinger-hypothesis-testing"><i class="fa fa-check"></i>TV and Hellinger, hypothesis testing</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>9</b> Lecture notes</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#main-content"><i class="fa fa-check"></i>Main content</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#one-parameter-families-minimax-rates"><i class="fa fa-check"></i>One-parameter families; minimax rates</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#hcr-inequality-fisher-information"><i class="fa fa-check"></i>HCR inequality; Fisher information</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">6.7480 Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="divergence" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Divergence<a href="divergence.html#divergence" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The main idea of this course is that:
+<span style="color:green">
+Divergence is the fundamental object in information theory.
+</span>
+Shannon-entropy is related to KL-divergence by
+equation <a href="divergence.html#prp:entropyDivergenceRelation">3.3</a>.
+It sheds light on the following relations:</p>
+<ol style="list-style-type: decimal">
+<li>Entropy subadditivity <span class="math inline">\(H(A, B)\leq H(A)+H(B)\)</span>
+corresponds to super-additivity of divergence when the
+sampling distribution is factorizable
+<span class="math display">\[
+     D(P_{AB} \|Q_AQ_B) \geq D(P_AP_B \| Q_AQ_B) = D(P_A\|Q_A) + D(P_B \|Q_B)
+\]</span>
+with equality iff <span class="math inline">\(P_{AB} = P_AP_B\)</span>
+(special case of full chain rule <a href="divergence.html#prp:specialDivChainRule">3.5</a>).</li>
+<li>Conditional factorization: the definition of <span class="math inline">\(H(Y|X)\)</span> satisfying
+<span class="math display">\[
+     H(Y|X) = H(X, Y) - H(X)
+\]</span>
+corresponds to the conditional factorization of divergence in
+<a href="divergence.html#prp:divergenceChainRule">3.2</a>
+<span class="math display">\[
+     D(P_{Y|X} \| Q_{Y|X} \, | \, P_X) = D(P_{XY}|Q_{XY}) - D(P_Y \| P_X)
+\]</span></li>
+<li>Conditioning reduces entropy
+(recall equivalence to entropy strong subadditivity iff submodularity)
+<span class="math display">\[
+     H(A|B) \leq H(A|B, C)
+\]</span>
+corresponds to conditioning increasing divergence
+<span class="math display">\[
+     D(P_Y \| Q_Y) \leq D(P_{Y|X} \| Q_{Y|X}\, |\, P_X)
+\]</span>
+with equality iff <span class="math inline">\(D(P_{X|Y} \| Q_{X|Y} \, | \, P_Y) = 0\)</span>.</li>
+</ol>
+<p>Some other ideas:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(D(P\|Q)\)</span> is the un-likelihood of sampling <span class="math inline">\(P\)</span> from <span class="math inline">\(Q\)</span>.</li>
+<li>It’s insightful to view <span class="math inline">\(P_{XY}\)</span> as generative processes <span class="math inline">\(P_{Y|X}P_X\)</span> by disintegration.</li>
+<li>Markov-kernels are randomized functions. A standalone distribution
+is a randomized function from a singleton domain.</li>
+<li>Discrete Markov kernels are transition matrices and functions.
+Composition <span class="math inline">\(K_{A|B}\circ K_{B|C} = K_{A|C}\)</span> corresponds
+to the matrix product (einsum) <span class="math inline">\(K^{A|B}_{ab} K^{B|C}_{bc} \mapsto K^{A|C}_{ac}\)</span>.
+Multiplication <span class="math inline">\(K_{A|B} K_{B|1} = K_{AB|1}\)</span>
+corresponds to the einsum <span class="math inline">\(K^{A|B}_{ab} K^{B|C}_{bc} \mapsto K^{AB|C}_{abc}\)</span>.
+In the function picture, composition is function composition
+<span class="math inline">\(f, g\mapsto (x\mapsto f(g(x))\)</span>, while multiplication corresponds
+to a more complicated operation.</li>
+<li>The singular most important tool for divergence is
+chain rule <a href="divergence.html#prp:divergenceChainRule">3.2</a>.</li>
+<li><span style="color:green">To produce conditional-quantity bounds, consider the joint quantity and
+decompose in <span class="math inline">\(2\)</span> different ways; this underpins the proof of KL-DPI and
+monotonicity of divergence under conditioning.
+</span></li>
+<li>The large deviations estimate <a href="divergence.html#cor:largeDevEstimate">3.3</a> demonstrates
+how KL gives a uniform (across all events)</li>
+</ol>
+<div id="kl-divergence" class="section level2 unnumbered hasAnchor">
+<h2>KL-Divergence<a href="divergence.html#kl-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:unlabeled-div-17" class="definition"><strong>Definition 3.1  (KL-Divergence) </strong></span>Given distributions <span class="math inline">\(P, Q\)</span> on <span class="math inline">\(\mathcal A\)</span> with <span class="math inline">\(Q\)</span>
+being the reference measure, the (Kullback-Leibler)
+divergence (relative entropy) between <span class="math inline">\(P, Q\)</span> is
+<span class="math display">\[
+    D(P\|Q) = \begin{cases}
+        \mathbb E_Q \left[d_QP \log d_QP\right] &amp; P \ll Q \\
+        +\infty &amp; \text{otherwise}
+    \end{cases}
+\]</span>
+By expanding the expectation,
+the first quantity is seen to be equivalent to
+<span class="math display">\[
+    \mathbb E_Q \left[d_QP \log d_QP\right]
+    = \mathbb E_P\left[
+        \log d_QP
+    \right]
+\]</span>
+Here <span class="math inline">\(d_QP\)</span> is the Radon-Nikodym derivative, which in
+the case of standard alphabet is <span class="math inline">\(P(X)/Q(X)\)</span>.
+The relation <span class="math inline">\(P\ll Q\)</span> is read as
+“<span class="math inline">\(P\)</span> is absolutely continuous w.r.t. <span class="math inline">\(Q\)</span>”.</p>
+</div>
+<div class="theorem">
+<p><span id="thm:infoInequality" class="theorem"><strong>Theorem 3.1  (Information inequality) </strong></span>For all <span class="math inline">\(P\ll Q\)</span>, <span class="math inline">\(D(P\|Q) \geq 0\)</span>, with equality iff <span class="math inline">\(P=Q\)</span>.</p>
+</div>
+<p><em>Proof:</em> Applying Jenson’s inequality to the convex function
+<span class="math inline">\(\varphi(x)=x\log x\)</span>:
+<span class="math display">\[\begin{align}
+    D(P\|Q) = \mathbb E_Q[\varphi(d_QP)] \geq \varphi \mathbb E_Q[d_QP] = \varphi(1) = 0
+\end{align}\]</span></p>
+<p>The following corollary shows that minimizing divergence
+recovers the true distribution.</p>
+<div class="corollary">
+<p><span id="cor:unlabeled-div-18" class="corollary"><strong>Corollary 3.1  (minimal entropy recovers true distribution) </strong></span>Given any discrete R.V. <span class="math inline">\(X\)</span> such that <span class="math inline">\(H(X)&lt;\infty\)</span>. Then
+<span class="math display">\[
+    \min_Q \mathbb E_{X\sim P_X} \left[\log \dfrac 1 {Q(X)} \right] = H(X)
+\]</span>
+where <span class="math inline">\(Q\)</span> is over valid probability distributions.
+The unique minimizer is <span class="math inline">\(Q=P_X\)</span>.</p>
+</div>
+<p><em>Proof:</em> Using the previous theorem:
+<span class="math display">\[\begin{align}
+    \mathbb E_Q \left[\log \dfrac 1 {Q(X)} - H(X)\right]
+    &amp;= \mathbb E_{P_X} \left[\log \dfrac{P_X(X)} {Q(X)}\right]
+    = D(P_X\|Q)
+\end{align}\]</span></p>
+<div class="remark">
+<p><span id="unlabeled-div-19" class="remark"><em>Remark</em> (perspective on KL-divergence). </span>One should think of <span class="math inline">\(D(P\|Q)\)</span> as the un-likelihood of
+producing the “candidate” distribution <span class="math inline">\(P\)</span> by samping from <span class="math inline">\(Q\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-20" class="definition"><strong>Definition 3.2  (binary divergence) </strong></span>Binary divergence is defined by
+<span class="math display">\[
+    d(p, q) = D(\mathrm{Ber}_p\| \mathrm{Ber}_q)
+    = p \log \dfrac p q + \bar p \log \dfrac{\bar p}{\bar q}
+\]</span></p>
+</div>
+</div>
+<div id="differential-entropy" class="section level2 unnumbered hasAnchor">
+<h2>Differential entropy<a href="divergence.html#differential-entropy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The differential entropy generalizes entropy to
+non-probability measures; it does not have many
+of the desirable properties of divergence, however
+(in particular, lack of invariance under bijective transform).</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-21" class="definition"><strong>Definition 3.3  (differential entropy) </strong></span>The differential entropy of a random vector <span class="math inline">\(X\)</span> is
+<span class="math display">\[
+    h(X) = -D(P_X\|\mathrm{Leb})
+\]</span>
+where <span class="math inline">\(\mathrm{Leb}\)</span> is the Lebesgue measure (just think
+of it as the constant <span class="math inline">\(1\)</span> everywhere). In particular, if <span class="math inline">\(X\)</span>
+has probability <span class="math inline">\(P_X\)</span>, then
+<span class="math display">\[
+    h(X) = \mathbb E_{P_X}\left[\log P_X(x)\right]
+\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-22" class="theorem"><strong>Theorem 3.2  (properties of differential entropy) </strong></span></p>
+<ol style="list-style-type: decimal">
+<li>Uniform distribution maximizes <span class="math inline">\(h\)</span>:
+given <span class="math inline">\(\mathrm{Pr}(X\in S\subset \mathbb R^n)=1\)</span>, then
+<span class="math inline">\(h(X^n \leq \log \mathrm{Leb}(S)\)</span> with equality given by uniform.</li>
+<li>Linear transform: <span class="math inline">\(h(AX+c) = h(X) + \log|\det A|\)</span> for invertible <span class="math inline">\(A\)</span>.</li>
+<li>Conditioning reduces entropy: <span class="math inline">\(h(X|Y) \leq h(X)\)</span>.</li>
+</ol>
+</div>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-23" class="proposition"><strong>Proposition 3.1  (differential entropy of Gaussian) </strong></span>Recall the multivariate Gaussian pdf:
+<span class="math display">\[
+    f(x) = \dfrac{1}{\sqrt{(2\pi )^d |\Sigma|}}
+    \exp \left[-\dfrac 1 2 (x-\mu)^T \Sigma^{-1}(x-\mu)\right]
+\]</span>
+the differential entropy of a
+multivariate Gaussian <span class="math inline">\(X=\mathcal N(\mu, \Sigma)\)</span> is
+<span class="math display">\[
+    h(X) = \dfrac 1 2 \log[(2\pi e)^d |\Sigma|]
+\]</span></p>
+</div>
+<p><em>Proof:</em> Direct computation: logarithm of the constant
+term yields <span class="math inline">\(\dfrac 1 2 \log[(2\pi )^d |\Sigma|]\)</span>, while the
+exponential term yields
+<span class="math display">\[\begin{align}
+    \mathbb E\left[
+        (x-\mu)^T \Sigma^{-1}(x-\mu)
+    \right]
+    &amp;= \mathbb E\mathrm{tr}\left[
+        (x-\mu)(x-\mu)^T \Sigma^{-1}
+    \right]\\
+    &amp;= \mathrm{tr}\left(
+        \mathbb E[(x-\mu)(x-\mu)^T]\Sigma^{-1}
+    \right) = \mathrm{tr}(I) = d
+\end{align}\]</span></p>
+<p>Recall that for semidefinite matrices,
+the positive semidefinite order is
+<span class="math display">\[
+    A\prec B \iff B - A\text{ semi-definite.}
+\]</span></p>
+<div class="theorem">
+<p><span id="thm:gaussianCovExtremality" class="theorem"><strong>Theorem 3.3  (entropy extremality under covariance constraint) </strong></span>For any <span class="math inline">\(d\times d\)</span> covariance <span class="math inline">\(\Sigma\)</span>,
+differential entropy is saturated by multivariate
+Gaussian
+<span class="math display">\[
+    \max_{\mathrm{Cov}(X) \preceq \Sigma} h(X)
+    = h(\mathcal N(0, \Sigma)) = \dfrac 1 2 \log[(2\pi e)^d |\Sigma|]
+\]</span>
+Expected power constraint is saturated by independent Gaussian
+<span class="math display">\[
+    \max_{\mathbb E[\|X\|^2] \leq a} h(X)
+    = h\left(\mathcal N\left(0, \dfrac a d I_d\right)\right)
+    = \dfrac d 2 \log \dfrac{2\pi e a}{d}
+\]</span></p>
+</div>
+<p><em>Proof:</em> let <span class="math inline">\(\mathbb E[X]=0\)</span> w.l.g and <span class="math inline">\(X_G = \mathcal N(0, \Sigma)\)</span> with
+pdf <span class="math inline">\(P_G\)</span>; apply information inequality
+<span class="math display">\[\begin{align}
+    0
+    &amp;\leq D(P_X \| X_G)
+    = \mathbb E_P \left[\log \dfrac{P_X(x)}{P_G(x)}\right]
+    = \mathbb E_P \left[\log P_X(x)\right]
+    - \mathbb E_P \left[\log P_G(x)\right] \\
+    &amp;= -h(X) - \dfrac 1 2 \log[(2\pi)^d |\Sigma|]
+    + \dfrac{\log e} e \mathbb E_P[X^T\Sigma^{-1}X]
+    \leq -h(X) + h(X_G)
+\end{align}\]</span>
+On the last step, we apply the usual trick
+<span class="math inline">\(\mathbb E_P[X^T\Sigma^{-1}X] = \mathrm{tr}\, \mathbb E[\Sigma_X \Sigma^{-1}] \leq \mathrm{tr}(I) = d\)</span>.</p>
+<div class="corollary">
+<p><span id="cor:unlabeled-div-24" class="corollary"><strong>Corollary 3.2  </strong></span><span class="math inline">\(\Sigma \mapsto \log \det \Sigma = \mathrm{tr}\log \Sigma\)</span>
+is concave on the space of real positive
+definite <span class="math inline">\(n\times n\)</span> matrices.</p>
+</div>
+<p><em>Proof:</em> Let <span class="math inline">\(\lambda\sim \mathrm{Ber}(1/2)\)</span> and
+<span class="math inline">\(X = \lambda \mathcal N(0, \Sigma_1) + \bar \lambda \mathcal N(0, \Sigma_2)\)</span>,
+convexity follows from <span class="math inline">\(h(X) \leq (X|\lambda)\)</span>.</p>
+</div>
+<div id="markov-kernels" class="section level2 unnumbered hasAnchor">
+<h2>Markov Kernels<a href="divergence.html#markov-kernels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Information theorists see Markov kernels everywhere!</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-25" class="definition"><strong>Definition 3.4  (Markov kernel (channel)) </strong></span>A Markov kernel is a function <span class="math inline">\(K(-|-)\)</span>,
+whose first argument is a measurable subset of <span class="math inline">\(\mathcal Y\)</span> and
+the second an element of <span class="math inline">\(\mathcal X\)</span> such that</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(E\to K(E|x)\)</span> is a probability measure for every <span class="math inline">\(x\in \mathcal X\)</span>.</li>
+<li><span class="math inline">\(x\to K(E|x)\)</span> is measurable.</li>
+</ol>
+<p>A markov kernel is the concept of a randomized function, where
+an input <span class="math inline">\(x\)</span> results in a random measure (distribution) on <span class="math inline">\(\mathcal Y\)</span>.</p>
+</div>
+<p>Common operations include:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Joint multiplication</strong>: Maps <span class="math inline">\(P_{Y|X} P_X\mapsto P_{X, Y}\)</span>.</li>
+<li><strong>Composition</strong>: a probability distribution <span class="math inline">\(P_X\)</span> on <span class="math inline">\(\mathcal X\)</span>
+and <span class="math inline">\(K:\mathcal X\to \mathcal Y\)</span>, then one can consider joint distribution
+<span class="math inline">\(P_X\times K\)</span> on <span class="math inline">\(\mathcal X\times \mathcal Y\)</span> where
+<span class="math display">\[
+     P_{X, Y}(x, y) = P_X(x) K(\{y\}|X)
+\]</span>
+This corresponds to matrix multiplication in the transition-matrix
+picture and function composition in the function picture.
+It is also the partial trace of joint-multiplication.</li>
+<li><strong>(Tensor / Cartesian) product</strong>:
+<span class="math inline">\(P_X, P_Y\mapsto P_X \times P_Y\)</span>.
+We also overload this with joint multiplication: for example:
+<span class="math inline">\(P_{Y|X}P_{Z|X}P_X\)</span> should be understood as <span class="math inline">\((P_{Y|X}\times P_{Z|X})P_X\)</span>.</li>
+<li><strong>Disintegration</strong> (standard Borel spaces):
+every <span class="math inline">\(P_{X, Y}\)</span> on <span class="math inline">\(\mathcal X\times \mathcal Y\)</span> can be decomposed into
+<span class="math display">\[
+     P_{X, Y} = P_X\times P_{Y|X}
+\]</span></li>
+</ol>
+<div class="definition">
+<p><span id="def:unlabeled-div-26" class="definition"><strong>Definition 3.5  (Binary symmetric channel) </strong></span>The channel <span class="math inline">\(\mathrm{BSC}_\delta\{0, 1\}\to \{0, 1\}\)</span> is defined as
+<span class="math display">\[
+    Y = (X + Z)\mod 2, \quad Z\sim \mathrm{Ber}(\delta)
+\]</span>
+This has the transition matrix in basis <span class="math inline">\(\{0, 1\}\)</span>:
+<span class="math display">\[
+    \begin{pmatrix}
+        1 - \delta &amp; \delta \\
+        \delta &amp; 1 - \delta
+    \end{pmatrix}
+\]</span></p>
+</div>
+<p>Matrix multiplication shows that
+<span class="math inline">\(\mathrm{BSC}_\delta \circ \mathrm{BSC}_\delta
+= \mathrm{BSC}_{2\delta \bar \delta}
+= \mathrm{BSC}_{\delta \ast \bar \delta}\)</span>.</p>
+</div>
+<div id="conditional-divergence-chain-rule-dpi" class="section level2 unnumbered hasAnchor">
+<h2>Conditional divergence, Chain Rule, DPI<a href="divergence.html#conditional-divergence-chain-rule-dpi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The joint divergence can be written as the sum of marginal
+and conditional divergences, where the latter is defined below:</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-27" class="definition"><strong>Definition 3.6  (Conditional divergence) </strong></span>Given distribution <span class="math inline">\(P_X\)</span> and two markov kernels <span class="math inline">\(P_{Y|X}, Q_{Y|X}\)</span>,
+the divergence between <span class="math inline">\(P, Q\)</span> given <span class="math inline">\(P_X\)</span> is defined as
+<span class="math display">\[
+    D(P_{Y|X}\|Q_{Y|X}\,|\, P_X) \equiv
+    \mathbb E_{x_0\sim P_X} \left[
+        D(P_{Y|X=x_0} \| Q_{Y|X=x_0})
+    \right] = \mathbb E_{X, Y\sim P_{Y|X}P_X} \left[\log \dfrac{P_{Y|X}}{Q_{Y|X}}\right]
+\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:divergenceChainRule" class="proposition"><strong>Proposition 3.2  (Chain rule) </strong></span></p>
+<span style="color:green">
+The joint divergence is (1) the sum of marginal plus conditional divergences,
+and (2) the sum of marginal divergence and joint divergence upon replacing the
+source of <span class="math inline">\(Q_{Y|X}\)</span> with <span class="math inline">\(P_X\)</span>. </span>
+<div style="color:blue">
+<p><span class="math display">\[
+    D(P_{X, Y}\|Q_{X, Y}) = D(P_X, Q_X) + D(P_{Y|X}\|Q_{Y|X} \, |P_X)
+    = D(P_X, Q_X) + D(P_{XY} \| Q_{Y|X}P_X)
+\]</span></p>
+</div>
+</div>
+<p><em>Proof:</em> Expand the definition and factor joint into conditionals
+<span class="math display">\[\begin{align}
+    D(P_{X, Y}\|Q_{X, Y})
+    &amp;= \mathbb E_P\left[\log \dfrac{P_{XY}}{Q_{XY}}\right]
+    = \mathbb E_P\left[\log \dfrac{P_{Y|X}P_X}{Q_{Y|X}Q_X}\right] \\
+    &amp;= \mathbb E_P \left[\log \dfrac{P_{Y|X}}{Q_{Y|X}}\right] +
+    \mathbb E_P \left[\log \dfrac{P_X}{Q_X}\right] \\
+    &amp;= D(P_{Y|X}\|Q_{Y|X}\, | P_X) + D(P_X\|Q_X)
+\end{align}\]</span>
+The second equality follows from the first equality (see property 1 below).</p>
+<div style="color:green">
+<div class="remark">
+<p><span id="unlabeled-div-28" class="remark"><em>Remark</em> (care in factoring Q). </span>In the expression above, note that <span class="math inline">\(Q_{XY}=Q_{Y|X}Q_X\)</span> should be factored
+<em>according to the marginal of <span class="math inline">\(Q\)</span>, not <span class="math inline">\(P\)</span>.</em> This is important
+in the proof of the Kolmogorov identities in theorem
+<a href="mutual-information.html#thm:mutInfoMoreProperties">4.2</a>, where
+<span class="math display">\[
+    P_{XY}P_Z \text{ factored against $XZ$} = P_{Y|X}
+\]</span></p>
+</div>
+</div>
+<p>Almost every property of Shannon entropy has a counterpart
+in KL-divergence.
+The following relation provides some intuition as to why:</p>
+<div class="proposition">
+<p><span id="prp:entropyDivergenceRelation" class="proposition"><strong>Proposition 3.3  (entropy-divergence relation) </strong></span>Given a distribution <span class="math inline">\(P\)</span> supported on a finite set <span class="math inline">\(\mathcal A\)</span>
+<span class="math display">\[
+    H(P) = \log |\mathcal A| - D(P\|U_{\mathcal A})
+\]</span>
+where <span class="math inline">\(U_{\mathcal A}\)</span> is the uniform distribution of <span class="math inline">\(\mathcal A\)</span>.
+Given <span class="math inline">\(X, Y\)</span> on <span class="math inline">\(\mathcal A, \mathcal B\)</span>, the conditional entropy is written as
+<span class="math display">\[
+    H(Y|X) = \log |\mathcal B| - D(P_{Y|X} \| U_{\mathcal B} | P_X)
+\]</span></p>
+</div>
+<p><em>Proof</em> The first claim follows by direct computation: let <span class="math inline">\(n=|\mathcal A|\)</span>, then
+<span class="math display">\[
+    \log |\mathcal A| - D(P\|U_{\mathcal A})
+    = \log n - \mathbb E_{x\sim P} \log n P(x)
+    =\mathbb E_{x\sim P} \left[\log n + \log \dfrac 1 {n P(x)}\right]
+    =H(X)
+\]</span>
+Let <span class="math inline">\(m=|\mathcal B|\)</span>, the second claim follows from
+<span class="math display">\[\begin{align}
+    H(Y|X)
+    &amp;= H(X, Y) - H(X)\\
+    &amp;= \log (nm) - \log n - \left[
+        D(P_{XY} \| U_{\mathcal A\times \mathcal B}) -
+        D(P_X \| U_{\mathcal A})
+    \right]\\
+    &amp;= \log |\mathcal B| - D(P_{Y} \| U_{\mathcal B}\, | U_{\mathcal A})
+\end{align}\]</span></p>
+<div class="theorem">
+<p><span id="thm:divergenceProperties" class="theorem"><strong>Theorem 3.4  (Properties of divergence) </strong></span>Given standard Borel <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, then</p>
+<ol style="list-style-type: decimal">
+<li><span style="color:blue">Unconditional expression for divergence</span>
+<span class="math inline">\(D(P_{Y|X}\|Q_{Y|X}\, |\, P_X) = D(P_{Y|X}P_X \| Q_{Y|X} P_X)\)</span>.<br />
+</li>
+<li><span style="color:blue">Monotonicity</span>:
+<span class="math inline">\(D(P_{X, Y}\|Q_{X, Y}) \geq D(P_Y\|Q_Y)\)</span>
+(follows from chain rule + information inequality).</li>
+<li><span style="color:blue">Full chain rule</span>:
+<span class="math inline">\(D(P_{X_1\cdots X_n} \| Q_{X_1\cdots X_n})
+     = \sum_{j=1}^n D(
+         P_{X_j|X_1, \cdots, X_{j-1}} \|
+         Q_{X_j|X_1, \cdots, X_{j-1}} \, | \,
+         P_{X_1, \cdots, X_{j-1}}
+     )\)</span>.</li>
+<li><span style="color:blue"> Tensorization </span>:
+<span class="math inline">\(D\left(\prod P_{X_j} \| \prod Q_{X_j} \right)
+     = \sum D(P_{X_j} \| Q_{X_j})\)</span></li>
+</ol>
+</div>
+<p><em>Proof</em>: The unconditional expression follows
+from chain rule <a href="divergence.html#prp:divergenceChainRule">3.2</a>
+<span class="math display">\[
+        D(P_{Y|X} P_X\|Q_{Y|X} P_X) = D(P_{Y|X} P_X\|Q_{Y|X} P_X) - D(P_X\|P_X)
+        = D(P_{Y|X} P_X\|Q_{Y|X} P_X)
+    \]</span>
+The full chain rule follows from inductive application of the chain rule.
+For tensorization, see proposition <a href="divergence.html#prp:specialDivChainRule">3.5</a> below.</p>
+<div class="proposition">
+<p><span id="prp:conditionIncDiv" class="proposition"><strong>Proposition 3.4  (conditioning increases divergence) </strong></span>Given <span class="math inline">\(P_{Y|X}, Q_{Y|X}, P_X\)</span>, we have
+<span class="math display">\[
+    D(P_{Y|X}\circ P_X \| Q_{Y|X} \circ P_X)
+    \leq D(P_{Y|X} \| Q_{Y|X} \, | \, P_X) = D(P_{Y|X} P_X \| Q_{Y|X} P_X)
+\]</span>
+Equality is saturated iff <span class="math inline">\(D(P_{X|Y} \| Q_{X|Y} \, |\, P_Y) = 0\)</span>.</p>
+</div>
+<p><em>Proof:</em> Written in this form, this is apparant since <span class="math inline">\(A\circ B\)</span> loses information
+from the joint <span class="math inline">\(AB\)</span>. To see this explicitly, let
+<span class="math display">\[
+        P_Y = P_{Y|X} \circ P_X, \quad Q_Y = Q_{Y|X} \circ P_X, \quad
+        P_{XY} = P_XP_Y, \quad Q_{XY} = Q_XQ_Y
+    \]</span>
+Using the chain rule yields
+<span class="math display">\[\begin{align}
+        D(P_{XY} \| Q_{XY})
+        &amp;= D(P_{X|Y} \| Q_{X|Y} \, | \, P_Y) + D(P_Y \| Q_Y) \\
+        &amp;= D(P_{Y|X} \| Q_{Y|X} \, | \, P_X) + D(P_X \| Q_X)_{=0}
+    \end{align}\]</span>
+Here <span class="math inline">\(D(P_X \| Q_X)=0\)</span>; the equality condition can also be seen.</p>
+<div class="proposition">
+<p><span id="prp:specialDivChainRule" class="proposition"><strong>Proposition 3.5  (chain rule: independent sampling distribution) </strong></span>Consider the chain rule with independent <span class="math inline">\(Q\)</span>’s, then
+<span class="math display">\[
+    D(P_{X_1\cdots X_n} \|Q_{X_1}\cdots Q_{X_n})
+    = D(P_{X_1\cdots X_n} \| P_{X_1}\cdots P_{X_n})
+    + \sum_{j=1}^n D(P_{X_j} \|Q_{X_j})
+    \geq \sum_{j=1}^n D(P_{X_j} \|Q_{X_j})
+\]</span>
+with equality saturated iff <span class="math inline">\(P\)</span> is factorizable.</p>
+</div>
+<p><em>Proof:</em> Use the second equality in the chain rule <a href="divergence.html#prp:divergenceChainRule">3.2</a>
+inductively to swap out <span class="math inline">\(Q_{X_j}\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:klDPI" class="theorem"><strong>Theorem 3.5  (Data-Processing Inequality (DPI)) </strong></span>Given a Markov kernel <span class="math inline">\(K:\mathcal X\to \mathcal Y\)</span> and
+a chain <span class="math inline">\((P_X, Q_X) \xrightarrow{K} (P_Y, Q_Y)\)</span> so that
+<span class="math inline">\(P_Y = K_{Y|X} \circ P_X, \quad Q_Y = K_{Y|X} \circ Q_X\)</span>,
+then processing reduces the ability to distinguish between
+the distributions
+<span class="math display">\[
+        D(P_X\|Q_X) \geq D(P_Y\|Q_Y)
+        = D(K_{Y|X} \circ P_X \| K_{Y|X} \circ Q_X)
+    \]</span></p>
+</div>
+<p><em>Proof:</em> Decompose the joint in <span class="math inline">\(2\)</span> different ways:
+<span class="math display">\[\begin{align}
+        D(P_{XY}\|Q_{XY})
+        &amp;= D(P_{X|Y} \| Q_{X|Y} |P_Y)_{\geq 0}
+        + D(P_Y \| Q_Y) \\
+        &amp;= D(P_{Y|X} \| Q_{Y|X}|P_X)_{=0} + D(P_X\|Q_X)
+    \end{align}\]</span>
+Using nonnegativity on the first line and equality
+of the channel on the second line yields that
+the processing inequality is saturated iff the
+reverse inference distribution is the same:
+<span class="math display">\[
+        D(P_Y\|Q_Y) \leq D(P_X\|Q_X) \text{ with equality } \iff
+        D(P_{X|Y} \| Q_{X|Y} |P_Y)_{\geq 0}
+    \]</span></p>
+<div class="corollary">
+<p><span id="cor:largeDevEstimate" class="corollary"><strong>Corollary 3.3  (large deviations estimate) </strong></span>For any subset <span class="math inline">\(E\subset \mathcal X\)</span> we have
+<span class="math display">\[
+    D(P_X \| Q_X) \geq d(P_X[E] \| Q_X[E])
+\]</span></p>
+</div>
+<p><em>Proof:</em> Apply to the binary-output channel <span class="math inline">\(1_E\)</span>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="entropy-method-in-combinatorics-and-geometry.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mutual-information.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

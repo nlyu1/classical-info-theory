@@ -1,0 +1,7 @@
+<details>
+<summary>Proof</summary>
+</details>
+
+<span style="color:red">
+Is Rényi defined for $\lambda = 0$?
+</span>

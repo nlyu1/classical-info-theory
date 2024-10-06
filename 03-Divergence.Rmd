@@ -1,0 +1,469 @@
+# Divergence 
+
+The main idea of this course is that: 
+<span style="color:green">
+Divergence is the fundamental object in information theory. 
+</span>
+Shannon-entropy is related to KL-divergence by 
+equation \@ref(prp:entropyDivergenceRelation). 
+It sheds light on the following relations: 
+
+1. Entropy subadditivity $H(A, B)\leq H(A)+H(B)$ 
+    corresponds to super-additivity of divergence when the 
+    sampling distribution is factorizable 
+    \[ 
+        D(P_{AB} \|Q_AQ_B) \geq D(P_AP_B \| Q_AQ_B) = D(P_A\|Q_A) + D(P_B \|Q_B)
+    \] 
+    with equality iff $P_{AB} = P_AP_B$ 
+    (special case of full chain rule \@ref(prp:specialDivChainRule)). 
+2. Conditional factorization: the definition of $H(Y|X)$ satisfying 
+    \[ 
+        H(Y|X) = H(X, Y) - H(X)
+    \] 
+    corresponds to the conditional factorization of divergence in 
+    \@ref(prp:divergenceChainRule)
+    \[ 
+        D(P_{Y|X} \| Q_{Y|X} \, | \, P_X) = D(P_{XY}|Q_{XY}) - D(P_Y \| P_X)
+    \] 
+3. Conditioning reduces entropy 
+    (recall equivalence to entropy strong subadditivity iff submodularity) 
+    \[ 
+        H(A|B) \leq H(A|B, C) 
+    \] 
+    corresponds to conditioning increasing divergence 
+    \[ 
+        D(P_Y \| Q_Y) \leq D(P_{Y|X} \| Q_{Y|X}\, |\, P_X)
+    \] 
+    with equality iff $D(P_{X|Y} \| Q_{X|Y} \, | \, P_Y) = 0$. 
+
+Some other ideas: 
+
+1. $D(P\|Q)$ is the un-likelihood of sampling $P$ from $Q$. 
+2. It's insightful to view $P_{XY}$ as generative processes $P_{Y|X}P_X$ by disintegration. 
+3. Markov-kernels are randomized functions. A standalone distribution 
+    is a randomized function from a singleton domain. 
+4. Discrete Markov kernels are transition matrices and functions. 
+    Composition $K_{A|B}\circ K_{B|C} = K_{A|C}$ corresponds 
+    to the matrix product (einsum) $K^{A|B}_{ab} K^{B|C}_{bc} \mapsto K^{A|C}_{ac}$. 
+    Multiplication $K_{A|B} K_{B|1} = K_{AB|1}$ 
+    corresponds to the einsum $K^{A|B}_{ab} K^{B|C}_{bc} \mapsto K^{AB|C}_{abc}$. 
+    In the function picture, composition is function composition 
+    $f, g\mapsto (x\mapsto f(g(x))$, while multiplication corresponds 
+    to a more complicated operation. 
+5. The singular most important tool for divergence is 
+    chain rule \@ref(prp:divergenceChainRule). 
+6. <span style="color:green">To produce conditional-quantity bounds, consider the joint quantity and 
+    decompose in $2$ different ways; this underpins the proof of KL-DPI and 
+    monotonicity of divergence under conditioning. 
+    </span>
+7. The large deviations estimate \@ref(cor:largeDevEstimate) demonstrates 
+    how KL gives a uniform (across all events) 
+
+## KL-Divergence {-}
+:::{.definition name="KL-Divergence"}
+Given distributions $P, Q$ on $\mca A$ with $Q$ 
+being the reference measure, the (Kullback-Leibler) 
+divergence (relative entropy) between $P, Q$ is 
+\[ 
+    D(P\|Q) = \begin{cases}
+        \Exp_Q \left[d_QP \log d_QP\right] & P \ll Q \\ 
+        +\infty & \text{otherwise}
+    \end{cases}
+\] 
+By expanding the expectation, 
+the first quantity is seen to be equivalent to 
+\[ 
+    \Exp_Q \left[d_QP \log d_QP\right] 
+    = \Exp_P\left[
+        \log d_QP
+    \right]
+\] 
+Here $d_QP$ is the Radon-Nikodym derivative, which in 
+the case of standard alphabet is $P(X)/Q(X)$. 
+The relation $P\ll Q$ is read as 
+"$P$ is absolutely continuous w.r.t. $Q$". 
+:::
+
+:::{.theorem #infoInequality name="Information inequality"}
+For all $P\ll Q$, $D(P\|Q) \geq 0$, with equality iff $P=Q$. 
+:::
+_Proof:_ Applying Jenson's inequality to the convex function 
+$\varphi(x)=x\log x$: 
+\begin{align}
+    D(P\|Q) = \Exp_Q[\varphi(d_QP)] \geq \varphi \Exp_Q[d_QP] = \varphi(1) = 0
+\end{align}
+
+The following corollary shows that minimizing divergence 
+recovers the true distribution. 
+
+:::{.corollary name="minimal entropy recovers true distribution"}
+Given any discrete R.V. $X$ such that $H(X)<\infty$. Then 
+\[
+    \min_Q \Exp_{X\sim P_X} \left[\log \df 1 {Q(X)} \right] = H(X)
+\] 
+where $Q$ is over valid probability distributions. 
+The unique minimizer is $Q=P_X$.
+:::
+_Proof:_ Using the previous theorem: 
+\begin{align}
+    \Exp_Q \left[\log \df 1 {Q(X)} - H(X)\right]
+    &= \Exp_{P_X} \left[\log \df {P_X(X)} {Q(X)}\right]
+    = D(P_X\|Q)
+\end{align}
+
+:::{.remark name="perspective on KL-divergence"}
+One should think of $D(P\|Q)$ as the un-likelihood of 
+producing the "candidate" distribution $P$ by samping from $Q$. 
+:::
+
+:::{.definition name="binary divergence"}
+Binary divergence is defined by 
+\[ 
+    d(p, q) = D(\mrm{Ber}_p\| \mrm{Ber}_q) 
+    = p \log \df p q + \bar p \log \df {\bar p}{\bar q}
+\] 
+:::
+
+
+## Differential entropy {-}
+The differential entropy generalizes entropy to 
+non-probability measures; it does not have many 
+of the desirable properties of divergence, however 
+(in particular, lack of invariance under bijective transform). 
+
+:::{.definition name="differential entropy"}
+The differential entropy of a random vector $X$ is 
+\[ 
+    h(X) = -D(P_X\|\mrm{Leb})
+\] 
+where $\mrm{Leb}$ is the Lebesgue measure (just think 
+of it as the constant $1$ everywhere). In particular, if $X$ 
+has probability $P_X$, then 
+\[ 
+    h(X) = \mbb E_{P_X}\left[\log P_X(x)\right]
+\] 
+:::
+
+:::{.theorem name="properties of differential entropy"}
+
+1. Uniform distribution maximizes $h$: 
+    given $\Pr(X\in S\subset \R^n)=1$, then 
+    $h(X^n \leq \log \mrm{Leb}(S)$ with equality given by uniform. 
+2. Linear transform: $h(AX+c) = h(X) + \log|\det A|$ for invertible $A$. 
+3. Conditioning reduces entropy: $h(X|Y) \leq h(X)$. 
+:::
+
+
+
+:::{.proposition name="differential entropy of Gaussian"}
+Recall the multivariate Gaussian pdf: 
+\[ 
+    f(x) = \df{1}{\sqrt{(2\pi )^d |\Sigma|}}
+    \exp \left[-\df 1 2 (x-\mu)^T \Sigma^{-1}(x-\mu)\right]
+\] 
+the differential entropy of a 
+multivariate Gaussian $X=\mca N(\mu, \Sigma)$ is 
+\[ 
+    h(X) = \df 1 2 \log[(2\pi e)^d |\Sigma|]
+\] 
+:::
+_Proof:_ Direct computation: logarithm of the constant 
+term yields $\df 1 2 \log[(2\pi )^d |\Sigma|]$, while the 
+exponential term yields 
+\begin{align}
+    \Exp \left[
+        (x-\mu)^T \Sigma^{-1}(x-\mu) 
+    \right] 
+    &= \Exp \tr \left[
+        (x-\mu)(x-\mu)^T \Sigma^{-1}
+    \right]\\ 
+    &= \tr \left(
+        \Exp[(x-\mu)(x-\mu)^T]\Sigma^{-1}
+    \right) = \tr(I) = d
+\end{align}
+
+Recall that for semidefinite matrices, 
+the positive semidefinite order is 
+\[ 
+    A\prec B \iff B - A\text{ semi-definite.}
+\] 
+
+:::{.theorem #gaussianCovExtremality name="entropy extremality under 
+covariance constraint"}
+For any $d\times d$ covariance $\Sigma$, 
+differential entropy is saturated by multivariate 
+Gaussian 
+\[ 
+    \max_{\mrm{Cov}(X) \preceq \Sigma} h(X) 
+    = h(\mca N(0, \Sigma)) = \df 1 2 \log[(2\pi e)^d |\Sigma|]
+\] 
+Expected power constraint is saturated by independent Gaussian 
+\[ 
+    \max_{\Exp[\|X\|^2] \leq a} h(X) 
+    = h\left(\mca N\left(0, \df a d I_d\right)\right) 
+    = \df d 2 \log \df{2\pi e a}{d}
+\] 
+:::
+_Proof:_ let $\Exp[X]=0$ w.l.g and $X_G = \mca N(0, \Sigma)$ with 
+pdf $P_G$; apply information inequality 
+\begin{align}
+    0 
+    &\leq D(P_X \| X_G) 
+    = \Exp_P \left[\log \df{P_X(x)}{P_G(x)}\right]
+    = \Exp_P \left[\log P_X(x)\right] 
+    - \Exp_P \left[\log P_G(x)\right] \\ 
+    &= -h(X) - \df 1 2 \log[(2\pi)^d |\Sigma|]
+    + \df {\log e} e \Exp_P[X^T\Sigma^{-1}X]
+    \leq -h(X) + h(X_G)
+\end{align}
+On the last step, we apply the usual trick 
+$\Exp_P[X^T\Sigma^{-1}X] = \tr \, \Exp[\Sigma_X \Sigma^{-1}] \leq \tr(I) = d$. 
+
+
+:::{.corollary}
+$\Sigma \mapsto \log \det \Sigma = \tr \log \Sigma$ 
+is concave on the space of real positive 
+definite $n\times n$ matrices. 
+:::
+_Proof:_ Let $\lambda\sim \mrm{Ber}(1/2)$ and 
+$X = \lambda \mca N(0, \Sigma_1) + \bar \lambda \mca N(0, \Sigma_2)$, 
+convexity follows from $h(X) \leq (X|\lambda)$. 
+
+## Markov Kernels {-}
+Information theorists see Markov kernels everywhere! 
+
+:::{.definition name="Markov kernel (channel)"}
+A Markov kernel is a function $K(-|-)$, 
+whose first argument is a measurable subset of $\mca Y$ and 
+the second an element of $\mca X$ such that 
+
+1. $E\to K(E|x)$ is a probability measure for every $x\in \mca X$. 
+2. $x\to K(E|x)$ is measurable. 
+
+A markov kernel is the concept of a randomized function, where 
+an input $x$ results in a random measure (distribution) on $\mca Y$. 
+:::
+
+Common operations include: 
+
+1. **Joint multiplication**: Maps $P_{Y|X} P_X\mapsto P_{X, Y}$. 
+2. **Composition**:  a probability distribution $P_X$ on $\mca X$ 
+    and $K:\mca X\to \mca Y$, then one can consider joint distribution 
+    $P_X\times K$ on $\mca X\times \mca Y$ where 
+    \[ 
+        P_{X, Y}(x, y) = P_X(x) K(\{y\}|X)
+    \] 
+    This corresponds to matrix multiplication in the transition-matrix 
+    picture and function composition in the function picture. 
+    It is also the partial trace of joint-multiplication. 
+3. **(Tensor / Cartesian) product**: 
+    $P_X, P_Y\mapsto P_X \times P_Y$. 
+    We also overload this with joint multiplication: for example: 
+    $P_{Y|X}P_{Z|X}P_X$ should be understood as $(P_{Y|X}\times P_{Z|X})P_X$. 
+3. **Disintegration** (standard Borel spaces): 
+    every $P_{X, Y}$ on $\mca X\times \mca Y$ can be decomposed into 
+    \[ 
+        P_{X, Y} = P_X\times P_{Y|X}
+    \] 
+
+:::{.definition name="Binary symmetric channel"}
+The channel $\mrm{BSC}_\delta\{0, 1\}\to \{0, 1\}$ is defined as 
+\[
+    Y = (X + Z)\mod 2, \quad Z\sim \mrm{Ber}(\delta)
+\] 
+This has the transition matrix in basis $\{0, 1\}$: 
+\[ 
+    \begin{pmatrix}
+        1 - \delta & \delta \\ 
+        \delta & 1 - \delta 
+    \end{pmatrix}
+\] 
+:::
+Matrix multiplication shows that 
+$\mrm{BSC}_\delta \circ \mrm{BSC}_\delta 
+= \mrm{BSC}_{2\delta \bar \delta} 
+= \mrm{BSC}_{\delta \ast \bar \delta}$. 
+
+
+## Conditional divergence, Chain Rule, DPI {-}
+
+The joint divergence can be written as the sum of marginal 
+and conditional divergences, where the latter is defined below: 
+
+:::{.definition name="Conditional divergence"}
+Given distribution $P_X$ and two markov kernels $P_{Y|X}, Q_{Y|X}$, 
+the divergence between $P, Q$ given $P_X$ is defined as 
+\[ 
+    D(P_{Y|X}\|Q_{Y|X}\,|\, P_X) \equiv 
+    \Exp_{x_0\sim P_X} \left[
+        D(P_{Y|X=x_0} \| Q_{Y|X=x_0})
+    \right] = \Exp_{X, Y\sim P_{Y|X}P_X} \left[\log \df{P_{Y|X}}{Q_{Y|X}}\right]
+\] 
+:::
+
+:::{.proposition #divergenceChainRule name="Chain rule"}
+<span style="color:green">
+The joint divergence is (1) the sum of marginal plus conditional divergences,
+and (2) the sum of marginal divergence and joint divergence upon replacing the 
+source of $Q_{Y|X}$ with $P_X$. </span>
+<div style="color:blue">
+\[
+    D(P_{X, Y}\|Q_{X, Y}) = D(P_X, Q_X) + D(P_{Y|X}\|Q_{Y|X} \, |P_X)
+    = D(P_X, Q_X) + D(P_{XY} \| Q_{Y|X}P_X)
+\]  
+</div>
+:::
+_Proof:_ Expand the definition and factor joint into conditionals 
+\begin{align}
+    D(P_{X, Y}\|Q_{X, Y})
+    &= \Exp_P\left[\log \df{P_{XY}}{Q_{XY}}\right]
+    = \Exp_P\left[\log \df{P_{Y|X}P_X}{Q_{Y|X}Q_X}\right] \\ 
+    &= \Exp_P \left[\log \df{P_{Y|X}}{Q_{Y|X}}\right] + 
+    \Exp_P \left[\log \df{P_X}{Q_X}\right] \\ 
+    &= D(P_{Y|X}\|Q_{Y|X}\, | P_X) + D(P_X\|Q_X)
+\end{align}
+The second equality follows from the first equality (see property 1 below). 
+
+<div style="color:green">
+
+:::{.remark name="care in factoring Q"}
+In the expression above, note that $Q_{XY}=Q_{Y|X}Q_X$ should be factored 
+_according to the marginal of $Q$, not $P$._ This is important 
+in the proof of the Kolmogorov identities in theorem 
+\@ref(thm:mutInfoMoreProperties), where 
+\[ 
+    P_{XY}P_Z \text{ factored against $XZ$} = P_{Y|X}
+\] 
+:::
+</div>
+
+Almost every property of Shannon entropy has a counterpart 
+in KL-divergence. 
+The following relation provides some intuition as to why: 
+
+:::{.proposition #entropyDivergenceRelation name="entropy-divergence relation"}
+Given a distribution $P$ supported on a finite set $\mca A$ 
+\[ 
+    H(P) = \log |\mca A| - D(P\|U_{\mca A})
+\] 
+where $U_{\mca A}$ is the uniform distribution of $\mca A$. 
+Given $X, Y$ on $\mca A, \mca B$, the conditional entropy is written as 
+\[ 
+    H(Y|X) = \log |\mca B| - D(P_{Y|X} \| U_{\mca B} | P_X)
+\] 
+:::
+_Proof_ The first claim follows by direct computation: let $n=|\mca A|$, then 
+\[ 
+    \log |\mca A| - D(P\|U_{\mca A}) 
+    = \log n - \Exp_{x\sim P} \log n P(x) 
+    =\Exp_{x\sim P} \left[\log n + \log \df 1 {n P(x)}\right]
+    =H(X)
+\] 
+Let $m=|\mca B|$, the second claim follows from 
+\begin{align}
+    H(Y|X) 
+    &= H(X, Y) - H(X)\\ 
+    &= \log (nm) - \log n - \left[
+        D(P_{XY} \| U_{\mca A\times \mca B}) - 
+        D(P_X \| U_{\mca A})
+    \right]\\
+    &= \log |\mca B| - D(P_{Y} \| U_{\mca B}\, | U_{\mca A})
+\end{align}
+
+:::{.theorem #divergenceProperties name="Properties of divergence"}
+Given standard Borel $\mca X, \mca Y$, then 
+
+1. <span style="color:blue">Unconditional expression for divergence</span>
+    $D(P_{Y|X}\|Q_{Y|X}\, |\, P_X) = D(P_{Y|X}P_X \| Q_{Y|X} P_X)$.  
+2. <span style="color:blue">Monotonicity</span>: 
+    $D(P_{X, Y}\|Q_{X, Y}) \geq D(P_Y\|Q_Y)$ 
+    (follows from chain rule + information inequality). 
+3. <span style="color:blue">Full chain rule</span>:
+    $D(P_{X_1\cdots X_n} \| Q_{X_1\cdots X_n})
+        = \sum_{j=1}^n D(
+            P_{X_j|X_1, \cdots, X_{j-1}} \|
+            Q_{X_j|X_1, \cdots, X_{j-1}} \, | \, 
+            P_{X_1, \cdots, X_{j-1}}
+        )$. 
+4. <span style="color:blue"> Tensorization </span>:
+    $D\left(\prod P_{X_j} \| \prod Q_{X_j} \right)
+        = \sum D(P_{X_j} \| Q_{X_j})$
+:::
+_Proof_: The unconditional expression follows 
+    from chain rule \@ref(prp:divergenceChainRule)
+    \[ 
+        D(P_{Y|X} P_X\|Q_{Y|X} P_X) = D(P_{Y|X} P_X\|Q_{Y|X} P_X) - D(P_X\|P_X) 
+        = D(P_{Y|X} P_X\|Q_{Y|X} P_X)
+    \] 
+    The full chain rule follows from inductive application of the chain rule. 
+    For tensorization, see proposition \@ref(prp:specialDivChainRule) below.
+
+:::{.proposition #conditionIncDiv name="conditioning increases divergence"} 
+Given $P_{Y|X}, Q_{Y|X}, P_X$, we have 
+\[ 
+    D(P_{Y|X}\circ P_X \| Q_{Y|X} \circ P_X) 
+    \leq D(P_{Y|X} \| Q_{Y|X} \, | \, P_X) = D(P_{Y|X} P_X \| Q_{Y|X} P_X)
+\] 
+Equality is saturated iff $D(P_{X|Y} \| Q_{X|Y} \, |\, P_Y) = 0$. 
+:::
+_Proof:_ Written in this form, this is apparant since $A\circ B$ loses information 
+    from the joint $AB$. To see this explicitly, let 
+    \[ 
+        P_Y = P_{Y|X} \circ P_X, \quad Q_Y = Q_{Y|X} \circ P_X, \quad 
+        P_{XY} = P_XP_Y, \quad Q_{XY} = Q_XQ_Y 
+    \] 
+    Using the chain rule yields 
+    \begin{align}
+        D(P_{XY} \| Q_{XY})
+        &= D(P_{X|Y} \| Q_{X|Y} \, | \, P_Y) + D(P_Y \| Q_Y) \\ 
+        &= D(P_{Y|X} \| Q_{Y|X} \, | \, P_X) + D(P_X \| Q_X)_{=0}
+    \end{align}
+    Here $D(P_X \| Q_X)=0$; the equality condition can also be seen. 
+
+:::{.proposition #specialDivChainRule name="chain rule: independent sampling distribution"}
+Consider the chain rule with independent $Q$'s, then 
+\[ 
+    D(P_{X_1\cdots X_n} \|Q_{X_1}\cdots Q_{X_n})
+    = D(P_{X_1\cdots X_n} \| P_{X_1}\cdots P_{X_n}) 
+    + \sum_{j=1}^n D(P_{X_j} \|Q_{X_j}) 
+    \geq \sum_{j=1}^n D(P_{X_j} \|Q_{X_j})
+\] 
+with equality saturated iff $P$ is factorizable. 
+:::
+_Proof:_ Use the second equality in the chain rule \@ref(prp:divergenceChainRule) 
+inductively to swap out $Q_{X_j}$. 
+
+:::{.theorem #klDPI name="Data-Processing Inequality (DPI)"}
+Given a Markov kernel $K:\mca X\to \mca Y$ and 
+    a chain $(P_X, Q_X) \xrightarrow{K} (P_Y, Q_Y)$ so that 
+    $P_Y = K_{Y|X} \circ P_X, \quad Q_Y = K_{Y|X} \circ Q_X$, 
+    then processing reduces the ability to distinguish between 
+    the distributions 
+    \[ 
+        D(P_X\|Q_X) \geq D(P_Y\|Q_Y) 
+        = D(K_{Y|X} \circ P_X \| K_{Y|X} \circ Q_X)
+    \] 
+:::
+_Proof:_ Decompose the joint in $2$ different ways: 
+    \begin{align}
+        D(P_{XY}\|Q_{XY}) 
+        &= D(P_{X|Y} \| Q_{X|Y} |P_Y)_{\geq 0} 
+        + D(P_Y \| Q_Y) \\ 
+        &= D(P_{Y|X} \| Q_{Y|X}|P_X)_{=0} + D(P_X\|Q_X) 
+    \end{align}
+    Using nonnegativity on the first line and equality 
+    of the channel on the second line yields that 
+    the processing inequality is saturated iff the 
+    reverse inference distribution is the same: 
+    \[ 
+        D(P_Y\|Q_Y) \leq D(P_X\|Q_X) \text{ with equality } \iff 
+        D(P_{X|Y} \| Q_{X|Y} |P_Y)_{\geq 0} 
+    \] 
+
+:::{.corollary #largeDevEstimate name="large deviations estimate"}
+For any subset $E\subset \mca X$ we have 
+\[ 
+    D(P_X \| Q_X) \geq d(P_X[E] \| Q_X[E])
+\] 
+:::
+_Proof:_ Apply to the binary-output channel $1_E$. 

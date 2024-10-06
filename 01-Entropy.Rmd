@@ -1,0 +1,286 @@
+# Entropy 
+
+In my interpretation, the fundamental properties of entropy are: 
+
+1. Additive under independent joint: $H(X, Y) = H(X)+H(Y)$ when $X\indep Y$, 
+    with subadditivity when $X, Y$ are not independent. 
+2. Subtractive under conditioning: $H(X|Y) = H(X, Y) - H(X)$ (chain rule). 
+3. Conditioning decreases entropy (implication of 1, 2)
+
+Strong subadditivity is the mathematical equivalent of 
+"conditioning decreases entropy," which is further equivalent to 
+submodularity. 
+
+The two tricks in the proofs below are: 
+
+1. The chain $H_n/n \leq \cdots \leq H_k/k \leq \cdots H_1$ is equivalent to 
+$H_{k+1}-H_k \leq H_k - H_{k-1}$. (Han's inequality). 
+2. Expand "probability" to empirical lists and take appropriate limit (Shearer's lemma). 
+3. When reduction inequalities are present (e.g. submodularity), reason about an easy case 
+    (e.g. nested chain) then reduce using the reduction inequality (Shearer's lemma). 
+
+## Basics {-}
+::: {.definition name="Entropy"}
+The shannon entropy of a discrete random variable with 
+probability mass function $P_x(x\in \mca X)$ is 
+\[ 
+    H(X) = \Exp\left[\log \df 1 {P_X(X)}\right] 
+\]
+The conditional entropy is 
+\[ 
+    H(X|Y) = \Exp_{y\sim P_Y}\left[
+        H(P_{X|Y=y})
+    \right]
+\]
+:::
+
+:::{.definition name="convexity"}
+A subset $S$ of a vector space is convex if 
+\[ 
+    x, y\in S\implies \alpha x + \bar \alpha y \in S, \quad \alpha \in [0, 1], \quad \bar \alpha = 1 - \alpha 
+\]
+A function $f:S\to \R$ is convex if 
+\[ 
+    f(\alpha x + \bar \alpha y) \leq \alpha f(x) + \bar \alpha f(y)
+\]
+For any $S$-valued r.v. $X$, $f$ is convex implies $f(\Exp[X]) \leq \Exp[f(X)]$. 
+:::
+
+:::{.theorem name="properties of entropy"}
+
+a. Positivity $H(X)\geq 0$ with equality iff $X$ is constant. 
+b. Uniform distribution maximizes entropy: for finite $\mca X, H(X)\leq \log |\mca X|$ 
+    with equality iff $X$ is uniform on $X$. 
+c. Chain rule: $H(X, Y)=H(X)+H(Y|X) \leq H(X)+H(Y)$. 
+d. Conditioning decreases entropy: $H(X|Y)\leq H(X)$ with equality iff $X, Y$ are independent. 
+e. Deterministic transformation: $H(X)=H(X, f(X))\geq H(f(X))$ with equality iff $f$ 
+    is injective on the support of $P_X$. 
+f. Chain rule: equality holds iff $X_1, \cdots, X_n$ are mutually independent.  
+\[ 
+    H(X_1, \cdots, X_n) = \sum_{j=1}^n H(X_j|X^{j-1}) \leq \sum_{j=1}^n H(X_j)
+\]
+:::
+
+_Proof:_
+(b) $x\mapsto \log x$ is concave, so 
+\[ 
+    H(X) = \Exp\log \df 1 {P_X(X)} \leq 
+    \log \Exp \left[\df 1 {P_X(X)}\right]
+    = \log |\mca X|
+\] 
+(c) Telescoping 
+\[ 
+    H(X, Y) = \Exp\left[\log \df 1 {P_{X, Y}(X, Y)}\right] 
+    = \Exp\left[\log \df 1 {P_X(X)}\right] + \Exp\left[\log \df 1 {P_{Y|X}(Y|X)}\right]
+\] 
+(d) Apply Jensen's inequality to the strictly concave (over $[0, 1]$) 
+function $-x\log x$. 
+\[ 
+    H(X|Y) = \sum_x \Exp_Y\left[P(x|Y) \log \df 1 {P(x|Y)}\right] 
+    \leq \sum_x P(x)\log \df 1 {P(x)} = H(X)
+\] 
+Jenson's equality is saturated when $\forall x: \Exp[P(x|Y)] = P(x) \iff X \indep Y$. 
+(e) $H(X, f(X)) = H(f(X)) + H(f(X)|X) = H(X) + H(f(X)|X)$, and $H(f(X)|X)=0\iff f(X)$ is constant 
+given $X$. 
+
+:::{.theorem name="axiomatic characterization of entropy"}
+Denote a distribution $P=(p_1, \cdots, p_m)$ on $m$ letters and a functional $H_m(p_1, \cdots, p_m)$. 
+$H_m(P) = H(P)$ has to be the Shannon entropy if it obeys the following axioms: 
+
+(a) Permutation invariance: $H(P\circ \pi) = H(P)$
+(b) Expandibility: $H_{m+1}(P\oplus [0]) = H_m(P)$
+(c) Subadditivity: $H(X, Y)\leq H(X)+H(Y)$, with equality if $X\indep Y$. The saturation constraint 
+is equivalently 
+\[ 
+    H_{mn}(p_1q_1, \cdots, p_mq_n) = H_m(P) + H_n(Q) 
+\] 
+(d) Normalization: $H_2(1/2, 1/2)=\log 2)$ 
+(e) Continuity: $H_2(p, 1-p)\to 0$ as $p\to 0$. 
+:::
+
+:::{.definition name="Renyi entropy"}
+The Renyi entropy of order $\alpha$ is 
+\[ 
+    H_\alpha(P) = \begin{cases}
+        \df 1 {1-\alpha} \log \sum_j p_j^\alpha & \alpha \in (0, \infty)-\{1\} \\ 
+        \min_j \log(1/p_j) & \alpha = \infty 
+    \end{cases}
+\] 
+Renyi entropy is non-increasing in $\alpha$ and tends to the Shannon entropy as $\alpha\to 1$. 
+:::
+
+The "type" of a sequence refers to the empirical distribution of symbols in the sequence 
+(physical "macrostate", and the exact sequence corresponds to the "microstate").  
+The following proposition shows that the multinomial coefficient can be approximated up to 
+a polynomial term by $\exp(nH(P))$. 
+
+:::{.proposition #methodOfTypes name="method of types"}
+Given non-negative integers $(n_j)_{1\leq j\leq k}$ with $\sum n_j=n$ and 
+denote the distribution $(p_j) = (n_j/n)$, then the multinomial coefficient satisfies 
+\[ 
+    \df 1 {(1+n)^{k-1}} e^{nH(P)} \leq \binom{n}{(n_j)} \leq e^{nH(P)}, 
+    \quad \binom{n}{(n_j)} = \df{n!}{\prod n_j!}
+\] 
+:::
+
+_Proof:_ Fix $P$, let $(X_j)\sim P$ i.i.d and let $N_j$ denote the number of occurences of $j$, then 
+$(N_j)$ has a multinomial distribution 
+\[ 
+    \Pr((N_j)) = \binom{n}{(n_j)} \prod_j p_j^{n_j} = \binom{n}{(n_j)} e^{-nH(P)} \leq 1
+\] 
+The upper bound follows from $\Pr((N_j))\leq 1$. For the lower-bound, note that 
+$(N_j)$ takes at most $(n+1)^{k-1}$ values (each entry takes values in $\{0, \cdots, n\}$, and 
+there are $k-1$ degrees of freedom). Now 
+\[ 
+    1 = \sum_{(N_j)} \Pr((N_j)) \leq (n+1)^{k-1} \max \Pr((N_j)) 
+    = (n+1)^{k-1} \binom{n}{(N_j)} e^{-nH(P)}
+\] 
+
+
+## Combinatorial properties {-}
+
+:::{.definition name="submodularity, monotone"}
+Define $[n]=\{1, \cdots, n\}$ and let $\binom{S}{k}$ denote subsets of $S$ of size $k$, $2^S$ 
+all subsets of $S$. A set function $f:2^S\to \R$ is submodular if $\forall T_1, T_2\subset S$ 
+\[ 
+    f(T_1\cup T_2) + f(T_1\cap T_2) \leq f(T_1) + f(T_2)
+\] 
+This captures the sense that "adding elements yield diminishing returns" by rearranging the equation 
+\[ 
+    f(T_1\cup T_2) - f(T_2)\leq f(T_1) - f(T_1\cap T_2)
+\] 
+The set function $f$ is monotone if $T_1\subset T_2\implies f(T_1)\leq f(T_2)$. 
+:::
+
+:::{.theorem name="strong subadditivity of entropy"}
+Let $X^n$ be a discete RV, then $T\mapsto H(X_T)$ is monotone and submodular. 
+:::
+_Proof:_ Let $A=X_{T_1-T_2}, B=X_{T_1\cap T_2}, C-X_{T_2-T_1}$, we need to show that 
+\[ 
+    H(A, B, C) + H(B) \leq H(A, B) + H(B, C)
+\] 
+Monotonicity is apparant. Submodularity follows 
+from the fact that conditioning decreases entropy 
+\begin{align}
+    H(A, B, C) - H(A, B) &\leq H(B, C) - H(B) \\ 
+    H(C|A, B) &\leq H(C|B)
+\end{align}
+
+
+:::{.remark #submodularityInterpretation name="interpretation on submodularity"}
+Entropy subadditivity is the foralization of the fact that 
+adding information decreases entropy. Consider an example: 
+
+1. $Z$ is the result of a fair coin flip ($0$ or $1$). 
+2. $X$ is the result of an independent fair coin flip. 
+3. $Y=X\oplus Z$ denotes whether $Z=X$ ($0$ if this is true, else $1$). 
+
+Then $H(X) = H(Y) = H(Z) = \log 2$; 
+also $H(X, Z)=H(Y, Z)=H(X, Y, Z)=2\log 2$. 
+Then 
+
+\begin{aligned}
+    H(Z|X, Y) &= H(X, Y, Z) - H(X, Y) = 2\log 2 - 2\log 2 = 0 \\ 
+    H(Z|Y) &= H(Y, Z) - H(Y) = 2\log 2 - \log 2 = \log 2 = H(Z)
+\end{aligned}
+The first equation makes precise that "$X, Y$ tells us everything we need to know 
+about $Z$", while the last two that "$X$ alone tells us 
+nothing about $Z$." The mathematical implication of this statement is that 
+\[ 
+    H(Z|Y) > H(Z|X, Y) \iff H(Y, Z) - H(Y) \geq H(X, Y, Z) - H(X, Y) 
+\] 
+which is exactly the strong subadditivity of entropy: 
+adding information about $X$ increases $H(X)\mapsto H(X, Y)$ more than 
+it increases $H(X, Z)\mapsto H(X, Y, Z)$. 
+:::
+
+
+:::{.theorem name="Han's inequality"}
+Let $X^n$ be a discrete $n$-dimensional RV. Let 
+\[ 
+    \bar H_k(X^n) = \binom{n}{k}^{-1} \sum_{T\in \binom{[n]}{k}} H(X_T)
+\] 
+denote the average entropy of a $k$-subset of coordinates. Then $\bar H_k/k$ 
+is decreasing in $k$: 
+\[ 
+    \df 1 n \bar H_n \leq \cdots \leq \df 1 k \bar H_k \leq \cdots \leq \bar H_1
+\] 
+Furthermore, $\bar H_k$ is monotonically increasing but concave 
+\[ 
+    \bar H_{k+1} - \bar H_k \leq \bar H_k - \bar H_{k-1}
+\] 
+:::
+_Proof:_ Let $\bar H_0=0$. 
+The second claim implies the first since each term in the first 
+equation is an average of the (diminishing) terms in the second: 
+\[ 
+    \df 1 m \bar H_m = \df 1 m \sum_{k=1}^m (\bar H_k - \bar H_{k-1})
+\] 
+To prove the second claim, use submodularity 
+\[ 
+    H(X_1, \cdots, X_{k+1}) - H(X_1, \cdots, X_{k}) \leq H(X_2, \cdots, X_{k+1}) - H(X_2, \cdots, H_{k})
+\] 
+Average this over all $n!$ permutations of $[n]$ to get 
+\[ 
+    \bar H_{k+1} - \bar H_k \leq \bar H_k - \bar H_{k-1}
+\] 
+Equivalently, use the fact that conditioning decreases entropy, 
+average this expression over $n!$ permutations 
+\[ 
+    H(X_{k+1}|X_1, \cdots, X_k) \leq H(X_{k+1}|X_2, \cdots, X_k)
+\] 
+
+:::{.corollary #pairwiseBound name="joint entropy pairwise bound"}
+$H(X) \leq \df 1 {n-1} \sum_{i<j} H(X_i, X_j)$
+:::
+
+:::{.corollary name="a cute geometric result"}
+Consider placing $N$ points in $\R^3$ arbitrarily. Let  
+$N_1, N_2, N_3$ denote the number of distinct points projected 
+onto the $xy, xz, yz$-planes, then $N_1N_2N_3\geq N^2$. 
+:::
+
+_Proof_: Let $\mca C\subset (\R^3)^N$ denote the set of coordinates 
+of the $N$ points, and let $(A, B, C)\sim \mca C$ denote the three 
+components of the points drawn from $\mca C$, then using Han's inequality: 
+\[ 
+    \log N = H(A, B, C) \leq \df 1 2(\log N_1 + \log N_2 + \log N_3)
+\] 
+
+:::{.remark}
+The core to the proof above is that combinatorics (size-counting) 
+related to components are subject to the submodularity of entropy. 
+:::
+
+:::{.theorem #shearer name="Shearer's lemma"}
+Let $X^n$ be discrete $n$-dimensional RV and $S\subset [n]$ 
+be a RV independent of $X^n$, then 
+\[ 
+    H(X_S|S) \geq H(X^n) \min_{i\in [n]} \Pr(i\in S)
+\] 
+This holds for any submodular set-function $H$ with $H(\emptyset) = 0$. 
+:::
+_Proof:_ Consider the equivalent statement by "unrolling the probability": 
+if $\mca C=(S_1, \cdots, S_M)$ 
+is a list of subsets of $[n]$ then 
+\[ 
+    \sum_j H(S_j) \geq H(X^n) \min_j \deg(j), \quad \deg(j) = |\{j: i\in S_j\}|
+\] 
+Call $\mca C$ a chain if all subsets are such that 
+$S_1\subset S_2\cdots \subset S_M$. For a chain, the proposition 
+is trivial since $\min_j \deg(j)$ is zero of $S_M\neq [n]$ or equals 
+the multiplicity of $S_M$ in $\mca C$, which equals $\min_j \deg(j)$, in which case 
+\[ 
+    \sum_j H(X_{S_j}) \geq H(X_{S_M})\min_j \deg(j)
+\] 
+When $\mca C$ is not a chain, consider a pair of sets $S_1, S_2$ 
+incomparable by inclusion and replace with $S_1\cap S_2, S_1\cup S_2$. 
+Submodularity implies that $\sum_j H(X_{S_j})$ does not increase under this 
+transform, and $\deg j$ are not changed. Repeat this until we have a chain. 
+
+<span style="color:green">
+Main idea of the proof: 
+(1) expand "probability" to empirical lists. 
+(2) Reason about an easy case (chain), 
+then reduce to easy case by submodularity. 
+</span>

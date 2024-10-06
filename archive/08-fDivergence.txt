@@ -1,0 +1,118 @@
+# f-Divergences 
+
+Key takeaways:
+
+1. TV as binary hypothesis testing. 
+2. Several divergences are metrics; one fast way to 
+    compare is to compare to metric, use triangle inequality, 
+    then use comparison inequality again. 
+3. There is no chain rule for $f$-divergences other than 
+    KL-divergence. 
+4. Convexity $\iff$ DPI $\iff$ monotonicity. 
+5. TV does not enjoy tensorization properties. 
+6. $f$-divergence is equivalent module $+c(t-1)$; then 
+    convexity plus $f(t)=1$ implies locally $\chi^2$. 
+
+
+## Total variation {-}
+
+:::{.definition name="total variation (TV)"}
+$TV(P, Q) = \df 1 2 \int |p(x) - q(x)|\, dx$ 
+:::
+
+**Variational characterizations of TV**
+in both $\sup$ and $\inf$. 
+
+Suppose $X\to Y$ with $P_{Y|X} = (x=^?1):P:Q$, and 
+$X \sim \mrm{Unif}(\pm 1)$; then 
+\[ 
+    \min_{\hat X\in \pm 1} \Pr[X\neq \hat X|Y] 
+    = \df{1 - \mrm{TV}(P, Q)}{2}
+\] 
+Suppose we want to minimize mse, then 
+\[ 
+    \min_{\hat X\in [-1, 1]} \Pr[(X-\hat X)^2|Y] 
+    = \df{1 - \mrm{TV}(P, Q)}{2}
+\] 
+
+
+## f-Divergence {-}
+
+:::{.definition name="f-divergence"}
+Fix convex $f: (0, \infty) \to \bar {\mathbb R}$ satisfying 
+$f(1)=0$. Given $P, Q$ with $P\ll Q$, 
+\[ 
+    D_f(P\|Q) = \Exp_Q \left[f\left(\df{dP}{dQ}\right)\right]
+\] 
+When $P\not \ll Q$: fixing $p>0$ constant and $q\to 0$
+\[ 
+    qf(p/q) = p \df{f(p/q)}{p/q} \to p f'(\infty), \quad 
+    f'(\infty) \equiv \lim_{x\to \infty} \df{f(x)}{x}
+\] 
+For example, for TV we have $f'(\infty)=1$, while for KL it's 
+not defined. The generalized version is thus 
+\[ 
+    D_f(P\|Q) 
+    = \sum_{x\in \mca X, Q(x)>0} Q(x) f \df{dP}{dQ} 
+    + \sum_{Q(x)=0} p(x) f'(\infty)
+\] 
+
+Symmetric $f$-divergences are written with comma. 
+
+1. With $f(t)=t\log t$: KL-divergence. 
+2. With $f(t) = \df 1 2 |t-1|$: total variation. 
+3. $f(t)=(t-1)^2$: $\chi^2$ variation. 
+4. $f(t)=(\sqrt t - 1)^2$: Hellinger. 
+5. $t\log t - \log t$: symmetric KL. 
+6. $???$: $D(P \| (P+Q)/2) + D(Q \| (P+Q)/2)$: Jensen-Shannon 
+    (JS) divergence. 
+:::
+
+Exchange symmetry of $f$-divergence: 
+$D_f(P\|Q) = D_{tf(1/t)}(Q\|P)$. 
+
+<span style="color:green">
+Convexity of $f$ corresponds to DPI. 
+</span>
+
+## Data-processing inequality {-}
+
+:::{.theorem name="general monotonicity"}
+$D_f(P_{AB} \| Q_{AB}) \geq D(P_A \| Q_A)$. 
+:::
+_Proof:_ Just apply Jensen's inequality. 
+
+:::{.corollary name="hello"}
+$D(P_B \| Q_B) \geq 0$. Introduce a constant, then 
+\[ 
+    D_F(P_B \| Q_B) = D_f(P_{B, 1} \| Q_{B, 1}) 
+    \geq D_f(P_1 \| Q_1) = 0 
+\] 
+:::
+
+:::{.theorem name="general DPI"}
+$D_f(P_X \| Q_X) \geq D_f (P_Y \| Q_Y)$. 
+:::
+_Proof:_ $D_f(P_X \| Q_X)=D_f(P_{XY} \| Q_{XY})\geq D_f(P_Y \| Q_Y)$. 
+
+:::{.theorem name="locality of divergence"}
+Almost all $f$-divergences are locally $\chi$^2$: 
+let $f$ be twice continuous differentiable with
+$\limsup_{x\to \infty} f'(x)<\infty$. 
+If $\chi^2(P\|Q) < \infty$, then 
+\[ 
+    \lambda^2 \df{f''(1)}{2} \chi^2(P\|Q) + o(\lambda)
+\] 
+:::
+_Proof (sketch):_ Expand about $\lambda$, and constant and 
+linear terms go to zero. 
+
+:::{.corollary}
+Consider DPI applied to $X\to Y=1_{E\subset \mca X}$. 
+\begin{align}
+    |P(E) - Q(E)| &\leq TV(P, Q) \\ 
+    |P(E) - Q(E)| &\leq \sqrt{\chi^2(P\|Q) Q(E)} \\ 
+    |\sqrt{P(E)} - \sqrt{Q(E)}| &\leq H(P, Q) \\ 
+    -P(E) \log Q(E) &\leq D(P\|Q) + \log 2 
+\end{align}
+:::

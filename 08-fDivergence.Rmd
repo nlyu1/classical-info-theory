@@ -1,0 +1,722 @@
+# f-Divergence 
+
+Key takeaways:
+
+1. TV as binary hypothesis testing. 
+2. Several divergences are metrics; one fast way to 
+    compare is to compare to metric, use triangle inequality, 
+    then use comparison inequality again. 
+3. There is no chain rule for $f$-divergences other than 
+    KL-divergence. 
+4. Convexity of $D_f$ \@ref(thm:fInfoProperties) $\iff$ 
+    DPI \@ref(thm:fDPI) $\iff$ 
+    monotonicity \@ref(thm:fMonotonicity) $\iff$ convexity of $f$. 
+5. TV does not enjoy tensorization properties. 
+6. $f$-divergence is equivalent modulo $+c(t-1)$; then 
+    convexity plus $f(t)=1$ implies locally $\chi^2$; 
+    w.l.o.g we can assume $f\geq 0$ and $f'(1)=0$.
+7. The powerful approximation theorem \@ref(thm:fFiniteApprox) 
+    reduces arbitrary spaces to finite ones. 
+8. Rényi entropy enjoys tensorization and chain rule (up to tilting); 
+    it includes KL, $\chi^2$ and Hellinger as special cases. 
+8. The Hellinger divergence is both a metric and tensorizes well. 
+
+
+<div style="color:red">
+
+1. Understanding the last term in $f$-divergence. 
+</div>
+
+## Definition {-}
+
+:::{.definition name="f-divergence"}
+Given a convex function $f:(0, \infty)\to \R$ with $f(1)=0$, 
+for every two probability distributions over 
+$\mca X$, if $P\ll Q$ then the $f$ divergence is 
+\[ 
+    D_f(P\|Q) = \Exp_Q \left[
+        f\left(\df{dP}{dQ}\right)
+    \right]
+\] 
+Here $f(0) = f(0_+)$ per limit. More generally, 
+define $f'(\infty) = \lim_{x\to 0^+} xf(1/x)$, 
+we have 
+\[ 
+    D_f(P\|Q) = \int_{q>0} q(x) f\left[
+        \df{p(x)}{q(x)} 
+    \right] \, d\mu + f'(\infty) P[Q=0]
+\] 
+this last generalization is needed to account for 
+divergences like total variation. 
+:::
+
+Examples of $f$-divergences: 
+
+1. **KL-divergence**: $f(x)=x\log x$ to recover KL-divergence. 
+2. **Total variation (TV)**: $f(x) = \df 1 2 |x - 1|$: 
+\[ 
+    \TV(P, Q) = \df 1 2 \Exp_Q \left|\df{dP}{dQ} - 1\right| 
+    = \df 1 2 \int |dP - dQ| = 1 - \int d(P\wedge Q)
+\] 
+Recall that $P\wedge Q$ is the pointwise minimum measure 
+so $\int d(P\wedge Q)$ is the overlap measure. 
+3. **$\chi^2$-divergence**: $f(x)=(x-1)^2$. 
+\[ 
+    \chi^2(P\|Q) = \Exp_Q \left(\df{dP}{dQ} - 1\right)^2 
+    = \int \df{(dP - dQ)^2}{dQ} 
+    = \int \df{dP^2}{dQ} + dQ - 2dP = \int \df{dP^2}{dQ} - 1
+\] 
+4. **Squared Hellinger distance**: $f(x) = \left(1 - \sqrt x\right)^2$. 
+\[ 
+    H^2(P, Q) = \int \left(\sqrt{dP} - \sqrt{dQ}\right)^2 
+    = 2 - 2\int \sqrt{dPdQ}
+    (\#eq:hellingerDiv)
+\] 
+The quantity $B(P, Q) = \int \sqrt{dPdQ}$ is the 
+**Bhattacharyya coefficient** (Hellinger affinity). 
+Note that $H(P, Q) = \sqrt{H^2(P, Q)}$. 
+The Hellinger distance is $H(P, Q) = \sqrt{H^2(P, Q)}$. 
+5. **Le Cam divergence**: $f(x) = \df{1-x}{2x+2}$, 
+\[ 
+    \LC(P, Q) = \df 1 2 \int \df{(dP - dQ)^2}{dP + dQ}
+\] 
+The square root $\sqrt{\LC(P, Q)}$, the Le Cam distance, 
+is a metric. 
+6. **Jensen-Shannon divergence** take 
+$f(x) = x\log \df{2x}{x+1} + \log \df 2 {x+1}$. 
+\[ 
+    \JS(P, Q) = D\left(P \| \df{P+Q}{2}\right) 
+    + D\left(Q \| \df{P+Q}{2}\right)
+\] 
+
+:::{.proposition}
+$\TV(P, Q) = \df 1 2 \int |dP - dQ| = 1 - \int d(P\wedge Q)$. 
+:::
+<details>
+<summary>Proof</summary>
+_Proof:_ Let $E = \{x:dP > dQ\}$, then 
+\begin{align}
+    \int |dP - dQ| 
+    &= \int_E dP - d(P\wedge Q) + \int_{E^c} dQ - d(P\wedge Q)
+    = \int_E dP + \int_{E^c} dQ - \int d(P\wedge Q) \\ 
+    &= \int_E dP + \int_{E^c} d(P\wedge Q)_{=dP} + \int_{E^c} dQ + \int_E d(P\wedge Q)_{=dQ} 
+    - 2\int d(P\wedge Q) \\ 
+    &= 2 - 2\int d(P\wedge Q)
+\end{align}
+</details>
+
+
+:::{.proposition}
+The following quantities derived from divergences are 
+metrics on the space of probability distributions
+\[ 
+    \TV(P, Q), \quad H(P, Q), \quad \sqrt{\JS(P, Q)}, \quad \sqrt{\LC(P, Q)}
+\] 
+:::
+
+:::{.proposition name="closure properties"}
+
+1. $D_f(Q \| P) = D_g(P \|Q)$ for $g(x) = xf(1/x)$. 
+2. $D_f(P\|Q)$ is a $f$-divergence, then 
+\[ 
+    D_f(\lambda P + \bar \lambda Q \|Q), \quad 
+    D_f(P \| \lambda P + \bar \lambda Q), \quad 
+    \forall \lambda\in [0, 1]
+\] 
+are $f$-divergences. 
+3. Linearity: $D_{f+g} = D_f + D_g$. 
+4. Distinguishability: $D_f(P \| P) = 0$ 
+:::
+<details>
+<summary>Proof</summary>
+For the first claim, 
+\[ 
+    D_g(P \|Q) = \int dQ \left(\df{dP}{dQ}\right) f\left(\df{dQ}{dP}\right) 
+    = D_f(Q \| P)
+\] 
+For the second claim, the other case can be obtained by using the equation above. 
+\[ 
+    D_f(\lambda P + \bar \lambda Q \|Q) 
+    = \int dQ f\left(\lambda \df{dP}{dQ} + \bar \lambda\right)
+    \implies \tilde f(x) = f\left(\lambda x + \bar \lambda\right)
+\] 
+</details>
+
+:::{.proposition name="equivalence properties"}
+
+1. $D_f(P\|Q) = 0$ for all $P\neq Q$ iff $f(x)=c(x-1)$ for some $c$. 
+2. $D_f = D_{f+c(x-1)}$; thus we can always assume $f\geq 0$ and $f'(1)=0$. 
+:::
+<details>
+<summary>Proof</summary>
+Claim $1$ proceeds by computation (assuming continuity) 
+\[ 
+    D_f(P \|Q) = c \int (dP / dQ - 1) dQ = 0 
+\] 
+This means that $c(x-1)$ is in the kernel of the linear operator 
+$f\mapsto D_f$. Pick $c=-f'(1)$, then $f(1)=f'(1)=0$; by convexity $f\geq 0$. 
+</details>
+
+
+:::{.proposition #specialfMonotonicity name="special case of monotonicity"}
+<span style="color:green">
+Joint divergence is unchanged through the same channel 
+</span>
+\[ 
+    D_f(P_XP_{Y|X} \| Q_XP_{Y|X}) = D_f(P_X \| Q_X)
+\] 
+in particular, for the source-agnostic channel we have 
+\[ 
+    D_f(P_XP_Y \| Q_XP_Y) = D_f(P_X \| Q_X)
+\] 
+:::
+
+<details>
+<summary>Proof</summary>
+Direct computation 
+\begin{align}
+    D_f(P_XP_{Y|X} \| Q_XP_{Y|X}) 
+    &= \int Q_X(x) dx \int P_{Y|X=x}(y)dy\, 
+    f\left[\df{P_X(x) P_{Y|X=x}(y)}{Q_X(x) Q_{Y|X=x}(y)}\right]\\ 
+    &= \int Q_X(x) dx f\left(\df{P_X(x)}{Q_X(x)}\right)
+    = D_f(P_X \| Q_X)
+\end{align}
+</details>
+
+## Information properties {-}
+
+:::{.theorem #fMonotonicity name="monotonicity"}
+The joint is more distinguishable than the marginal: 
+\[ 
+    D_f(P_{XY} \| Q_{XY}) \geq D_f(P_X \| Q_X)
+\] 
+inequality is saturated when $P_{Y|X} = Q_{Y|X}$. 
+:::
+
+<details>
+<summary>Proof</summary>
+Assume $P_{XY} \ll Q_{XY}$, then expand and 
+apply Jensen's inequality 
+\begin{align}
+    D_f(P_{XY} \| Q_{XY}) 
+    &= \Exp_{X\sim Q_X} \Exp_{Y\sim Q_{Y|X}} f\left(
+        \df{dP_{Y|X} P_X}{dQ_{Y|X}Q_X}
+    \right)
+    \geq \Exp_{X\sim Q_X} f\left(\Exp_{Y\sim Q_{Y|X}}
+        \df{dP_{Y|X} P_X}{dQ_{Y|X}Q_X}
+    \right) \\ 
+    &\geq \Exp_{X\sim Q_X} f\left(
+        \df{dP_X}{dQ_X}
+    \right) = D_f(P_X \| Q_X)
+\end{align}
+To be more careful, on the first line we have 
+\begin{align}
+    \Exp_{Y\sim Q_{Y|X=x}}
+        \df{P_{Y|X=x}(y) P_X(x)}{Q_{Y|X=x}(y)Q_X(x)}
+    &= \df{P_X(x)}{Q_X(x)} \sum_y 
+    Q_{Y|X=x}(y) \df{P_{Y|X=x}(y)}{Q_{Y|X=x}(y)}
+    = \df{P_X(x)}{Q_X(x)}
+\end{align}
+Inequality is saturated when, for every $x$, 
+$P_{Y|X=x}=Q_{Y|X=x}$. 
+</details>
+
+:::{.definition name="conditional f-divergence"}
+Given $P_{Y|X}, Q_{Y|X}$ and $P_X$, the conditional 
+$f$-divergence is 
+\[ 
+    D_f(P_{Y|X} \| Q_{Y|X} | P_X) 
+    = D_f(P_{Y|X} P_X \| Q_{Y|X} P_X) 
+    = \Exp_{x\sim P_X}\left[
+        D_f(P_{Y|X=x}\| Q_{Y|X=x})
+    \right]
+\] 
+:::
+<details>
+<summary>Proof</summary>
+The second statement requires some justification: 
+\begin{align}
+    D_f(P_{Y|X} P_X \| Q_{Y|X} P_X) 
+    &= \Exp_{x\sim P_X} 
+    \Exp_{y\sim Q_{Y|X=x}}\left[
+        f\left(\df{P_{Y|X=x}(y)}{Q_{Y|X=x}(y)}\right)
+    \right]
+\end{align}
+</summary>
+
+
+:::{.theorem #fDPI name="data-processing inequality"}
+Given a channel $P_{Y|X}$ with two inputs $P_X, Q_X$ 
+\[ 
+    D_f(P_{Y|X} 
+    \circ P_X \| P_{Y|X} \circ Q_X) 
+    \leq D_f(P_X \| Q_X)
+\] 
+:::
+<details>
+<summary>Proof</summary>
+$D_f(P_X \| Q_X) = D_f(P_{XY} \| Q_{XY}) \geq D_f(P_Y \| Q_Y)$, 
+with two equalities given by proposition \@ref(prp:specialfMonotonicity) 
+and theorem \@ref(thm:fMonotonicity). Inequality 
+is saturated by the monotonicity condition $P_{X|Y} = Q_{X|Y}$. 
+</details>
+
+
+:::{.theorem #fInfoProperties name="information properties of f-divergences"}
+
+1. <span style="color:blue">Non-negativity</span>: $D_f(P\|Q) \geq 0$. If $f$ is _strictly convex_ 
+    at 1, i.e. 
+    \[ 
+        \forall s, t\in [0, \infty), \alpha \in (0, 1) \text{ with }
+        \alpha s + \bar \alpha t = 1: \quad \alpha f(s)+ \bar \alpha f(t) 
+        > f(1) = 0
+    \] 
+    then $D_f(P\|Q) = 0 \iff P=Q$. 
+2. <span style="color:blue">Conditional $f$-divergence; conditioning increases divergence</span>: 
+    $D_f(P_{Y|X} \circ P_X \| Q_{Y|X} \circ P_X) \leq D_f(P_{Y|X} \| Q_{Y|X} | Q_X)
+        = D_f(P_{Y|X} P_X \| Q_{Y|X} P_X)$. 
+3. <span style="color:blue">Joint-convexity</span>: $(P, Q)\mapsto D_f(P\|Q)$ is jointly convex; 
+    consequently, $P\mapsto D_f(P\|Q)$ and $Q\mapsto D_f(P\|Q)$ 
+    are also convex. 
+:::
+<details>
+<summary>Proof</summary>
+For non-negativity, apply monotonicity to 
+\[ 
+    D_f(P_X \| P_Y) = D_f(P_{X, 1} \| P_{Y, 1}) \geq D_f(1 \| 1) = 0
+\] 
+Assume $P\neq Q$ so there exists measurable $A$ such that 
+$P[A]=p \neq Q[A] = Q$, then apply the $\chi_A$ channel and apply DPI; 
+both cases $q=1$ and $q\neq 1$ contradict strict convexity. 
+Claim (2) follows from monotonicity and recognize $P_{Y|x}\circ P_X$ as the 
+marginal of $P_{Y|X}P_X$. 
+Joint convexity follows from standard latent variable argument: 
+to prove joint convexity 
+\[ 
+    D(\lambda P_0 + \bar \lambda P_1 \| Q_0 + \bar \lambda Q_1) 
+    \leq \lambda D(P_0 \| Q_0) + \bar \lambda D(P_1 \| Q_1)
+\] 
+Take $\theta \sim \mrm{Ber}_\lambda \to (P, Q)$, then the RHS is 
+$D(P_{P|\lambda} \| P_{Q|\lambda} | P_\lambda)$ while the LHS 
+is $D(P_{P|\lambda}\circ P_\lambda\| P_{Q|\lambda} \circ P_\lambda)$
+
+The following powerful theorem allows us to reduce any general 
+problem to finite alphabets. 
+</details>
+
+:::{.theorem #fFiniteApprox name="finite approximation theorem"}
+Given two probability measures $P, Q$ on $\mca X$ with $\sigma$-algebra 
+$\mca F$. Given a finite $\mca F$-measurable partition 
+$\mca E = \{E_1, \cdots, E_n\}$, define the distribution $P_{\mca E}$ 
+on $[n]$ by $P_{\mca E}(j) = P[E_j]$, similarly for $Q$, then 
+\[ 
+    D_f(P\|Q) = \sup_{\mca E} D_f(P_{\mca E} \| Q_{\mca E})
+\] 
+where $\sup$ is over all finite $\mca F$-measurable partitions. 
+:::
+
+<span style="color:red">
+TODO
+</span>
+
+
+## TV and Hellinger, hypothesis testing {-}
+
+In a _binary hypothesis testing_ problem, one is 
+given an observation $X$, which is known to be $X\sim P$ 
+or $X\sim Q$. The goal is to decide $\lambda\in \{0, 1\}$ 
+based on $X$. In other words, 
+\[ 
+    \lambda \to X\to \hat \lambda 
+\] 
+Our objective is to find a possibly randomized 
+decision function $\phi:\mca X\to \{0, 1\}$ such that 
+\[ 
+    P[\phi(X)=1] + Q[\phi(X) = 0]
+\] 
+is minimized. We will see that optimization leads to TV, while 
+asymptotic tensorization leads to $H^2$. 
+
+
+:::{.theorem #tvVarChar name="variational characterizations of TV"}
+
+1. $\sup$-representation: let 
+$\mca F = \{f:\mca X\to \mbb R, \|f\|_\infty \leq 1\}$, then 
+\[ 
+    \TV(P, Q) = \sup_E P(E) - Q(E) = \df 1 2 \sup_{f\in \mca F} 
+    \left[\Exp_P f(X) - \Exp_Q f(X)\right]
+\] 
+Supremum is achieved by $f=\chi_E$, where $E=\{x:p(x)>q(x)\}$. 
+2. $\inf$-representation: Provided the diagonal is measurable, 
+\[ 
+    \TV(P, Q) = \min_{P_{XY}} \{P_{XY}[X\neq Y]
+    \text{ subject to } P_X=P, P_Y=Q\}
+\] 
+:::
+<details>
+<summary>Proof</summary>
+The upper bound by $\TV$ is intuitive; 
+to demonstrate saturation, let $E = \{x:p(x)>q(x)\}$, then 
+\begin{align}
+    0 = \int [p(x) - q(x)]\, d\mu 
+    &= \int_E + \int_{E^c} [p(x) - q(x)]\, d\mu  \\ 
+    \int_E [q(x) - p(x)]\, d\mu 
+    &= \int_{E^c} [p(x) - q(x)]\, d\mu 
+\end{align}
+The sum of these two integrals (note the definition of $E$) 
+equals $2\TV$, then 
+\[ 
+    \TV(P, Q) = \df 1 2 \int \chi_E[(q(x) - p(x)]\, d\mu 
+    = \df 1 2 \Exp_P \chi_E(X) - \Exp_Q \chi_E(X)
+\] 
+For the $\inf$ representation, given any coupling $P_{XY}$, 
+for $f\in \mca F$ we have 
+\[ 
+    \Exp_P f(X) - \Exp_Q f(X) 
+    = \Exp_{P_{XY}}[f(X) - f(Y)] \leq \Exp_{P_{XY}}|f(X) - f(Y)|
+    \leq P_{XY}[X\neq Y]
+\] 
+This shows that the $\inf$-representation is always an 
+upper bound; to demonstrate saturation, consider the following 
+construction given $P, Q$: 
+
+1. Let $\pi = \int \pi(x)\, d\mu$ denote the overlap scalar, where 
+$\pi(x) = \min(p(x), q(x))$. 
+2. With probability $\pi$ take $X=Y$ sampled from density 
+\[ 
+    r(x) = \df 1 \pi \pi(x)
+\] 
+2. With probability $1-\pi$ sample $X, Y$ independently from 
+\[ 
+    p_1(x) = \df {p(x) - \pi(x)} {1 - \pi}, \quad 
+    q_1(x)=\df {q(x) - \pi(x)}{1 - \pi}
+\] 
+Now, the marginals are indeed $P, Q$, and this saturates 
+the inequality since $P_{XY}[X\neq Y] = 1-\pi=\TV(P, Q)$
+(happens iff sampling from $p_1, q_1$, assuming infinite 
+alphabet) 
+</details>
+
+<span style="color:red">
+Inf-characterization is only tight when alphabet is infinite?
+</span>
+
+## Joint range {-}
+
+We first provide a special case of an inequality. 
+
+:::{.theorem name="Pinsker's inequality"}
+For any two distributions, 
+$D(P\|Q) \geq (2\log e) \TV(P, Q)^2$ 
+:::
+<details>
+<summary>Proof</summary>
+By DPI, it suffices to consider 
+Bernoulli distributions via the channel $1_E$ 
+which results in Bernoulli with parameter 
+$P(E)$ or $Q(E)$. Working in natural units, 
+Pinsker's inequality 
+for Bernoulli distributions yield 
+\[ 
+    \sqrt{\df 1 2 D(P\|Q)} 
+    \geq \TV(1_E\circ P, Q_E\circ Q) = 
+    |P(E) - Q(E)|
+\] 
+Taking supremum over all $E$ yields 
+the desired inequality per the TV 
+variational characterization theorem \@ref(thm:tvVarChar). 
+</summary>
+</details>
+
+
+<div style="color:red">
+
+:::{.corollary name="Tau's inequality"}
+TODO
+:::
+</div>
+
+
+:::{.definition name="joint range"}
+Given two $f$-divergences $D_f$ and $D_g$, their 
+joint range $\mca R\subset [0, \infty]^2$ 
+is defined by 
+\[ 
+    \mca R = \mrm{Image}\left[
+        (P, Q)\mapsto (D_f(P\|Q, D_g(P\|Q))
+    \right]
+\] 
+The joint range over $k$-ary distribution is denoted $\mca R_k$. 
+:::
+
+Our next result will characterize the set of 
+$f$-divergences. 
+
+:::{.lemma #convexBoundaryThm name="Fenchel-Eggleston-Carathéodory theorem"}
+Let $S\subset \R^d$ and $x\in \mrm{co}(S)$. There exists 
+a set of $d+1$ points $S'=\{x_1, \cdots x_{d+1}\}\in S$ 
+such that $x\in \mrm{co}(S')$. If $S$ has at most 
+$d$ connected components, then $d$ points are enough. 
+:::
+
+As a corollary of the following theorem, it 
+suffices to prove joint range for Bernouli, then 
+convexify the range. 
+
+:::{.theorem name="Harremoës-Vajda"}
+$\mca R = \mrm{co}(\mca R_2) = \mca R_4$
+where $\mrm{co}$ denotes the convex hull with 
+a natural extension of convex operations to 
+$[0, \infty]^2$. In particular, 
+
+1. $\mrm{co}(\mca R_2) \subset\mca R_4$: 
+    standard latent variable argument. 
+2. $\mca R_k \subset \mrm{co}(\mca R_2) = \mca R_4$. 
+3. $\mca R = \mca R_4$: the approximation 
+    theorem already implies $\mca R = \overline{\bigcup_k \mca R_k}$; 
+    the closure is technical. 
+:::
+<details>
+<summary>Proof</summary>
+First consider claim $1$. 
+Construct a convex divergence as follows: 
+for two pairs of distributions $(P_0, Q_0)$ and 
+$(P_1, Q_1)$ on $\mca X$ and $\lambda \in [0, 1]$. 
+Define the typical Bernoulli latent joint $(X, B)$ 
+by $P_B = Q_B = \mrm{Ber}(\alpha)$ and $(P, Q)_{X|B=j} = (P_j, Q_j)$. 
+Applying the conditional divergence to obtain 
+\[ 
+    D_f(P_{XB} \| Q_{XB}) 
+    = \bar \alpha D_f(P_0\|Q_0) + \alpha D_f(P_1 \| Q_1) 
+    \implies \mrm{co}(\mca R_2)\subset \mca R_4 
+\] 
+Onto the most nontrivial claim $2$: fixing $k$ and 
+distributions $P, Q$ on $[k]$ with distributions $(p_j), (q_j)$, 
+w.l.o.g. make $q_{j>1}>0$ and concentrate $q_1=0$ (i.e. concentrate 
+all empty points onto $j=1$. Let $\phi_{j>1} = p_j / q_j$ and consider 
+\[ 
+    \mca S = \left\{
+        \tilde Q = (\tilde q_j)_{j\in [k]}: 
+        \tilde q_j\geq 0, \sum \tilde q_j=1, \tilde q_1=0, 
+    \right\}
+
+\] 
+</summary>
+
+
+
+
+## Rényi divergence {-}
+
+The Rényi divergences are a monotone transformation 
+of $f$-divergences; they satisfy DPI and other properties. 
+
+:::{.definition name="Rényi divergence"}
+For $\lambda\in \R - \{0, 1\}$, the Rényi divergence 
+of order $\lambda$ between distributions $P, Q$ is 
+\[ 
+    D_\lambda(P \| Q) = \df 1 {\lambda - 1} \log \Exp_Q \left[
+        \left(\df{dP}{dQ}\right)^\lambda
+    \right]
+\] 
+:::
+To see its connection with entropy, note that 
+\[ 
+    \Exp_Q \left(\df{dP}{dQ}\right)^\lambda 
+    = \mrm{sgn}(\lambda - 1) D_f(P\|Q) + 1, \quad f = \mrm{sgn}(\lambda - 1)(x^\lambda - 1)
+\] 
+with which the Rényi entropy becomes (the $\mrm{sgn}(\lambda - 1)$ is just there 
+to keep $f$ convex): 
+\[ 
+    D_\lambda(P\|Q) = \df 1 {\lambda - 1} \log \left[1 + 
+        \mrm{sgn}(\lambda - 1) D_f(P\|Q)
+    \right], \quad f = \mrm{sgn}(\lambda - 1)(x^\lambda - 1)
+    (\#eq:renyiMonotone)
+\] 
+
+:::{.proposition}
+Under regularity conditions, 
+\[ 
+    \lim_{\lambda \to 1} D_\lambda (P \|Q) = D(P \| Q)
+\] 
+:::
+<details>
+<summary>Proof</summary>
+Expand $(d_QP)^\lambda = \exp(\lambda \ln d_QP)$ about $\lambda=1$: 
+\[ 
+    (d_QP)^{\lambda} \approx d_QP + \ln d_QP \cdot d_QP \cdot (\lambda - 1)
+\] 
+Taking $\Exp_Q$ yields $1 + (\lambda - 1)\Exp_P[\ln d_QP]$; then 
+substituting into $\log x \approx 1+x$ yields 
+\[ 
+    D_{\lambda_\to 1}(P \| Q) = \df 1 {\lambda - 1} \log \left[
+        1 + (\lambda - 1)\Exp_P[\ln d_QP]
+    \right]
+    = \Exp_P \ln d_QP = D(P \| Q)
+\] 
+</details>
+
+:::{.proposition #specialRenyi name="special cases of Rényi divergence"}
+Consider $\lambda = 1/2, 2$: 
+\[ 
+    D_2 = \log(1 + \chi^2), \quad D_{1/2} = -2\log\left(1 - \df{H^2}{2}\right)
+\] 
+:::
+<details>
+<summary>Proof</summary>
+The $D_2$ case is apparant in light of equation \@ref(eq:renyiMonotone). 
+Substitute $\lambda = 1/2$: 
+\[ 
+    D_{1/2} = \df 1 {1/2 - 1} \log[1 - D_{x\mapsto 1 - \sqrt x}(P\|Q)]
+\] 
+It remains to show that $D_{1 - \sqrt x} (P\|Q) = \df{H^2}{2}$, applying 
+equation \@ref(eq:hellingerDiv)
+\[ 
+    \Exp_Q\left[1 - \sqrt{d_QP}\right] 
+    = \df 1 2 \Exp_Q \left(1 - \sqrt{d_QP}\right)^2 = 1 - \int \sqrt{dPdQ}
+\] 
+</details>
+
+Several other properties:
+
+1. $\lambda \mapsto D_\lambda D(P\|Q)$ is non-decreasing and 
+$\lambda \mapsto (1 - \lambda) D_\lambda(P\|Q)$ is concave. 
+2. For $\lambda \in [0, 1]$ the divergence $D_\lambda$ is jointly convex. 
+3. The Rényi entropy for finite alphabet is $H_\lambda(P) = \log m - D_\lambda(P \| U)$. 
+
+:::{.definition name="conditional Rényi entropy"}
+Given $P_{X|Y}, Q_{X|Y}$ and $P_Y$
+\begin{align}
+    D_\lambda(P_{X|Y} \| Q_{X|Y} | P_Y) 
+    &= D_\lambda(P_{X|Y} P_Y \| Q_{X|Y} P_Y) 
+    = \df 1 {\lambda - 1} \log \Exp_{Q_{X|Y}P_Y} 
+        \left[
+            \df{(P_{X|Y}P_Y)(X, Y)}{(Q_{X|Y}P_Y)(X, Y)}
+        \right]^\lambda \\ 
+    &= \df 1 {\lambda - 1} \log \Exp_{y\sim P_Y} 
+    \int_{\mca X} P_{X|Y=y}(x)^\lambda Q_{X|Y=y}(x)^{1-\lambda}
+\end{align}
+:::
+
+:::{.proposition name="Rényi chain rule"}
+Given $P_{AB}, Q_{AB}$, define the $\lambda$-tilting 
+of $P_B$ towards $Q_B$ by 
+\[ 
+    P_B^{(\lambda)}(b) = P_B^\lambda(b) Q_B^{1-\lambda}(b) 
+    \exp \left[
+        -(\lambda - 1) D_\lambda(P_B \| Q_B)
+    \right]
+\] 
+joint Rényi divergence decomposes as 
+\[ 
+    D_\lambda(P_{AB} \| Q_{AB}) = D_\lambda(P_B \| Q_B) + 
+    D_\lambda( P_{A|B} \| Q_{A|B} | P_B^{(\lambda)})
+\] 
+:::
+<details>
+<summary>Proof</summary>
+First need to prove that $P_B^{(\lambda)}$ is indeed 
+correctly normalized: 
+\begin{align}
+    \exp \left[
+        -(\lambda - 1) D_\lambda(P_B \| Q_B)
+    \right]
+    &= \Exp_Q \left[\left(\df{dP}{dQ}\right)^\lambda\right]
+    = \int P_B^\lambda(b) Q_B^{1-\lambda}(b)\, db 
+\end{align}
+Next up, computing the RHS explicitly, we have 
+\begin{align}
+    (\lambda - 1) [D_\lambda(P_B \| Q_B) + 
+    D_\lambda( P_{A|B} \| Q_{A|B} | P_B^{(\lambda)})] 
+    &= \log \int_{\mca B} \left[
+        P_B(b)^\lambda Q_B(b)^{1-\lambda} 
+        \cdot \int_{\mca A} P_{A|B=b}(a)^\lambda Q_{A|B=b}(a)^{1-\lambda}
+    \right] \\ 
+    &= \log \Exp_{Q_{AB}} \left(\df{dP_{AB}}{dQ_{AB}}\right)^\lambda 
+    = D_\lambda(P_{AB} \| Q_{AB})
+\end{align}
+</details>
+
+:::{.corollary name="Rényi tensorization"}
+Specializing the chain rule to independent joints, 
+\[ 
+    D_\lambda \left(\prod P_{X_j} \| \prod Q_{X_j}\right) 
+    = \sum_j D_\lambda(P_{X_j} \| Q_{X_j})
+\] 
+:::
+
+:::{.corollary name="tensorization of χ² and Hellinger"}
+Applying tensorization and proposition \@ref(prp:specialRenyi): 
+\begin{align}
+    1 + \chi^2 \left(\prod_j P_j \| \prod_j Q_j\right) 
+    &= \prod_j 1 + \chi^2(P_j \| Q_j)  \\ 
+    1 - \df 1 2 H^2 \left(\prod P_j, \prod Q_j\right) 
+    &= \prod_j 1 - \df 1 2 H^2(P_j, Q_j)
+\end{align}
+:::
+
+:::{.proposition name="variational characterization via KL"}
+Show that $\forall \alpha \in \mbb R$: 
+\[ 
+    \bar \alpha D_\alpha(P \|Q) 
+    = \inf_R \left[
+        \alpha D(R\|P) + \bar \alpha D(R\|Q)
+    \right]
+\] 
+:::
+<details>
+<summary>Proof</summary>
+The KL case $\alpha=1$ holds trivially with $R=P$. 
+otherwise expand the LHS to 
+\begin{align}
+    \bar \alpha D_\alpha(P\|Q)
+    &= -\log \Exp_Q \left(\df{dP}{DQ}\right)^\alpha
+    = \log \Exp_Q \left(
+        \df{dQ}{dP}
+    \right)^\alpha  
+\end{align}
+Expand the RHS to 
+\begin{align}
+    \alpha D(R\|P) + \bar \alpha D(R\|Q) 
+    &= \Exp_R \log \left[
+        \left(\df{dR}{dP}\right)^\alpha 
+        \left(\df{dR}{dQ}\right)^{\bar \alpha}
+    \right] 
+    = \Exp_R \log 
+        \df{dR}{dP^\alpha dQ^{\bar \alpha}} \\ 
+    &= \Exp_R \log \df{dR}{dQ} \cdot \left(\df{dQ}{dP}\right)^\alpha 
+    = D(R \| Q) + \Exp_R \log \left(\df{dQ}{dP}\right)^\alpha 
+\end{align}
+We wish to establish the bound 
+\begin{align}
+    \log \Exp_Q \left(
+        \df{dQ}{dP}
+    \right)^\alpha 
+    \leq \Exp_R \log \left[
+        \df{dR}{dP^\alpha dQ^{\bar \alpha}}
+    \right]
+    &= D(R \| Q) + \Exp_R \log \left(\df{dQ}{dP}\right)^\alpha  \\ 
+    D(R\|Q) &\geq \Exp_R \log \left(\df{dP}{dQ}\right)^\alpha 
+    - \log \Exp_Q \left(\df{dP}{dQ}\right)^\alpha
+\end{align}
+Comparison between $\log \Exp$ and $\Exp \log$ screams Donsker-Varadhan
+\@ref(thm:donskerVaradhan): 
+\[ 
+    D(R \|Q) \geq  \Exp_R f - \log \Exp_Q \exp f
+\] 
+for $f = \alpha \log(dP/dQ)$ being the likelihood ratio. 
+Recall that the saturation constraint is 
+\[ 
+    \log \left(\df{dP}{dQ}\right)^\alpha = f = \log \df{dR}{dQ} + C \iff 
+    \df{P(x)^\alpha}{Q(x)^\alpha} = \df{R(x)}{Q(x)} \iff 
+    dR \propto dP^\alpha dQ^{\bar \alpha}
+\] 
+the proportionality freedom comes from invariance of $f\mapsto f+C$ 
+in Donsker-Varadhan and is determined by the normalization constraint. 
+The final result is simply the Renyi-tilt of $P$ towards $Q$ given by 
+\[ 
+    R(x) = P(x)^\alpha Q(x)^{\bar \alpha} \exp \left[
+        -\bar \alpha D_\alpha(P \| Q)
+    \right]
+\] 
+</details>

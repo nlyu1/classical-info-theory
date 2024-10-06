@@ -1,0 +1,148 @@
+# Entropy method in combinatorics and geometry 
+
+To bound the cardinality of a set $\mca C$, consider drawing 
+an element uniformly at random from $\mca C$, whose entropy 
+is $\log |\mca C|$. To bound $|\mca C|$ from above, we can 
+describe this random object by a random vector $X=(X_j)_{1\leq j\leq n}$ 
+and compute or upper-bound the joint-entropy by one of the following methods:
+
+- _Marginal bound:_ $H(X) \leq \sum H(X_j)$. 
+- _Pairwise bound_: $H(X) \leq \df 1 {n-1}\sum_{i<j} H(X_i, X_j)$ 
+- _Exact calculation_: $H(X) = \sum_j H(X_j|X_1\leq k <j)$ 
+
+## Binary vectors of average weights {-}
+
+Let $\mca C$ denote a set of $n$-bitstrings. If the average number 
+of $1$'s in $\mca C$ is close to $0$ or $1$, then $\mca C$ cannot 
+contain too many elements. 
+
+:::{.lemma}
+Let $\mca C\subset \{0, 1\}^n$ and $p$ be the 
+average fraction of $1$'s in $\mca C$, then 
+\[ 
+    |\mca C|\leq e^{nh(p)}, \quad h(p) = -p\log p - (1-p)\log(1-p)
+\] 
+:::
+_Proof:_ Let $(X_j)_{1\leq j\leq n}$ be drawn uniformly random 
+from $\mca C$, then 
+\[ 
+    \log |C| = H(X_1, \cdots, X_n) \leq \sum_j H(X_j) = \sum h(p_j)
+\] 
+Note that $(X_j)$ are not independent. Uniform distribution over $\mca C$ 
+does not imply independence of the individual components. Now, by concavity 
+\[ 
+    \sum h(p_j) \leq n h\left(\df 1 n \sum p_j\right) = nh(p) 
+\] 
+
+The volume of a Hamming ball of radius $k$ centered at a binary vector 
+$x$ is the number of binary vectors which lie within that ball. Since 
+the space $\{0, 1\}^n$ is symmetric, the volume of the Hamming ball of radius 
+$k$ is the same for any center $x$ and bounded by the following theorem 
+
+:::{.theorem name="binomial bound"}
+\[ 
+    \sum_{j=0}^k \binom{n}{j} \leq e^{nh(k/n)}, \quad k\leq n/2 
+\] 
+:::
+_Proof:_ Let $w_H(x)$ denote the Hamming weight and take $\mca C = \{x|w_H(X)\leq k\}$, 
+then the previous lemma gives, for $x\mapsto h(x)$ increasing for $x\leq 1/2$ 
+\[ 
+    |\mca C| = \sum_{j=0}^k \binom{n}{j} \leq \sum_{j=0}^k e^{n h(j/n)} 
+    \leq e^{nh(k/n)}, \quad k\leq n/2 
+\] 
+
+
+## Counting subgraphs {-}
+For graphs $H, G$, let $N(H, G)$ be the number of subgraphs 
+(subset of edges) of $G$ which are isomorphic to $H$. 
+Let $G$ have $m$ edges, consider the maximal number of $H$ 
+which are contained in $G$. Define 
+\[ 
+    N(H, m) = \max_{G:|E(G)|\leq m|} N(H, G)
+\] 
+This is the maximum number of $H$ which can be contained in 
+a graph with $m$ edges. 
+
+:::{.proposition name="triangle in graphs"}
+$N(K_3, m) \asymp m^{3/2}$. 
+:::
+_Proof:_ To show the lower-bound, $G=K_n$ has $\Theta(n^2)$ edges and $\Theta(n^3)$ 
+triangles. To show the upper bound, fix $G=(V, E)$ with $m$ edges and 
+draw a labeled triangle at random with vertices $(X_1, X_2, X_3)$, then by 
+Shearer's lemma 
+\[ 
+    \log(3!N(K_3, G)) = H(X_1, X_2, X_3) 
+    \leq \df 1 2 [H(X_1, X_2)+H(X_1, X_3)+H(X_2, X_3)]
+    \leq \df 3 2 \log(2m)
+\] 
+
+:::{.theorem name="linear programming dual"}
+Given a linear program $\max c^Tx: Ax\leq b, x\geq 0$, its dual is 
+\[ 
+    \min b^Ty, \quad A^Ty\geq c, y\geq 0
+\] 
+This can be viewed as looking for a vector of coefficients $y$ 
+to combine the constraints such that the resulting RHS 
+constraint $b^Ty$ upper-bounds $c^Tx$ (which happens when $A^Ty\geq c$).  
+:::
+
+:::{.theorem name="Friedgut and Kahn"}
+The fractional covering number of a graph $G=(V, E)$ is the value of the linear program 
+\[ 
+    \rho^*(H) = \min_w \left[
+        \sum_{e\in E}w(e): \sum_{v\in e\in E} w(e)\geq 1, \forall v\in V, w(e)\in [0, 1]
+    \right]
+\] 
+Then $c_0(H) m^{\rho^*(H)} \leq N(H, m) \leq c_1(H)m^{\rho^*(H)}$. 
+:::
+_Proof:_ Consider the upper bound first. Label $V(H)=[n]$ 
+and let $w^*(e)$ be the solution for $\rho^*(H)$. For any $G$ with $m$ edges, 
+draw a subgraph of $G$ uniformly at random from all those isomorphic to $H$. 
+Let $X_i\in V(G)$ be the vertex corresponding to the $i$-th vertex of $H$. 
+Define a random $2$-subset of $[n]$ by sampling $e\in E(H)$ with probability 
+$w^*(e)/\rho^*(H)$, then by definition of $\rho^*(H)$ 
+\[ 
+    \Pr(i\in S) \geq \df 1 {\rho^*(H)}
+\] 
+since the minimal probability of selecting any edge (and its associated vertices) 
+is $1/\max w(e) \leq 1/\sum w(e) = \rho^*(H)$. Then applying Shearer's lemma \@ref(thm:shearer)
+\[ 
+    \log N(H, G) = H(X) \leq H(X_S|S)\rho^*(H) \leq \log(2m)\rho^*(H) 
+    \implies N(H, G)\leq (2m)^{\rho^*(H)}
+\] 
+For the other bound, the idea is to explode the graph $H$. 
+Consider the dual LP corresponding to the fractional packing number 
+\[ 
+    \alpha^*(H) = \max_\psi \left[\sum_{v\in V(H)} \psi(v): 
+        \psi(v)\in [0, 1] \text{ and } 
+        \forall (vw)\in E: \psi(v)+\psi(w)\leq 1
+    \right]
+\] 
+Construct the graph $G$ as follows: for each $v\in H$, replicate it $m(v)$ times 
+(here $m$ stands for multiplicity, to be defined later). Each edge $e=(vw)$ of $H$ 
+is then replaced by $K_{m(v), m(w)}$ so that 
+\[ 
+    |E(G)| = \sum_{(vw)\in E(H)} m(v)m(w) 
+\] 
+We also have $N(G, H)\prod_{v\in V(H)} m(v)$. Fix a large number $M$ and 
+let $m(v) = \lceil M^{\psi(v)}\rceil$, then 
+\begin{align}
+    |E(G)| &\leq \sum_{(vw)\in E(H)} 4M^{\psi(v)+\psi(w)} \leq 4M|E(H)| \\ 
+    N(G, H) &\geq \prod_{v\in V(H)} M^{\psi(v)} = M^{\alpha^*(H)} 
+\end{align}
+
+## Brégman's theorem {-}
+The Brégman's theorem bounds the number of perfect 
+matchings in a bipartite graph. 
+
+:::{.definition name="permanent"}
+The permanent of a $n\times n$ matrix is 
+\[ 
+    \mrm{perm}(A) = 
+    \sum_{\pi \in S_n} \prod_{j=1}^n a_{j\pi(j)}
+\] 
+:::
+
+<span style="color:red">
+To finish. 
+</span>

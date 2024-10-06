@@ -1,0 +1,79 @@
+---
+title: "6.7480 Notes"
+author: "Nicholas Lyu"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [refs.bib]
+biblio-style: "numeric"
+split_bib: yes
+link-citations: true
+---
+
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{bm}
+\newcommand{\pd}[1]{\partial_{#1}}
+
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mb}{\boldsymbol}
+\newcommand{\mrm}{\mathrm}
+\newcommand{\mca}{\mathcal}
+\newcommand{\mfk}{\mathfrak}
+\newcommand{\tr}{\mrm{tr}} 
+\newcommand{\df}{\dfrac}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\dag}{\dagger}
+
+\newcommand{\Cl}{\mca C}
+\newcommand{\Gr}{\mca G}
+\newcommand{\Pf}{\mrm{Pf}}
+\newcommand{\Pa}{\mca P}
+\newcommand{\R}{\mbb R}
+
+\newcommand{\poly}{\mrm{poly}}
+\newcommand{\Exp}{\mbb E}
+\newcommand{\Var}{\mrm{Var}}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\Pr}{\mrm{Pr}}
+\newcommand{\TV}{\mrm{TV}}
+\newcommand{\LC}{\mrm{LC}}
+\newcommand{\JS}{\mrm{JS}}
+\newcommand{\ot}{\otimes}
+
+
+
+# Preface {-}
+Placeholder. 
+
+## Administrative trivia {-}
+Professor email: `yp@mit.edu`. 
+
+Office Hours: LIDS ($6$th floor of $D$-tower, lobby). 
+
+## Motivation {-}
+
+1. Why is training GPT $\iff$ building a great text compressor? 
+2. Given $2$ families of distributions 
+$P_\theta, \theta\in \Theta_1, \Theta_2$. 
+To have $P_{\mrm{err}} \leq \delta$, the number of samples 
+is asymptotically 
+$\left(\min D(P_{\theta_1}\|P_{\theta_2})\right)^{-1} \log(1/\delta)$ 
+3. Noisy channel coding. 
+4. Cramer-Rau bound
+\[ 
+    \min_{\hat \theta} 
+    \max_{\theta\in \Theta} \Exp[(\theta - \hat \theta^2]
+    \asymp \df 1 {n\min \mca I_F(\theta)}
+\] 
+5. How many bits to represent a random function / signal / picture 
+with fidelity $\epsilon$. 
+
+Key concepts: entropy, KL-divergence, mutual information, 
+fisher information, mutual information. 
+
+Fundamentally, information and entropy captures 
+how our uncertainty in a quantity changes after 
+observations. 

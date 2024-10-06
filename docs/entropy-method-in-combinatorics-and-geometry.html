@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Entropy method in combinatorics and geometry | 6.7480 Notes</title>
+  <meta name="description" content="2 Entropy method in combinatorics and geometry | 6.7480 Notes" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Entropy method in combinatorics and geometry | 6.7480 Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Entropy method in combinatorics and geometry | 6.7480 Notes" />
+  
+  
+  
+
+<meta name="author" content="Nicholas Lyu" />
+
+
+<meta name="date" content="2024-10-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="entropy.html"/>
+<link rel="next" href="divergence.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
+<ul>
+<li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#basics"><i class="fa fa-check"></i>Basics</a></li>
+<li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#combinatorial-properties"><i class="fa fa-check"></i>Combinatorial properties</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics and geometry</a>
+<ul>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#brégmans-theorem"><i class="fa fa-check"></i>Brégman’s theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
+<ul>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#kl-divergence"><i class="fa fa-check"></i>KL-Divergence</a></li>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#markov-kernels"><i class="fa fa-check"></i>Markov Kernels</a></li>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#conditional-divergence-chain-rule-dpi"><i class="fa fa-check"></i>Conditional divergence, Chain Rule, DPI</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
+<ul>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mutual-information-graphical-models"><i class="fa fa-check"></i>Conditional mutual information, graphical models</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#sufficient-statistic"><i class="fa fa-check"></i>Sufficient statistic</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html"><i class="fa fa-check"></i><b>5</b> Variational Measures of Information</a>
+<ul>
+<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#geometric-interpretations-of-mi"><i class="fa fa-check"></i>Geometric interpretations of MI</a></li>
+<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#lower-variational-bounds"><i class="fa fa-check"></i>Lower variational bounds</a></li>
+<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#continuity"><i class="fa fa-check"></i>Continuity</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extremization.html"><a href="extremization.html"><i class="fa fa-check"></i><b>6</b> Extremization</a>
+<ul>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#convexity"><i class="fa fa-check"></i>Convexity</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#minimax-and-saddle-point"><i class="fa fa-check"></i>Minimax and saddle-point</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-saddle-point-of-mi"><i class="fa fa-check"></i>Capacity, Saddle point of MI</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#gaussian-saddle-point"><i class="fa fa-check"></i>Gaussian saddle point</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
+<li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
+<ul>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#information-properties"><i class="fa fa-check"></i>Information properties</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#tv-and-hellinger-hypothesis-testing"><i class="fa fa-check"></i>TV and Hellinger, hypothesis testing</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>9</b> Lecture notes</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#main-content"><i class="fa fa-check"></i>Main content</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#one-parameter-families-minimax-rates"><i class="fa fa-check"></i>One-parameter families; minimax rates</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#hcr-inequality-fisher-information"><i class="fa fa-check"></i>HCR inequality; Fisher information</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">6.7480 Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="entropy-method-in-combinatorics-and-geometry" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Entropy method in combinatorics and geometry<a href="entropy-method-in-combinatorics-and-geometry.html#entropy-method-in-combinatorics-and-geometry" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>To bound the cardinality of a set <span class="math inline">\(\mathcal C\)</span>, consider drawing
+an element uniformly at random from <span class="math inline">\(\mathcal C\)</span>, whose entropy
+is <span class="math inline">\(\log |\mathcal C|\)</span>. To bound <span class="math inline">\(|\mathcal C|\)</span> from above, we can
+describe this random object by a random vector <span class="math inline">\(X=(X_j)_{1\leq j\leq n}\)</span>
+and compute or upper-bound the joint-entropy by one of the following methods:</p>
+<ul>
+<li><em>Marginal bound:</em> <span class="math inline">\(H(X) \leq \sum H(X_j)\)</span>.</li>
+<li><em>Pairwise bound</em>: <span class="math inline">\(H(X) \leq \dfrac 1 {n-1}\sum_{i&lt;j} H(X_i, X_j)\)</span></li>
+<li><em>Exact calculation</em>: <span class="math inline">\(H(X) = \sum_j H(X_j|X_1\leq k &lt;j)\)</span></li>
+</ul>
+<div id="binary-vectors-of-average-weights" class="section level2 unnumbered hasAnchor">
+<h2>Binary vectors of average weights<a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let <span class="math inline">\(\mathcal C\)</span> denote a set of <span class="math inline">\(n\)</span>-bitstrings. If the average number
+of <span class="math inline">\(1\)</span>’s in <span class="math inline">\(\mathcal C\)</span> is close to <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>, then <span class="math inline">\(\mathcal C\)</span> cannot
+contain too many elements.</p>
+<div class="lemma">
+<p><span id="lem:unlabeled-div-11" class="lemma"><strong>Lemma 2.1  </strong></span>Let <span class="math inline">\(\mathcal C\subset \{0, 1\}^n\)</span> and <span class="math inline">\(p\)</span> be the
+average fraction of <span class="math inline">\(1\)</span>’s in <span class="math inline">\(\mathcal C\)</span>, then
+<span class="math display">\[
+    |\mathcal C|\leq e^{nh(p)}, \quad h(p) = -p\log p - (1-p)\log(1-p)
+\]</span></p>
+</div>
+<p><em>Proof:</em> Let <span class="math inline">\((X_j)_{1\leq j\leq n}\)</span> be drawn uniformly random
+from <span class="math inline">\(\mathcal C\)</span>, then
+<span class="math display">\[
+    \log |C| = H(X_1, \cdots, X_n) \leq \sum_j H(X_j) = \sum h(p_j)
+\]</span>
+Note that <span class="math inline">\((X_j)\)</span> are not independent. Uniform distribution over <span class="math inline">\(\mathcal C\)</span>
+does not imply independence of the individual components. Now, by concavity
+<span class="math display">\[
+    \sum h(p_j) \leq n h\left(\dfrac 1 n \sum p_j\right) = nh(p)
+\]</span></p>
+<p>The volume of a Hamming ball of radius <span class="math inline">\(k\)</span> centered at a binary vector
+<span class="math inline">\(x\)</span> is the number of binary vectors which lie within that ball. Since
+the space <span class="math inline">\(\{0, 1\}^n\)</span> is symmetric, the volume of the Hamming ball of radius
+<span class="math inline">\(k\)</span> is the same for any center <span class="math inline">\(x\)</span> and bounded by the following theorem</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-12" class="theorem"><strong>Theorem 2.1  (binomial bound) </strong></span><span class="math display">\[
+    \sum_{j=0}^k \binom{n}{j} \leq e^{nh(k/n)}, \quad k\leq n/2
+\]</span></p>
+</div>
+<p><em>Proof:</em> Let <span class="math inline">\(w_H(x)\)</span> denote the Hamming weight and take <span class="math inline">\(\mathcal C = \{x|w_H(X)\leq k\}\)</span>,
+then the previous lemma gives, for <span class="math inline">\(x\mapsto h(x)\)</span> increasing for <span class="math inline">\(x\leq 1/2\)</span>
+<span class="math display">\[
+    |\mathcal C| = \sum_{j=0}^k \binom{n}{j} \leq \sum_{j=0}^k e^{n h(j/n)}
+    \leq e^{nh(k/n)}, \quad k\leq n/2
+\]</span></p>
+</div>
+<div id="counting-subgraphs" class="section level2 unnumbered hasAnchor">
+<h2>Counting subgraphs<a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For graphs <span class="math inline">\(H, G\)</span>, let <span class="math inline">\(N(H, G)\)</span> be the number of subgraphs
+(subset of edges) of <span class="math inline">\(G\)</span> which are isomorphic to <span class="math inline">\(H\)</span>.
+Let <span class="math inline">\(G\)</span> have <span class="math inline">\(m\)</span> edges, consider the maximal number of <span class="math inline">\(H\)</span>
+which are contained in <span class="math inline">\(G\)</span>. Define
+<span class="math display">\[
+    N(H, m) = \max_{G:|E(G)|\leq m|} N(H, G)
+\]</span>
+This is the maximum number of <span class="math inline">\(H\)</span> which can be contained in
+a graph with <span class="math inline">\(m\)</span> edges.</p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-13" class="proposition"><strong>Proposition 2.1  (triangle in graphs) </strong></span><span class="math inline">\(N(K_3, m) \asymp m^{3/2}\)</span>.</p>
+</div>
+<p><em>Proof:</em> To show the lower-bound, <span class="math inline">\(G=K_n\)</span> has <span class="math inline">\(\Theta(n^2)\)</span> edges and <span class="math inline">\(\Theta(n^3)\)</span>
+triangles. To show the upper bound, fix <span class="math inline">\(G=(V, E)\)</span> with <span class="math inline">\(m\)</span> edges and
+draw a labeled triangle at random with vertices <span class="math inline">\((X_1, X_2, X_3)\)</span>, then by
+Shearer’s lemma
+<span class="math display">\[
+    \log(3!N(K_3, G)) = H(X_1, X_2, X_3)
+    \leq \dfrac 1 2 [H(X_1, X_2)+H(X_1, X_3)+H(X_2, X_3)]
+    \leq \dfrac 3 2 \log(2m)
+\]</span></p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-14" class="theorem"><strong>Theorem 2.2  (linear programming dual) </strong></span>Given a linear program <span class="math inline">\(\max c^Tx: Ax\leq b, x\geq 0\)</span>, its dual is
+<span class="math display">\[
+    \min b^Ty, \quad A^Ty\geq c, y\geq 0
+\]</span>
+This can be viewed as looking for a vector of coefficients <span class="math inline">\(y\)</span>
+to combine the constraints such that the resulting RHS
+constraint <span class="math inline">\(b^Ty\)</span> upper-bounds <span class="math inline">\(c^Tx\)</span> (which happens when <span class="math inline">\(A^Ty\geq c\)</span>).</p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-15" class="theorem"><strong>Theorem 2.3  (Friedgut and Kahn) </strong></span>The fractional covering number of a graph <span class="math inline">\(G=(V, E)\)</span> is the value of the linear program
+<span class="math display">\[
+    \rho^*(H) = \min_w \left[
+        \sum_{e\in E}w(e): \sum_{v\in e\in E} w(e)\geq 1, \forall v\in V, w(e)\in [0, 1]
+    \right]
+\]</span>
+Then <span class="math inline">\(c_0(H) m^{\rho^*(H)} \leq N(H, m) \leq c_1(H)m^{\rho^*(H)}\)</span>.</p>
+</div>
+<p><em>Proof:</em> Consider the upper bound first. Label <span class="math inline">\(V(H)=[n]\)</span>
+and let <span class="math inline">\(w^*(e)\)</span> be the solution for <span class="math inline">\(\rho^*(H)\)</span>. For any <span class="math inline">\(G\)</span> with <span class="math inline">\(m\)</span> edges,
+draw a subgraph of <span class="math inline">\(G\)</span> uniformly at random from all those isomorphic to <span class="math inline">\(H\)</span>.
+Let <span class="math inline">\(X_i\in V(G)\)</span> be the vertex corresponding to the <span class="math inline">\(i\)</span>-th vertex of <span class="math inline">\(H\)</span>.
+Define a random <span class="math inline">\(2\)</span>-subset of <span class="math inline">\([n]\)</span> by sampling <span class="math inline">\(e\in E(H)\)</span> with probability
+<span class="math inline">\(w^*(e)/\rho^*(H)\)</span>, then by definition of <span class="math inline">\(\rho^*(H)\)</span>
+<span class="math display">\[
+    \mathrm{Pr}(i\in S) \geq \dfrac 1 {\rho^*(H)}
+\]</span>
+since the minimal probability of selecting any edge (and its associated vertices)
+is <span class="math inline">\(1/\max w(e) \leq 1/\sum w(e) = \rho^*(H)\)</span>. Then applying Shearer’s lemma <a href="entropy.html#thm:shearer">1.5</a>
+<span class="math display">\[
+    \log N(H, G) = H(X) \leq H(X_S|S)\rho^*(H) \leq \log(2m)\rho^*(H)
+    \implies N(H, G)\leq (2m)^{\rho^*(H)}
+\]</span>
+For the other bound, the idea is to explode the graph <span class="math inline">\(H\)</span>.
+Consider the dual LP corresponding to the fractional packing number
+<span class="math display">\[
+    \alpha^*(H) = \max_\psi \left[\sum_{v\in V(H)} \psi(v):
+        \psi(v)\in [0, 1] \text{ and }
+        \forall (vw)\in E: \psi(v)+\psi(w)\leq 1
+    \right]
+\]</span>
+Construct the graph <span class="math inline">\(G\)</span> as follows: for each <span class="math inline">\(v\in H\)</span>, replicate it <span class="math inline">\(m(v)\)</span> times
+(here <span class="math inline">\(m\)</span> stands for multiplicity, to be defined later). Each edge <span class="math inline">\(e=(vw)\)</span> of <span class="math inline">\(H\)</span>
+is then replaced by <span class="math inline">\(K_{m(v), m(w)}\)</span> so that
+<span class="math display">\[
+    |E(G)| = \sum_{(vw)\in E(H)} m(v)m(w)
+\]</span>
+We also have <span class="math inline">\(N(G, H)\prod_{v\in V(H)} m(v)\)</span>. Fix a large number <span class="math inline">\(M\)</span> and
+let <span class="math inline">\(m(v) = \lceil M^{\psi(v)}\rceil\)</span>, then
+<span class="math display">\[\begin{align}
+    |E(G)| &amp;\leq \sum_{(vw)\in E(H)} 4M^{\psi(v)+\psi(w)} \leq 4M|E(H)| \\
+    N(G, H) &amp;\geq \prod_{v\in V(H)} M^{\psi(v)} = M^{\alpha^*(H)}
+\end{align}\]</span></p>
+</div>
+<div id="brégmans-theorem" class="section level2 unnumbered hasAnchor">
+<h2>Brégman’s theorem<a href="entropy-method-in-combinatorics-and-geometry.html#brégmans-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Brégman’s theorem bounds the number of perfect
+matchings in a bipartite graph.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-16" class="definition"><strong>Definition 2.1  (permanent) </strong></span>The permanent of a <span class="math inline">\(n\times n\)</span> matrix is
+<span class="math display">\[
+    \mathrm{perm}(A) =
+    \sum_{\pi \in S_n} \prod_{j=1}^n a_{j\pi(j)}
+\]</span></p>
+</div>
+<p><span style="color:red">
+To finish.
+</span></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="entropy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="divergence.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

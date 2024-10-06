@@ -1,0 +1,280 @@
+# Mutual Information
+
+Key takeaways: 
+
+1. The graph direction in Markov models are somewhat redundant: 
+\[ 
+    X\to Y\to Z \iff X\leftarrow Y\to Z\iff Z\to Y\to X
+\] 
+The key is $X\indep Z\|Y$. 
+2. In light of how divergence-DPI implies mutual information-DPI 
+    (proposition \@ref(prp:miDpiPerspective)), given a divergence $\mca D$
+    satisfying DPI, we can define a mutual-information like quantity 
+    \[ 
+        I_{\mca D}(X; Y) 
+        = \Exp_{x\sim P_X} \left[\mca D(P_{Y|X=x} \| P_Y)\right] 
+        = D(P_{Y|X} \| P_Y | P_X)
+    \] 
+3. The key factorization result for mutual 
+    information is \@ref(thm:mutInfoMoreProperties). 
+4. Mutual information is the weighted divergence from the marginal 
+    to the conditionals (definition \@ref(def:mutInfDef)). 
+
+
+## Definition, properties {-}
+:::{.definition #mutInfDef name="Mutual information"}
+The mutual information between $X, Y$ is (Fano's definition)
+\[ 
+    I(X; Y) \equiv D(P_{X, Y}\|P_XP_Y) = D(P_{Y|X} \| P_Y | P_X)
+\] 
+Shannon's definition is not general enough for infinite cases, 
+even when the alphabet is discrete. 
+\[ 
+    I(X; Y) = H(X) - H(X|Y)
+\] 
+The conditional mutual-information is 
+\[ 
+    I(X; Y|Z) = \Exp_{z\in P_Z} I(X; Y|Z=z)
+\] 
+:::
+
+:::{.theorem #mutualInfoProperties name="properties of mutual information"}
+Mutual information satisfies: 
+
+1. <span style="color:blue">Conditional expression:</span>
+    $I(X; Y) = D(P_{XY}\|P_XP_Y) = D(P_{Y|X} \| P_Y\,|\, P_X)$. 
+2. <span style="color:blue">Symmetry:</span> $I(X; Y) = I(Y; X)$. 
+3. <span style="color:blue">Positivity:</span> $I(X; Y)\geq 0$ with equality 
+    saturated iff $X\indep Y$. 
+4. <span style="color:blue">Transformations destroy information:</span>
+    $I(f(X); Y) \leq I(X; Y)$ with equality iff $f$ is injective. 
+5. <span style="color:blue">Data create information:</span> 
+    $I(X, Y; Z) \geq I(X; Z)$ with equality iff $Y$ is a deterministic 
+    transform of $X$. 
+:::
+_Proof:_ The conditional expression follows from the decomposition in 
+theorem \@ref(thm:divergenceProperties). For symmetry, consider 
+a swap-channel on the joint which maps $P_XP_Y\mapsto P_YP_X$, then 
+applying the KL-DPI \@ref(thm:klDPI) to the joint $K\circ P_{XY} = P_{YX}$ 
+and the marginal $K\circ P_XP_Y = P_YP_X$ yields 
+\[ 
+    D(P_{XY} \| P_XP_Y) = D(P_{YX} \| P_YP_X) \iff I(X; Y) = I(Y; X)
+\] 
+the DPI inequality is made into an equality by a symmetry argument. 
+Positivity is established by the information inequality \@ref(thm:infoInequality). 
+For claim (4), consider the kernel $K\circ (X, Y) = (f(X), Y)$ and apply KL-DPI 
+\[ 
+    D(P_{f(X)Y} \| P_{f(X)}P_Y) \leq D(P_{XY} \| P_XP_Y) 
+    \iff I(f(X); Y) \leq I(X; Y)
+\] 
+For injective $f$, apply the argument to the inverse. For the last claim, 
+apply (4) to the projection transform $(X, Y)\mapsto X$. 
+
+
+:::{.proposition name="Mutual information and entropy"}
+
+1. $I(X; X) = \begin{cases} H(X) & X \text{ discrete.} \\ 
+    \infty \text{ otherwise.}\end{cases}$ 
+2. Given discrete $X$, $H(X) = I(X; Y) + H(X|Y)$. 
+3. Given both $X, Y$ discrete, $H(X)+H(Y) = I(X; Y) + H(X; Y)$. 
+:::
+_Proof:_ (2) and (3) follow from direct computation. 
+Given $X$ discrete with alphabet-size $n$, we have 
+\[ 
+    I(X; X) = D(P_{XX} \| P_XP_X) 
+    = \Exp_{XX\sim P_{XX}} \log \df{P_X(X)}{P_X(X)^2} = H(X)
+\] 
+note that $XX\sim P_{XX}\cong X\sim P_X$. For infinite-alphabet, 
+consider a kernel $K_m$ which projects $X$ onto the univariate $\mrm{Unif}(0, 1)$ 
+distribution then takes the first $m$ decimals, then 
+\[ 
+    I(X; X) > I(K_m(X); X) = H(K_m(X)) - H(K_m(X)|X)_{=0} = m\log 2
+\] 
+this holds for all $m$. 
+
+## Causal graphs {-}
+
+
+Consider a Markov graph $X\to Y\to Z$. This unrolls to 
+\begin{align} 
+    X\to Y\to Z
+    &\iff P_{X, Y, Z} = P_{Z|Y}P_{Y|X}P_X \\ 
+    &\iff P_{X, Z}|Y = P_{X|Y} P_{Z|Y} \iff X\indep Z | Y \\ 
+    &\iff P_{X, Y, Z} = P_{X, Z|Y} P_Y = P_{X|Y} P_{Z|Y} P_Y \\ 
+    &\iff X\leftarrow Y \rightarrow Z \\ 
+    &\iff Z\rightarrow Y\rightarrow X 
+\end{align}
+A variable $V$ is a _collider_ on some undirected path if 
+\[ 
+    \cdots \to V \leftarrow \cdots 
+\] 
+Two subsets of vertices $A, B$ are $d$-connected by 
+a subset $C$ if there exists an undirected path 
+from $a\in A\to b\in B$ such that: 
+
+1. There are no non-colliders in $C$. 
+2. Every collider is either in $C$ or has a descendent in $C$. 
+
+$A\indep B|C$ in **every distribution** satisfying 
+the graphical model iff $A, B$ are _not_ $d$-connected by $C$. 
+
+## Conditional mutual information, graphical models {-}
+
+:::{.definition name="conditional mutual information"}
+Given standard Borel $\mca X, \mca Y$, define 
+\[ 
+    I(X; Y|Z) = D(P_{X, Y|Z} \| P_{X|Z} P_{Y|Z} \, | \, P_Z) 
+    = \Exp_{z\sim P_Z}\left[I(X; Y|Z=z)\right]
+\] 
+:::
+
+:::{.theorem #mutInfoMoreProperties name="more properties of mutual information"}
+Given standard Borel R.Vs, then 
+
+1. $I(X; Z|Y)\geq 0$ with equality iff $X\indep Z | Y$. 
+2. Chain rule (Kolmogorov identities): 
+    <div style="color:blue">  
+    \[ 
+        I(X, Y; Z) = I(X; Z) + I(Y; Z|X) = I(Y; Z) + I(X; Z|Y)
+    \] 
+    </div>
+3.  DPI for mutual information: given $X\to Y\to Z$, then 
+    \[ 
+        I(X; Z) \leq I(X; Y)
+    \] 
+    with equality iff $X\to Z\to Y$. 
+4. Full chain rule: $I(X^n; Y) = \sum_{k=1}^n I(X_k; Y|X^{k-1})$. 
+5. Bijective invariance: given bijective $f, g$, then $I(fX; gY) = I(X; Y)$. 
+:::
+_Proof:_ 
+Non-negativity follows from the divergence definition 
+and the information inequality: 
+\[ 
+    I(X; Z|Y) 
+    = D(P_{XZ}P_Y \| P_XP_ZP_Y) \geq 0 
+\] 
+For the chain rule, factor the LHS using proposition \@ref(prp:divergenceChainRule)
+against $X, Z$ to obtain 
+\begin{align}
+    I(X, Y; Z) 
+    &= D(P_{XYZ} \| P_{XY}P_Z) 
+    = D(P_{XZ} \| P_XP_Z) + 
+    D(P_{XYZ} \| P_{Y|X} P_{XZ}) \\ 
+    &= I(X; Z) + D(P_{XY|Z} P_Z \| P_{Y|X} P_{Z|X} P_X)
+    = I(X; Z) + I(X; Y |Z)
+\end{align}
+where factoring against $XZ$ yields 
+$P_{XY}P_Z = P_{Y|X}(P_XP_Z)$ and $P_XP_Z$ is replaced with the marginal 
+$P_{XZ}$ of $P_{XYZ}$. The other identity follows from symmetry. 
+For the DPI, apply the Kolmogorov identity to $I(Y, Z;X)$ to obtain 
+\begin{aligned}
+    I(Y, Z ; X)
+    &= I(Y; X) + I(Z; X | Y)_{=0} \\ 
+    &= I(Z; X) + I(Y; X | Z) 
+\end{aligned}
+equality is fulfilled iff $X\to Z\to Y$. 
+Bijective invariance follows from applying DPI to $f$ then $f^{-1}$: 
+consider the equally valid chains under bijection: 
+\[ 
+    Y\to X\to fX \implies I(fX; Y) \leq I(X; Y), \quad 
+    Y\to fX\to X \implies I(X; Y) \leq I(fX; Y)
+\] 
+
+
+<div style="color:green">
+:::{.remark name="mutual information chain rule"}
+Mutual information between $X; Y$ is a resource which can be consumed 
+when we condition on an additional variable $Z$. 
+Additionally, one should remember the Kolmogorov identities as a decomposition 
+of $I(X, Y; Z)$ into an individual component $I(X; Z)$ plus 
+the second term $I(Y; Z|X)$, which is $I(Y; Z)$ adjusted for over-counting. 
+:::
+</div>
+
+:::{.corollary}
+If $X\to Y\to Z\to W$, then $I(X; W) \leq I(Y; Z)$. 
+:::
+_Proof:_ Several applications of chain rule: 
+$I(Y; Z) \geq I(X; Z) \geq I(X; W)$. 
+
+<div style="color:green">
+:::{.remark name="incomparable mutual information under conditioning"}
+Under a Markov chain $X\to Y\to Z$, mutual information decreases 
+upon conditioning. To find an example such that $I(X; Y|Z) > I(X; Y)$, 
+the only non-isomorphic graph is 
+\[ 
+    X\to Y\leftarrow Z 
+\] 
+Let $X, Z\sim \mrm{Ber}(1/2)$ i.i.d and $Y=X\oplus Z$, then 
+$X\indep Y \implies I(X; Y)=0$ and 
+\[ 
+    I(X; Y|Z) = H(X, Y|Z) - H(X|Y, Z) = \log 2
+\] 
+:::
+</div>
+
+:::{.proposition #miDpiPerspective name="alternate proof of mutual information DPI"}
+Mutual information DPI is implied by the divergence-DPI 
+theorem \@ref(thm:klDPI). Given a Markov chain $X\to Y\to Z$, we have 
+\[ 
+    I(X; Z) = D(P_{XZ} \| P_XP_Z) 
+    = D(P_{Z|X} \| P_Z | P_X) \leq D(P_{Y|X} \| P_Y | P_X)
+    = I(X; Y)
+\] 
+:::
+_Proof:_ The markov kernel in question is simply $P_{Z|Y}$ applied to 
+$(P_{Y|X=x}, P_Y) \mapsto (P_{Z|X=x}, P_Z)$. 
+
+
+## Sufficient statistic {-}
+Consider the following definitions: 
+
+- $P^\theta_X$ is a class of distributions for $X$ parameterized by $\theta\in \Theta$. 
+- Given kernel $P_{T|X}$, let $P_T^\theta = P_{T|X} \circ P^\theta_X$ be the induced 
+    distribution on $T$. 
+
+:::{.definition name="sufficient statistic"}
+$T$ is a sufficient statistic of $X$ for $\theta$ if there exists a 
+kernel $P_{X|T}$ such that $P_{T|X} P_X^\theta = P_{X|T} P^\theta_T$. 
+In other words, $P_{X|T}$ can be chosen not to depend on $\theta$. 
+:::
+
+:::{.theorem name="characterization of sufficiency"}
+The following claims are equivalent: 
+
+1. $T$ is a sufficient statistic of $X$ for $\theta$. 
+2. $\forall P_\theta, \theta \to T\to X 
+\iff \forall P_\theta, I(\theta; X|T) = 0$. 
+:::
+<span style="color:red">
+To finish. 
+</span>
+
+
+## Probability of error, Fano's inequality {-}
+Given a R.V. $W$ and our prediction $\hat W$, we can 
+
+1. Guess randomly: $W\indep \hat W$. 
+2. Guess with data: $W\to X\to \hat W$, 
+    where $X=f(W)$ is a deterministic function of $W$. 
+3. $W\to X\to Y\to \hat W$, where $X\to Y$ is some noisy channel. 
+
+
+:::{.theorem}
+Given a finite alphabet $|\mca X|=M<\infty$, for any $\hat X\indep X$ 
+\[ 
+    H(X) \leq F_M(\Pr[X=\hat X]), \quad F_M(x) = (1-x)\log(M-1)+h(x)
+\] 
+and $h(x)$ is the binary entropy. 
+:::
+
+<span style="color:red">
+To finish. 
+</span>
+
+
+## Entropy-power Inequality {-}
+
+<span style="color:red">
+To finish. 
+</span>

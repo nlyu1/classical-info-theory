@@ -1,0 +1,4 @@
+book_filename: "6.7480 Notes, Fall 2024"
+language:
+output_dir: "docs"
+delete_merged_file: true

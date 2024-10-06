@@ -1,0 +1,281 @@
+# Variational Measures of Information
+
+Key takeaways:
+
+1. Variational characterizations are important because 
+    they provide convenient bounds when we choose an easily-computable candidate. 
+2. For each convex quantity there is a dual variational characterization per 
+    the Legendre transformation. 
+3. For convexity theorems, introduce an additional parameter 
+    $\theta \sim \mrm{Ber}(\lambda)$ to rewrite 
+    $\lambda f(x)+\bar \lambda f(y)$ as a conditional quantity, 
+    then use decomposition.
+4. To analyze mutual information with a mixture distribution: add a latent 
+    variable as an upper bound, then use the Kolmogorov identities to 
+    analyze the gap / decompose in another way. 
+5. Mutual information is "average divergence" achieved 
+    using center of gravity \@ref(cor:centerOfGravityMI). 
+
+## Geometric interpretations of MI {-}
+
+:::{.theorem #goldenFormula name="golden formula"}
+For any $Q_Y$ we have 
+\[ 
+    D(P_{Y|X} \| Q_Y|P_X) = I(X; Y) + D(P_Y\|Q_Y)
+\] 
+In particular, if $P_Y \ll Q_Y$, then 
+\[ 
+    I(X; Y) = D(P_{Y|X} \| Q_Y|P_X) - D(P_Y\|Q_Y)
+\] 
+:::
+<details>
+<summary>Proof</summary>
+The two sides expand to
+\begin{align}
+    D(P_{Y|X} \| Q_Y|P_X) &= D(P_{XY} \| P_XQ_Y) \\ 
+    I(X; Y) + D(P_Y \|Q_Y) &= D(P_{XY} \| P_XP_Y) + D(P_Y \|Q_Y)
+\end{align}
+and are equal by the divergence chain rule \@ref(prp:divergenceChainRule).
+</details>
+
+:::{.corollary #centerOfGravityMI name="center of gravity formula"}
+$I(X; Y) = \min_{Q_Y} D(P_{Y|X} \| Q_Y|P_X)$, the 
+unique minimizer is $Q_Y=P_Y$. 
+:::
+_Proof:_ Follows from the golden formula and information inequality. 
+
+To properly interpret this corollary as the center of gravity: 
+consider the simplex of conditionals $\{P_{Y|X=x}\}$. Given 
+a candidate marginal $Q_Y$, we can compute its divergence 
+from each conditional, weighted by their incidence probability 
+\[ 
+    D(P_{Y|X} \| Q_Y|P_X) 
+    = \Exp_{x\sim P_X} \left[D(P_{Y|X=x} \| Q_Y)\right]
+\] 
+The unique minimizer of this is $P_Y$, with minimized value $I(X; Y)$. 
+
+One can also see that mutual information is small if masses are concentrated: 
+this coincides with $I(X; Y) = H(Y) - H(Y|X)$. 
+
+:::{.theorem name="minimum distance from independence"}
+$I(X; Y) = \min_{Q_X, Q_Y} D(P_{XY} \|Q_XQ_Y)$. 
+The unique minimizer is $Q_X, Q_Y = P_X, P_Y$. 
+:::
+<details>
+<summary>Proof</summary>
+Decompose the divergence on the RHS 
+\begin{align}
+    D(P_{XY} \|Q_XQ_Y) 
+    &= D(P_{XY} \| Q_X P_Y) + D(P_Y \|Q_Y) \\ 
+    &= D(P_{XY} \| P_X P_Y) + D(P_Y \|Q_Y) + D(P_X \| Q_X) \\ 
+    &= I(X; Y) + D(P_Y \|Q_Y) + D(P_X \| Q_X)
+\end{align}
+</details>
+
+:::{.theorem name="minimum distance from markov chain"}
+Minimizing over all $Q_{XYZ} = Q_XQ_{Y|X}Q_{Z|Y}$, 
+\[ 
+    I(X; Z|Y) = \min_{Q_{XYZ}:X\to Y\to Z} D(P_{XYZ} \| Q_{XYZ})
+\] 
+:::
+
+## Lower variational bounds {-}
+
+
+:::{.theorem name="lower variational bound of MI"}
+For any Markov kernel $Q_{X|Y}$ such that $Q_{X|Y=y} \ll P_X$ for 
+$P_Y$ almost everywhere we have 
+\[ 
+    I(X; Y) \geq \Exp_{P_{X, Y}} \left[\log \df{d Q_{X|Y}}{dP_X}\right]
+\] 
+if $I(X; Y) < \infty$, then 
+\[ 
+    I(X; Y) = \sup_{Q_{X|Y}} \Exp_{P_{XY}} \left[
+        \log \df{dQ_{X|Y}}{dP_X}
+    \right]
+\] 
+equality is saturated when $Q_{X|Y} = P_{X|Y}$. 
+:::
+<details>
+<summary>Proof</summary>
+Without dealing with limit arguments, 
+\begin{align}
+    \Exp_{P_{X|Y=y}} \left[
+        \log \df{Q_{X|Y}(x|y)}{P_X(x)}
+    \right]
+    &= \Exp_{P_{X|Y=y}} \left[
+        \log \left(
+            \df{Q_{X|Y}(x|y)}{P_{X|Y}(x|y)}
+            \df{P_{X|Y}(x|y)}{P_X(x)}
+        \right)
+    \right] \\ 
+    &= \Exp_{P_{X|Y=y}} \left[
+        -D(P_{X|Y=y} \| Q_{X|Y=y}) + D(P_{X|Y=y} \| P_X)
+    \right]
+\end{align}
+Take expectation over $y$ to obtain 
+\begin{align}
+    \Exp_{P_{XY}} \left[
+        \log \df{dQ_{X|Y}}{dP_X}
+    \right] 
+    &= D(P_{X|Y=y} \| P_X | P_Y) - D(P_{X|Y} \| Q_{X|Y} | P_Y) \\ 
+    &= I(X; Y) - D(P_{X|Y} \| Q_{X|Y} | P_Y)
+\end{align}
+</details>
+
+:::{.theorem #donskerVaradhan name="Donsker-Varadhan"}
+Given probability measures $P, Q$ over $\mca X$, 
+denote a class of functions 
+\begin{align}
+    \mca C_Q &= \{
+        f:\mca X\to \R\cup \{-\infty\} | 
+        0 < \Exp_Q[e^{f(X)}] < \infty
+    \} \\ 
+    D(P \| Q) &= \sup_{f\in \mca C_Q} 
+        \Exp_P f(X) - \log \Exp_Q\left[e^{f(X)}\right]
+\end{align}
+If $\mca X$ is a metric space with the 
+Borel $\sigma$-algebra, then the supremum can be 
+taken over the class of all bounded continuous functions. 
+:::
+<details>
+<summary>Proof</summary>
+Again, for clarity we're ignoring measurability 
+(or infinity) subtleties. 
+The key idea is, given $f\in \mca C_Q$, to 
+define a tilted distribution $Q^f$ such that 
+\[ 
+    Q^f(dx) = e^{f(dx) - \psi_f} Q(dx), \quad 
+    \psi_f = \log \Exp_Q\left(e^{f(X)}\right)
+\] 
+Here $\psi_f$ is just a $f$-dependent normalization constant. 
+Then 
+\begin{align}
+    \Exp_P[f(X) - \psi_f]
+    &= \Exp_P[\log e^{f(X) - \psi_f}]
+    = \Exp_P\left[\log \df{dQ^f}{dQ}\right]\\ 
+    &= \Exp_P\left[\log \df{dP}{dQ}- \log \df{dP}{dQ^f}\right]
+    = D(P\|Q) - D(P\|Q^f) \leq D(P\|Q)
+\end{align}
+Equality is saturated when $Q^f = P \iff f = \log \df{dP}{dQ}$. 
+</details>
+
+:::{.corollary}
+The supremum in Donsker-Varadhan is equivalent to, 
+$\forall f\in \mca C_Q$ 
+\[ 
+    \Exp_P f(X) \leq D(P\|Q) + \psi_f, 
+    \quad \psi_f = \log \Exp_Q\left(e^{f(X)}\right)
+\] 
+This allows us to upper-bound $\Exp_P f(X)$ for difficult $P$ 
+by substituting with an easier $Q$. 
+:::
+
+Recall the Legendre transform: given a convex function $f(x)$, 
+its Legendre transform is 
+\[ 
+    g(p) = \sup_x\left[\la x, p\ra - f(x)\right]
+\] 
+Here, $g(p)$ is the function $P\mapsto D(P\|Q)$, $x$ 
+is a well-behaved function $f$, and $f(x)$ corresponds 
+to the functional $f\mapsto \psi_f$. This is a functional 
+Legendre transform. The following result will then not be too surprising. 
+
+:::{.proposition name="Gibbs variational principle"}
+Given measurable $\mca X:\R\cup \{-\infty\}$ 
+and a probability measure $Q$ on $\mca X$ 
+\[ 
+    \log \Exp_Q\left[e^{f(X)}\right] = \sup_P \Exp_P [f(X)] - D(P\|Q) 
+\] 
+If the LHS is finite, then the unique maximizer in the RHS is $P=Q^f$. 
+:::
+
+## Continuity {-}
+
+:::{.proposition name="Single-argument continuity of divergence for finite alphabets"}
+Fixing finite $\mca X$ with a strictly positive distribution $Q$ over $\mca X$, 
+then $P\mapsto D(P\|Q)$ is continuous; in particular, $P\mapsto H(P)$ is continuous. 
+:::
+
+<span style="color:green">
+For finite alphabets, divergence is never continuous in the pair: consider 
+\[ 
+    \lim_{n\to \infty} d(1/n \| 2^{-n}) 
+    = \df 1 n \log \left(\df{2^n} n\right) + \df {n-1} n \log \left(\df{1-1/n}{1-2^{-n}}\right)
+    = \log 2 \neq 0 
+\] 
+while the arguments converge to $0$: _information can be destroyed at the limit._
+</span>
+
+<div style="color:green">
+:::{.remark}
+$D(P\|Q)$ is not continuous in either $P$ or $Q$ for general alphabets: 
+consider $X_j\sim 2\mrm{Ber}_{1/2}-1$, then $\bar X_j\to \mca N(0, 1)$ 
+but $D(\bar X_j \|\mca N(0, 1))=\infty$ because $\bar X_j$ is discrete for all $n$. 
+:::
+</div>
+
+:::{.theorem #semiContinuity name="Lower semicontinuity of divergence"}
+Given a metric space $\mca X$ with Borel $\sigma$-algebra $\mca H$. 
+If $P_n, Q_n$ converge weakly to $P, Q$, respectively, then 
+\[ 
+    D(P\|Q) \leq \liminf_{n\to \infty} D(P_n\|Q_n)
+\] 
+Recall that weak convergence is pointwise convergence in distribution. 
+:::
+<details>
+<summary>Proof</summary>
+This follows from Donsker-Varadhan by $\Exp_{P_n}[f]\to \Exp_P[f]$ and 
+$\Exp_{Q_n}[e^f]\to \Exp_Q[e^f]$. To reason about $\liminf$: choose a 
+subsequence such that $D(P_n\|Q_n)$ decreases monotonically, 
+then $\liminf\mapsto \lim$; equality cannot be established by the previous example: 
+a more fundamental reason is because weak convergence guarantees 
+the convergence of expectations for each individual function but not 
+convergence for the supremum. 
+</details>
+
+<span style="color:green">
+Convergence in the weaker metric topology only implies weak 
+semi-continuity in the stronger Jensen metric. 
+</span>
+
+
+
+:::{.proposition name="continuity of MI"}
+
+a. Given finite alphabets $\mca X, \mca Y$, $P_{XY}\mapsto I(X; Y)$ is continuous. 
+b. If $\mca X$ is finite, then $P_X\mapsto I(X; Y)$ is continuous. 
+c. For general $\mca X, \mca Y$, let $P_X\in \Pi = \mrm{co}(P_1, \cdots, P_n)$ 
+    be in the convex hull of $(P_j$; if $I(P_j; P_{Y|X}<\infty$ for each 
+    $P_j$, then the map $P_X\mapsto I(X; Y)$ is continuous. 
+:::
+<details>
+<summary>Proof</summary>
+For the first statement, $I(X; Y)=H(X)+H(Y) - H(X, Y)$ and entropy is 
+continuous on finite alphabets. For the second statement, define the 
+uniform mixture of conditionals $Q_Y = |\mca X|^{-1}\sum P_{Y|X=x}$, then 
+\[ 
+    D(P_Y \|Q_Y) = \Exp_{Q_Y} \left[\varphi \left(\sum P_X(x)h_x(Y)\right)\right], 
+    \quad \varphi(t) = t\log t
+\] 
+Here $h_x(y) = \df{dP_{Y|X=x}}{dQ_Y}(y)$ is nonnegative and bounded by $|\mca X|$, 
+so using the bounded convergence theorem we have $P_X\mapsto $D(P_Y\|Q_Y)$ 
+continuous. By the golden formula, 
+\[ 
+    I(X; Y) = D(P_{Y|X} \|Q_Y|P_X) - D(P_Y\|Q_Y) 
+\] 
+the first term is linear in $P_X$. For the third claim, form 
+a chain $Z\to X\to Y$ with $Z\in [n]$ mapping $P_{X|Z=j}=P_j$. Then 
+\[ 
+    I(X; Y) = I(Z; Y) + I(X; Y|Z)
+\] 
+the first term is continuous in $P_Z$ while the second is linear in $P_Z$. 
+Thus $P_Z\mapsto I(X; Y)$ is continuous, and so is $P_X\mapsto I(X; Y)$. 
+</details>
+
+<span style="color:green">
+The bounded convergence theorem applies in proof of (b) because 
+we have pointwise convergence of $\sum_{x} P_X(x)h_x(y)$ as $P_X$ 
+approaches its limit, and $\varphi$ is continuous and bounded, so 
+this allows us to pass the limit through composition with $\varphi$. 
+</span>

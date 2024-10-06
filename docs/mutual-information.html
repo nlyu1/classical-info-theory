@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Mutual Information | 6.7480 Notes</title>
+  <meta name="description" content="4 Mutual Information | 6.7480 Notes" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Mutual Information | 6.7480 Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Mutual Information | 6.7480 Notes" />
+  
+  
+  
+
+<meta name="author" content="Nicholas Lyu" />
+
+
+<meta name="date" content="2024-10-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="divergence.html"/>
+<link rel="next" href="variational-measures-of-information.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
+<ul>
+<li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#basics"><i class="fa fa-check"></i>Basics</a></li>
+<li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#combinatorial-properties"><i class="fa fa-check"></i>Combinatorial properties</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics and geometry</a>
+<ul>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#brégmans-theorem"><i class="fa fa-check"></i>Brégman’s theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
+<ul>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#kl-divergence"><i class="fa fa-check"></i>KL-Divergence</a></li>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#markov-kernels"><i class="fa fa-check"></i>Markov Kernels</a></li>
+<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#conditional-divergence-chain-rule-dpi"><i class="fa fa-check"></i>Conditional divergence, Chain Rule, DPI</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
+<ul>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mutual-information-graphical-models"><i class="fa fa-check"></i>Conditional mutual information, graphical models</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#sufficient-statistic"><i class="fa fa-check"></i>Sufficient statistic</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
+<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html"><i class="fa fa-check"></i><b>5</b> Variational Measures of Information</a>
+<ul>
+<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#geometric-interpretations-of-mi"><i class="fa fa-check"></i>Geometric interpretations of MI</a></li>
+<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#lower-variational-bounds"><i class="fa fa-check"></i>Lower variational bounds</a></li>
+<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#continuity"><i class="fa fa-check"></i>Continuity</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extremization.html"><a href="extremization.html"><i class="fa fa-check"></i><b>6</b> Extremization</a>
+<ul>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#convexity"><i class="fa fa-check"></i>Convexity</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#minimax-and-saddle-point"><i class="fa fa-check"></i>Minimax and saddle-point</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-saddle-point-of-mi"><i class="fa fa-check"></i>Capacity, Saddle point of MI</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#gaussian-saddle-point"><i class="fa fa-check"></i>Gaussian saddle point</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
+<li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
+<ul>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#information-properties"><i class="fa fa-check"></i>Information properties</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#tv-and-hellinger-hypothesis-testing"><i class="fa fa-check"></i>TV and Hellinger, hypothesis testing</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>9</b> Lecture notes</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#main-content"><i class="fa fa-check"></i>Main content</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#one-parameter-families-minimax-rates"><i class="fa fa-check"></i>One-parameter families; minimax rates</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#hcr-inequality-fisher-information"><i class="fa fa-check"></i>HCR inequality; Fisher information</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">6.7480 Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mutual-information" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Mutual Information<a href="mutual-information.html#mutual-information" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Key takeaways:</p>
+<ol style="list-style-type: decimal">
+<li>The graph direction in Markov models are somewhat redundant:
+<span class="math display">\[
+X\to Y\to Z \iff X\leftarrow Y\to Z\iff Z\to Y\to X
+\]</span>
+The key is <span class="math inline">\(X\perp\!\!\!\perp Z\|Y\)</span>.</li>
+<li>In light of how divergence-DPI implies mutual information-DPI
+(proposition <a href="mutual-information.html#prp:miDpiPerspective">4.2</a>), given a divergence <span class="math inline">\(\mathcal D\)</span>
+satisfying DPI, we can define a mutual-information like quantity
+<span class="math display">\[
+     I_{\mathcal D}(X; Y)
+     = \mathbb E_{x\sim P_X} \left[\mathcal D(P_{Y|X=x} \| P_Y)\right]
+     = D(P_{Y|X} \| P_Y | P_X)
+\]</span></li>
+<li>The key factorization result for mutual
+information is <a href="mutual-information.html#thm:mutInfoMoreProperties">4.2</a>.</li>
+<li>Mutual information is the weighted divergence from the marginal
+to the conditionals (definition <a href="mutual-information.html#def:mutInfDef">4.1</a>).</li>
+</ol>
+<div id="definition-properties" class="section level2 unnumbered hasAnchor">
+<h2>Definition, properties<a href="mutual-information.html#definition-properties" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:mutInfDef" class="definition"><strong>Definition 4.1  (Mutual information) </strong></span>The mutual information between <span class="math inline">\(X, Y\)</span> is (Fano’s definition)
+<span class="math display">\[
+    I(X; Y) \equiv D(P_{X, Y}\|P_XP_Y) = D(P_{Y|X} \| P_Y | P_X)
+\]</span>
+Shannon’s definition is not general enough for infinite cases,
+even when the alphabet is discrete.
+<span class="math display">\[
+    I(X; Y) = H(X) - H(X|Y)
+\]</span>
+The conditional mutual-information is
+<span class="math display">\[
+    I(X; Y|Z) = \mathbb E_{z\in P_Z} I(X; Y|Z=z)
+\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:mutualInfoProperties" class="theorem"><strong>Theorem 4.1  (properties of mutual information) </strong></span>Mutual information satisfies:</p>
+<ol style="list-style-type: decimal">
+<li><span style="color:blue">Conditional expression:</span>
+<span class="math inline">\(I(X; Y) = D(P_{XY}\|P_XP_Y) = D(P_{Y|X} \| P_Y\,|\, P_X)\)</span>.</li>
+<li><span style="color:blue">Symmetry:</span> <span class="math inline">\(I(X; Y) = I(Y; X)\)</span>.</li>
+<li><span style="color:blue">Positivity:</span> <span class="math inline">\(I(X; Y)\geq 0\)</span> with equality
+saturated iff <span class="math inline">\(X\perp\!\!\!\perp Y\)</span>.</li>
+<li><span style="color:blue">Transformations destroy information:</span>
+<span class="math inline">\(I(f(X); Y) \leq I(X; Y)\)</span> with equality iff <span class="math inline">\(f\)</span> is injective.</li>
+<li><span style="color:blue">Data create information:</span>
+<span class="math inline">\(I(X, Y; Z) \geq I(X; Z)\)</span> with equality iff <span class="math inline">\(Y\)</span> is a deterministic
+transform of <span class="math inline">\(X\)</span>.</li>
+</ol>
+</div>
+<p><em>Proof:</em> The conditional expression follows from the decomposition in
+theorem <a href="divergence.html#thm:divergenceProperties">3.4</a>. For symmetry, consider
+a swap-channel on the joint which maps <span class="math inline">\(P_XP_Y\mapsto P_YP_X\)</span>, then
+applying the KL-DPI <a href="divergence.html#thm:klDPI">3.5</a> to the joint <span class="math inline">\(K\circ P_{XY} = P_{YX}\)</span>
+and the marginal <span class="math inline">\(K\circ P_XP_Y = P_YP_X\)</span> yields
+<span class="math display">\[
+    D(P_{XY} \| P_XP_Y) = D(P_{YX} \| P_YP_X) \iff I(X; Y) = I(Y; X)
+\]</span>
+the DPI inequality is made into an equality by a symmetry argument.
+Positivity is established by the information inequality <a href="divergence.html#thm:infoInequality">3.1</a>.
+For claim (4), consider the kernel <span class="math inline">\(K\circ (X, Y) = (f(X), Y)\)</span> and apply KL-DPI
+<span class="math display">\[
+    D(P_{f(X)Y} \| P_{f(X)}P_Y) \leq D(P_{XY} \| P_XP_Y)
+    \iff I(f(X); Y) \leq I(X; Y)
+\]</span>
+For injective <span class="math inline">\(f\)</span>, apply the argument to the inverse. For the last claim,
+apply (4) to the projection transform <span class="math inline">\((X, Y)\mapsto X\)</span>.</p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-29" class="proposition"><strong>Proposition 4.1  (Mutual information and entropy) </strong></span></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\
+\infty \text{ otherwise.}\end{cases}\)</span></li>
+<li>Given discrete <span class="math inline">\(X\)</span>, <span class="math inline">\(H(X) = I(X; Y) + H(X|Y)\)</span>.</li>
+<li>Given both <span class="math inline">\(X, Y\)</span> discrete, <span class="math inline">\(H(X)+H(Y) = I(X; Y) + H(X; Y)\)</span>.</li>
+</ol>
+</div>
+<p><em>Proof:</em> (2) and (3) follow from direct computation.
+Given <span class="math inline">\(X\)</span> discrete with alphabet-size <span class="math inline">\(n\)</span>, we have
+<span class="math display">\[
+    I(X; X) = D(P_{XX} \| P_XP_X)
+    = \mathbb E_{XX\sim P_{XX}} \log \dfrac{P_X(X)}{P_X(X)^2} = H(X)
+\]</span>
+note that <span class="math inline">\(XX\sim P_{XX}\cong X\sim P_X\)</span>. For infinite-alphabet,
+consider a kernel <span class="math inline">\(K_m\)</span> which projects <span class="math inline">\(X\)</span> onto the univariate <span class="math inline">\(\mathrm{Unif}(0, 1)\)</span>
+distribution then takes the first <span class="math inline">\(m\)</span> decimals, then
+<span class="math display">\[
+    I(X; X) &gt; I(K_m(X); X) = H(K_m(X)) - H(K_m(X)|X)_{=0} = m\log 2
+\]</span>
+this holds for all <span class="math inline">\(m\)</span>.</p>
+</div>
+<div id="causal-graphs" class="section level2 unnumbered hasAnchor">
+<h2>Causal graphs<a href="mutual-information.html#causal-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider a Markov graph <span class="math inline">\(X\to Y\to Z\)</span>. This unrolls to
+<span class="math display">\[\begin{align}
+    X\to Y\to Z
+    &amp;\iff P_{X, Y, Z} = P_{Z|Y}P_{Y|X}P_X \\
+    &amp;\iff P_{X, Z}|Y = P_{X|Y} P_{Z|Y} \iff X\perp\!\!\!\perp Z | Y \\
+    &amp;\iff P_{X, Y, Z} = P_{X, Z|Y} P_Y = P_{X|Y} P_{Z|Y} P_Y \\
+    &amp;\iff X\leftarrow Y \rightarrow Z \\
+    &amp;\iff Z\rightarrow Y\rightarrow X
+\end{align}\]</span>
+A variable <span class="math inline">\(V\)</span> is a <em>collider</em> on some undirected path if
+<span class="math display">\[
+    \cdots \to V \leftarrow \cdots
+\]</span>
+Two subsets of vertices <span class="math inline">\(A, B\)</span> are <span class="math inline">\(d\)</span>-connected by
+a subset <span class="math inline">\(C\)</span> if there exists an undirected path
+from <span class="math inline">\(a\in A\to b\in B\)</span> such that:</p>
+<ol style="list-style-type: decimal">
+<li>There are no non-colliders in <span class="math inline">\(C\)</span>.</li>
+<li>Every collider is either in <span class="math inline">\(C\)</span> or has a descendent in <span class="math inline">\(C\)</span>.</li>
+</ol>
+<p><span class="math inline">\(A\perp\!\!\!\perp B|C\)</span> in <strong>every distribution</strong> satisfying
+the graphical model iff <span class="math inline">\(A, B\)</span> are <em>not</em> <span class="math inline">\(d\)</span>-connected by <span class="math inline">\(C\)</span>.</p>
+</div>
+<div id="conditional-mutual-information-graphical-models" class="section level2 unnumbered hasAnchor">
+<h2>Conditional mutual information, graphical models<a href="mutual-information.html#conditional-mutual-information-graphical-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:unlabeled-div-30" class="definition"><strong>Definition 4.2  (conditional mutual information) </strong></span>Given standard Borel <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, define
+<span class="math display">\[
+    I(X; Y|Z) = D(P_{X, Y|Z} \| P_{X|Z} P_{Y|Z} \, | \, P_Z)
+    = \mathbb E_{z\sim P_Z}\left[I(X; Y|Z=z)\right]
+\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:mutInfoMoreProperties" class="theorem"><strong>Theorem 4.2  (more properties of mutual information) </strong></span>Given standard Borel R.Vs, then</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(I(X; Z|Y)\geq 0\)</span> with equality iff <span class="math inline">\(X\perp\!\!\!\perp Z | Y\)</span>.</li>
+<li>Chain rule (Kolmogorov identities):
+<div style="color:blue">
+<span class="math display">\[
+     I(X, Y; Z) = I(X; Z) + I(Y; Z|X) = I(Y; Z) + I(X; Z|Y)
+\]</span>
+</div></li>
+<li>DPI for mutual information: given <span class="math inline">\(X\to Y\to Z\)</span>, then
+<span class="math display">\[
+    I(X; Z) \leq I(X; Y)
+\]</span>
+with equality iff <span class="math inline">\(X\to Z\to Y\)</span>.</li>
+<li>Full chain rule: <span class="math inline">\(I(X^n; Y) = \sum_{k=1}^n I(X_k; Y|X^{k-1})\)</span>.</li>
+<li>Bijective invariance: given bijective <span class="math inline">\(f, g\)</span>, then <span class="math inline">\(I(fX; gY) = I(X; Y)\)</span>.</li>
+</ol>
+</div>
+<em>Proof:</em>
+Non-negativity follows from the divergence definition
+and the information inequality:
+<span class="math display">\[
+    I(X; Z|Y)
+    = D(P_{XZ}P_Y \| P_XP_ZP_Y) \geq 0
+\]</span>
+For the chain rule, factor the LHS using proposition <a href="divergence.html#prp:divergenceChainRule">3.2</a>
+against <span class="math inline">\(X, Z\)</span> to obtain
+<span class="math display">\[\begin{align}
+    I(X, Y; Z)
+    &amp;= D(P_{XYZ} \| P_{XY}P_Z)
+    = D(P_{XZ} \| P_XP_Z) +
+    D(P_{XYZ} \| P_{Y|X} P_{XZ}) \\
+    &amp;= I(X; Z) + D(P_{XY|Z} P_Z \| P_{Y|X} P_{Z|X} P_X)
+    = I(X; Z) + I(X; Y |Z)
+\end{align}\]</span>
+where factoring against <span class="math inline">\(XZ\)</span> yields
+<span class="math inline">\(P_{XY}P_Z = P_{Y|X}(P_XP_Z)\)</span> and <span class="math inline">\(P_XP_Z\)</span> is replaced with the marginal
+<span class="math inline">\(P_{XZ}\)</span> of <span class="math inline">\(P_{XYZ}\)</span>. The other identity follows from symmetry.
+For the DPI, apply the Kolmogorov identity to <span class="math inline">\(I(Y, Z;X)\)</span> to obtain
+<span class="math display">\[\begin{aligned}
+    I(Y, Z ; X)
+    &amp;= I(Y; X) + I(Z; X | Y)_{=0} \\
+    &amp;= I(Z; X) + I(Y; X | Z)
+\end{aligned}\]</span>
+<p>equality is fulfilled iff <span class="math inline">\(X\to Z\to Y\)</span>.
+Bijective invariance follows from applying DPI to <span class="math inline">\(f\)</span> then <span class="math inline">\(f^{-1}\)</span>:
+consider the equally valid chains under bijection:
+<span class="math display">\[
+    Y\to X\to fX \implies I(fX; Y) \leq I(X; Y), \quad
+    Y\to fX\to X \implies I(X; Y) \leq I(fX; Y)
+\]</span></p>
+<div style="color:green">
+<div class="remark">
+<p><span id="unlabeled-div-31" class="remark"><em>Remark</em> (mutual information chain rule). </span>Mutual information between <span class="math inline">\(X; Y\)</span> is a resource which can be consumed
+when we condition on an additional variable <span class="math inline">\(Z\)</span>.
+Additionally, one should remember the Kolmogorov identities as a decomposition
+of <span class="math inline">\(I(X, Y; Z)\)</span> into an individual component <span class="math inline">\(I(X; Z)\)</span> plus
+the second term <span class="math inline">\(I(Y; Z|X)\)</span>, which is <span class="math inline">\(I(Y; Z)\)</span> adjusted for over-counting.</p>
+</div>
+</div>
+<div class="corollary">
+<p><span id="cor:unlabeled-div-32" class="corollary"><strong>Corollary 4.1  </strong></span>If <span class="math inline">\(X\to Y\to Z\to W\)</span>, then <span class="math inline">\(I(X; W) \leq I(Y; Z)\)</span>.</p>
+</div>
+<p><em>Proof:</em> Several applications of chain rule:
+<span class="math inline">\(I(Y; Z) \geq I(X; Z) \geq I(X; W)\)</span>.</p>
+<div style="color:green">
+<div class="remark">
+<p><span id="unlabeled-div-33" class="remark"><em>Remark</em> (incomparable mutual information under conditioning). </span>Under a Markov chain <span class="math inline">\(X\to Y\to Z\)</span>, mutual information decreases
+upon conditioning. To find an example such that <span class="math inline">\(I(X; Y|Z) &gt; I(X; Y)\)</span>,
+the only non-isomorphic graph is
+<span class="math display">\[
+    X\to Y\leftarrow Z
+\]</span>
+Let <span class="math inline">\(X, Z\sim \mathrm{Ber}(1/2)\)</span> i.i.d and <span class="math inline">\(Y=X\oplus Z\)</span>, then
+<span class="math inline">\(X\perp\!\!\!\perp Y \implies I(X; Y)=0\)</span> and
+<span class="math display">\[
+    I(X; Y|Z) = H(X, Y|Z) - H(X|Y, Z) = \log 2
+\]</span></p>
+</div>
+</div>
+<div class="proposition">
+<p><span id="prp:miDpiPerspective" class="proposition"><strong>Proposition 4.2  (alternate proof of mutual information DPI) </strong></span>Mutual information DPI is implied by the divergence-DPI
+theorem <a href="divergence.html#thm:klDPI">3.5</a>. Given a Markov chain <span class="math inline">\(X\to Y\to Z\)</span>, we have
+<span class="math display">\[
+    I(X; Z) = D(P_{XZ} \| P_XP_Z)
+    = D(P_{Z|X} \| P_Z | P_X) \leq D(P_{Y|X} \| P_Y | P_X)
+    = I(X; Y)
+\]</span></p>
+</div>
+<p><em>Proof:</em> The markov kernel in question is simply <span class="math inline">\(P_{Z|Y}\)</span> applied to
+<span class="math inline">\((P_{Y|X=x}, P_Y) \mapsto (P_{Z|X=x}, P_Z)\)</span>.</p>
+</div>
+<div id="sufficient-statistic" class="section level2 unnumbered hasAnchor">
+<h2>Sufficient statistic<a href="mutual-information.html#sufficient-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider the following definitions:</p>
+<ul>
+<li><span class="math inline">\(P^\theta_X\)</span> is a class of distributions for <span class="math inline">\(X\)</span> parameterized by <span class="math inline">\(\theta\in \Theta\)</span>.</li>
+<li>Given kernel <span class="math inline">\(P_{T|X}\)</span>, let <span class="math inline">\(P_T^\theta = P_{T|X} \circ P^\theta_X\)</span> be the induced
+distribution on <span class="math inline">\(T\)</span>.</li>
+</ul>
+<div class="definition">
+<p><span id="def:unlabeled-div-34" class="definition"><strong>Definition 4.3  (sufficient statistic) </strong></span><span class="math inline">\(T\)</span> is a sufficient statistic of <span class="math inline">\(X\)</span> for <span class="math inline">\(\theta\)</span> if there exists a
+kernel <span class="math inline">\(P_{X|T}\)</span> such that <span class="math inline">\(P_{T|X} P_X^\theta = P_{X|T} P^\theta_T\)</span>.
+In other words, <span class="math inline">\(P_{X|T}\)</span> can be chosen not to depend on <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-35" class="theorem"><strong>Theorem 4.3  (characterization of sufficiency) </strong></span>The following claims are equivalent:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(T\)</span> is a sufficient statistic of <span class="math inline">\(X\)</span> for <span class="math inline">\(\theta\)</span>.</li>
+<li><span class="math inline">\(\forall P_\theta, \theta \to T\to X
+\iff \forall P_\theta, I(\theta; X|T) = 0\)</span>.</li>
+</ol>
+</div>
+<p><span style="color:red">
+To finish.
+</span></p>
+</div>
+<div id="probability-of-error-fanos-inequality" class="section level2 unnumbered hasAnchor">
+<h2>Probability of error, Fano’s inequality<a href="mutual-information.html#probability-of-error-fanos-inequality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Given a R.V. <span class="math inline">\(W\)</span> and our prediction <span class="math inline">\(\hat W\)</span>, we can</p>
+<ol style="list-style-type: decimal">
+<li>Guess randomly: <span class="math inline">\(W\perp\!\!\!\perp\hat W\)</span>.</li>
+<li>Guess with data: <span class="math inline">\(W\to X\to \hat W\)</span>,
+where <span class="math inline">\(X=f(W)\)</span> is a deterministic function of <span class="math inline">\(W\)</span>.</li>
+<li><span class="math inline">\(W\to X\to Y\to \hat W\)</span>, where <span class="math inline">\(X\to Y\)</span> is some noisy channel.</li>
+</ol>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-36" class="theorem"><strong>Theorem 4.4  </strong></span>Given a finite alphabet <span class="math inline">\(|\mathcal X|=M&lt;\infty\)</span>, for any <span class="math inline">\(\hat X\perp\!\!\!\perp X\)</span>
+<span class="math display">\[
+    H(X) \leq F_M(\mathrm{Pr}[X=\hat X]), \quad F_M(x) = (1-x)\log(M-1)+h(x)
+\]</span>
+and <span class="math inline">\(h(x)\)</span> is the binary entropy.</p>
+</div>
+<p><span style="color:red">
+To finish.
+</span></p>
+</div>
+<div id="entropy-power-inequality" class="section level2 unnumbered hasAnchor">
+<h2>Entropy-power Inequality<a href="mutual-information.html#entropy-power-inequality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span style="color:red">
+To finish.
+</span></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="divergence.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variational-measures-of-information.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
