@@ -61,6 +61,7 @@ The recurring themes in this book include:
     a. They provide bounds: choose the varied quantity to be our friend! 
     b. Provide tractable variational approximations 
     using numerical optimization methods (e.g. VAE, GAN). 
+4. Mutual information as a minimax saddle point. 
 
 ## Administrative trivia {-}
 Professor email: `yp@mit.edu`. 
