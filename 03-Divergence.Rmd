@@ -229,7 +229,7 @@ _Proof:_ Let $\lambda\sim \mrm{Ber}(1/2)$ and
 $X = \lambda \mca N(0, \Sigma_1) + \bar \lambda \mca N(0, \Sigma_2)$, 
 convexity follows from $h(X) \leq (X|\lambda)$. 
 
-## Markov Kernels {-}
+## Channel, conditional divergence {-}
 Information theorists see Markov kernels everywhere! 
 
 :::{.definition name="Markov kernel (channel)"}
@@ -284,11 +284,10 @@ $\mrm{BSC}_\delta \circ \mrm{BSC}_\delta
 = \mrm{BSC}_{2\delta \bar \delta} 
 = \mrm{BSC}_{\delta \ast \bar \delta}$. 
 
-
-## Conditional divergence, Chain Rule, DPI {-}
-
-The joint divergence can be written as the sum of marginal 
-and conditional divergences, where the latter is defined below: 
+We will next see that the joint divergence can 
+be written as the sum of marginal 
+and conditional divergences; 
+the latter is defined below: 
 
 :::{.definition name="Conditional divergence"}
 Given distribution $P_X$ and two markov kernels $P_{Y|X}, Q_{Y|X}$, 
@@ -300,6 +299,9 @@ the divergence between $P, Q$ given $P_X$ is defined as
     \right] = \Exp_{X, Y\sim P_{Y|X}P_X} \left[\log \df{P_{Y|X}}{Q_{Y|X}}\right]
 \] 
 :::
+
+
+## Chain Rule, DPI {-}
 
 :::{.proposition #divergenceChainRule name="Chain rule"}
 <span style="color:green">

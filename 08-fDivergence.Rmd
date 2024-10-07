@@ -21,33 +21,32 @@ Key takeaways:
     it includes KL, $\chi^2$ and Hellinger as special cases. 
 8. The Hellinger divergence is both a metric and tensorizes well. 
 
-
-<div style="color:red">
-
-1. Understanding the last term in $f$-divergence. 
-</div>
-
 ## Definition {-}
 
 :::{.definition name="f-divergence"}
 Given a convex function $f:(0, \infty)\to \R$ with $f(1)=0$, 
-for every two probability distributions over 
-$\mca X$, if $P\ll Q$ then the $f$ divergence is 
-\[ 
-    D_f(P\|Q) = \Exp_Q \left[
-        f\left(\df{dP}{dQ}\right)
-    \right]
-\] 
-Here $f(0) = f(0_+)$ per limit. More generally, 
-define $f'(\infty) = \lim_{x\to 0^+} xf(1/x)$, 
-we have 
-\[ 
-    D_f(P\|Q) = \int_{q>0} q(x) f\left[
-        \df{p(x)}{q(x)} 
-    \right] \, d\mu + f'(\infty) P[Q=0]
-\] 
-this last generalization is needed to account for 
-divergences like total variation. 
+    for every two probability distributions over 
+    $\mca X$, if $P\ll Q$ then the $f$ divergence is 
+    \[ 
+        D_f(P\|Q) = \Exp_Q \left[
+            f\left(\df{dP}{dQ}\right)
+        \right]
+    \] 
+    Here $f(0) = f(0_+)$ per limit. More generally, 
+    define $f'(\infty) = \lim_{x\to 0^+} xf(1/x)$, 
+    we have 
+    \[ 
+        D_f(P\|Q) = \int_{q>0} q(x) f\left[
+            \df{p(x)}{q(x)} 
+        \right] \, d\mu + f'(\infty) P[Q=0]
+    \] 
+    this last generalization is needed to account for 
+    divergences like total variation. 
+    Intuitively, sums for terms with $dQ=0$ are like 
+    \[ 
+        \int_{dQ=0} dQ f\left(\df{dP}{dQ}\right) 
+        = \lim_{t=dP/dQ\to 0^+} \int \df {dP}{t} f(1/t)
+    \] 
 :::
 
 Examples of $f$-divergences: 
@@ -183,7 +182,7 @@ Direct computation
 \end{align}
 </details>
 
-## Information properties {-}
+## Information properties, MI {-}
 
 :::{.theorem #fMonotonicity name="monotonicity"}
 The joint is more distinguishable than the marginal: 
@@ -242,7 +241,7 @@ The second statement requires some justification:
         f\left(\df{P_{Y|X=x}(y)}{Q_{Y|X=x}(y)}\right)
     \right]
 \end{align}
-</summary>
+</details>
 
 
 :::{.theorem #fDPI name="data-processing inequality"}
@@ -318,6 +317,19 @@ where $\sup$ is over all finite $\mca F$-measurable partitions.
 <span style="color:red">
 TODO
 </span>
+
+:::{.definition name="f-information"}
+The $f$-information is defined by 
+\[ 
+    I_f(X; Y) = D_f(P_{XY} | P_XP_Y)
+\] 
+:::
+
+:::{.definition name="f-DPI"}
+For $U\to X\to Y$, we have $I_f(U; Y) \leq I_f(U; X)$.
+:::
+Proof: $I_f(U; X) = D_f(P_{UX} \|P_UP_X) \geq 
+D_f(P_{UY} \| P_UP_Y) = I_f(U; Y)$. 
 
 
 ## TV and Hellinger, hypothesis testing {-}
@@ -425,7 +437,6 @@ for Bernoulli distributions yield
 Taking supremum over all $E$ yields 
 the desired inequality per the TV 
 variational characterization theorem \@ref(thm:tvVarChar). 
-</summary>
 </details>
 
 
@@ -463,7 +474,7 @@ As a corollary of the following theorem, it
 suffices to prove joint range for Bernouli, then 
 convexify the range. 
 
-:::{.theorem name="Harremoës-Vajda"}
+:::{.theorem #harremoesVajda name="Harremoës-Vajda"}
 $\mca R = \mrm{co}(\mca R_2) = \mca R_4$
 where $\mrm{co}$ denotes the convex hull with 
 a natural extension of convex operations to 
@@ -493,17 +504,57 @@ Applying the conditional divergence to obtain
 Onto the most nontrivial claim $2$: fixing $k$ and 
 distributions $P, Q$ on $[k]$ with distributions $(p_j), (q_j)$, 
 w.l.o.g. make $q_{j>1}>0$ and concentrate $q_1=0$ (i.e. concentrate 
-all empty points onto $j=1$. Let $\phi_{j>1} = p_j / q_j$ and consider 
+all empty points onto $j=1$.
+<span style="color:blue">
+Consider the equivalence class $\mca S$ of all 
+$(\tilde p_j, \tilde q_j)$ <u>which have the same likelihood ratio 
+on the support</u> of $q$: 
+</span>
+Let $\phi_{j>1} = p_j / q_j$ and consider 
 \[ 
     \mca S = \left\{
         \tilde Q = (\tilde q_j)_{j\in [k]}: 
         \tilde q_j\geq 0, \sum \tilde q_j=1, \tilde q_1=0, 
     \right\}
-
 \] 
-</summary>
+Note that $\mca S$ it the intersection of 
 
+1. The simplex of all distributions $\tilde q$. 
+2. The half-space specified by $\tilde q\cdot \phi \leq 1$. 
 
+We can next identify the boundary of $\mca S_e\subset \mca S$: 
+
+1. $\tilde q_{j\geq 2}=1$ and $\phi_j\leq 1$. 
+2. $\tilde q_{j_1}+\tilde q_{j_2}=1$ and 
+    $\tilde q_{j_1}\phi_{j_1} + \tilde q_{j_2}\phi_{j_2}=1$. 
+
+```{r echo=FALSE, fig.align='center', out.width='50%', fig.cap="Gray line corresponds to $S$; blue and green dots correspond to elements of $S_e$ identified by (1) and (2), respectively. "}
+  knitr::include_graphics("images/joint_range.jpeg") 
+```
+
+We next have $\mca S = \mrm{co}(\mca S_e)$; so for $Q$, 
+there exists extreme points $\tilde Q_j\in \mca S_e$ 
+(note that $\mca S_e$ is dependent upon $Q$!) with support on 
+at most $2$ atoms (binary distributions) such that 
+$Q = \alpha_j \tilde Q_j$. 
+The map asspciating $\tilde P$ given $\tilde Q$ is 
+\[ 
+    \tilde p_j = \begin{cases}
+        \phi_j \tilde q_j & j\in \{2, \cdots, k\}, \\ 
+        1 - \sum_{j=2}^k \phi_j \tilde q_j & j = 1
+    \end{cases}
+\] 
+On this particular set which fixes the likelihood ratio, 
+the divergence is an affine map: 
+\[ 
+    \tilde Q \mapsto D_f(\tilde P \| \tilde Q) 
+    = \sum_{j\geq 2}\tilde q_j f(\phi_j) + f'(\infty)\tilde p_1 \implies 
+    D_f(P\|Q) = \sum_{j=1}^m \alpha_i D_f(\tilde P_i \|\tilde Q_i)
+\] 
+
+</details>
+
+We defer details to the book (7.6). 
 
 
 ## Rényi divergence {-}
@@ -720,3 +771,37 @@ The final result is simply the Renyi-tilt of $P$ towards $Q$ given by
     \right]
 \] 
 </details>
+
+## Variational characterizations {-}
+
+Given a convex function $f:(0, \infty)\to \R$, 
+recall that is convex conjugate $f^*:\R\to \R\cup \{+\infty\}$ 
+is defined by 
+\[ 
+    f^*(y) = \sup_{x\in \R_+} xy - f(x)
+\] 
+The Legendre transform is convex, involutary, and satisfies 
+\[ 
+    f(x) + f^*(y) \geq xy 
+\] 
+Similarly, the convex conjugate of any convex 
+functional $\Psi(P)$ is 
+\[ 
+    \Psi^*(g) = \sup_P \int g\, dP - \Psi(P), \quad 
+    \Psi(P) = \sup_g \int g\, dP - \Psi^*(g)
+\] 
+In this section, we identify $f:(0, \infty)\to \R$ 
+with its convex extension $f:\R\to \R\cup \{+\infty\}$ 
+(one can just take $f = \infty$ for all inputs outside 
+the original domain); different choices of $f$'s extension 
+yields a different variational characterization. 
+
+:::{.theorem name="supremum characterization of f-divergences"}
+Given probability measures $P, Q$ on $\mca X$; fix 
+an extension of $f$ and corresponding Legendre transform $f^*$; 
+denote $\mrm{dom}(f^*) = (f^*)^{-1}(\R-\{\infty\})$, then 
+\[ 
+    D_f(P\|Q) = \sup_{g:\mca X\to \mrm{dom}(f^*)} 
+    \Exp_P[g(X)] - \Exp_Q[(f^*\circ g)(X)]
+\] 
+:::

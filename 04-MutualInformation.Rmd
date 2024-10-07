@@ -118,7 +118,7 @@ from $a\in A\to b\in B$ such that:
 $A\indep B|C$ in **every distribution** satisfying 
 the graphical model iff $A, B$ are _not_ $d$-connected by $C$. 
 
-## Conditional mutual information, graphical models {-}
+## Conditional MI {-}
 
 :::{.definition name="conditional mutual information"}
 Given standard Borel $\mca X, \mca Y$, define 

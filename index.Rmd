@@ -57,11 +57,26 @@ The recurring themes in this book include:
     a. KL-divergence (and Rényi) is special because its $\log$ form 
     admits additive decomposition of joint divergence. 
 3. Convexity of information measures correspond to **variational characterizations**, 
-    which are important because: 
+    which are extremely useful because: 
     a. They provide bounds: choose the varied quantity to be our friend! 
     b. Provide tractable variational approximations 
     using numerical optimization methods (e.g. VAE, GAN). 
 4. Mutual information as a minimax saddle point. 
+
+Fundamentally, information and entropy captures 
+how our uncertainty in a quantity changes after 
+observations. 
+
+The foundational results in this book include:
+
+1. Additive decomposition of KL. 
+2. <u>Golden formula</u>: variational characterization of mutual information. 
+3. <u>Saddle point characterization of mutual information</u>. 
+4. <u>Donsker-Varadhan</u> (theorem \@ref(thm:donskerVaradhan)): 
+    variational characterization of KL. 
+5. Finite-partition approximation theorem for $f$-divergence. 
+6. <u>Harremoës-Vadja</u> (theorem \@ref(thm:harremoesVajda)): 
+    one theorem to rule them all for $f$-divergence inequalities. 
 
 ## Administrative trivia {-}
 Professor email: `yp@mit.edu`. 
@@ -88,7 +103,3 @@ with fidelity $\epsilon$.
 
 Key concepts: entropy, KL-divergence, mutual information, 
 fisher information, mutual information. 
-
-Fundamentally, information and entropy captures 
-how our uncertainty in a quantity changes after 
-observations. 

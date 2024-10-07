@@ -186,9 +186,11 @@ local definition of $\chi^2$
 
 Recall that the **Fisher information** is given by 
 \[ 
-    \mca I_F(\theta; \{P^\theta\}_{\theta \in \Theta}) 
+    \mca J_F(\theta; \{P^\theta\}_{\theta \in \Theta}) 
     = \int \df{\left[\pd \theta P^\theta(x)\right]^2}{P^\theta(x)} \, \mu(dx)
 \] 
+Fisher information is just the second-order derivative 
+of $\chi^2$. 
 
 
 There are two notions of distance: 
@@ -200,3 +202,74 @@ and $P^{\theta + \epsilon}$.
 Moreover, Fisher information is additive under 
 tensorization: KL is additive under tensorization 
 and apply the locality principle. 
+
+Theorems about Fisher information require a lot 
+more assumptions. 
+
+## Oct 7: Data compression {-}
+
+:::{.theorem name="local expansion of χ"}
+For $\theta_0 = 0$, when the following conditions hold: 
+
+1. $\theta \in [0, \tau)$. 
+2. There exists $\dot p^\theta(x)$ satisfying 
+\[ 
+    P^\theta(x) = P^0(x) + \int_0^\theta \dot p^t(x)\, dt 
+\] 
+3. The fisher information is defined _everywhere_ 
+    in a connected interval open interval about $\theta_0$: 
+\[ 
+    \int dx\, \sup_{0\leq t < \tau} 
+    \df{\dot p^t(x)^2}{p^0(x)} < \infty 
+\] 
+
+Then $\chi^2(P^{\theta_0 + \delta} \| P^{\theta_0}) 
+    + \delta^2 \mca J_F(\theta_0) + o(\delta^2)$. 
+:::
+The quadratic local behavior of $\chi^2$ requires 
+not only finite Fisher information at $\theta_0$; 
+it also requires $\mca J_F$ to be finite almost everywhere 
+on a nontrivial interval. 
+
+<span style="color:green">
+In summary, $\chi^2$ is nice for the "good" cases 
+where $\mca J$ is finite a.e. However, for some 
+irregular cases it's best to use 
+$H^2(P^{\theta_0 + \delta}, P^\theta)$, whose local 
+behavior is always determined by the local Fisher information. 
+</span>
+
+A location family is a one-parameter family for which 
+the parameter controls the displacement of a fixed density $\nu$, 
+e.g. $\mca N(\theta, 1)$; for this family, 
+$\mca J(\theta) = \mca J(0)$, which we can abbreviate as 
+\[ 
+    \mca J(\nu) = \int \df{(\nu')^2}{\nu} \, dx 
+\] 
+Note that Fisher information $\mca J_F$ is originally defined for 
+a one-parameter family; with the notation $\mca J(\nu)$, 
+we're assuming the one-parameter family to be the location family 
+of the given density. 
+
+:::{.theorem name="van Trees inequality"}
+Under regularity assumptions on $P^\theta$, 
+for every estimator $\hat \theta(X)$ and prior 
+$\pi$ 
+\[ 
+    \Exp_{\theta \sim \pi} \Exp_{X\sim P^\theta} \left[
+        [\theta - \hat \theta(X)]^2
+    \right] \geq \df 1 {\mca J(\pi) + 
+    \Exp_{\theta \sim \pi} \mca J_F(\theta)}
+\] 
+:::
+
+:::{.corollary}
+For $n$ i.i.d. observations, for every $\pi$ 
+\[ 
+    R_n^* \geq \df 1 {\mca J(\pi) + 
+    n\Exp_{\theta \sim \pi} \mca J_F(\theta)}
+\] 
+:::
+van Trees is important important because it provides 
+a lower bound on minimax risk based on 
+local quantities $\mca J_F(\theta)$. 
