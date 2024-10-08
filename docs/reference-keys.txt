@@ -105,7 +105,6 @@ prp:unlabeled-div-73
 thm:unlabeled-div-74
 thm:unlabeled-div-75
 cor:unlabeled-div-76
-def:unlabeled-div-77
 entropy
 entropy-method-in-combinatorics-and-geometry
 divergence

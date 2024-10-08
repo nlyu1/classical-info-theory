@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-07" />
+<meta name="date" content="2024-10-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -421,22 +421,7 @@ chain rule (since it’s close to KL).</li>
 </ol>
 <p>Van Trees replaced <span class="math inline">\(\mathcal J_F\)</span> with the expectation of
 <span class="math inline">\(\mathcal J_F\)</span>, and it applies to every (instead of unbiased) estimators.</p>
-<p>Back to compression:</p>
-<div class="definition">
-<p><span id="def:unlabeled-div-77" class="definition"><strong>Definition 9.1  (lossless compression) </strong></span>Given a discrete alphabet <span class="math inline">\(\mathcal X\)</span> a compressor
-has signature <span class="math inline">\(f:\mathcal X\to \{0, 1\}^*\)</span>.
-It is lossless w.r.t. <span class="math inline">\(P_X\)</span> if <span class="math inline">\(\exists g:\{0, 1\}^*\to \mathcal X\)</span>
-such that <span class="math inline">\(g\circ f = 1\)</span> almost everywhere w.r.t. <span class="math inline">\(P_X\)</span>.</p>
-</div>
-<p>The optimal lossless compressor is apparantly given by
-<span class="math inline">\(1\to \emptyset, 2\to 0, 3\to 1, 4\to 00, \cdots\)</span>.
-where <span class="math inline">\(j\)</span> is the <span class="math inline">\(j\)</span>-th most frequent occurence.</p>
-<p>Exercise: compute
-<span class="math display">\[
-    \sup_{Q \text{ on } \N}
-    \{H(Q): \sum_{l=0}^\infty l Q(l) \leq \mu \}
-\]</span>
-Solution: <span class="math inline">\((1 + \mu)h(1/(1+\mu))\)</span>.</p>
+<p><em>Compression:</em> (omitted).</p>
 
 </div>
 </div>
