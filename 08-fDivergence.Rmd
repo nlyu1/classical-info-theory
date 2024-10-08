@@ -385,33 +385,39 @@ For the $\inf$ representation, given any coupling $P_{XY}$,
 for $f\in \mca F$ we have 
 \[ 
     \Exp_P f(X) - \Exp_Q f(X) 
-    = \Exp_{P_{XY}}[f(X) - f(Y)] \leq \Exp_{P_{XY}}|f(X) - f(Y)|
-    \leq P_{XY}[X\neq Y]
+    = \Exp_{P_{XY}}[f(X) - f(Y)] 
+    \leq 2 P_{XY}[X\neq Y]
 \] 
 This shows that the $\inf$-representation is always an 
-upper bound; to demonstrate saturation, consider the following 
+upper bound; 
+<span style="color:green">
+we obtain saturation when $X\neq Y$ only happens for 
+possible values of $X$ disjoint from possible values of $Y$, 
+and $f$ is the indicator function 
+on the disjoint support. 
+</span>
+This is satisfied by the following 
 construction given $P, Q$: 
 
 1. Let $\pi = \int \pi(x)\, d\mu$ denote the overlap scalar, where 
 $\pi(x) = \min(p(x), q(x))$. 
-2. With probability $\pi$ take $X=Y$ sampled from density 
+2. With probability $\pi$ take $X=Y$ sampled from the overlap density 
 \[ 
     r(x) = \df 1 \pi \pi(x)
 \] 
-2. With probability $1-\pi$ sample $X, Y$ independently from 
+3. With probability $1-\pi$ sample $X, Y$ independently from 
 \[ 
     p_1(x) = \df {p(x) - \pi(x)} {1 - \pi}, \quad 
     q_1(x)=\df {q(x) - \pi(x)}{1 - \pi}
 \] 
+```{r echo=FALSE, fig.align='center', out.width='80%', fig.cap="Visual representation of joint construction."}
+  knitr::include_graphics("images/tvInf.jpeg") 
+```
+
+Note that $p_1, q_1$ have disjoint supports. 
 Now, the marginals are indeed $P, Q$, and this saturates 
 the inequality since $P_{XY}[X\neq Y] = 1-\pi=\TV(P, Q)$
-(happens iff sampling from $p_1, q_1$, assuming infinite 
-alphabet) 
 </details>
-
-<span style="color:red">
-Inf-characterization is only tight when alphabet is infinite?
-</span>
 
 ## Joint range {-}
 
@@ -554,7 +560,8 @@ the divergence is an affine map:
 
 </details>
 
-We defer details to the book (7.6). 
+
+We defer detailed examples of joint ranges to the book (7.6). 
 
 
 ## Rényi divergence {-}

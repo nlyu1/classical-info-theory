@@ -273,3 +273,33 @@ For $n$ i.i.d. observations, for every $\pi$
 van Trees is important important because it provides 
 a lower bound on minimax risk based on 
 local quantities $\mca J_F(\theta)$. 
+
+Two takeaways for information theorists: 
+
+1. In Bayesian setting, apply information theory techniques 
+    to the joint P_{\tilde \theta, X}$. 
+2. In local neighborhoods, $\chi^2$ satisfies an additive 
+    chain rule (since it's close to KL). 
+
+Van Trees replaced $\mca J_F$ with the expectation of 
+$\mca J_F$, and it applies to every (instead of unbiased) estimators. 
+
+Back to compression: 
+
+:::{.definition name="lossless compression"}
+Given a discrete alphabet $\mca X$ a compressor 
+has signature $f:\mca X\to \{0, 1\}^*$. 
+It is lossless w.r.t. $P_X$ if $\exists g:\{0, 1\}^*\to \mca X$ 
+such that $g\circ f = 1$ almost everywhere w.r.t. $P_X$. 
+:::
+
+The optimal lossless compressor is apparantly given by 
+$1\to \emptyset, 2\to 0, 3\to 1, 4\to 00, \cdots$. 
+where $j$ is the $j$-th most frequent occurence. 
+
+Exercise: compute 
+\[ 
+    \sup_{Q \text{ on } \N} 
+    \{H(Q): \sum_{l=0}^\infty l Q(l) \leq \mu \}
+\] 
+Solution: $(1 + \mu)h(1/(1+\mu))$. 

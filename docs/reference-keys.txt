@@ -83,12 +83,13 @@ thm:fFiniteApprox
 def:unlabeled-div-59
 def:unlabeled-div-60
 thm:tvVarChar
+fig:unnamed-chunk-1
 thm:unlabeled-div-61
 cor:unlabeled-div-62
 def:unlabeled-div-63
 lem:convexBoundaryThm
 thm:harremoesVajda
-fig:unnamed-chunk-1
+fig:unnamed-chunk-2
 def:unlabeled-div-64
 eq:renyiMonotone
 prp:unlabeled-div-65
@@ -104,6 +105,7 @@ prp:unlabeled-div-73
 thm:unlabeled-div-74
 thm:unlabeled-div-75
 cor:unlabeled-div-76
+def:unlabeled-div-77
 entropy
 entropy-method-in-combinatorics-and-geometry
 divergence

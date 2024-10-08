@@ -548,16 +548,23 @@ For the <span class="math inline">\(\inf\)</span> representation, given any coup
 for <span class="math inline">\(f\in \mathcal F\)</span> we have
 <span class="math display">\[
     \mathbb E_P f(X) - \mathbb E_Q f(X)
-    = \mathbb E_{P_{XY}}[f(X) - f(Y)] \leq \mathbb E_{P_{XY}}|f(X) - f(Y)|
-    \leq P_{XY}[X\neq Y]
+    = \mathbb E_{P_{XY}}[f(X) - f(Y)]
+    \leq 2 P_{XY}[X\neq Y]
 \]</span>
 This shows that the <span class="math inline">\(\inf\)</span>-representation is always an
-upper bound; to demonstrate saturation, consider the following
+upper bound;
+<span style="color:green">
+we obtain saturation when <span class="math inline">\(X\neq Y\)</span> only happens for
+possible values of <span class="math inline">\(X\)</span> disjoint from possible values of <span class="math inline">\(Y\)</span>,
+and <span class="math inline">\(f\)</span> is the indicator function
+on the disjoint support.
+</span>
+This is satisfied by the following
 construction given <span class="math inline">\(P, Q\)</span>:</p>
 <ol style="list-style-type: decimal">
 <li>Let <span class="math inline">\(\pi = \int \pi(x)\, d\mu\)</span> denote the overlap scalar, where
 <span class="math inline">\(\pi(x) = \min(p(x), q(x))\)</span>.</li>
-<li>With probability <span class="math inline">\(\pi\)</span> take <span class="math inline">\(X=Y\)</span> sampled from density
+<li>With probability <span class="math inline">\(\pi\)</span> take <span class="math inline">\(X=Y\)</span> sampled from the overlap density
 <span class="math display">\[
 r(x) = \dfrac 1 \pi \pi(x)
 \]</span></li>
@@ -566,15 +573,17 @@ r(x) = \dfrac 1 \pi \pi(x)
 p_1(x) = \dfrac{p(x) - \pi(x)} {1 - \pi}, \quad
 q_1(x)=\dfrac{q(x) - \pi(x)}{1 - \pi}
 \]</span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="images/tvInf.jpeg" alt="Visual representation of joint construction." width="80%" />
+<p class="caption">
+Figure 8.1: Visual representation of joint construction.
+</p>
+</div></li>
+</ol>
+Note that <span class="math inline">\(p_1, q_1\)</span> have disjoint supports.
 Now, the marginals are indeed <span class="math inline">\(P, Q\)</span>, and this saturates
 the inequality since <span class="math inline">\(P_{XY}[X\neq Y] = 1-\pi=\mathrm{TV}(P, Q)\)</span>
-(happens iff sampling from <span class="math inline">\(p_1, q_1\)</span>, assuming infinite
-alphabet)</li>
-</ol>
 </details>
-<p><span style="color:red">
-Inf-characterization is only tight when alphabet is infinite?
-</span></p>
 </div>
 <div id="joint-range" class="section level2 unnumbered hasAnchor">
 <h2>Joint range<a href="f-divergence.html#joint-range" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -686,10 +695,10 @@ Note that <span class="math inline">\(\mathcal S\)</span> it the intersection of
 <li><span class="math inline">\(\tilde q_{j_1}+\tilde q_{j_2}=1\)</span> and
 <span class="math inline">\(\tilde q_{j_1}\phi_{j_1} + \tilde q_{j_2}\phi_{j_2}=1\)</span>.</li>
 </ol>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="images/joint_range.jpeg" alt="Gray line corresponds to $S$; blue and green dots correspond to elements of $S_e$ identified by (1) and (2), respectively. " width="50%" />
 <p class="caption">
-Figure 8.1: Gray line corresponds to <span class="math inline">\(S\)</span>; blue and green dots correspond to elements of <span class="math inline">\(S_e\)</span> identified by (1) and (2), respectively.
+Figure 8.2: Gray line corresponds to <span class="math inline">\(S\)</span>; blue and green dots correspond to elements of <span class="math inline">\(S_e\)</span> identified by (1) and (2), respectively.
 </p>
 </div>
 <p>We next have <span class="math inline">\(\mathcal S = \mathrm{co}(\mathcal S_e)\)</span>; so for <span class="math inline">\(Q\)</span>,
@@ -712,7 +721,7 @@ the divergence is an affine map:
     D_f(P\|Q) = \sum_{j=1}^m \alpha_i D_f(\tilde P_i \|\tilde Q_i)
 \]</span></p>
 </details>
-<p>We defer details to the book (7.6).</p>
+<p>We defer detailed examples of joint ranges to the book (7.6).</p>
 </div>
 <div id="rényi-divergence" class="section level2 unnumbered hasAnchor">
 <h2>Rényi divergence<a href="f-divergence.html#rényi-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
