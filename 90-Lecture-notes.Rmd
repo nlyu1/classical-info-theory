@@ -284,4 +284,3 @@ Two takeaways for information theorists:
 Van Trees replaced $\mca J_F$ with the expectation of 
 $\mca J_F$, and it applies to every (instead of unbiased) estimators. 
 
-_Compression:_ (omitted). 
