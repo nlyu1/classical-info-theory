@@ -19,6 +19,10 @@ The key is $X\indep Z\|Y$.
     information is \@ref(thm:mutInfoMoreProperties). 
 4. Mutual information is the weighted divergence from the marginal 
     to the conditionals (definition \@ref(def:mutInfDef)). 
+5. General proof technique (see \@ref(thm:simpleFano)); 
+    to derive bounds on general statements, derive one for 
+    a tractable statement then apply divergence inequalitites 
+    (DPI, Donsker-Varadhan etc). 
 
 
 ## Definition, properties {-}
@@ -259,18 +263,67 @@ Given a R.V. $W$ and our prediction $\hat W$, we can
     where $X=f(W)$ is a deterministic function of $W$. 
 3. $W\to X\to Y\to \hat W$, where $X\to Y$ is some noisy channel. 
 
+The following statement upper bounds the discrete entropy 
+based on the probability of correctness for random guessing 
+and the maximum probability. We would guess that: 
 
-:::{.theorem}
+1. For the maximum probability of the distribution, the bound 
+    should be largest when $P_0 = 1/M$ and decay as $P_0$ increases. 
+2. The maximum collision probability is also $1/M$ across all distributions. 
+
+The second statement in the following theorem can be viewed 
+as a bound on entropy using the $\infty$-Renyi entropy. 
+
+:::{.theorem #simpleFano name="entropy bound using independent guess"}
 Given a finite alphabet $|\mca X|=M<\infty$, for any $\hat X\indep X$ 
 \[ 
     H(X) \leq F_M(\Pr[X=\hat X]), \quad F_M(x) = (1-x)\log(M-1)+h(x)
 \] 
-and $h(x)$ is the binary entropy. 
+and $h(x)=-x\log x - \bar x \log \bar x$ is the binary entropy. 
+Let $P_0 = \max_{x\in \mca X} P_X(x)$, then 
+\[ 
+    H(X) \leq F_M(P_0) 
+\] 
+with equality iff $P_X=(P_0, \alpha, \cdots)$ where $\alpha=(1-P_0)/(M-1)$. 
+Note that $F_M(0)=\log(M-1)$, $F_M(1/M)=\log M$, and $F_M(1)=0$. 
 :::
 
-<span style="color:red">
-To finish. 
+<span style="color:green">
+Proof technique: instead of studying $P_{X\hat X}$ for 
+arbitrary $\hat X$, introduce a tractable $Q_{X\hat X}$, 
+to bound an event, then use DPI (or divergence inequalities) 
+to bound the same event for $P_{X\hat X}$ together with some 
+divergence quantity.  
 </span>
+<details>
+<summary>Proof</summary>
+For the first inequality, 
+consider $Q_{X\hat X} = U_XP_{\hat X}$ with $U_X$ uniform, then 
+$Q[X=\hat X]=1/M$; let $P[X=\hat X]=p$, the applying divergence 
+DPI to $(X, \hat X)\mapsto 1[X=\hat X]$ yields 
+\begin{align}
+    D(P_{X\hat X} \| Q_{X\hat X}) 
+    &= \Exp_{X, \hat X\sim P} \log M \df{P(x)^2}{P(x)}
+    = \log M - H(P_X) \\ 
+    &\geq d(p\|1/M) = p \log pM + \bar p \log \df{M \bar p}{M-1} \\ 
+    &= -h(p) + p\log M + (1-p) \log M - \bar p\log(M-1) \\ 
+    &= -h(p) + \log M + \bar p \log(M-1) \\ 
+    H(P_X)&\leq h(p) + \bar p \log(M-1)
+\end{align}
+To prove the second claim, choose $\hat X$ to be the mode of $X$. 
+</details>
+
+:::{.theorem name="Fano's inequality"}
+Let $|mca X|=M$ and $X\to Y\to \hat X$. 
+Let $p_e = P[X\neq \hat X]$, then 
+\[ 
+    H(X|Y) \leq F_M(1-p_e) = p_e\log(M-1) + h(p_e)
+\] 
+Furthermore, for $p_0 = \max P_X(x)$, then regardless of $M$ we have 
+\[ 
+    I(X; Y) \geq (1 - p_e) \log \df 1 {p_0} - h(p_e)
+\] 
+:::
 
 
 ## Entropy-power Inequality {-}

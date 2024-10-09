@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Mutual Information | 6.7480 Notes</title>
   <meta name="description" content="4 Mutual Information | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Mutual Information | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -181,6 +181,10 @@ satisfying DPI, we can define a mutual-information like quantity
 information is <a href="mutual-information.html#thm:mutInfoMoreProperties">4.2</a>.</li>
 <li>Mutual information is the weighted divergence from the marginal
 to the conditionals (definition <a href="mutual-information.html#def:mutInfDef">4.1</a>).</li>
+<li>General proof technique (see <a href="mutual-information.html#thm:simpleFano">4.4</a>);
+to derive bounds on general statements, derive one for
+a tractable statement then apply divergence inequalitites
+(DPI, Donsker-Varadhan etc).</li>
 </ol>
 <div id="definition-properties" class="section level2 unnumbered hasAnchor">
 <h2>Definition, properties<a href="mutual-information.html#definition-properties" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -234,8 +238,7 @@ apply (4) to the projection transform <span class="math inline">\((X, Y)\mapsto 
 <div class="proposition">
 <p><span id="prp:unlabeled-div-29" class="proposition"><strong>Proposition 4.1  (Mutual information and entropy) </strong></span></p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\
-\infty \text{ otherwise.}\end{cases}\)</span></li>
+<li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\  \infty \text{ otherwise.}\end{cases}\)</span></li>
 <li>Given discrete <span class="math inline">\(X\)</span>, <span class="math inline">\(H(X) = I(X; Y) + H(X|Y)\)</span>.</li>
 <li>Given both <span class="math inline">\(X, Y\)</span> discrete, <span class="math inline">\(H(X)+H(Y) = I(X; Y) + H(X; Y)\)</span>.</li>
 </ol>
@@ -398,8 +401,7 @@ In other words, <span class="math inline">\(P_{X|T}\)</span> can be chosen not t
 <p><span id="thm:unlabeled-div-35" class="theorem"><strong>Theorem 4.3  (characterization of sufficiency) </strong></span>The following claims are equivalent:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(T\)</span> is a sufficient statistic of <span class="math inline">\(X\)</span> for <span class="math inline">\(\theta\)</span>.</li>
-<li><span class="math inline">\(\forall P_\theta, \theta \to T\to X
-\iff \forall P_\theta, I(\theta; X|T) = 0\)</span>.</li>
+<li><span class="math inline">\(\forall P_\theta, \theta \to T\to X \iff \forall P_\theta, I(\theta; X|T) = 0\)</span>.</li>
 </ol>
 </div>
 <p><span style="color:red">
@@ -415,16 +417,66 @@ To finish.
 where <span class="math inline">\(X=f(W)\)</span> is a deterministic function of <span class="math inline">\(W\)</span>.</li>
 <li><span class="math inline">\(W\to X\to Y\to \hat W\)</span>, where <span class="math inline">\(X\to Y\)</span> is some noisy channel.</li>
 </ol>
+<p>The following statement upper bounds the discrete entropy
+based on the probability of correctness for random guessing
+and the maximum probability. We would guess that:</p>
+<ol style="list-style-type: decimal">
+<li>For the maximum probability of the distribution, the bound
+should be largest when <span class="math inline">\(P_0 = 1/M\)</span> and decay as <span class="math inline">\(P_0\)</span> increases.</li>
+<li>The maximum collision probability is also <span class="math inline">\(1/M\)</span> across all distributions.</li>
+</ol>
+<p>The second statement in the following theorem can be viewed
+as a bound on entropy using the <span class="math inline">\(\infty\)</span>-Renyi entropy.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-36" class="theorem"><strong>Theorem 4.4  </strong></span>Given a finite alphabet <span class="math inline">\(|\mathcal X|=M&lt;\infty\)</span>, for any <span class="math inline">\(\hat X\perp\!\!\!\perp X\)</span>
+<p><span id="thm:simpleFano" class="theorem"><strong>Theorem 4.4  (entropy bound using independent guess) </strong></span>Given a finite alphabet <span class="math inline">\(|\mathcal X|=M&lt;\infty\)</span>, for any <span class="math inline">\(\hat X\perp\!\!\!\perp X\)</span>
 <span class="math display">\[
     H(X) \leq F_M(\mathrm{Pr}[X=\hat X]), \quad F_M(x) = (1-x)\log(M-1)+h(x)
 \]</span>
-and <span class="math inline">\(h(x)\)</span> is the binary entropy.</p>
+and <span class="math inline">\(h(x)=-x\log x - \bar x \log \bar x\)</span> is the binary entropy.
+Let <span class="math inline">\(P_0 = \max_{x\in \mathcal X} P_X(x)\)</span>, then
+<span class="math display">\[
+    H(X) \leq F_M(P_0)
+\]</span>
+with equality iff <span class="math inline">\(P_X=(P_0, \alpha, \cdots)\)</span> where <span class="math inline">\(\alpha=(1-P_0)/(M-1)\)</span>.
+Note that <span class="math inline">\(F_M(0)=\log(M-1)\)</span>, <span class="math inline">\(F_M(1/M)=\log M\)</span>, and <span class="math inline">\(F_M(1)=0\)</span>.</p>
 </div>
-<p><span style="color:red">
-To finish.
-</span></p>
+<span style="color:green">
+Proof technique: instead of studying <span class="math inline">\(P_{X\hat X}\)</span> for
+arbitrary <span class="math inline">\(\hat X\)</span>, introduce a tractable <span class="math inline">\(Q_{X\hat X}\)</span>,
+to bound an event, then use DPI (or divergence inequalities)
+to bound the same event for <span class="math inline">\(P_{X\hat X}\)</span> together with some
+divergence quantity.<br />
+</span>
+<details>
+<summary>
+Proof
+</summary>
+For the first inequality,
+consider <span class="math inline">\(Q_{X\hat X} = U_XP_{\hat X}\)</span> with <span class="math inline">\(U_X\)</span> uniform, then
+<span class="math inline">\(Q[X=\hat X]=1/M\)</span>; let <span class="math inline">\(P[X=\hat X]=p\)</span>, the applying divergence
+DPI to <span class="math inline">\((X, \hat X)\mapsto 1[X=\hat X]\)</span> yields
+<span class="math display">\[\begin{align}
+    D(P_{X\hat X} \| Q_{X\hat X})
+    &amp;= \mathbb E_{X, \hat X\sim P} \log M \dfrac{P(x)^2}{P(x)}
+    = \log M - H(P_X) \\
+    &amp;\geq d(p\|1/M) = p \log pM + \bar p \log \dfrac{M \bar p}{M-1} \\
+    &amp;= -h(p) + p\log M + (1-p) \log M - \bar p\log(M-1) \\
+    &amp;= -h(p) + \log M + \bar p \log(M-1) \\
+    H(P_X)&amp;\leq h(p) + \bar p \log(M-1)
+\end{align}\]</span>
+To prove the second claim, choose <span class="math inline">\(\hat X\)</span> to be the mode of <span class="math inline">\(X\)</span>.
+</details>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-36" class="theorem"><strong>Theorem 4.5  (Fano's inequality) </strong></span>Let <span class="math inline">\(|mca X|=M\)</span> and <span class="math inline">\(X\to Y\to \hat X\)</span>.
+Let <span class="math inline">\(p_e = P[X\neq \hat X]\)</span>, then
+<span class="math display">\[
+    H(X|Y) \leq F_M(1-p_e) = p_e\log(M-1) + h(p_e)
+\]</span>
+Furthermore, for <span class="math inline">\(p_0 = \max P_X(x)\)</span>, then regardless of <span class="math inline">\(M\)</span> we have
+<span class="math display">\[
+    I(X; Y) \geq (1 - p_e) \log \dfrac 1 {p_0} - h(p_e)
+\]</span></p>
+</div>
 </div>
 <div id="entropy-power-inequality" class="section level2 unnumbered hasAnchor">
 <h2>Entropy-power Inequality<a href="mutual-information.html#entropy-power-inequality" class="anchor-section" aria-label="Anchor link to header"></a></h2>

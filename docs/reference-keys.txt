@@ -44,6 +44,7 @@ cor:unlabeled-div-32
 prp:miDpiPerspective
 def:unlabeled-div-34
 thm:unlabeled-div-35
+thm:simpleFano
 thm:unlabeled-div-36
 thm:goldenFormula
 cor:centerOfGravityMI
