@@ -141,7 +141,7 @@ For the second claim, the other case can be obtained by using the equation above
 \] 
 </details>
 
-:::{.proposition name="equivalence properties"}
+:::{.proposition #fEquivProperties name="equivalence properties"}
 
 1. $D_f(P\|Q) = 0$ for all $P\neq Q$ iff $f(x)=c(x-1)$ for some $c$. 
 2. $D_f = D_{f+c(x-1)}$; thus we can always assume $f\geq 0$ and $f'(1)=0$. 
@@ -444,14 +444,6 @@ Taking supremum over all $E$ yields
 the desired inequality per the TV 
 variational characterization theorem \@ref(thm:tvVarChar). 
 </details>
-
-
-<div style="color:red">
-
-:::{.corollary name="Tau's inequality"}
-TODO
-:::
-</div>
 
 
 :::{.definition name="joint range"}
@@ -812,3 +804,137 @@ denote $\mrm{dom}(f^*) = (f^*)^{-1}(\R-\{\infty\})$, then
     \Exp_P[g(X)] - \Exp_Q[(f^*\circ g)(X)]
 \] 
 :::
+
+## Empirical distribution and χ² {-}
+
+## Fisher information, location family {-}
+
+We consider a parameterized set of distributions 
+$\{P_\theta: \theta\in \Theta\}$ where $\Theta$ is an open 
+subset of $\R^d$. Further suppose that $P_\theta(dx)=p_\theta(x)\mu(dx)$ 
+for some common dominating measure $\mu$. 
+
+:::{.definition name="Fisher information, score"}
+If for each fixed $x$, the density $p_\theta(x)$ depends smoothly 
+on $\theta$, we define the Fisher information matrix w.r.t. $\theta$ as 
+\[ 
+    \mca J_F(\theta) = \Exp_\theta(VV^T), \quad 
+    V = \nabla_\theta \ln p_\theta(X) = \df 1 {p_\theta(X)} \nabla_\theta p_\theta(X)
+\] 
+The _random variable_ $V$ is known as the score. 
+:::
+
+Under technical regularity conditions, we have: 
+
+1. $\Exp_\theta[V]=0$: for an intuitive argument 
+\[ 
+    \Exp_\theta[\nabla_\theta \ln p_\theta(X)] 
+    = \int \nabla_\theta p_\theta(x) = \nabla_\theta \int p_\theta = 0 
+\] 
+2. $\mca J_F(\theta) = \mrm{Cov}_\theta(V) 
+    = -\Exp_\theta \left[\mca H_\theta \ln p_\theta(X)\right]$: differentiating (1)
+\begin{align}
+    \pd {jk}^2 \ln p_\theta = \pd j \left(
+        \df 1 {p_\theta} \pd k p_\theta
+    \right) = -\df {(\pd j p_\theta)(\pd k p_\theta)} {p_\theta^2} 
+    + \left[\df 1 {p_\theta} \pd {jk}^2 p_\theta\right]_{=0} = (VV^T)_{jk}
+\end{align}
+The second term vanishes when we take the expectation. 
+3. $D(P_{\theta} \| P_{\theta + \xi}) 
+    = \df{\log e}{2} \xi^T \mca J_F(\theta)\xi + o(\|\xi\|^2)$: 
+    this is obtained by integrating 
+\[ 
+    \ln p_{\theta + \xi}(x) = \ln p_\theta(x) + \xi^T \nabla_\theta \ln p_\theta(x) 
+    + \df 1 2 \xi^T \mca H_\theta \ln p_\theta(x) + o(\|\xi\|^2)
+\] 
+4. Under a smooth invertible map $\theta \to \tilde \theta$, we have 
+\[ 
+    \mca J_F(\tilde \theta) = J_{\tilde \theta \to \theta}^T 
+    \mca J_F(\theta) J_{\tilde \theta\to \theta}
+\] 
+In fact, this allows one to define a Riemannian metric on the parameter space, 
+called the Fisher-Rao metric. 
+5. Tensorization: under i.i.d. observations, $X^n\sim P_\theta$ i.i.d, we have 
+$\{P_\theta^{\otimes n}:\theta \in \Theta\}$ whose Fisher information 
+$\mca J_F^{\otimes n}(\theta) = n\mca J_F(\theta)$. 
+
+:::{.definition name="location family"}
+For any density $p_0$ on $\mbb R^d$, one can define a location 
+family of distributions on $\mbb R^d$ by setting 
+$P_\theta(dx) = p_0(x-\theta)dx$. In this case the Fisher information is 
+translation-invariant, does not depend on $\theta$, and its written instead 
+to emphasize its dependence on $p_0$: 
+\[ 
+    J(p_0) = \Exp_{X\sim p_0} \left[(\nabla \ln p_0)(\nabla \ln p_0)^T\right] 
+    = -\Exp_{X\sim p_0} \left[
+        \mca H_X \ln p_0
+    \right]
+\] 
+:::
+
+## Local χ² behavior {-} 
+
+The first theorem gives the linear coefficient of 
+$D_f(\lambda P + \bar \lambda Q \| Q)$ as $\lambda\to 0^+$. 
+When $P\ll Q$, the decay is always sublinear with 
+quadratic coefficient given by theorem \@ref(thm:localChiExpansion). 
+Else the linear coefficient is given by the theorem below. 
+
+:::{.theorem name="local linear coefficient"}
+Suppose $D_f(P\|Q)<\infty$ and $f'(1)$ exists, then 
+\[ 
+    \lim_{\lambda\to 0} \df 1 \lambda D_f(\lambda P + \bar \lambda Q \|Q) 
+    = (1 - P[Q\neq 0])f'(\infty)
+\] 
+In particular, for $P\ll Q$, the decay is always sublinear. 
+:::
+<details>
+<summary>Proof</summary>
+Per proposition \@ref(prp:fEquivProperties) we may assume 
+$f(1)=f'(1)=0$ and $f\geq 0$. Decompose $p$ into absolutely continuous 
+and singular parts 
+\[ 
+    P = \mu P_1 + \bar \mu P_0, \quad P_0\perp Q, \quad P_1\ll Q 
+\] 
+Expand out the definition of divergence to obtain 
+\[ 
+    \df 1 \lambda D_f(\lambda P + \bar \lambda Q \| Q) 
+    = \bar \mu f'(\infty) + \int dQ \df 1 \lambda f\left[
+        1 + \lambda \left(
+            \mu \df{dP_1}{dQ} - 1
+        \right) 
+    \right]
+\] 
+The function $g(\lambda) = f(1 + \lambda t)$ is positive and 
+convex for every $\in \mbb R$, then $\df 1 \lambda g(\lambda)$ 
+decreases monotonically to $g'(0)=0$ as $\lambda \to 0^+$ 
+(picture a zero-centered convex function). The integrand is 
+$Q$-integrable at $\lambda=1$ (which dominates $g(t, \lambda\leq 1)$, 
+then applying dominated covergence theorem yields the desired result. 
+</details>
+
+:::{.theorem #localChiExpansion name="local quadratic coefficient"}
+Let $f$ be twice continuously differentiable on $(0, \infty)$ 
+with $\limsup_{x\to \infty} f''(x)$ finite. 
+If $\chi^2(P\|Q)<\infty$ (in particular, $P\ll Q$), then 
+$D_f(\lambda P + \bar \lambda Q \|Q)$ is finite for all 
+$\lambda \in [0, 1]$ and 
+\[ 
+    \lim_{\lambda \to 0} \df 1 {\lambda^2} D_f(\lambda P + \bar \lambda Q \| Q) 
+    = \df{f''(1)}{2} \chi^2(P\|Q)
+\] 
+If $\chi^2(P\|Q)=\infty$ with $f''(1)>0$, then 
+$D_f(\bar \lambda Q + \lambda P \|Q) = \omega(\lambda^2)$. 
+:::
+
+Since $P\ll Q$, we can use the expression $D_f(P\|Q) = \Exp_Q[f(d_QP)]$. 
+W.l.o.g. again assume $f'(1) = f(1)=0$, then $\chi^2$ is written as 
+\begin{align}
+    D_f(\bar \lambda Q + \lambda P \| Q) 
+    &= \int q(x) f\left(\lambda \df{p(x)}{q(x)} + \bar \lambda\right)
+    \, d\mu \\ 
+    f(1+u) &= \int 
+\end{align} 
+<details>
+<summary>Proof</summary>
+</details>

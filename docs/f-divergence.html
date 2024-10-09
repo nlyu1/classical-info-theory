@@ -127,6 +127,9 @@
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#variational-characterizations"><i class="fa fa-check"></i>Variational characterizations</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#empirical-distribution-and-χ²"><i class="fa fa-check"></i>Empirical distribution and χ²</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#fisher-information-location-family"><i class="fa fa-check"></i>Fisher information, location family</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#local-χ²-behavior"><i class="fa fa-check"></i>Local χ² behavior</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i>Data compression</a></li>
 <li class="chapter" data-level="9" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>9</b> Lecture notes</a>
@@ -302,7 +305,7 @@ For the second claim, the other case can be obtained by using the equation above
 \]</span>
 </details>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-57" class="proposition"><strong>Proposition 8.4  (equivalence properties) </strong></span></p>
+<p><span id="prp:fEquivProperties" class="proposition"><strong>Proposition 8.4  (equivalence properties) </strong></span></p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(D_f(P\|Q) = 0\)</span> for all <span class="math inline">\(P\neq Q\)</span> iff <span class="math inline">\(f(x)=c(x-1)\)</span> for some <span class="math inline">\(c\)</span>.</li>
 <li><span class="math inline">\(D_f = D_{f+c(x-1)}\)</span>; thus we can always assume <span class="math inline">\(f\geq 0\)</span> and <span class="math inline">\(f&#39;(1)=0\)</span>.</li>
@@ -384,7 +387,7 @@ Inequality is saturated when, for every <span class="math inline">\(x\)</span>,
 <span class="math inline">\(P_{Y|X=x}=Q_{Y|X=x}\)</span>.
 </details>
 <div class="definition">
-<p><span id="def:unlabeled-div-58" class="definition"><strong>Definition 8.2  (conditional f-divergence) </strong></span>Given <span class="math inline">\(P_{Y|X}, Q_{Y|X}\)</span> and <span class="math inline">\(P_X\)</span>, the conditional
+<p><span id="def:unlabeled-div-57" class="definition"><strong>Definition 8.2  (conditional f-divergence) </strong></span>Given <span class="math inline">\(P_{Y|X}, Q_{Y|X}\)</span> and <span class="math inline">\(P_X\)</span>, the conditional
 <span class="math inline">\(f\)</span>-divergence is
 <span class="math display">\[
     D_f(P_{Y|X} \| Q_{Y|X} | P_X)
@@ -482,13 +485,13 @@ where <span class="math inline">\(\sup\)</span> is over all finite <span class="
 TODO
 </span></p>
 <div class="definition">
-<p><span id="def:unlabeled-div-59" class="definition"><strong>Definition 8.3  (f-information) </strong></span>The <span class="math inline">\(f\)</span>-information is defined by
+<p><span id="def:unlabeled-div-58" class="definition"><strong>Definition 8.3  (f-information) </strong></span>The <span class="math inline">\(f\)</span>-information is defined by
 <span class="math display">\[
     I_f(X; Y) = D_f(P_{XY} | P_XP_Y)
 \]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-60" class="definition"><strong>Definition 8.4  (f-DPI) </strong></span>For <span class="math inline">\(U\to X\to Y\)</span>, we have <span class="math inline">\(I_f(U; Y) \leq I_f(U; X)\)</span>.</p>
+<p><span id="def:unlabeled-div-59" class="definition"><strong>Definition 8.4  (f-DPI) </strong></span>For <span class="math inline">\(U\to X\to Y\)</span>, we have <span class="math inline">\(I_f(U; Y) \leq I_f(U; X)\)</span>.</p>
 </div>
 <p>Proof: <span class="math inline">\(I_f(U; X) = D_f(P_{UX} \|P_UP_X) \geq
 D_f(P_{UY} \| P_UP_Y) = I_f(U; Y)\)</span>.</p>
@@ -589,7 +592,7 @@ the inequality since <span class="math inline">\(P_{XY}[X\neq Y] = 1-\pi=\mathrm
 <h2>Joint range<a href="f-divergence.html#joint-range" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We first provide a special case of an inequality.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-61" class="theorem"><strong>Theorem 8.6  (Pinsker's inequality) </strong></span>For any two distributions,
+<p><span id="thm:unlabeled-div-60" class="theorem"><strong>Theorem 8.6  (Pinsker's inequality) </strong></span>For any two distributions,
 <span class="math inline">\(D(P\|Q) \geq (2\log e) \mathrm{TV}(P, Q)^2\)</span></p>
 </div>
 <details>
@@ -611,13 +614,8 @@ Taking supremum over all <span class="math inline">\(E\)</span> yields
 the desired inequality per the TV
 variational characterization theorem <a href="f-divergence.html#thm:tvVarChar">8.5</a>.
 </details>
-<div style="color:red">
-<div class="corollary">
-<p><span id="cor:unlabeled-div-62" class="corollary"><strong>Corollary 8.1  (Tau's inequality) </strong></span>TODO</p>
-</div>
-</div>
 <div class="definition">
-<p><span id="def:unlabeled-div-63" class="definition"><strong>Definition 8.5  (joint range) </strong></span>Given two <span class="math inline">\(f\)</span>-divergences <span class="math inline">\(D_f\)</span> and <span class="math inline">\(D_g\)</span>, their
+<p><span id="def:unlabeled-div-61" class="definition"><strong>Definition 8.5  (joint range) </strong></span>Given two <span class="math inline">\(f\)</span>-divergences <span class="math inline">\(D_f\)</span> and <span class="math inline">\(D_g\)</span>, their
 joint range <span class="math inline">\(\mathcal R\subset [0, \infty]^2\)</span>
 is defined by
 <span class="math display">\[
@@ -728,7 +726,7 @@ the divergence is an affine map:
 <p>The Rényi divergences are a monotone transformation
 of <span class="math inline">\(f\)</span>-divergences; they satisfy DPI and other properties.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-64" class="definition"><strong>Definition 8.6  (Rényi divergence) </strong></span>For <span class="math inline">\(\lambda\in \mathbb R- \{0, 1\}\)</span>, the Rényi divergence
+<p><span id="def:unlabeled-div-62" class="definition"><strong>Definition 8.6  (Rényi divergence) </strong></span>For <span class="math inline">\(\lambda\in \mathbb R- \{0, 1\}\)</span>, the Rényi divergence
 of order <span class="math inline">\(\lambda\)</span> between distributions <span class="math inline">\(P, Q\)</span> is
 <span class="math display">\[
     D_\lambda(P \| Q) = \dfrac 1 {\lambda - 1} \log \mathbb E_Q \left[
@@ -750,7 +748,7 @@ to keep <span class="math inline">\(f\)</span> convex):
     \tag{8.2}
 \]</span></p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-65" class="proposition"><strong>Proposition 8.6  </strong></span>Under regularity conditions,
+<p><span id="prp:unlabeled-div-63" class="proposition"><strong>Proposition 8.6  </strong></span>Under regularity conditions,
 <span class="math display">\[
     \lim_{\lambda \to 1} D_\lambda (P \|Q) = D(P \| Q)
 \]</span></p>
@@ -802,7 +800,7 @@ equation <a href="f-divergence.html#eq:hellingerDiv">(8.1)</a>
 <li>The Rényi entropy for finite alphabet is <span class="math inline">\(H_\lambda(P) = \log m - D_\lambda(P \| U)\)</span>.</li>
 </ol>
 <div class="definition">
-<p><span id="def:unlabeled-div-66" class="definition"><strong>Definition 8.7  (conditional Rényi entropy) </strong></span>Given <span class="math inline">\(P_{X|Y}, Q_{X|Y}\)</span> and <span class="math inline">\(P_Y\)</span>
+<p><span id="def:unlabeled-div-64" class="definition"><strong>Definition 8.7  (conditional Rényi entropy) </strong></span>Given <span class="math inline">\(P_{X|Y}, Q_{X|Y}\)</span> and <span class="math inline">\(P_Y\)</span>
 <span class="math display">\[\begin{align}
     D_\lambda(P_{X|Y} \| Q_{X|Y} | P_Y)
     &amp;= D_\lambda(P_{X|Y} P_Y \| Q_{X|Y} P_Y)
@@ -815,7 +813,7 @@ equation <a href="f-divergence.html#eq:hellingerDiv">(8.1)</a>
 \end{align}\]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-67" class="proposition"><strong>Proposition 8.8  (Rényi chain rule) </strong></span>Given <span class="math inline">\(P_{AB}, Q_{AB}\)</span>, define the <span class="math inline">\(\lambda\)</span>-tilting
+<p><span id="prp:unlabeled-div-65" class="proposition"><strong>Proposition 8.8  (Rényi chain rule) </strong></span>Given <span class="math inline">\(P_{AB}, Q_{AB}\)</span>, define the <span class="math inline">\(\lambda\)</span>-tilting
 of <span class="math inline">\(P_B\)</span> towards <span class="math inline">\(Q_B\)</span> by
 <span class="math display">\[
     P_B^{(\lambda)}(b) = P_B^\lambda(b) Q_B^{1-\lambda}(b)
@@ -855,14 +853,14 @@ Next up, computing the RHS explicitly, we have
 \end{align}\]</span>
 </details>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-68" class="corollary"><strong>Corollary 8.2  (Rényi tensorization) </strong></span>Specializing the chain rule to independent joints,
+<p><span id="cor:unlabeled-div-66" class="corollary"><strong>Corollary 8.1  (Rényi tensorization) </strong></span>Specializing the chain rule to independent joints,
 <span class="math display">\[
     D_\lambda \left(\prod P_{X_j} \| \prod Q_{X_j}\right)
     = \sum_j D_\lambda(P_{X_j} \| Q_{X_j})
 \]</span></p>
 </div>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-69" class="corollary"><strong>Corollary 8.3  (tensorization of χ² and Hellinger) </strong></span>Applying tensorization and proposition <a href="f-divergence.html#prp:specialRenyi">8.7</a>:
+<p><span id="cor:unlabeled-div-67" class="corollary"><strong>Corollary 8.2  (tensorization of χ² and Hellinger) </strong></span>Applying tensorization and proposition <a href="f-divergence.html#prp:specialRenyi">8.7</a>:
 <span class="math display">\[\begin{align}
     1 + \chi^2 \left(\prod_j P_j \| \prod_j Q_j\right)
     &amp;= \prod_j 1 + \chi^2(P_j \| Q_j)  \\
@@ -871,7 +869,7 @@ Next up, computing the RHS explicitly, we have
 \end{align}\]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-70" class="proposition"><strong>Proposition 8.9  (variational characterization via KL) </strong></span>Show that <span class="math inline">\(\forall \alpha \in \mathbb R\)</span>:
+<p><span id="prp:unlabeled-div-68" class="proposition"><strong>Proposition 8.9  (variational characterization via KL) </strong></span>Show that <span class="math inline">\(\forall \alpha \in \mathbb R\)</span>:
 <span class="math display">\[
     \bar \alpha D_\alpha(P \|Q)
     = \inf_R \left[
@@ -962,7 +960,7 @@ with its convex extension <span class="math inline">\(f:\mathbb R\to \mathbb R\c
 the original domain); different choices of <span class="math inline">\(f\)</span>’s extension
 yields a different variational characterization.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-71" class="theorem"><strong>Theorem 8.8  (supremum characterization of f-divergences) </strong></span>Given probability measures <span class="math inline">\(P, Q\)</span> on <span class="math inline">\(\mathcal X\)</span>; fix
+<p><span id="thm:unlabeled-div-69" class="theorem"><strong>Theorem 8.8  (supremum characterization of f-divergences) </strong></span>Given probability measures <span class="math inline">\(P, Q\)</span> on <span class="math inline">\(\mathcal X\)</span>; fix
 an extension of <span class="math inline">\(f\)</span> and corresponding Legendre transform <span class="math inline">\(f^*\)</span>;
 denote <span class="math inline">\(\mathrm{dom}(f^*) = (f^*)^{-1}(\mathbb R-\{\infty\})\)</span>, then
 <span class="math display">\[
@@ -970,6 +968,140 @@ denote <span class="math inline">\(\mathrm{dom}(f^*) = (f^*)^{-1}(\mathbb R-\{\i
     \mathbb E_P[g(X)] - \mathbb E_Q[(f^*\circ g)(X)]
 \]</span></p>
 </div>
+</div>
+<div id="empirical-distribution-and-χ²" class="section level2 unnumbered hasAnchor">
+<h2>Empirical distribution and χ²<a href="f-divergence.html#empirical-distribution-and-χ²" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="fisher-information-location-family" class="section level2 unnumbered hasAnchor">
+<h2>Fisher information, location family<a href="f-divergence.html#fisher-information-location-family" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We consider a parameterized set of distributions
+<span class="math inline">\(\{P_\theta: \theta\in \Theta\}\)</span> where <span class="math inline">\(\Theta\)</span> is an open
+subset of <span class="math inline">\(\mathbb R^d\)</span>. Further suppose that <span class="math inline">\(P_\theta(dx)=p_\theta(x)\mu(dx)\)</span>
+for some common dominating measure <span class="math inline">\(\mu\)</span>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-70" class="definition"><strong>Definition 8.8  (Fisher information, score) </strong></span>If for each fixed <span class="math inline">\(x\)</span>, the density <span class="math inline">\(p_\theta(x)\)</span> depends smoothly
+on <span class="math inline">\(\theta\)</span>, we define the Fisher information matrix w.r.t. <span class="math inline">\(\theta\)</span> as
+<span class="math display">\[
+    \mathcal J_F(\theta) = \mathbb E_\theta(VV^T), \quad
+    V = \nabla_\theta \ln p_\theta(X) = \dfrac 1 {p_\theta(X)} \nabla_\theta p_\theta(X)
+\]</span>
+The <em>random variable</em> <span class="math inline">\(V\)</span> is known as the score.</p>
+</div>
+<p>Under technical regularity conditions, we have:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\mathbb E_\theta[V]=0\)</span>: for an intuitive argument
+<span class="math display">\[
+\mathbb E_\theta[\nabla_\theta \ln p_\theta(X)]
+= \int \nabla_\theta p_\theta(x) = \nabla_\theta \int p_\theta = 0
+\]</span></li>
+<li><span class="math inline">\(\mathcal J_F(\theta) = \mathrm{Cov}_\theta(V)
+= -\mathbb E_\theta \left[\mathcal H_\theta \ln p_\theta(X)\right]\)</span>: differentiating (1)
+<span class="math display">\[\begin{align}
+\partial_{jk}^2 \ln p_\theta = \partial_{j} \left(
+     \dfrac 1 {p_\theta} \partial_{k} p_\theta
+\right) = -\dfrac{(\partial_{j} p_\theta)(\partial_{k} p_\theta)} {p_\theta^2}
++ \left[\dfrac 1 {p_\theta} \partial_{jk}^2 p_\theta\right]_{=0} = (VV^T)_{jk}
+\end{align}\]</span>
+The second term vanishes when we take the expectation.</li>
+<li><span class="math inline">\(D(P_{\theta} \| P_{\theta + \xi})
+= \dfrac{\log e}{2} \xi^T \mathcal J_F(\theta)\xi + o(\|\xi\|^2)\)</span>:
+this is obtained by integrating
+<span class="math display">\[
+\ln p_{\theta + \xi}(x) = \ln p_\theta(x) + \xi^T \nabla_\theta \ln p_\theta(x)
++ \dfrac 1 2 \xi^T \mathcal H_\theta \ln p_\theta(x) + o(\|\xi\|^2)
+\]</span></li>
+<li>Under a smooth invertible map <span class="math inline">\(\theta \to \tilde \theta\)</span>, we have
+<span class="math display">\[
+\mathcal J_F(\tilde \theta) = J_{\tilde \theta \to \theta}^T
+\mathcal J_F(\theta) J_{\tilde \theta\to \theta}
+\]</span>
+In fact, this allows one to define a Riemannian metric on the parameter space,
+called the Fisher-Rao metric.</li>
+<li>Tensorization: under i.i.d. observations, <span class="math inline">\(X^n\sim P_\theta\)</span> i.i.d, we have
+<span class="math inline">\(\{P_\theta^{\otimes n}:\theta \in \Theta\}\)</span> whose Fisher information
+<span class="math inline">\(\mathcal J_F^{\otimes n}(\theta) = n\mathcal J_F(\theta)\)</span>.</li>
+</ol>
+<div class="definition">
+<p><span id="def:unlabeled-div-71" class="definition"><strong>Definition 8.9  (location family) </strong></span>For any density <span class="math inline">\(p_0\)</span> on <span class="math inline">\(\mathbb R^d\)</span>, one can define a location
+family of distributions on <span class="math inline">\(\mathbb R^d\)</span> by setting
+<span class="math inline">\(P_\theta(dx) = p_0(x-\theta)dx\)</span>. In this case the Fisher information is
+translation-invariant, does not depend on <span class="math inline">\(\theta\)</span>, and its written instead
+to emphasize its dependence on <span class="math inline">\(p_0\)</span>:
+<span class="math display">\[
+    J(p_0) = \mathbb E_{X\sim p_0} \left[(\nabla \ln p_0)(\nabla \ln p_0)^T\right]
+    = -\mathbb E_{X\sim p_0} \left[
+        \mathcal H_X \ln p_0
+    \right]
+\]</span></p>
+</div>
+</div>
+<div id="local-χ²-behavior" class="section level2 unnumbered hasAnchor">
+<h2>Local χ² behavior<a href="f-divergence.html#local-χ²-behavior" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The first theorem gives the linear coefficient of
+<span class="math inline">\(D_f(\lambda P + \bar \lambda Q \| Q)\)</span> as <span class="math inline">\(\lambda\to 0^+\)</span>.
+When <span class="math inline">\(P\ll Q\)</span>, the decay is always sublinear with
+quadratic coefficient given by theorem <a href="f-divergence.html#thm:localChiExpansion">8.10</a>.
+Else the linear coefficient is given by the theorem below.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-72" class="theorem"><strong>Theorem 8.9  (local linear coefficient) </strong></span>Suppose <span class="math inline">\(D_f(P\|Q)&lt;\infty\)</span> and <span class="math inline">\(f&#39;(1)\)</span> exists, then
+<span class="math display">\[
+    \lim_{\lambda\to 0} \dfrac 1 \lambda D_f(\lambda P + \bar \lambda Q \|Q)
+    = (1 - P[Q\neq 0])f&#39;(\infty)
+\]</span>
+In particular, for <span class="math inline">\(P\ll Q\)</span>, the decay is always sublinear.</p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+Per proposition <a href="f-divergence.html#prp:fEquivProperties">8.4</a> we may assume
+<span class="math inline">\(f(1)=f&#39;(1)=0\)</span> and <span class="math inline">\(f\geq 0\)</span>. Decompose <span class="math inline">\(p\)</span> into absolutely continuous
+and singular parts
+<span class="math display">\[
+    P = \mu P_1 + \bar \mu P_0, \quad P_0\perp Q, \quad P_1\ll Q
+\]</span>
+Expand out the definition of divergence to obtain
+<span class="math display">\[
+    \dfrac 1 \lambda D_f(\lambda P + \bar \lambda Q \| Q)
+    = \bar \mu f&#39;(\infty) + \int dQ \dfrac 1 \lambda f\left[
+        1 + \lambda \left(
+            \mu \dfrac{dP_1}{dQ} - 1
+        \right)
+    \right]
+\]</span>
+The function <span class="math inline">\(g(\lambda) = f(1 + \lambda t)\)</span> is positive and
+convex for every <span class="math inline">\(\in \mathbb R\)</span>, then <span class="math inline">\(\dfrac 1 \lambda g(\lambda)\)</span>
+decreases monotonically to <span class="math inline">\(g&#39;(0)=0\)</span> as <span class="math inline">\(\lambda \to 0^+\)</span>
+(picture a zero-centered convex function). The integrand is
+<span class="math inline">\(Q\)</span>-integrable at <span class="math inline">\(\lambda=1\)</span> (which dominates <span class="math inline">\(g(t, \lambda\leq 1)\)</span>,
+then applying dominated covergence theorem yields the desired result.
+</details>
+<div class="theorem">
+<p><span id="thm:localChiExpansion" class="theorem"><strong>Theorem 8.10  (local quadratic coefficient) </strong></span>Let <span class="math inline">\(f\)</span> be twice continuously differentiable on <span class="math inline">\((0, \infty)\)</span>
+with <span class="math inline">\(\limsup_{x\to \infty} f&#39;&#39;(x)\)</span> finite.
+If <span class="math inline">\(\chi^2(P\|Q)&lt;\infty\)</span> (in particular, <span class="math inline">\(P\ll Q\)</span>), then
+<span class="math inline">\(D_f(\lambda P + \bar \lambda Q \|Q)\)</span> is finite for all
+<span class="math inline">\(\lambda \in [0, 1]\)</span> and
+<span class="math display">\[
+    \lim_{\lambda \to 0} \dfrac 1 {\lambda^2} D_f(\lambda P + \bar \lambda Q \| Q)
+    = \dfrac{f&#39;&#39;(1)}{2} \chi^2(P\|Q)
+\]</span>
+If <span class="math inline">\(\chi^2(P\|Q)=\infty\)</span> with <span class="math inline">\(f&#39;&#39;(1)&gt;0\)</span>, then
+<span class="math inline">\(D_f(\bar \lambda Q + \lambda P \|Q) = \omega(\lambda^2)\)</span>.</p>
+</div>
+Since <span class="math inline">\(P\ll Q\)</span>, we can use the expression <span class="math inline">\(D_f(P\|Q) = \mathbb E_Q[f(d_QP)]\)</span>.
+W.l.o.g. again assume <span class="math inline">\(f&#39;(1) = f(1)=0\)</span>, then <span class="math inline">\(\chi^2\)</span> is written as
+<span class="math display">\[\begin{align}
+    D_f(\bar \lambda Q + \lambda P \| Q)
+    &amp;= \int q(x) f\left(\lambda \dfrac{p(x)}{q(x)} + \bar \lambda\right)
+    \, d\mu \\
+    f(1+u) &amp;= \int
+\end{align}\]</span>
+<details>
+<summary>
+Proof
+</summary>
+</details>
 
 </div>
 </div>
