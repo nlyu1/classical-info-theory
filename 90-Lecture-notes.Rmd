@@ -284,3 +284,174 @@ Two takeaways for information theorists:
 Van Trees replaced $\mca J_F$ with the expectation of 
 $\mca J_F$, and it applies to every (instead of unbiased) estimators. 
 
+## Oct 9: data compression II {-}
+
+Overview: 
+
+1. Review 
+2. Distribution of fixed length
+3. Arithmetic encoder 
+4. Stationary, ergodic data sources
+5. Lempel-Ziv (adaptive, universal compression)
+
+Main takeaways: 
+
+1. AEP. 
+2. Optimal compression is possible using (1) arithmetic encoding 
+    and (2) optimal next-token prediction. 
+
+Information theory is about bounding 
+hard, intractable operational quantities with mathematically 
+analyzable quantities. 
+
+### Review {-}
+
+Assume $P_X$ known and ordered $P_X(1)\geq P_X(2)\geq \cdots$. 
+The optimum compressor $f^*(x)$ satisfies 
+\[ 
+    l(f^*(X)) = \lceil \log_2 X\rceil 
+\] 
+We also proved that the expected 
+optimum compression length satisfies 
+\[ 
+    \Exp l(f^*(X)) \approx H(X)
+\] 
+In fact, this is upper-bounded by $H(X)$. 
+_But this is not an algorithm!_ 
+
+1. Sorting the distribution is intractible. 
+2. It's variable-length but not prefix-free!
+    We're assuming one-shot compression 
+    (comma is for free). Howevver, prefix free code, 
+    the optimal expected bound is lower-bounded by $H(X)$. 
+3. Proof idea: typicality; break region into typical (tractable) 
+    and atypical regions with vanishing probability. 
+4. Asymptotic equipartition property: i.i.d. implies 
+    law of large numbers (in log-space). 
+
+Distribution of compression length is distributed (up to constants) 
+as the entropy density. This is great because entropy density tensorizes. 
+
+:::{.proposition name="distribution of compression length"}
+Define random variable $L^* = l(f^*(X))$. 
+Denote the entropy density $i_X(a) = -\log P_X(a)$; 
+the optimal compressor should compress symbol $a$ to roughly 
+this length: 
+\[ 
+    \Pr[i(X) \leq k] \leq \Pr[L^* \leq K] \leq \Pr[i(X) \leq k + \tau]
+    + 2^{1-\tau}
+\] 
+This holds for every $k\in \mbb Z_+, \tau>0$. 
+:::
+_Proof:_ Left-bound is easy: 
+\[ 
+    L^*(x) = \lceil \log_2 X\rceil \leq \log 2 |X| 
+    \leq -\log P_X(x) = i_X(x)
+\] 
+To bound the second term, decompose the probability 
+\begin{align}
+    \Pr[L^* \leq k] 
+    &= \Pr[L^* \leq k, i(x) \leq k+\tau] + \Pr[L^* \leq k, i(x) > k+\tau] \\ 
+    &\leq \Pr[i_X(x) \leq k+\tau] + (\cdots)
+\end{align}
+The second term is bounded by the number of strings 
+which achieves this $2^{k+1}$ times the maximum probability 
+they're obtaining $2^{-k-\tau}$, yielding $2^{1-\tau}$. 
+
+Corrolary: if, for some sequence of r.v., the normalized entropy 
+rate converges in distribution to $U$, then the normalized optimal 
+compression length (for asymptotically large block length) 
+also converges to $U$. 
+
+Another corollary: if $S_j\sim P_S$ i.i.d., then 
+\[ 
+    \df 1 n i_{S_1^n}(S_1^n) = -\df 1 n \log P_{S^n}(S^n) 
+    = -\df 1 n \sum_{j=1}^n \log P_S(s_j) \to H(S)
+\] 
+This implies that the expectation of the optimal compression length 
+for i.i.d. source $X$ converges to $H(X)$ in the limit of asymptotically 
+large block lengths. 
+
+<u> This is a nontrivial result, because the optimal compressor 
+is a very freely-specified object, but we are able to bound its 
+behavior very neatly. </u>
+
+In particular, recall that the optimal-compressor maps 
+highest-probability atoms to the empty set, but we see from the 
+asymptotic Gaussian distribution of the compression length that 
+they have almost negligible density. This is a demonstration of the 
+**asymptotic equipartition property**, which states that 
+for i.i.d. sources, the overwhelming number of sequences have 
+the same probability given by $e^{H(X)}$. 
+
+### Arithmetic encoder {-}
+
+Given a general $\{X_j\}$-process and wishing to compress $X_1^n$. 
+
+First consider i.i.d process. Order the alphabet and 
+recursively partition the interval $[0, 1]$ so that 
+each interval has length equal to its probability. 
+The trick is to find the largest dyadic interval (recursive 
+binary partition) that fits inside the interval of the message. 
+For example: 
+\[ 
+    [0, 1]\to \emptyset, \quad [6\cdot 2^{-3}, 7\cdot 2^{-3}]\to 110
+\] 
+In the limit that the codestring goes to infinity, 
+the distribution of binary expansion will be uniform. 
+
+Fact for the compression length of arithmetic encoder for i.i.d. terms: 
+\[ 
+    \log \df 1 {P_{X^n}(x^n)} \leq l(f_{\mrm{ae}}(x^n) 
+    \leq \log_2 \df 1 {P_{X^n}(x^n)} + 2
+\] 
+The arithmetic encoder is additionally sequential: it does not 
+need to consume the full string to start outputting compression; 
+the same holds for the decompressor. 
+
+Implementing the arithmetic encoder for general non-i.i.d. 
+distributions just replace subsequent intervals by the marginals 
+$P_{X_n \| X^{(n-1)}}$. 
+
+<u>
+This means that, if we can sequentially predict the marginal 
+$P_{X_n \|X^{(n-1)}}$ very well (e.g. next-token prediction LLM), 
+then we can close-to-optimal compress a non-i.i.d. distribution 
+by combining this with the arithmetic encoder. 
+</u>
+
+
+:::{.theorem name="Shannon-McMillan-Breimen"}
+A.e.p. holds w.r.t. the entropy rate 
+if $\{X_j\}$ is a stationary (ensures 
+existence of the entropy rate) ergodic process. 
+:::
+
+Shannon's proof: 
+every stationary ergodic process can be arbitrarily 
+approximated by a $m\to \infty$-order Markov chain. 
+
+### Lempel-Ziv {-}
+
+Central question: how to compress well without $P_{X^n}$? 
+
+:::{.lemma name="Katz's lemma"}
+Given a stationary ergodic process $(X_{j\in \mbb Z})$. 
+Define $L = \inf\{t>0: X_{-t}=X_0\}$, then 
+\[ 
+    \Exp[L | X_0=u] = \Pr[X_0=u]^{-1}
+\] 
+:::
+_Proof:_ consider the probability that we don't see $u$ 
+when we look back for $k$ steps, using stationarity: 
+\begin{align}
+    \Pr[L>K, X_0=u]
+    &= \Pr[X_0=u, X_{-1}\neq U, \cdots, X_{-k}\neq u]  \\ 
+    &= \Pr[X_k=u, X_{k-1}\neq U, \cdots, X_0\neq u]
+    = \Pr[E_k]
+\end{align}
+_todo_ Another key point is that for stationary ergodic 
+processes, $\Pr[\bigcup E_k] = 1$. 
+
+Using Katz's lemma, we can do an unbiased estimation of $\Pr[X_0=u]$ 
+by looking back. 

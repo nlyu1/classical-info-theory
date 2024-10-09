@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-08" />
+<meta name="date" content="2024-10-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,6 +141,12 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#hcr-inequality-fisher-information"><i class="fa fa-check"></i>HCR inequality; Fisher information</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-7-data-compression"><i class="fa fa-check"></i>Oct 7: Data compression</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-9-data-compression-ii"><i class="fa fa-check"></i>Oct 9: data compression II</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#review"><i class="fa fa-check"></i>Review</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#arithmetic-encoder"><i class="fa fa-check"></i>Arithmetic encoder</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lempel-ziv"><i class="fa fa-check"></i>Lempel-Ziv</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -424,7 +430,165 @@ chain rule (since it’s close to KL).</li>
 </ol>
 <p>Van Trees replaced <span class="math inline">\(\mathcal J_F\)</span> with the expectation of
 <span class="math inline">\(\mathcal J_F\)</span>, and it applies to every (instead of unbiased) estimators.</p>
+</div>
+<div id="oct-9-data-compression-ii" class="section level2 unnumbered hasAnchor">
+<h2>Oct 9: data compression II<a href="lecture-notes.html#oct-9-data-compression-ii" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Overview:</p>
+<ol style="list-style-type: decimal">
+<li>Review</li>
+<li>Distribution of fixed length</li>
+<li>Arithmetic encoder</li>
+<li>Stationary, ergodic data sources</li>
+<li>Lempel-Ziv (adaptive, universal compression)</li>
+</ol>
+<p>Main takeaways:</p>
+<ol style="list-style-type: decimal">
+<li>AEP.</li>
+<li>Optimal compression is possible using (1) arithmetic encoding
+and (2) optimal next-token prediction.</li>
+</ol>
+<p>Information theory is about bounding
+hard, intractable operational quantities with mathematically
+analyzable quantities.</p>
+<div id="review" class="section level3 unnumbered hasAnchor">
+<h3>Review<a href="lecture-notes.html#review" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Assume <span class="math inline">\(P_X\)</span> known and ordered <span class="math inline">\(P_X(1)\geq P_X(2)\geq \cdots\)</span>.
+The optimum compressor <span class="math inline">\(f^*(x)\)</span> satisfies
+<span class="math display">\[
+    l(f^*(X)) = \lceil \log_2 X\rceil
+\]</span>
+We also proved that the expected
+optimum compression length satisfies
+<span class="math display">\[
+    \mathbb El(f^*(X)) \approx H(X)
+\]</span>
+In fact, this is upper-bounded by <span class="math inline">\(H(X)\)</span>.
+<em>But this is not an algorithm!</em></p>
+<ol style="list-style-type: decimal">
+<li>Sorting the distribution is intractible.</li>
+<li>It’s variable-length but not prefix-free!
+We’re assuming one-shot compression
+(comma is for free). Howevver, prefix free code,
+the optimal expected bound is lower-bounded by <span class="math inline">\(H(X)\)</span>.</li>
+<li>Proof idea: typicality; break region into typical (tractable)
+and atypical regions with vanishing probability.</li>
+<li>Asymptotic equipartition property: i.i.d. implies
+law of large numbers (in log-space).</li>
+</ol>
+<p>Distribution of compression length is distributed (up to constants)
+as the entropy density. This is great because entropy density tensorizes.</p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-78" class="proposition"><strong>Proposition 9.3  (distribution of compression length) </strong></span>Define random variable <span class="math inline">\(L^* = l(f^*(X))\)</span>.
+Denote the entropy density <span class="math inline">\(i_X(a) = -\log P_X(a)\)</span>;
+the optimal compressor should compress symbol <span class="math inline">\(a\)</span> to roughly
+this length:
+<span class="math display">\[
+    \mathrm{Pr}[i(X) \leq k] \leq \mathrm{Pr}[L^* \leq K] \leq \mathrm{Pr}[i(X) \leq k + \tau]
+    + 2^{1-\tau}
+\]</span>
+This holds for every <span class="math inline">\(k\in \mathbb Z_+, \tau&gt;0\)</span>.</p>
+</div>
+<p><em>Proof:</em> Left-bound is easy:
+<span class="math display">\[
+    L^*(x) = \lceil \log_2 X\rceil \leq \log 2 |X|
+    \leq -\log P_X(x) = i_X(x)
+\]</span>
+To bound the second term, decompose the probability
+<span class="math display">\[\begin{align}
+    \mathrm{Pr}[L^* \leq k]
+    &amp;= \mathrm{Pr}[L^* \leq k, i(x) \leq k+\tau] + \mathrm{Pr}[L^* \leq k, i(x) &gt; k+\tau] \\
+    &amp;\leq \mathrm{Pr}[i_X(x) \leq k+\tau] + (\cdots)
+\end{align}\]</span>
+The second term is bounded by the number of strings
+which achieves this <span class="math inline">\(2^{k+1}\)</span> times the maximum probability
+they’re obtaining <span class="math inline">\(2^{-k-\tau}\)</span>, yielding <span class="math inline">\(2^{1-\tau}\)</span>.</p>
+<p>Corrolary: if, for some sequence of r.v., the normalized entropy
+rate converges in distribution to <span class="math inline">\(U\)</span>, then the normalized optimal
+compression length (for asymptotically large block length)
+also converges to <span class="math inline">\(U\)</span>.</p>
+<p>Another corollary: if <span class="math inline">\(S_j\sim P_S\)</span> i.i.d., then
+<span class="math display">\[
+    \dfrac 1 n i_{S_1^n}(S_1^n) = -\dfrac 1 n \log P_{S^n}(S^n)
+    = -\dfrac 1 n \sum_{j=1}^n \log P_S(s_j) \to H(S)
+\]</span>
+This implies that the expectation of the optimal compression length
+for i.i.d. source <span class="math inline">\(X\)</span> converges to <span class="math inline">\(H(X)\)</span> in the limit of asymptotically
+large block lengths.</p>
+<p><u> This is a nontrivial result, because the optimal compressor
+is a very freely-specified object, but we are able to bound its
+behavior very neatly. </u></p>
+<p>In particular, recall that the optimal-compressor maps
+highest-probability atoms to the empty set, but we see from the
+asymptotic Gaussian distribution of the compression length that
+they have almost negligible density. This is a demonstration of the
+<strong>asymptotic equipartition property</strong>, which states that
+for i.i.d. sources, the overwhelming number of sequences have
+the same probability given by <span class="math inline">\(e^{H(X)}\)</span>.</p>
+</div>
+<div id="arithmetic-encoder" class="section level3 unnumbered hasAnchor">
+<h3>Arithmetic encoder<a href="lecture-notes.html#arithmetic-encoder" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Given a general <span class="math inline">\(\{X_j\}\)</span>-process and wishing to compress <span class="math inline">\(X_1^n\)</span>.</p>
+<p>First consider i.i.d process. Order the alphabet and
+recursively partition the interval <span class="math inline">\([0, 1]\)</span> so that
+each interval has length equal to its probability.
+The trick is to find the largest dyadic interval (recursive
+binary partition) that fits inside the interval of the message.
+For example:
+<span class="math display">\[
+    [0, 1]\to \emptyset, \quad [6\cdot 2^{-3}, 7\cdot 2^{-3}]\to 110
+\]</span>
+In the limit that the codestring goes to infinity,
+the distribution of binary expansion will be uniform.</p>
+<p>Fact for the compression length of arithmetic encoder for i.i.d. terms:
+<span class="math display">\[
+    \log \dfrac 1 {P_{X^n}(x^n)} \leq l(f_{\mathrm{ae}}(x^n)
+    \leq \log_2 \dfrac 1 {P_{X^n}(x^n)} + 2
+\]</span>
+The arithmetic encoder is additionally sequential: it does not
+need to consume the full string to start outputting compression;
+the same holds for the decompressor.</p>
+<p>Implementing the arithmetic encoder for general non-i.i.d.
+distributions just replace subsequent intervals by the marginals
+<span class="math inline">\(P_{X_n \| X^{(n-1)}}\)</span>.</p>
+<p><u>
+This means that, if we can sequentially predict the marginal
+<span class="math inline">\(P_{X_n \|X^{(n-1)}}\)</span> very well (e.g. next-token prediction LLM),
+then we can close-to-optimal compress a non-i.i.d. distribution
+by combining this with the arithmetic encoder.
+</u></p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-79" class="theorem"><strong>Theorem 9.3  (Shannon-McMillan-Breimen) </strong></span>A.e.p. holds w.r.t. the entropy rate
+if <span class="math inline">\(\{X_j\}\)</span> is a stationary (ensures
+existence of the entropy rate) ergodic process.</p>
+</div>
+<p>Shannon’s proof:
+every stationary ergodic process can be arbitrarily
+approximated by a <span class="math inline">\(m\to \infty\)</span>-order Markov chain.</p>
+</div>
+<div id="lempel-ziv" class="section level3 unnumbered hasAnchor">
+<h3>Lempel-Ziv<a href="lecture-notes.html#lempel-ziv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Central question: how to compress well without <span class="math inline">\(P_{X^n}\)</span>?</p>
+<div class="lemma">
+<p><span id="lem:unlabeled-div-80" class="lemma"><strong>Lemma 9.1  (Katz's lemma) </strong></span>Given a stationary ergodic process <span class="math inline">\((X_{j\in \mathbb Z})\)</span>.
+Define <span class="math inline">\(L = \inf\{t&gt;0: X_{-t}=X_0\}\)</span>, then
+<span class="math display">\[
+    \mathbb E[L | X_0=u] = \mathrm{Pr}[X_0=u]^{-1}
+\]</span></p>
+</div>
+<p><em>Proof:</em> consider the probability that we don’t see <span class="math inline">\(u\)</span>
+when we look back for <span class="math inline">\(k\)</span> steps, using stationarity:
+<span class="math display">\[\begin{align}
+    \mathrm{Pr}[L&gt;K, X_0=u]
+    &amp;= \mathrm{Pr}[X_0=u, X_{-1}\neq U, \cdots, X_{-k}\neq u]  \\
+    &amp;= \mathrm{Pr}[X_k=u, X_{k-1}\neq U, \cdots, X_0\neq u]
+    = \mathrm{Pr}[E_k]
+\end{align}\]</span>
+<em>todo</em> Another key point is that for stationary ergodic
+processes, <span class="math inline">\(\mathrm{Pr}[\bigcup E_k] = 1\)</span>.</p>
+<p>Using Katz’s lemma, we can do an unbiased estimation of <span class="math inline">\(\mathrm{Pr}[X_0=u]\)</span>
+by looking back.</p>
 
+</div>
 </div>
 </div>
             </section>

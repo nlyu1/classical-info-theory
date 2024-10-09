@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-08" />
+<meta name="date" content="2024-10-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,6 +141,12 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#hcr-inequality-fisher-information"><i class="fa fa-check"></i>HCR inequality; Fisher information</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-7-data-compression"><i class="fa fa-check"></i>Oct 7: Data compression</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-9-data-compression-ii"><i class="fa fa-check"></i>Oct 9: data compression II</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#review"><i class="fa fa-check"></i>Review</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#arithmetic-encoder"><i class="fa fa-check"></i>Arithmetic encoder</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lempel-ziv"><i class="fa fa-check"></i>Lempel-Ziv</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -163,7 +169,7 @@
 <div id="header">
 <h1 class="title">6.7480 Notes</h1>
 <p class="author"><em>Nicholas Lyu</em></p>
-<p class="date"><em>2024-10-08</em></p>
+<p class="date"><em>2024-10-09</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -191,6 +197,8 @@ using numerical optimization methods (e.g. VAE, GAN).</li>
 <li>Divergence measures are extremely useful for bounding events:
 bound the event for a tractable distribution, bound the divergence between the tractable
 and given distribution, and we can bound the event for the given distribution.</li>
+<li>Typicality method for providing proofs: break region into tractable region of
+large probability and difficult region with low probability.</li>
 </ol>
 <p>Fundamentally, information and entropy captures
 how our uncertainty in a quantity changes after
