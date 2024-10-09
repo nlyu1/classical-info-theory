@@ -62,6 +62,9 @@ The recurring themes in this book include:
     b. Provide tractable variational approximations 
     using numerical optimization methods (e.g. VAE, GAN). 
 4. Mutual information as a minimax saddle point. 
+5. Divergence measures are extremely useful for bounding events: 
+    bound the event for a tractable distribution, bound the divergence between the tractable 
+    and given distribution, and we can bound the event for the given distribution. 
 
 Fundamentally, information and entropy captures 
 how our uncertainty in a quantity changes after 
