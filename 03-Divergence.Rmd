@@ -1,8 +1,7 @@
 # Divergence 
 
-The main idea of this course is that: 
 <span style="color:green">
-Divergence is the fundamental object in information theory. 
+Divergence is a fundamental object in information theory. 
 </span>
 Shannon-entropy is related to KL-divergence by 
 equation \@ref(prp:entropyDivergenceRelation). 

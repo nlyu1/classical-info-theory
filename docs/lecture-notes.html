@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Lecture notes | 6.7480 Notes</title>
-  <meta name="description" content="9 Lecture notes | 6.7480 Notes" />
+  <title>10 Lecture notes | 6.7480 Notes</title>
+  <meta name="description" content="10 Lecture notes | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Lecture notes | 6.7480 Notes" />
+  <meta property="og:title" content="10 Lecture notes | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Lecture notes | 6.7480 Notes" />
+  <meta name="twitter:title" content="10 Lecture notes | 6.7480 Notes" />
   
   
   
@@ -133,8 +133,11 @@
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#fisher-information-location-family"><i class="fa fa-check"></i>Fisher information, location family</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#local-χ²-behavior"><i class="fa fa-check"></i>Local χ² behavior</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i>Data compression</a></li>
-<li class="chapter" data-level="9" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>9</b> Lecture notes</a>
+<li class="chapter" data-level="9" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>9</b> Data compression</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>10</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -168,8 +171,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="lecture-notes" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">9</span> Lecture notes<a href="lecture-notes.html#lecture-notes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="lecture-notes" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Lecture notes<a href="lecture-notes.html#lecture-notes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="oct-2-fisher-information-classical-minimax-estimation" class="section level2 unnumbered hasAnchor">
 <h2>Oct 2: Fisher information, classical minimax estimation<a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Agenda:</p>
@@ -206,7 +209,7 @@ Recall that Donsker-varadhan is not linear in <span class="math inline">\(\mathb
 but there is a standard trick to rewrite the expectation.</p>
 <p>We now apply the variational characterization to <span class="math inline">\(\chi^2\)</span>;</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-74" class="proposition"><strong>Proposition 9.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
+<p><span id="prp:unlabeled-div-79" class="proposition"><strong>Proposition 10.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
 </div>
 <p>Expanding this out, the first term is very useful;
 but the second is not. The first step is to break a single
@@ -294,7 +297,7 @@ towards it.</p>
 <div id="hcr-inequality-fisher-information" class="section level3 unnumbered hasAnchor">
 <h3>HCR inequality; Fisher information<a href="lecture-notes.html#hcr-inequality-fisher-information" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-75" class="proposition"><strong>Proposition 9.2  </strong></span><span class="math inline">\(\forall \hat \theta\)</span> and <span class="math inline">\(\theta, \theta_0\)</span> we have
+<p><span id="prp:unlabeled-div-80" class="proposition"><strong>Proposition 10.2  </strong></span><span class="math inline">\(\forall \hat \theta\)</span> and <span class="math inline">\(\theta, \theta_0\)</span> we have
 <span class="math display">\[
     R_n^* \geq \mathrm{Var}_{P^\theta} \geq \dfrac{
         \left(\mathbb E_{P^\theta} \hat \theta
@@ -360,7 +363,7 @@ more assumptions.</p>
 <div id="oct-7-data-compression" class="section level2 unnumbered hasAnchor">
 <h2>Oct 7: Data compression<a href="lecture-notes.html#oct-7-data-compression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-76" class="theorem"><strong>Theorem 9.1  (local expansion of χ) </strong></span>For <span class="math inline">\(\theta_0 = 0\)</span>, when the following conditions hold:</p>
+<p><span id="thm:unlabeled-div-81" class="theorem"><strong>Theorem 10.1  (local expansion of χ) </strong></span>For <span class="math inline">\(\theta_0 = 0\)</span>, when the following conditions hold:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\theta \in [0, \tau)\)</span>.</li>
 <li>There exists <span class="math inline">\(\dot p^\theta(x)\)</span> satisfying
@@ -399,7 +402,7 @@ a one-parameter family; with the notation <span class="math inline">\(\mathcal J
 we’re assuming the one-parameter family to be the location family
 of the given density.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-77" class="theorem"><strong>Theorem 9.2  (van Trees inequality) </strong></span>Under regularity assumptions on <span class="math inline">\(P^\theta\)</span>,
+<p><span id="thm:unlabeled-div-82" class="theorem"><strong>Theorem 10.2  (van Trees inequality) </strong></span>Under regularity assumptions on <span class="math inline">\(P^\theta\)</span>,
 for every estimator <span class="math inline">\(\hat \theta(X)\)</span> and prior
 <span class="math inline">\(\pi\)</span>
 <span class="math display">\[
@@ -410,7 +413,7 @@ for every estimator <span class="math inline">\(\hat \theta(X)\)</span> and prio
 \]</span></p>
 </div>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-78" class="corollary"><strong>Corollary 9.1  </strong></span>For <span class="math inline">\(n\)</span> i.i.d. observations, for every <span class="math inline">\(\pi\)</span>
+<p><span id="cor:unlabeled-div-83" class="corollary"><strong>Corollary 10.1  </strong></span>For <span class="math inline">\(n\)</span> i.i.d. observations, for every <span class="math inline">\(\pi\)</span>
 <span class="math display">\[
     R_n^* \geq \dfrac 1 {\mathcal J(\pi) +
     n\mathbb E_{\theta \sim \pi} \mathcal J_F(\theta)}
@@ -476,7 +479,7 @@ law of large numbers (in log-space).</li>
 <p>Distribution of compression length is distributed (up to constants)
 as the entropy density. This is great because entropy density tensorizes.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-79" class="proposition"><strong>Proposition 9.3  (distribution of compression length) </strong></span>Define random variable <span class="math inline">\(L^* = l(f^*(X))\)</span>.
+<p><span id="prp:unlabeled-div-84" class="proposition"><strong>Proposition 10.3  (distribution of compression length) </strong></span>Define random variable <span class="math inline">\(L^* = l(f^*(X))\)</span>.
 Denote the entropy density <span class="math inline">\(i_X(a) = -\log P_X(a)\)</span>;
 the optimal compressor should compress symbol <span class="math inline">\(a\)</span> to roughly
 this length:
@@ -555,7 +558,7 @@ then we can close-to-optimal compress a non-i.i.d. distribution
 by combining this with the arithmetic encoder.
 </u></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-80" class="theorem"><strong>Theorem 9.3  (Shannon-McMillan-Breimen) </strong></span>A.e.p. holds w.r.t. the entropy rate
+<p><span id="thm:unlabeled-div-85" class="theorem"><strong>Theorem 10.3  (Shannon-McMillan-Breimen) </strong></span>A.e.p. holds w.r.t. the entropy rate
 if <span class="math inline">\(\{X_j\}\)</span> is a stationary (ensures
 existence of the entropy rate) ergodic process.</p>
 </div>
@@ -567,7 +570,7 @@ approximated by a <span class="math inline">\(m\to \infty\)</span>-order Markov 
 <h3>Lempel-Ziv<a href="lecture-notes.html#lempel-ziv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Central question: how to compress well without <span class="math inline">\(P_{X^n}\)</span>?</p>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-81" class="lemma"><strong>Lemma 9.1  (Katz's lemma) </strong></span>Given a stationary ergodic process <span class="math inline">\((X_{j\in \mathbb Z})\)</span>.
+<p><span id="lem:unlabeled-div-86" class="lemma"><strong>Lemma 10.1  (Katz's lemma) </strong></span>Given a stationary ergodic process <span class="math inline">\((X_{j\in \mathbb Z})\)</span>.
 Define <span class="math inline">\(L = \inf\{t&gt;0: X_{-t}=X_0\}\)</span>, then
 <span class="math display">\[
     \mathbb E[L | X_0=u] = \mathrm{Pr}[X_0=u]^{-1}

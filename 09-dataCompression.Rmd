@@ -1,1 +1,131 @@
-# Data compression {-}
+# Data compression 
+
+This section corresponds to Chapters 10-12 of the book. 
+
+Fixing a source domain $\mca X$, we can define:
+
+- A **compressor** $f:\mca X\to \{0, 1\}^*$. 
+- A **decompressor** $g:\{0, 1\}^*\to \mca X$. 
+
+Highlights include:
+
+1. The average compression length of the optimal single-shot lossless 
+    compressor (theorem \@ref(thm:optimalEncodingAvg)). 
+
+## Source coding theorems {-}
+
+The single-shot in the definition below refers to the fact that 
+we are compressing and decompressing each symbol, instead of 
+compressing many then decompressing them; this we do not 
+need to impose any constraints on $f$, such as prefix-freeness or 
+unique-decodability. 
+
+:::{.definition name="variable-length single-shot lossless compression"}
+A pair $(f, g)$ is a variable-length single-shot lossless compressor if: 
+
+1. $f$ is of the type $f:\mca X\to \{0, 1\}^*$. The image of $f$ 
+    is a codebook, and an element $f(x)$ in the image of $f$ is a codeword.
+2. There exists a decompressor such that $g\circ f = 1_{\mca X}$.  
+:::
+
+Two immediate results of this definition:
+
+- Lossless compression is only possible for discrete $X$. 
+- Without loss of generality, we can sort $\mca X$ 
+so that $P(0)\geq P(1)\geq \cdots$. 
+
+:::{.definition name="stochastic dominance"}
+Given two real-valued stochastic variables $X, Y$, we say that $X\preceq Y$, 
+or $Y$ stochastically dominates $X$, if the CDF of $X$ dominates that of $Y$ 
+everywhere. 
+:::
+
+:::{.definition name="optimal single-shot lossless compressor"}
+For a down-sorted PMF $P(X)$, the optimal single-shot lossless compressor 
+assigns strings with increasing lengths to symbol $j\in \mca X=\mbb N$. 
+In particular, $l(f^*(j)) = \lfloor \log_2 j\rfloor$, where $l$ is the 
+string-length function. 
+:::
+
+An immediate corollary of the following result is that 
+$\Exp[(l\circ f^*)(X)] \leq \Exp[(l\circ f)(X)]$ for any $X$. 
+
+:::{.proposition}
+For any lossless single-shot compressor $f$ and source distribution $X$, 
+$l\circ f^*\preceq l\circ f$. 
+:::
+<details>
+<summary>Proof</summary>
+Let $A_k = \{x:l(f(x)) \leq k\}$ denote the set of inputs which 
+are encoded to length at most $k$. Note that, since 
+encoding is lossless and there are at most $2^{k+1}-1$ binary 
+strings of length $k$, we have 
+\[ 
+    |A_k| \leq \sum_{j=0}^k 2^j = 2^{k+1}-1 = |A_k^*|
+\] 
+The stochastic dominance follows from the fact that $f^*$ 
+sorts the PMF in descending order:
+\[ 
+    \Pr[(l\circ f)(X)\leq k] 
+    = \sum_{x\in A_k} P_X(x) 
+    \leq \sum_{x\in A^*_k} P_X(x) = \Pr[(l\circ f^*)(X) \leq k]
+\] 
+</details>
+
+Working in units of bits, the average compression length of the 
+optimal encoding is $H(X)$. A coding theorem relates a fundamental 
+limit $\Exp[(l\circ f^*)(X)]$, which is an operational quantity, 
+to an information measure $H(X)$. 
+
+:::{.lemma}
+$H(X|L=k)\leq k$. This follows from that $X|L=k$ can 
+take at most $2^k$ values, the uniform distribution on which has entropy $k$. 
+:::
+
+:::{.lemma #finiteExpectationExtremality}
+For $X$ taking values on $\mbb N=\{1, 2, \cdots\}$ and $\Exp[X]<\infty$, 
+we have 
+\[ 
+    H(X) \leq h\left(\Exp[X]^{-1}\right)\Exp[X]
+\] 
+The inequality is saturated by the geometric distribution. 
+:::
+<details>
+<summary>Proof</summary>
+Let $p = 1 / \Exp[X]$ and note that $\Exp[xp] = 1, 
+\Exp[x\bar p] = \Exp[x(1-p)] = \Exp[x - 1]$, then 
+\begin{align}
+    H(X) - \Exp[X] h(p)
+    &= \Exp\left[-\log p(x) - x[-p\log p - \bar p\log \bar p]\right] \\ 
+    &= \Exp\left[-\log p(x) + xp \log p + x\bar p\log \bar p\right] \\ 
+    &= \Exp \left[-\log p(x) + (x-1) \log \bar p + \log p\right] \\ 
+    -D(P_X\|\mrm{Geom}_p) 
+    &= -\Exp \log \df{p(x)}{p{\bar p}^{x-1}} \\ 
+    &= \Exp \left[-\log p(x) + (x-1) \log \bar p + \log p\right] \\ 
+    -D(P_X\|\mrm{Geom}_p) &= H(X) - \Exp[X] h(p) \\ 
+    H(X) &= \Exp[X] h(p) + D(P_X\|\mrm{Geom}_p)_{\geq 0}
+\end{align}
+</details>
+
+:::{.theorem #optimalEncodingAvg name="average length of optimal encoding"}
+$H(X) - \log_2[e(H(X)+1)] \leq \Exp[(l\circ f^*)(X)] \leq H(X)$. 
+:::
+<details>
+<summary>Proof</summary>
+Let $L(X) = (l\circ f^*)(X)$, assume $X$ sorted w.l.o.g, 
+then $P_X(x) \leq 1/x$ and 
+\[ 
+    L(x) = \lfloor \log_2(x)\rfloor \leq \log_2 \df 1 {P_X(x)} 
+    \implies \Exp[L(x)] \leq \Exp \left[\log_2 \df 1 {P_X(x)}\right] = H(X)
+\] 
+On the other hand, first note that $H(X|L=k)\leq k$ since $X|L=k$ can 
+take at most $2^k$ values, the uniform distribution on which has entropy $k$. 
+\begin{align}
+    H(X) 
+    &= H(X, L) = H(X|L) + H(L) \\ 
+    &\leq \Exp[L] + (\Exp[L] + 1) h\left(\df 1 {1+\Exp[L]}\right) \\ 
+    &= \Exp[L] + \log(1+\Exp[L]) + \Exp[L] + \log \left(1 + \df 1 {\Exp[L]}\right) \\ 
+    &= \Exp[L] + \log_2(1+\Exp[L]) + \log_2 e \leq \Exp[L] + \log_2 e(1+H(X))
+\end{align}
+In the last tep steps, we used $x\log(1+1/x) \leq \log e$ and $H(X)\leq \Exp[L]$. 
+</details>

@@ -97,7 +97,9 @@ Useful proof ideas:
 2. Unique extremality proofs: reduce the desired inequality to 
     the information inequality (theorem \@ref(thm:infoInequality)) 
     or a nonnegative information quantity (e.g. entropy). 
-    - Corollary \@ref(cor:minimalCE), theorem \@ref(thm:gaussianCovExtremality). 
+    - Corollary \@ref(cor:minimalCE), theorem \@ref(thm:gaussianCovExtremality), 
+        lemma \@ref(lem:finiteExpectationExtremality); the latter two 
+        characterized Gaussian and geometric distributions. 
     - Occasionally we need to introduce a tilted distribution based on 
     both inputs, see Donsker-Varadhan (\@ref(thm:donskerVaradhan)) or 
 3. Bounds on conditional quantities: consider the joint quantity 
@@ -152,6 +154,7 @@ Mandatory:
 
 1. Gaussian saddle-point. 
 2. Variational characterizations of $f$-divergences. 
+3. Refine TV and Hellinger. 
 
 Optional: 
 

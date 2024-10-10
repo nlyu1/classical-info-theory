@@ -2,14 +2,3 @@
 
 
 Placeholder. 
-
-<span style="color:green">
-TODO: 
-
-1. Gaussian capacity and saddle point. 
-2. **Inutuition on lower semi-continuity?**
-3. Fano's inequality. 
-4. Variational characterizations of TV. 
-5. Pinsker's inequality. 
-6. Joint range theorem. 
-</span>

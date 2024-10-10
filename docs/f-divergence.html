@@ -133,8 +133,11 @@
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#fisher-information-location-family"><i class="fa fa-check"></i>Fisher information, location family</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#local-χ²-behavior"><i class="fa fa-check"></i>Local χ² behavior</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i>Data compression</a></li>
-<li class="chapter" data-level="9" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>9</b> Lecture notes</a>
+<li class="chapter" data-level="9" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>9</b> Data compression</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>10</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -172,30 +175,31 @@
 <h1><span class="header-section-number">8</span> f-Divergence<a href="f-divergence.html#f-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Key takeaways:</p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(f\)</span>-divergence is equivalent modulo <span class="math inline">\(+c(t-1)\)</span>; then
-convexity plus <span class="math inline">\(f(t)=1\)</span> implies locally <span class="math inline">\(\chi^2\)</span>;
-w.l.o.g we can assume <span class="math inline">\(f\geq 0\)</span> and <span class="math inline">\(f&#39;(1)=0\)</span>.</li>
-<li>TV as binary hypothesis testing.</li>
-<li>Several divergences are metrics; one fast way to
-compare is to compare to metric, use triangle inequality,
-then use comparison inequality again.</li>
-<li>There is no chain rule for <span class="math inline">\(f\)</span>-divergences other than
-KL-divergence. Rényi divergence enjoys tensorization and chain rule (up to tilting);
-it includes KL, <span class="math inline">\(\chi^2\)</span> and Hellinger as special cases.</li>
+<li><span class="math inline">\(f\)</span>-divergence is equivalent modulo <span class="math inline">\(c(t-1)\)</span>;
+convexity plus <span class="math inline">\(f(1)=f&#39;(1)=1\)</span> (which implies <span class="math inline">\(f\geq 0\)</span>) implies locally <span class="math inline">\(\chi^2\)</span>.</li>
 <li>Convexity of <span class="math inline">\(D_f\)</span> <a href="f-divergence.html#thm:fInfoProperties">8.3</a> <span class="math inline">\(\iff\)</span>
 DPI <a href="f-divergence.html#thm:fDPI">8.2</a> <span class="math inline">\(\iff\)</span>
 monotonicity <a href="f-divergence.html#thm:fMonotonicity">8.1</a> <span class="math inline">\(\iff\)</span> convexity of <span class="math inline">\(f\)</span>.</li>
-<li>TV does not enjoy tensorization properties;
-Hellinger divergence is both a metric and tensorizes well.</li>
-<li>The powerful approximation theorem <a href="f-divergence.html#thm:fFiniteApprox">8.4</a>
-reduces arbitrary spaces to finite ones.</li>
 <li>Given a family of distributions parameterized by <span class="math inline">\(\theta\)</span>,
 the Fisher information at a point is the Hessian of the log-likelihood.
 It is non-negative, monotonic, and has its own chain rule <a href="f-divergence.html#prp:fisherChainRule">8.10</a>.</li>
 <li>Most <span class="math inline">\(f\)</span>-divergences (with bounded <span class="math inline">\(f&#39;&#39;\)</span>) are locally <span class="math inline">\(\chi^2\)</span>:
 theorem <a href="f-divergence.html#thm:localChiExpansion">8.10</a>. For regular families, <span class="math inline">\(\chi^2\)</span>
 (mixture interpolations, in particular) is locally determined
-by the Fisher information <a href="f-divergence.html#thm:localFisherDiv">8.11</a></li>
+by the Fisher information <a href="f-divergence.html#thm:localFisherDiv">8.11</a>.</li>
+<li>There is no chain rule for <span class="math inline">\(f\)</span>-divergences other than
+KL-divergence. Rényi divergence enjoys tensorization and chain rule (up to tilting);
+it includes KL, <span class="math inline">\(\chi^2\)</span> and Hellinger as special cases.</li>
+<li>TV as binary hypothesis testing.</li>
+<li>Several divergences are metrics (JS, <span class="math inline">\(H^2\)</span>); one fast way to
+compare is to compare to metric, use triangle inequality,
+then use comparison inequality again.</li>
+<li>TV does not enjoy tensorization properties;
+Hellinger divergence is both a metric and tensorizes well.</li>
+<li>A powerful approximation theorem <a href="f-divergence.html#thm:fFiniteApprox">8.4</a>
+reduces arbitrary spaces to finite ones. Similarly,
+the Harremoës-Vajda theorem <a href="f-divergence.html#thm:harremoesVajda">8.7</a>
+concludes the problem of joint range.</li>
 </ol>
 <div id="definition" class="section level2 unnumbered hasAnchor">
 <h2>Definition<a href="f-divergence.html#definition" class="anchor-section" aria-label="Anchor link to header"></a></h2>

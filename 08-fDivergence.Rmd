@@ -2,30 +2,32 @@
 
 Key takeaways:
 
-1. $f$-divergence is equivalent modulo $+c(t-1)$; then 
-    convexity plus $f(t)=1$ implies locally $\chi^2$; 
-    w.l.o.g we can assume $f\geq 0$ and $f'(1)=0$.
-2. TV as binary hypothesis testing. 
-3. Several divergences are metrics; one fast way to 
-    compare is to compare to metric, use triangle inequality, 
-    then use comparison inequality again. 
-4. There is no chain rule for $f$-divergences other than 
-    KL-divergence. Rényi divergence enjoys tensorization and chain rule (up to tilting); 
-    it includes KL, $\chi^2$ and Hellinger as special cases. 
-5. Convexity of $D_f$ \@ref(thm:fInfoProperties) $\iff$ 
+1. $f$-divergence is equivalent modulo $c(t-1)$; 
+    convexity plus $f(1)=f'(1)=1$ (which implies $f\geq 0$) implies locally $\chi^2$.
+2. Convexity of $D_f$ \@ref(thm:fInfoProperties) $\iff$ 
     DPI \@ref(thm:fDPI) $\iff$ 
     monotonicity \@ref(thm:fMonotonicity) $\iff$ convexity of $f$. 
-6. TV does not enjoy tensorization properties; 
-    Hellinger divergence is both a metric and tensorizes well. 
-7. The powerful approximation theorem \@ref(thm:fFiniteApprox) 
-    reduces arbitrary spaces to finite ones. 
-8. Given a family of distributions parameterized by $\theta$, 
+3. Given a family of distributions parameterized by $\theta$, 
     the Fisher information at a point is the Hessian of the log-likelihood. 
     It is non-negative, monotonic, and has its own chain rule \@ref(prp:fisherChainRule). 
-9. Most $f$-divergences (with bounded $f''$) are locally $\chi^2$: 
+4. Most $f$-divergences (with bounded $f''$) are locally $\chi^2$: 
     theorem \@ref(thm:localChiExpansion). For regular families, $\chi^2$ 
     (mixture interpolations, in particular) is locally determined 
-    by the Fisher information \@ref(thm:localFisherDiv)
+    by the Fisher information \@ref(thm:localFisherDiv).
+5. There is no chain rule for $f$-divergences other than 
+    KL-divergence. Rényi divergence enjoys tensorization and chain rule (up to tilting); 
+    it includes KL, $\chi^2$ and Hellinger as special cases. 
+6. TV as binary hypothesis testing. 
+7. Several divergences are metrics (JS, $H^2$); one fast way to 
+    compare is to compare to metric, use triangle inequality, 
+    then use comparison inequality again. 
+8. TV does not enjoy tensorization properties; 
+    Hellinger divergence is both a metric and tensorizes well. 
+9. A powerful approximation theorem \@ref(thm:fFiniteApprox) 
+    reduces arbitrary spaces to finite ones. Similarly, 
+    the Harremoës-Vajda theorem \@ref(thm:harremoesVajda) 
+    concludes the problem of joint range. 
+
 
 ## Definition {-}
 
