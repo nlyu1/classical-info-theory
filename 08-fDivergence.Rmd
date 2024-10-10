@@ -925,16 +925,33 @@ $\lambda \in [0, 1]$ and
 \] 
 If $\chi^2(P\|Q)=\infty$ with $f''(1)>0$, then 
 $D_f(\bar \lambda Q + \lambda P \|Q) = \omega(\lambda^2)$. 
+This includes KL, SKL, $H^2$, JS, LC, and all Renyi divergences 
+of orders $\lambda < 2$. 
 :::
+
+Taylor expand with integral form, then apply the dominated 
+convergence theorem. 
 
 Since $P\ll Q$, we can use the expression $D_f(P\|Q) = \Exp_Q[f(d_QP)]$. 
 W.l.o.g. again assume $f'(1) = f(1)=0$, then $\chi^2$ is written as 
 \begin{align}
     D_f(\bar \lambda Q + \lambda P \| Q) 
-    &= \int q(x) f\left(\lambda \df{p(x)}{q(x)} + \bar \lambda\right)
+    &= \int dQ f\left(1 - \lambda + \lambda \df{dP}{dQ}\right)
     \, d\mu \\ 
-    f(1+u) &= \int 
+    &= \int dQ f\left(1 + \lambda \df{dP - dQ}{DQ}\right)
+    \, d\mu
+\end{align}
+Next up, apply Taylor's theorem with remainder (which is 
+integration by parts) to 
+\begin{align}
+    f(1+u) &= u^2 \int_0^1 (1-t) f''(1+tu)dt 
 \end{align} 
+Apply to $u=\lambda \df{P-Q}{Q}$ to obtain 
+\[ 
+    D_f(\bar \lambda Q + \lambda P \|Q) = 
+    \int dQ \int_0^1 dt (1-t) \lambda^2 \left(\df{P-Q}{Q}\right)^2 
+    f''\left(1 + t\lambda \df{P-Q}{Q}\right)
+\] 
 <details>
 <summary>Proof</summary>
 </details>
