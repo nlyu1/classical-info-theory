@@ -303,7 +303,7 @@ the divergence between $P, Q$ given $P_X$ is defined as
 
 ## Chain Rule, DPI {-}
 
-:::{.proposition #divergenceChainRule name="Chain rule"}
+:::{.proposition #divergenceChainRule name="chain rule"}
 <span style="color:green">
 The joint divergence is (1) the sum of marginal plus conditional divergences,
 and (2) the sum of marginal divergence and joint divergence upon replacing the 
