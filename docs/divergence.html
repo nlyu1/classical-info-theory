@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-09" />
+<meta name="date" content="2024-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -75,7 +75,10 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo-list"><i class="fa fa-check"></i>Todo list</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
 <ul>
@@ -86,7 +89,6 @@
 <ul>
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#brégmans-theorem"><i class="fa fa-check"></i>Brégman’s theorem</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
 <ul>
@@ -112,7 +114,7 @@
 </ul></li>
 <li class="chapter" data-level="6" data-path="extremization.html"><a href="extremization.html"><i class="fa fa-check"></i><b>6</b> Extremization</a>
 <ul>
-<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#convexity"><i class="fa fa-check"></i>Convexity</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#extremizationConvexity"><i class="fa fa-check"></i>Convexity</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#minimax-and-saddle-point"><i class="fa fa-check"></i>Minimax and saddle-point</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-saddle-point-of-mi"><i class="fa fa-check"></i>Capacity, Saddle point of MI</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
@@ -230,7 +232,7 @@ how KL gives a uniform (across all events)</li>
 <div id="kl-divergence" class="section level2 unnumbered hasAnchor">
 <h2>KL-Divergence<a href="divergence.html#kl-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:unlabeled-div-17" class="definition"><strong>Definition 3.1  (KL-Divergence) </strong></span>Given distributions <span class="math inline">\(P, Q\)</span> on <span class="math inline">\(\mathcal A\)</span> with <span class="math inline">\(Q\)</span>
+<p><span id="def:unlabeled-div-16" class="definition"><strong>Definition 3.1  (KL-Divergence) </strong></span>Given distributions <span class="math inline">\(P, Q\)</span> on <span class="math inline">\(\mathcal A\)</span> with <span class="math inline">\(Q\)</span>
 being the reference measure, the (Kullback-Leibler)
 divergence (relative entropy) between <span class="math inline">\(P, Q\)</span> is
 <span class="math display">\[
@@ -253,7 +255,7 @@ The relation <span class="math inline">\(P\ll Q\)</span> is read as
 “<span class="math inline">\(P\)</span> is absolutely continuous w.r.t. <span class="math inline">\(Q\)</span>”.</p>
 </div>
 <div class="theorem">
-<p><span id="thm:infoInequality" class="theorem"><strong>Theorem 3.1  (Information inequality) </strong></span>For all <span class="math inline">\(P\ll Q\)</span>, <span class="math inline">\(D(P\|Q) \geq 0\)</span>, with equality iff <span class="math inline">\(P=Q\)</span>.</p>
+<p><span id="thm:infoInequality" class="theorem"><strong>Theorem 3.1  (information inequality) </strong></span>For all <span class="math inline">\(P\ll Q\)</span>, <span class="math inline">\(D(P\|Q) \geq 0\)</span>, with equality iff <span class="math inline">\(P=Q\)</span>.</p>
 </div>
 <p><em>Proof:</em> Applying Jenson’s inequality to the convex function
 <span class="math inline">\(\varphi(x)=x\log x\)</span>:
@@ -263,7 +265,7 @@ The relation <span class="math inline">\(P\ll Q\)</span> is read as
 <p>The following corollary shows that minimizing divergence
 recovers the true distribution.</p>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-18" class="corollary"><strong>Corollary 3.1  (minimal entropy recovers true distribution) </strong></span>Given any discrete R.V. <span class="math inline">\(X\)</span> such that <span class="math inline">\(H(X)&lt;\infty\)</span>. Then
+<p><span id="cor:minimalCE" class="corollary"><strong>Corollary 3.1  (minimal entropy recovers true distribution) </strong></span>Given any discrete R.V. <span class="math inline">\(X\)</span> such that <span class="math inline">\(H(X)&lt;\infty\)</span>. Then
 <span class="math display">\[
     \min_Q \mathbb E_{X\sim P_X} \left[\log \dfrac 1 {Q(X)} \right] = H(X)
 \]</span>
@@ -277,11 +279,11 @@ The unique minimizer is <span class="math inline">\(Q=P_X\)</span>.</p>
     = D(P_X\|Q)
 \end{align}\]</span></p>
 <div class="remark">
-<p><span id="unlabeled-div-19" class="remark"><em>Remark</em> (perspective on KL-divergence). </span>One should think of <span class="math inline">\(D(P\|Q)\)</span> as the un-likelihood of
+<p><span id="unlabeled-div-17" class="remark"><em>Remark</em> (perspective on KL-divergence). </span>One should think of <span class="math inline">\(D(P\|Q)\)</span> as the un-likelihood of
 producing the “candidate” distribution <span class="math inline">\(P\)</span> by samping from <span class="math inline">\(Q\)</span>.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-20" class="definition"><strong>Definition 3.2  (binary divergence) </strong></span>Binary divergence is defined by
+<p><span id="def:unlabeled-div-18" class="definition"><strong>Definition 3.2  (binary divergence) </strong></span>Binary divergence is defined by
 <span class="math display">\[
     d(p, q) = D(\mathrm{Ber}_p\| \mathrm{Ber}_q)
     = p \log \dfrac p q + \bar p \log \dfrac{\bar p}{\bar q}
@@ -295,7 +297,7 @@ non-probability measures; it does not have many
 of the desirable properties of divergence, however
 (in particular, lack of invariance under bijective transform).</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-21" class="definition"><strong>Definition 3.3  (differential entropy) </strong></span>The differential entropy of a random vector <span class="math inline">\(X\)</span> is
+<p><span id="def:unlabeled-div-19" class="definition"><strong>Definition 3.3  (differential entropy) </strong></span>The differential entropy of a random vector <span class="math inline">\(X\)</span> is
 <span class="math display">\[
     h(X) = -D(P_X\|\mathrm{Leb})
 \]</span>
@@ -307,7 +309,7 @@ has probability <span class="math inline">\(P_X\)</span>, then
 \]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-22" class="theorem"><strong>Theorem 3.2  (properties of differential entropy) </strong></span></p>
+<p><span id="thm:unlabeled-div-20" class="theorem"><strong>Theorem 3.2  (properties of differential entropy) </strong></span></p>
 <ol style="list-style-type: decimal">
 <li>Uniform distribution maximizes <span class="math inline">\(h\)</span>:
 given <span class="math inline">\(\mathrm{Pr}(X\in S\subset \mathbb R^n)=1\)</span>, then
@@ -317,7 +319,7 @@ given <span class="math inline">\(\mathrm{Pr}(X\in S\subset \mathbb R^n)=1\)</sp
 </ol>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-23" class="proposition"><strong>Proposition 3.1  (differential entropy of Gaussian) </strong></span>Recall the multivariate Gaussian pdf:
+<p><span id="prp:unlabeled-div-21" class="proposition"><strong>Proposition 3.1  (differential entropy of Gaussian) </strong></span>Recall the multivariate Gaussian pdf:
 <span class="math display">\[
     f(x) = \dfrac{1}{\sqrt{(2\pi )^d |\Sigma|}}
     \exp \left[-\dfrac 1 2 (x-\mu)^T \Sigma^{-1}(x-\mu)\right]
@@ -377,7 +379,7 @@ pdf <span class="math inline">\(P_G\)</span>; apply information inequality
 On the last step, we apply the usual trick
 <span class="math inline">\(\mathbb E_P[X^T\Sigma^{-1}X] = \mathrm{tr}\, \mathbb E[\Sigma_X \Sigma^{-1}] \leq \mathrm{tr}(I) = d\)</span>.</p>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-24" class="corollary"><strong>Corollary 3.2  </strong></span><span class="math inline">\(\Sigma \mapsto \log \det \Sigma = \mathrm{tr}\log \Sigma\)</span>
+<p><span id="cor:unlabeled-div-22" class="corollary"><strong>Corollary 3.2  </strong></span><span class="math inline">\(\Sigma \mapsto \log \det \Sigma = \mathrm{tr}\log \Sigma\)</span>
 is concave on the space of real positive
 definite <span class="math inline">\(n\times n\)</span> matrices.</p>
 </div>
@@ -389,7 +391,7 @@ convexity follows from <span class="math inline">\(h(X) \leq (X|\lambda)\)</span
 <h2>Channel, conditional divergence<a href="divergence.html#channel-conditional-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Information theorists see Markov kernels everywhere!</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-25" class="definition"><strong>Definition 3.4  (Markov kernel (channel)) </strong></span>A Markov kernel is a function <span class="math inline">\(K(-|-)\)</span>,
+<p><span id="def:unlabeled-div-23" class="definition"><strong>Definition 3.4  (Markov kernel (channel)) </strong></span>A Markov kernel is a function <span class="math inline">\(K(-|-)\)</span>,
 whose first argument is a measurable subset of <span class="math inline">\(\mathcal Y\)</span> and
 the second an element of <span class="math inline">\(\mathcal X\)</span> such that</p>
 <ol style="list-style-type: decimal">
@@ -422,7 +424,7 @@ every <span class="math inline">\(P_{X, Y}\)</span> on <span class="math inline"
 \]</span></li>
 </ol>
 <div class="definition">
-<p><span id="def:unlabeled-div-26" class="definition"><strong>Definition 3.5  (Binary symmetric channel) </strong></span>The channel <span class="math inline">\(\mathrm{BSC}_\delta\{0, 1\}\to \{0, 1\}\)</span> is defined as
+<p><span id="def:unlabeled-div-24" class="definition"><strong>Definition 3.5  (Binary symmetric channel) </strong></span>The channel <span class="math inline">\(\mathrm{BSC}_\delta\{0, 1\}\to \{0, 1\}\)</span> is defined as
 <span class="math display">\[
     Y = (X + Z)\mod 2, \quad Z\sim \mathrm{Ber}(\delta)
 \]</span>
@@ -441,7 +443,7 @@ be written as the sum of marginal
 and conditional divergences;
 the latter is defined below:</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-27" class="definition"><strong>Definition 3.6  (Conditional divergence) </strong></span>Given distribution <span class="math inline">\(P_X\)</span> and two markov kernels <span class="math inline">\(P_{Y|X}, Q_{Y|X}\)</span>,
+<p><span id="def:unlabeled-div-25" class="definition"><strong>Definition 3.6  (Conditional divergence) </strong></span>Given distribution <span class="math inline">\(P_X\)</span> and two markov kernels <span class="math inline">\(P_{Y|X}, Q_{Y|X}\)</span>,
 the divergence between <span class="math inline">\(P, Q\)</span> given <span class="math inline">\(P_X\)</span> is defined as
 <span class="math display">\[
     D(P_{Y|X}\|Q_{Y|X}\,|\, P_X) \equiv
@@ -454,7 +456,7 @@ the divergence between <span class="math inline">\(P, Q\)</span> given <span cla
 <div id="chain-rule-dpi" class="section level2 unnumbered hasAnchor">
 <h2>Chain Rule, DPI<a href="divergence.html#chain-rule-dpi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="proposition">
-<p><span id="prp:divergenceChainRule" class="proposition"><strong>Proposition 3.2  (Chain rule) </strong></span></p>
+<p><span id="prp:divergenceChainRule" class="proposition"><strong>Proposition 3.2  (chain rule) </strong></span></p>
 <span style="color:green">
 The joint divergence is (1) the sum of marginal plus conditional divergences,
 and (2) the sum of marginal divergence and joint divergence upon replacing the
@@ -478,7 +480,7 @@ source of <span class="math inline">\(Q_{Y|X}\)</span> with <span class="math in
 The second equality follows from the first equality (see property 1 below).</p>
 <div style="color:green">
 <div class="remark">
-<p><span id="unlabeled-div-28" class="remark"><em>Remark</em> (care in factoring Q). </span>In the expression above, note that <span class="math inline">\(Q_{XY}=Q_{Y|X}Q_X\)</span> should be factored
+<p><span id="unlabeled-div-26" class="remark"><em>Remark</em> (care in factoring Q). </span>In the expression above, note that <span class="math inline">\(Q_{XY}=Q_{Y|X}Q_X\)</span> should be factored
 <em>according to the marginal of <span class="math inline">\(Q\)</span>, not <span class="math inline">\(P\)</span>.</em> This is important
 in the proof of the Kolmogorov identities in theorem
 <a href="mutual-information.html#thm:mutInfoMoreProperties">4.2</a>, where
@@ -519,7 +521,7 @@ Let <span class="math inline">\(m=|\mathcal B|\)</span>, the second claim follow
     &amp;= \log |\mathcal B| - D(P_{Y} \| U_{\mathcal B}\, | U_{\mathcal A})
 \end{align}\]</span></p>
 <div class="theorem">
-<p><span id="thm:divergenceProperties" class="theorem"><strong>Theorem 3.4  (Properties of divergence) </strong></span>Given standard Borel <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, then</p>
+<p><span id="thm:divergenceProperties" class="theorem"><strong>Theorem 3.4  (properties of divergence) </strong></span>Given standard Borel <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, then</p>
 <ol style="list-style-type: decimal">
 <li><span style="color:blue">Unconditional expression for divergence</span>
 <span class="math inline">\(D(P_{Y|X}\|Q_{Y|X}\, |\, P_X) = D(P_{Y|X}P_X \| Q_{Y|X} P_X)\)</span>.<br />
@@ -575,7 +577,7 @@ with equality saturated iff <span class="math inline">\(P\)</span> is factorizab
 <p><em>Proof:</em> Use the second equality in the chain rule <a href="divergence.html#prp:divergenceChainRule">3.2</a>
 inductively to swap out <span class="math inline">\(Q_{X_j}\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:klDPI" class="theorem"><strong>Theorem 3.5  (Data-Processing Inequality (DPI)) </strong></span>Given a Markov kernel <span class="math inline">\(K:\mathcal X\to \mathcal Y\)</span> and
+<p><span id="thm:klDPI" class="theorem"><strong>Theorem 3.5  (data-processing inequality (DPI)) </strong></span>Given a Markov kernel <span class="math inline">\(K:\mathcal X\to \mathcal Y\)</span> and
 a chain <span class="math inline">\((P_X, Q_X) \xrightarrow{K} (P_Y, Q_Y)\)</span> so that
 <span class="math inline">\(P_Y = K_{Y|X} \circ P_X, \quad Q_Y = K_{Y|X} \circ Q_X\)</span>,
 then processing reduces the ability to distinguish between

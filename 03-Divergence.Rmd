@@ -84,7 +84,7 @@ The relation $P\ll Q$ is read as
 "$P$ is absolutely continuous w.r.t. $Q$". 
 :::
 
-:::{.theorem #infoInequality name="Information inequality"}
+:::{.theorem #infoInequality name="information inequality"}
 For all $P\ll Q$, $D(P\|Q) \geq 0$, with equality iff $P=Q$. 
 :::
 _Proof:_ Applying Jenson's inequality to the convex function 
@@ -96,7 +96,7 @@ $\varphi(x)=x\log x$:
 The following corollary shows that minimizing divergence 
 recovers the true distribution. 
 
-:::{.corollary name="minimal entropy recovers true distribution"}
+:::{.corollary #minimalCE name="minimal entropy recovers true distribution"}
 Given any discrete R.V. $X$ such that $H(X)<\infty$. Then 
 \[
     \min_Q \Exp_{X\sim P_X} \left[\log \df 1 {Q(X)} \right] = H(X)
@@ -372,7 +372,7 @@ Let $m=|\mca B|$, the second claim follows from
     &= \log |\mca B| - D(P_{Y} \| U_{\mca B}\, | U_{\mca A})
 \end{align}
 
-:::{.theorem #divergenceProperties name="Properties of divergence"}
+:::{.theorem #divergenceProperties name="properties of divergence"}
 Given standard Borel $\mca X, \mca Y$, then 
 
 1. <span style="color:blue">Unconditional expression for divergence</span>
@@ -435,7 +435,7 @@ with equality saturated iff $P$ is factorizable.
 _Proof:_ Use the second equality in the chain rule \@ref(prp:divergenceChainRule) 
 inductively to swap out $Q_{X_j}$. 
 
-:::{.theorem #klDPI name="Data-Processing Inequality (DPI)"}
+:::{.theorem #klDPI name="data-processing inequality (DPI)"}
 Given a Markov kernel $K:\mca X\to \mca Y$ and 
     a chain $(P_X, Q_X) \xrightarrow{K} (P_Y, Q_Y)$ so that 
     $P_Y = K_{Y|X} \circ P_X, \quad Q_Y = K_{Y|X} \circ Q_X$, 

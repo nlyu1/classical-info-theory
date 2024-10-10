@@ -47,30 +47,33 @@ link-citations: true
 
 # Preface {-}
 
-The recurring themes in this book include: 
+Fundamentally, information and entropy captures 
+how our uncertainty in a quantity changes after 
+observations. Some recurring themes in the book are: 
 
-1. Divergence as a fundamental concept in information theory. 
+1. Fundamental properties of information measures (e.g. entropy, mutual information, divergence, 
+    Fisher information) are: 
+    - Nonnegativity. 
+    - Monotonicity: joint provides more information than marginals. 
+    For especially well-behaved ones (entropy, KL, Fisher information) we expect 
+    additive decomposition, i.e. chain rule. 
+    - Data-processing inequality. 
+2. Divergence as a fundamental concept in information theory. 
     a. Quantifies difference between distributions; 
     the choice of this quantification depends on our problem. 
-2. **Convexity** of $f$ for $f$-divergence is mathematically equivalent 
+3. **Convexity** of $f$ for $f$-divergence is mathematically equivalent 
     to our information intuitions: data-processing inequality, monotonicity, etc. 
     a. KL-divergence (and Rényi) is special because its $\log$ form 
     admits additive decomposition of joint divergence. 
-3. Convexity of information measures correspond to **variational characterizations**, 
+4. Convexity of information measures correspond to **variational characterizations**, 
     which are extremely useful because: 
     a. They provide bounds: choose the varied quantity to be our friend! 
     b. Provide tractable variational approximations 
     using numerical optimization methods (e.g. VAE, GAN). 
-4. Mutual information as a minimax saddle point. 
-5. Divergence measures are extremely useful for bounding events: 
+5. Mutual information as information radius, or center of gravity; capacity as a minimax saddle point. 
+6. Divergence measures are extremely useful for bounding events: 
     bound the event for a tractable distribution, bound the divergence between the tractable 
     and given distribution, and we can bound the event for the given distribution. 
-6. Typicality method for providing proofs: break region into tractable region of 
-    large probability and difficult region with low probability. 
-
-Fundamentally, information and entropy captures 
-how our uncertainty in a quantity changes after 
-observations. 
 
 The foundational results in this book include:
 
@@ -84,7 +87,38 @@ The foundational results in this book include:
     one theorem to rule them all for $f$-divergence inequalities. 
 7. Most $f$-divergences are locally $\chi^2$-like about 
     $\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)$ 
-    and decays quadratically. 
+    and decays quadratically (theorem \@ref(thm:localChiExpansion)). 
+
+Useful proof ideas:
+
+1. Asymptotic analysis proofs: rewrite a difference as an integral, then 
+    apply the monotone convergence theorem. 
+    - Theorems \@ref(thm:localFisherDiv), \@ref(thm:localChiExpansion). 
+2. Unique extremality proofs: reduce the desired inequality to 
+    the information inequality (theorem \@ref(thm:infoInequality)) 
+    or a nonnegative information quantity (e.g. entropy). 
+    - Corollary \@ref(cor:minimalCE), theorem \@ref(thm:gaussianCovExtremality). 
+    - Occasionally we need to introduce a tilted distribution based on 
+    both inputs, see Donsker-Varadhan (\@ref(thm:donskerVaradhan)) or 
+3. Bounds on conditional quantities: consider the joint quantity 
+    and decompose in $2$ different ways. 
+    - KL-DPI theorem \@ref(thm:klDPI). 
+4. Meta-converse: instead of studying $P_{X\hat X}$ for 
+    arbitrary $\hat X$, introduce a tractable $Q_{X\hat X}$, 
+    to bound an event, then use DPI (or divergence inequalities like Donsker-Varadhan) 
+    to bound the same event for $P_{X\hat X}$ together with some 
+    divergence quantity.  
+    - Fano's inequality \@ref(thm:simpleFano). 
+5. Convexity proofs: introduce an additional parameter 
+    $\theta \sim \mrm{Ber}(\lambda)$ to rewrite 
+    $\lambda f(x)+\bar \lambda f(y)$ as a conditional quantity, 
+    then use decomposition.
+    - See section on [convexity](#extremizationConvexity). 
+6. Counting bounds: to bound $|\mca C|$, draw an element uniformly from $\mca C$, 
+    then upper-bound the joint-entropy by marginal bound, Han's inequality, or chain rule. 
+7. Typicality methods (compression): break region into tractable region of 
+    large probability and difficult region with low probability. 
+
 
 ## Administrative trivia {-}
 Professor email: `yp@mit.edu`. 
@@ -111,3 +145,15 @@ with fidelity $\epsilon$.
 
 Key concepts: entropy, KL-divergence, mutual information, 
 fisher information, mutual information. 
+
+### Todo list {-}
+
+Mandatory:
+
+1. Gaussian saddle-point. 
+2. Variational characterizations of $f$-divergences. 
+
+Optional: 
+
+1. Entropy-power inequality
+2. Sufficient statistic. 

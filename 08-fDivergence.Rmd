@@ -2,24 +2,30 @@
 
 Key takeaways:
 
-1. TV as binary hypothesis testing. 
-2. Several divergences are metrics; one fast way to 
-    compare is to compare to metric, use triangle inequality, 
-    then use comparison inequality again. 
-3. There is no chain rule for $f$-divergences other than 
-    KL-divergence. 
-4. Convexity of $D_f$ \@ref(thm:fInfoProperties) $\iff$ 
-    DPI \@ref(thm:fDPI) $\iff$ 
-    monotonicity \@ref(thm:fMonotonicity) $\iff$ convexity of $f$. 
-5. TV does not enjoy tensorization properties. 
-6. $f$-divergence is equivalent modulo $+c(t-1)$; then 
+1. $f$-divergence is equivalent modulo $+c(t-1)$; then 
     convexity plus $f(t)=1$ implies locally $\chi^2$; 
     w.l.o.g we can assume $f\geq 0$ and $f'(1)=0$.
+2. TV as binary hypothesis testing. 
+3. Several divergences are metrics; one fast way to 
+    compare is to compare to metric, use triangle inequality, 
+    then use comparison inequality again. 
+4. There is no chain rule for $f$-divergences other than 
+    KL-divergence. Rényi divergence enjoys tensorization and chain rule (up to tilting); 
+    it includes KL, $\chi^2$ and Hellinger as special cases. 
+5. Convexity of $D_f$ \@ref(thm:fInfoProperties) $\iff$ 
+    DPI \@ref(thm:fDPI) $\iff$ 
+    monotonicity \@ref(thm:fMonotonicity) $\iff$ convexity of $f$. 
+6. TV does not enjoy tensorization properties; 
+    Hellinger divergence is both a metric and tensorizes well. 
 7. The powerful approximation theorem \@ref(thm:fFiniteApprox) 
     reduces arbitrary spaces to finite ones. 
-8. Rényi entropy enjoys tensorization and chain rule (up to tilting); 
-    it includes KL, $\chi^2$ and Hellinger as special cases. 
-8. The Hellinger divergence is both a metric and tensorizes well. 
+8. Given a family of distributions parameterized by $\theta$, 
+    the Fisher information at a point is the Hessian of the log-likelihood. 
+    It is non-negative, monotonic, and has its own chain rule \@ref(prp:fisherChainRule). 
+9. Most $f$-divergences (with bounded $f''$) are locally $\chi^2$: 
+    theorem \@ref(thm:localChiExpansion). For regular families, $\chi^2$ 
+    (mixture interpolations, in particular) is locally determined 
+    by the Fisher information \@ref(thm:localFisherDiv)
 
 ## Definition {-}
 
@@ -313,10 +319,7 @@ on $[n]$ by $P_{\mca E}(j) = P[E_j]$, similarly for $Q$, then
 \] 
 where $\sup$ is over all finite $\mca F$-measurable partitions. 
 :::
-
-<span style="color:red">
-TODO
-</span>
+We omit the technical proof above. 
 
 :::{.definition name="f-information"}
 The $f$-information is defined by 
@@ -845,7 +848,7 @@ The second term vanishes when we take the expectation.
     this is obtained by integrating 
 \[ 
     \ln p_{\theta + \xi}(x) = \ln p_\theta(x) + \xi^T \nabla_\theta \ln p_\theta(x) 
-    + \df 1 2 \xi^T \mca H_\theta \ln p_\theta(x) + o(\|\xi\|^2)
+    + \df 1 2 \xi^T [\mca H_\theta \ln p_\theta(x)]\xi + o(\|\xi\|^2)
 \] 
 4. Under a smooth invertible map $\theta \to \tilde \theta$, we have 
 \[ 
@@ -857,6 +860,63 @@ called the Fisher-Rao metric.
 5. Tensorization: under i.i.d. observations, $X^n\sim P_\theta$ i.i.d, we have 
 $\{P_\theta^{\otimes n}:\theta \in \Theta\}$ whose Fisher information 
 $\mca J_F^{\otimes n}(\theta) = n\mca J_F(\theta)$. 
+
+We next consider the information properties of Fisher information 
+under regularity conditions. Consider a joint distribution $P^{XY}_\theta$ 
+parameterized by $\theta$ with marginals $P^X_\theta, P^Y_\theta$. 
+
+:::{.definition name="conditional Fisher information"}
+The conditional Fisher information $\mca J^{Y|X}_\theta$ 
+is the semidefinite matrix of size $n$ defined as 
+\[ 
+    \mca J^{Y|X}_F(\theta) = \Exp_X[\mca J^{Y|X=x}_F(\theta)] 
+    = \Exp_{XY}[V^{Y|X}_\theta(V^{Y|X}_\theta)^T], \quad 
+    V^{Y|X}_\theta(x, y) = \nabla_\theta \ln P^{Y|X}_\theta(x, y)
+\] 
+:::
+
+:::{.proposition #fisherChainRule name="Fisher information chain rule"}
+$\mca J^{XY}_F(\theta) = \mca J^X_F(\theta) + \mca J^Y_F(\theta)$
+:::
+
+<details>
+<summary>Proof</summary>
+Note that $V^{XY}_\theta, V^{Y|X}_\theta$ are 
+functions of $x, y$: 
+\begin{align}
+    V^{XY}_\theta(x, y)
+    &= \nabla_\theta \ln P^{XY}_\theta(x, y)
+    = \nabla_\theta \ln P^{Y|X}_\theta(x, y) + \nabla_\theta \ln P^X_\theta(x, y) \\  
+    \mca J^{XY}_F(\theta) = V^{Y|X}_\theta + V^X_\theta
+    &= \Exp_{XY} \left[
+        (V^{Y|X}_\theta + V^X_\theta)(V^{Y|X}_\theta + V^X_\theta)^T
+    \right] \\ 
+    &= \mca J^X_F + \mca J^{Y|X}_F + 2\Exp_{XY}\left[
+        (V^X_\theta)^T V^{Y|X}_\theta
+    \right]
+\end{align}
+The last term vanishes since 
+\begin{align}
+    \Exp_{Y|X=x}[\nabla V^{Y|X}_\theta(x, y)] 
+    &= \int P_{Y|X=x}(y) \df 1 {P_{Y|X=x}(y)} \nabla_\theta P_{Y|X=x}(y)\, dy = 0 \\ 
+    \Exp_{XY}\left[(V^X_\theta)^T V^{Y|X}_\theta\right]
+    &= \Exp_X \left[
+        (V^X_\theta)^T \Exp_{Y|X=x} \left[
+            V^{Y|X}_\theta
+        \right]_{=0}
+    \right] = 0
+\end{align}
+</details>
+
+:::{.corollary name="monotonicity"}
+$\mca J^{XY}_F(\theta) \geq \mca J^X_F(\theta)$, here $\geq$ 
+is in the sense of positive-semidefinite matrices. 
+:::
+
+:::{.corollary name="DPI"}
+$\mca J^{X}_F(\theta) \geq \mca J^Y_F(\theta)$ if $\theta\to X\to Y$. 
+:::
+
 
 :::{.definition name="location family"}
 For any density $p_0$ on $\mbb R^d$, one can define a location 
@@ -870,6 +930,13 @@ to emphasize its dependence on $p_0$:
         \mca H_X \ln p_0
     \right]
 \] 
+:::
+
+:::{.proposition name="properties of location family"}
+Given distributions $X, Y$, the following hold: 
+
+1. $J_F(XY) = J_F(X)+J_F(Y)$. 
+2. $J_F(a\theta + X) = a^2J_F(X)$
 :::
 
 ## Local χ² behavior {-} 
@@ -928,7 +995,8 @@ $D_f(\bar \lambda Q + \lambda P \|Q) = \omega(\lambda^2)$.
 This includes KL, SKL, $H^2$, JS, LC, and all Renyi divergences 
 of orders $\lambda < 2$. 
 :::
-
+<details>
+<summary>Proof</summary>
 Taylor expand with integral form, then apply the dominated 
 convergence theorem. 
 
@@ -952,6 +1020,71 @@ Apply to $u=\lambda \df{P-Q}{Q}$ to obtain
     \int dQ \int_0^1 dt (1-t) \lambda^2 \left(\df{P-Q}{Q}\right)^2 
     f''\left(1 + t\lambda \df{P-Q}{Q}\right)
 \] 
+Given the condition of the theorem, we can apply the dominated convergence 
+theorem and Fubini to obtain 
+\begin{align}
+    \lim_{\lambda \to 0} \df 1 {\lambda^2} 
+    D_f(\bar \lambda Q + \lambda P \|Q)
+    &= \int_0^1 dt(1-t) \int dQ \left(\df{P-Q}{Q}\right)^2 
+    \lim_{\lambda\to 0} f''\left(1 + t\lambda \df{P-Q}{Q}\right) \\ 
+    &= \int_0^1 (1-t)dt \int dQ \left(\df{P-Q}{Q}\right)^2 
+    = \df{f''(1)}{2}\chi^2(P\|Q)
+\end{align}
+</details>
+
+:::{.definition #fisherRegularity name="regular single-parameter families"}
+We call a single-parameter family $\{P_t, t\in [0, \tau)\}$ 
+regular at $t=0$ if the following holds:
+
+a. There is a dominating measure: $P_t(dx)=p_t(x)\mu(dx)$ for some 
+    measurable $(t, x)\mapsto p_t(x)$. 
+b. Density varies smoothly in $t$: there exists measurable $\dot p_s(x)$ 
+    such that for $\mu$-a.e. $x_0$ we have 
+\[ 
+    \int_0^\tau |\dot p_s(x_0)|\, ds < \infty, \quad p_
+    t(x_0) = p_0(x_0) + \int_0^t \dot p_s(x_0)\, ds 
+\] 
+as well as $\lim_{t\to 0^+} \dot p_t(x_0) = \dot p_0(x_0)$. 
+c. $p_0(x)=0\implies \dot p_t(x)=0$, and 
+\[ 
+    \int \sup_{0\leq t<\tau} \df{\dot p_t(x)^2}{p_0(x)} \, d\mu < \infty
+\] 
+d. Condition (b) holds for $h_t(x) = \sqrt{p_t(x)}$, and $\{\dot h_t\}_{t\in [0, \tau)}$ 
+    is uniformly $\mu$-integrable. 
+:::
+In particular, conditions (b, c) implies that $P_t\ll P_0$. 
+
+
+
+:::{.theorem #localFisherDiv name="local Fisher behavior of divergence"}
+Given a family $P_{t\in [0, \tau)}$ in definition \@ref(def:fisherRegularity), we have 
+\begin{align}
+    \chi^2(P_t\|P_0) = J_F(0)t^2 + o(t^2), \quad 
+    D(P_t\|P_0) = \df{\log e}{2}J_F(0)t^2 + o(t^2)
+\end{align}
+:::
 <details>
 <summary>Proof</summary>
+Idea: rewrite the difference in $\chi^2$ as an integral, 
+then apply the dominated convergence theorem. 
+
+Recall that $P_t\ll P_0$, then 
+\begin{align}
+    \df 1 {t^2}\chi^2(P_t\|P_0)
+    &= \df 1 {t^2} \int d\mu \df{[p_t(x) - p_0(x)]^2}{p_0(x)} \\ 
+    &= \df 1 {t^2} \int \df{d\mu}{p_0(x)} \left(
+        t\int_0^1 \dot p_{tu}(x)\, d\mu
+    \right)^2 \\ 
+    &= \int d\mu \int_0^1 du_1 \int_0^1 du_2 
+    \df{\dot p_{tu_1}(x) \dot p_{tu_2}(x)}{p_0(x)}
+\end{align}
+By regularity condition (c), take the limit $t\to 0$ and 
+apply the monotone convergence theorem to yield 
+\begin{align}
+    \lim_{t\to 0}
+    \df 1 {t^2}\chi^2(P_t\|P_0)
+    &= \int d\mu \int_0^1 du_1 \int_0^1 du_2 
+    \lim_{t\to 0} \df{\dot p_{tu_1}(x) \dot p_{tu_2}(x)}{p_0(x)} \\ 
+    &= \int d\mu \df{\dot p_0(x)^2}{p_0(x)} = J_F(0)
+\end{align}
 </details>

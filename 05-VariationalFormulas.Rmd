@@ -6,14 +6,10 @@ Key takeaways:
     they provide convenient bounds when we choose an easily-computable candidate. 
 2. For each convex quantity there is a dual variational characterization per 
     the Legendre transformation. 
-3. For convexity theorems, introduce an additional parameter 
-    $\theta \sim \mrm{Ber}(\lambda)$ to rewrite 
-    $\lambda f(x)+\bar \lambda f(y)$ as a conditional quantity, 
-    then use decomposition.
-4. To analyze mutual information with a mixture distribution: add a latent 
+3. To analyze mutual information with a mixture distribution: add a latent 
     variable as an upper bound, then use the Kolmogorov identities to 
     analyze the gap / decompose in another way. 
-5. Mutual information is "average divergence" achieved 
+4. Mutual information is "average divergence" achieved 
     using center of gravity \@ref(cor:centerOfGravityMI). 
 
 ## Geometric interpretations of MI {-}

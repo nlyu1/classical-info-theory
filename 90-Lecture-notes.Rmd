@@ -455,3 +455,9 @@ processes, $\Pr[\bigcup E_k] = 1$.
 
 Using Katz's lemma, we can do an unbiased estimation of $\Pr[X_0=u]$ 
 by looking back. 
+
+
+<span style="color:green">
+Do probability mixtures satisfy all of the local Fisher 
+regularity conditions?
+</span>

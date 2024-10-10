@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-09" />
+<meta name="date" content="2024-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -75,7 +75,10 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo-list"><i class="fa fa-check"></i>Todo list</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
 <ul>
@@ -86,7 +89,6 @@
 <ul>
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#brégmans-theorem"><i class="fa fa-check"></i>Brégman’s theorem</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
 <ul>
@@ -112,7 +114,7 @@
 </ul></li>
 <li class="chapter" data-level="6" data-path="extremization.html"><a href="extremization.html"><i class="fa fa-check"></i><b>6</b> Extremization</a>
 <ul>
-<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#convexity"><i class="fa fa-check"></i>Convexity</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#extremizationConvexity"><i class="fa fa-check"></i>Convexity</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#minimax-and-saddle-point"><i class="fa fa-check"></i>Minimax and saddle-point</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-saddle-point-of-mi"><i class="fa fa-check"></i>Capacity, Saddle point of MI</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
@@ -197,10 +199,10 @@ rate distortion: corollary <a href="extremization.html#cor:MIMinimax">6.2</a>.</
 <li>The capacity of a channel is the radius of posteriors under
 divergence.</li>
 </ol>
-<div id="convexity" class="section level2 unnumbered hasAnchor">
-<h2>Convexity<a href="extremization.html#convexity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="extremizationConvexity" class="section level2 unnumbered hasAnchor">
+<h2>Convexity<a href="extremization.html#extremizationConvexity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-45" class="theorem"><strong>Theorem 6.1  (KL convexity) </strong></span>The map <span class="math inline">\((P, Q)\mapsto D(P\|Q)\)</span> is convex:
+<p><span id="thm:unlabeled-div-42" class="theorem"><strong>Theorem 6.1  (KL convexity) </strong></span>The map <span class="math inline">\((P, Q)\mapsto D(P\|Q)\)</span> is convex:
 <span class="math display">\[
     \forall \lambda \in [0, 1]:
     \lambda D(P_0 \| Q_0) + \bar \lambda D(P_1\|Q_1)
@@ -221,7 +223,7 @@ then by chain rule we have
     = D(PR \|QR) \geq D(P\|Q)
 \end{align}\]</span></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-46" class="theorem"><strong>Theorem 6.2  (concavity of entropy) </strong></span><span class="math inline">\(P_X\mapsto H(X)\)</span> is concave. Fixing channel
+<p><span id="thm:unlabeled-div-43" class="theorem"><strong>Theorem 6.2  (concavity of entropy) </strong></span><span class="math inline">\(P_X\mapsto H(X)\)</span> is concave. Fixing channel
 <span class="math inline">\(P_{Y|X}\)</span>, <span class="math inline">\(P_X\mapsto H(X|Y)\)</span> is concave
 and continuous if <span class="math inline">\(\mathcal X\)</span> finite.</p>
 </div>
@@ -237,7 +239,7 @@ variable argument: consider <span class="math inline">\(U\sim \mathrm{Ber}(\lamb
 concavity follows from <span class="math inline">\(H(X|Y) \leq H(X|Y, U)\)</span>. Continuity
 follows <span class="math inline">\(H(Y|X) = H(Y) - I(X; Y)\)</span> both continuous.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-47" class="theorem"><strong>Theorem 6.3  (extremality of MI) </strong></span></p>
+<p><span id="thm:unlabeled-div-44" class="theorem"><strong>Theorem 6.3  (extremality of MI) </strong></span></p>
 <ol style="list-style-type: decimal">
 <li>Fixing channel <span class="math inline">\(P_{Y|X}\)</span>, <span class="math inline">\(P_X\mapsto I(P_X, P_{Y|X})\)</span> is concave.</li>
 <li>Fixing input distribution <span class="math inline">\(P_X\)</span>, <span class="math inline">\(P_{Y|X} \mapsto I(P_X, P_{Y|X})\)</span>
@@ -280,7 +282,7 @@ is jointly convex, and <span class="math inline">\(P_Y\)</span> is linear functi
 <div id="minimax-and-saddle-point" class="section level2 unnumbered hasAnchor">
 <h2>Minimax and saddle-point<a href="extremization.html#minimax-and-saddle-point" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-48" class="proposition"><strong>Proposition 6.1  (minimax inequality) </strong></span><span class="math display">\[
+<p><span id="prp:unlabeled-div-45" class="proposition"><strong>Proposition 6.1  (minimax inequality) </strong></span><span class="math display">\[
     \inf_y \sup_x f(x, y) \geq \sup_x \inf_y f(x, y)
 \]</span>
 Whichever operation acts first strictly dominates.</p>
@@ -320,7 +322,7 @@ In particular, this implies the existence of a saddle point.</p>
 <div id="capacity-saddle-point-of-mi" class="section level2 unnumbered hasAnchor">
 <h2>Capacity, Saddle point of MI<a href="extremization.html#capacity-saddle-point-of-mi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:unlabeled-div-49" class="definition"><strong>Definition 6.1  (capacity, caid, caod) </strong></span>The capacity of a channel <span class="math inline">\(P_{Y|X}\)</span> over a set <span class="math inline">\(\mathcal P\)</span>
+<p><span id="def:unlabeled-div-46" class="definition"><strong>Definition 6.1  (capacity, caid, caod) </strong></span>The capacity of a channel <span class="math inline">\(P_{Y|X}\)</span> over a set <span class="math inline">\(\mathcal P\)</span>
 of (usually convex) input distributions is
 <span class="math display">\[
     C = \sup_{P_X\in \mathcal P} I(P_X, P_{Y|X})
@@ -408,7 +410,7 @@ to the left inequality of theorem <a href="extremization.html#thm:MISaddleInequa
 <h2>Capacity as information radius<a href="extremization.html#capacity-as-information-radius" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Some review: given metric space <span class="math inline">\((X, d)\)</span> and bounded set <span class="math inline">\(A\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-50" class="definition"><strong>Definition 6.2  (radius, diameter) </strong></span>The (Chebyshev) radius is the radius of the smallest ball
+<p><span id="def:unlabeled-div-47" class="definition"><strong>Definition 6.2  (radius, diameter) </strong></span>The (Chebyshev) radius is the radius of the smallest ball
 that covers <span class="math inline">\(A\)</span>.
 <span class="math display">\[
     \mathrm{rad}(A) = \inf_{y\in X}\sup_{x\in A} d(x, y)
@@ -425,7 +427,7 @@ Compare the radius to the second equation in corollary
 radius of the conditionals.
 </span></p>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-51" class="corollary"><strong>Corollary 6.3  </strong></span>Given finite <span class="math inline">\(\mathcal X\)</span> and channel <span class="math inline">\(P_{Y|X}\)</span>, the
+<p><span id="cor:unlabeled-div-48" class="corollary"><strong>Corollary 6.3  </strong></span>Given finite <span class="math inline">\(\mathcal X\)</span> and channel <span class="math inline">\(P_{Y|X}\)</span>, the
 maximal mutual information over all input distributions
 satisfies
 <span class="math display">\[
@@ -441,7 +443,7 @@ which maximizes <span class="math inline">\(D(P_{Y|X=x} \| P_Y^*)\)</span>.</p>
 <div id="gaussian-saddle-point" class="section level2 unnumbered hasAnchor">
 <h2>Gaussian saddle point<a href="extremization.html#gaussian-saddle-point" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-52" class="theorem"><strong>Theorem 6.6  (extremality of Gaussian channels) </strong></span>Let <span class="math inline">\(X_g\sim \mathcal N(0, \sigma_X^2), N_g\sim \mathcal N(0, \sigma_N^2)\perp\!\!\!\perp X_g\)</span>, then</p>
+<p><span id="thm:unlabeled-div-49" class="theorem"><strong>Theorem 6.6  (extremality of Gaussian channels) </strong></span>Let <span class="math inline">\(X_g\sim \mathcal N(0, \sigma_X^2), N_g\sim \mathcal N(0, \sigma_N^2)\perp\!\!\!\perp X_g\)</span>, then</p>
 <ol style="list-style-type: decimal">
 <li><em>Gaussian capacity:</em>
 <span class="math display">\[

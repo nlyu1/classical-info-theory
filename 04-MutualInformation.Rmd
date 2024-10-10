@@ -313,8 +313,8 @@ DPI to $(X, \hat X)\mapsto 1[X=\hat X]$ yields
 To prove the second claim, choose $\hat X$ to be the mode of $X$. 
 </details>
 
-:::{.theorem name="Fano's inequality"}
-Let $|mca X|=M$ and $X\to Y\to \hat X$. 
+:::{.theorem #fanoInequality name="Fano's inequality"}
+Let $|\mca X|=M$ and $X\to Y\to \hat X$. 
 Let $p_e = P[X\neq \hat X]$, then 
 \[ 
     H(X|Y) \leq F_M(1-p_e) = p_e\log(M-1) + h(p_e)
@@ -324,6 +324,7 @@ Furthermore, for $p_0 = \max P_X(x)$, then regardless of $M$ we have
     I(X; Y) \geq (1 - p_e) \log \df 1 {p_0} - h(p_e)
 \] 
 :::
+_Proof:_ Apply the same proof as the previous theorem with $U_X$ uniform. 
 
 
 ## Entropy-power Inequality {-}

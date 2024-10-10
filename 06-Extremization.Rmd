@@ -30,7 +30,7 @@ Key mathematical ideas:
 4. The capacity of a channel is the radius of posteriors under 
     divergence. 
 
-## Convexity {-}
+## Convexity {#extremizationConvexity - }
 
 :::{.theorem name="KL convexity"}
 The map $(P, Q)\mapsto D(P\|Q)$ is convex: 

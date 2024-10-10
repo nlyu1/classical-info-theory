@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-09" />
+<meta name="date" content="2024-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -75,7 +75,10 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo-list"><i class="fa fa-check"></i>Todo list</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
 <ul>
@@ -86,7 +89,6 @@
 <ul>
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#brégmans-theorem"><i class="fa fa-check"></i>Brégman’s theorem</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
 <ul>
@@ -112,7 +114,7 @@
 </ul></li>
 <li class="chapter" data-level="6" data-path="extremization.html"><a href="extremization.html"><i class="fa fa-check"></i><b>6</b> Extremization</a>
 <ul>
-<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#convexity"><i class="fa fa-check"></i>Convexity</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#extremizationConvexity"><i class="fa fa-check"></i>Convexity</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#minimax-and-saddle-point"><i class="fa fa-check"></i>Minimax and saddle-point</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-saddle-point-of-mi"><i class="fa fa-check"></i>Capacity, Saddle point of MI</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
@@ -242,7 +244,7 @@ For claim (4), consider the kernel <span class="math inline">\(K\circ (X, Y) = (
 For injective <span class="math inline">\(f\)</span>, apply the argument to the inverse. For the last claim,
 apply (4) to the projection transform <span class="math inline">\((X, Y)\mapsto X\)</span>.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-29" class="proposition"><strong>Proposition 4.1  (Mutual information and entropy) </strong></span></p>
+<p><span id="prp:unlabeled-div-27" class="proposition"><strong>Proposition 4.1  (Mutual information and entropy) </strong></span></p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\  \infty \text{ otherwise.}\end{cases}\)</span></li>
 <li>Given discrete <span class="math inline">\(X\)</span>, <span class="math inline">\(H(X) = I(X; Y) + H(X|Y)\)</span>.</li>
@@ -291,7 +293,7 @@ the graphical model iff <span class="math inline">\(A, B\)</span> are <em>not</e
 <div id="conditional-mi" class="section level2 unnumbered hasAnchor">
 <h2>Conditional MI<a href="mutual-information.html#conditional-mi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:unlabeled-div-30" class="definition"><strong>Definition 4.2  (conditional mutual information) </strong></span>Given standard Borel <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, define
+<p><span id="def:unlabeled-div-28" class="definition"><strong>Definition 4.2  (conditional mutual information) </strong></span>Given standard Borel <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, define
 <span class="math display">\[
     I(X; Y|Z) = D(P_{X, Y|Z} \| P_{X|Z} P_{Y|Z} \, | \, P_Z)
     = \mathbb E_{z\sim P_Z}\left[I(X; Y|Z=z)\right]
@@ -351,7 +353,7 @@ consider the equally valid chains under bijection:
 \]</span></p>
 <div style="color:green">
 <div class="remark">
-<p><span id="unlabeled-div-31" class="remark"><em>Remark</em> (mutual information chain rule). </span>Mutual information between <span class="math inline">\(X; Y\)</span> is a resource which can be consumed
+<p><span id="unlabeled-div-29" class="remark"><em>Remark</em> (mutual information chain rule). </span>Mutual information between <span class="math inline">\(X; Y\)</span> is a resource which can be consumed
 when we condition on an additional variable <span class="math inline">\(Z\)</span>.
 Additionally, one should remember the Kolmogorov identities as a decomposition
 of <span class="math inline">\(I(X, Y; Z)\)</span> into an individual component <span class="math inline">\(I(X; Z)\)</span> plus
@@ -359,13 +361,13 @@ the second term <span class="math inline">\(I(Y; Z|X)\)</span>, which is <span c
 </div>
 </div>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-32" class="corollary"><strong>Corollary 4.1  </strong></span>If <span class="math inline">\(X\to Y\to Z\to W\)</span>, then <span class="math inline">\(I(X; W) \leq I(Y; Z)\)</span>.</p>
+<p><span id="cor:unlabeled-div-30" class="corollary"><strong>Corollary 4.1  </strong></span>If <span class="math inline">\(X\to Y\to Z\to W\)</span>, then <span class="math inline">\(I(X; W) \leq I(Y; Z)\)</span>.</p>
 </div>
 <p><em>Proof:</em> Several applications of chain rule:
 <span class="math inline">\(I(Y; Z) \geq I(X; Z) \geq I(X; W)\)</span>.</p>
 <div style="color:green">
 <div class="remark">
-<p><span id="unlabeled-div-33" class="remark"><em>Remark</em> (incomparable mutual information under conditioning). </span>Under a Markov chain <span class="math inline">\(X\to Y\to Z\)</span>, mutual information decreases
+<p><span id="unlabeled-div-31" class="remark"><em>Remark</em> (incomparable mutual information under conditioning). </span>Under a Markov chain <span class="math inline">\(X\to Y\to Z\)</span>, mutual information decreases
 upon conditioning. To find an example such that <span class="math inline">\(I(X; Y|Z) &gt; I(X; Y)\)</span>,
 the only non-isomorphic graph is
 <span class="math display">\[
@@ -399,12 +401,12 @@ theorem <a href="divergence.html#thm:klDPI">3.5</a>. Given a Markov chain <span 
 distribution on <span class="math inline">\(T\)</span>.</li>
 </ul>
 <div class="definition">
-<p><span id="def:unlabeled-div-34" class="definition"><strong>Definition 4.3  (sufficient statistic) </strong></span><span class="math inline">\(T\)</span> is a sufficient statistic of <span class="math inline">\(X\)</span> for <span class="math inline">\(\theta\)</span> if there exists a
+<p><span id="def:unlabeled-div-32" class="definition"><strong>Definition 4.3  (sufficient statistic) </strong></span><span class="math inline">\(T\)</span> is a sufficient statistic of <span class="math inline">\(X\)</span> for <span class="math inline">\(\theta\)</span> if there exists a
 kernel <span class="math inline">\(P_{X|T}\)</span> such that <span class="math inline">\(P_{T|X} P_X^\theta = P_{X|T} P^\theta_T\)</span>.
 In other words, <span class="math inline">\(P_{X|T}\)</span> can be chosen not to depend on <span class="math inline">\(\theta\)</span>.</p>
 </div>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-35" class="theorem"><strong>Theorem 4.3  (characterization of sufficiency) </strong></span>The following claims are equivalent:</p>
+<p><span id="thm:unlabeled-div-33" class="theorem"><strong>Theorem 4.3  (characterization of sufficiency) </strong></span>The following claims are equivalent:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(T\)</span> is a sufficient statistic of <span class="math inline">\(X\)</span> for <span class="math inline">\(\theta\)</span>.</li>
 <li><span class="math inline">\(\forall P_\theta, \theta \to T\to X \iff \forall P_\theta, I(\theta; X|T) = 0\)</span>.</li>
@@ -473,7 +475,7 @@ DPI to <span class="math inline">\((X, \hat X)\mapsto 1[X=\hat X]\)</span> yield
 To prove the second claim, choose <span class="math inline">\(\hat X\)</span> to be the mode of <span class="math inline">\(X\)</span>.
 </details>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-36" class="theorem"><strong>Theorem 4.5  (Fano's inequality) </strong></span>Let <span class="math inline">\(|mca X|=M\)</span> and <span class="math inline">\(X\to Y\to \hat X\)</span>.
+<p><span id="thm:fanoInequality" class="theorem"><strong>Theorem 4.5  (Fano's inequality) </strong></span>Let <span class="math inline">\(|\mathcal X|=M\)</span> and <span class="math inline">\(X\to Y\to \hat X\)</span>.
 Let <span class="math inline">\(p_e = P[X\neq \hat X]\)</span>, then
 <span class="math display">\[
     H(X|Y) \leq F_M(1-p_e) = p_e\log(M-1) + h(p_e)
@@ -483,6 +485,7 @@ Furthermore, for <span class="math inline">\(p_0 = \max P_X(x)\)</span>, then re
     I(X; Y) \geq (1 - p_e) \log \dfrac 1 {p_0} - h(p_e)
 \]</span></p>
 </div>
+<p><em>Proof:</em> Apply the same proof as the previous theorem with <span class="math inline">\(U_X\)</span> uniform.</p>
 </div>
 <div id="entropy-power-inequality" class="section level2 unnumbered hasAnchor">
 <h2>Entropy-power Inequality<a href="mutual-information.html#entropy-power-inequality" class="anchor-section" aria-label="Anchor link to header"></a></h2>

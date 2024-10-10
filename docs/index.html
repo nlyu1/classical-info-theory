@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-09" />
+<meta name="date" content="2024-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -75,7 +75,10 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo-list"><i class="fa fa-check"></i>Todo list</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
 <ul>
@@ -86,7 +89,6 @@
 <ul>
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#brégmans-theorem"><i class="fa fa-check"></i>Brégman’s theorem</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
 <ul>
@@ -112,7 +114,7 @@
 </ul></li>
 <li class="chapter" data-level="6" data-path="extremization.html"><a href="extremization.html"><i class="fa fa-check"></i><b>6</b> Extremization</a>
 <ul>
-<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#convexity"><i class="fa fa-check"></i>Convexity</a></li>
+<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#extremizationConvexity"><i class="fa fa-check"></i>Convexity</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#minimax-and-saddle-point"><i class="fa fa-check"></i>Minimax and saddle-point</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-saddle-point-of-mi"><i class="fa fa-check"></i>Capacity, Saddle point of MI</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
@@ -169,12 +171,23 @@
 <div id="header">
 <h1 class="title">6.7480 Notes</h1>
 <p class="author"><em>Nicholas Lyu</em></p>
-<p class="date"><em>2024-10-09</em></p>
+<p class="date"><em>2024-10-10</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The recurring themes in this book include:</p>
+<p>Fundamentally, information and entropy captures
+how our uncertainty in a quantity changes after
+observations. Some recurring themes in the book are:</p>
 <ol style="list-style-type: decimal">
+<li>Fundamental properties of information measures (e.g. entropy, mutual information, divergence,
+Fisher information) are:
+<ul>
+<li>Nonnegativity.</li>
+<li>Monotonicity: joint provides more information than marginals.
+For especially well-behaved ones (entropy, KL, Fisher information) we expect
+additive decomposition, i.e. chain rule.</li>
+<li>Data-processing inequality.</li>
+</ul></li>
 <li>Divergence as a fundamental concept in information theory.
 <ol style="list-style-type: lower-alpha">
 <li>Quantifies difference between distributions;
@@ -193,16 +206,11 @@ which are extremely useful because:
 <li>Provide tractable variational approximations
 using numerical optimization methods (e.g. VAE, GAN).</li>
 </ol></li>
-<li>Mutual information as a minimax saddle point.</li>
+<li>Mutual information as information radius, or center of gravity; capacity as a minimax saddle point.</li>
 <li>Divergence measures are extremely useful for bounding events:
 bound the event for a tractable distribution, bound the divergence between the tractable
 and given distribution, and we can bound the event for the given distribution.</li>
-<li>Typicality method for providing proofs: break region into tractable region of
-large probability and difficult region with low probability.</li>
 </ol>
-<p>Fundamentally, information and entropy captures
-how our uncertainty in a quantity changes after
-observations.</p>
 <p>The foundational results in this book include:</p>
 <ol style="list-style-type: decimal">
 <li>Additive decomposition of KL.</li>
@@ -215,7 +223,47 @@ variational characterization of KL.</li>
 one theorem to rule them all for <span class="math inline">\(f\)</span>-divergence inequalities.</li>
 <li>Most <span class="math inline">\(f\)</span>-divergences are locally <span class="math inline">\(\chi^2\)</span>-like about
 <span class="math inline">\(\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)\)</span>
-and decays quadratically.</li>
+and decays quadratically (theorem <a href="f-divergence.html#thm:localChiExpansion">8.10</a>).</li>
+</ol>
+<p>Useful proof ideas:</p>
+<ol style="list-style-type: decimal">
+<li>Asymptotic analysis proofs: rewrite a difference as an integral, then
+apply the monotone convergence theorem.
+<ul>
+<li>Theorems <a href="f-divergence.html#thm:localFisherDiv">8.11</a>, <a href="f-divergence.html#thm:localChiExpansion">8.10</a>.</li>
+</ul></li>
+<li>Unique extremality proofs: reduce the desired inequality to
+the information inequality (theorem <a href="divergence.html#thm:infoInequality">3.1</a>)
+or a nonnegative information quantity (e.g. entropy).
+<ul>
+<li>Corollary <a href="divergence.html#cor:minimalCE">3.1</a>, theorem <a href="divergence.html#thm:gaussianCovExtremality">3.3</a>.</li>
+<li>Occasionally we need to introduce a tilted distribution based on
+both inputs, see Donsker-Varadhan (<a href="variational-measures-of-information.html#thm:donskerVaradhan">5.5</a>) or</li>
+</ul></li>
+<li>Bounds on conditional quantities: consider the joint quantity
+and decompose in <span class="math inline">\(2\)</span> different ways.
+<ul>
+<li>KL-DPI theorem <a href="divergence.html#thm:klDPI">3.5</a>.</li>
+</ul></li>
+<li>Meta-converse: instead of studying <span class="math inline">\(P_{X\hat X}\)</span> for
+arbitrary <span class="math inline">\(\hat X\)</span>, introduce a tractable <span class="math inline">\(Q_{X\hat X}\)</span>,
+to bound an event, then use DPI (or divergence inequalities like Donsker-Varadhan)
+to bound the same event for <span class="math inline">\(P_{X\hat X}\)</span> together with some
+divergence quantity.
+<ul>
+<li>Fano’s inequality <a href="mutual-information.html#thm:simpleFano">4.4</a>.</li>
+</ul></li>
+<li>Convexity proofs: introduce an additional parameter
+<span class="math inline">\(\theta \sim \mathrm{Ber}(\lambda)\)</span> to rewrite
+<span class="math inline">\(\lambda f(x)+\bar \lambda f(y)\)</span> as a conditional quantity,
+then use decomposition.
+<ul>
+<li>See section on <a href="extremization.html#extremizationConvexity">convexity</a>.</li>
+</ul></li>
+<li>Counting bounds: to bound <span class="math inline">\(|\mathcal C|\)</span>, draw an element uniformly from <span class="math inline">\(\mathcal C\)</span>,
+then upper-bound the joint-entropy by marginal bound, Han’s inequality, or chain rule.</li>
+<li>Typicality methods (compression): break region into tractable region of
+large probability and difficult region with low probability.</li>
 </ol>
 <div id="administrative-trivia" class="section level2 unnumbered hasAnchor">
 <h2>Administrative trivia<a href="index.html#administrative-trivia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -243,7 +291,20 @@ with fidelity <span class="math inline">\(\epsilon\)</span>.</li>
 </ol>
 <p>Key concepts: entropy, KL-divergence, mutual information,
 fisher information, mutual information.</p>
+<div id="todo-list" class="section level3 unnumbered hasAnchor">
+<h3>Todo list<a href="index.html#todo-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Mandatory:</p>
+<ol style="list-style-type: decimal">
+<li>Gaussian saddle-point.</li>
+<li>Variational characterizations of <span class="math inline">\(f\)</span>-divergences.</li>
+</ol>
+<p>Optional:</p>
+<ol style="list-style-type: decimal">
+<li>Entropy-power inequality</li>
+<li>Sufficient statistic.</li>
+</ol>
 
+</div>
 </div>
 </div>
             </section>

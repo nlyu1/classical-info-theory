@@ -130,19 +130,3 @@ let $m(v) = \lceil M^{\psi(v)}\rceil$, then
     |E(G)| &\leq \sum_{(vw)\in E(H)} 4M^{\psi(v)+\psi(w)} \leq 4M|E(H)| \\ 
     N(G, H) &\geq \prod_{v\in V(H)} M^{\psi(v)} = M^{\alpha^*(H)} 
 \end{align}
-
-## Brégman's theorem {-}
-The Brégman's theorem bounds the number of perfect 
-matchings in a bipartite graph. 
-
-:::{.definition name="permanent"}
-The permanent of a $n\times n$ matrix is 
-\[ 
-    \mrm{perm}(A) = 
-    \sum_{\pi \in S_n} \prod_{j=1}^n a_{j\pi(j)}
-\] 
-:::
-
-<span style="color:red">
-To finish. 
-</span>
