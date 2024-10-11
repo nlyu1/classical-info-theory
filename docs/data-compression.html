@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-10" />
+<meta name="date" content="2024-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -192,7 +192,7 @@ compressing many then decompressing them; this we do not
 need to impose any constraints on <span class="math inline">\(f\)</span>, such as prefix-freeness or
 unique-decodability.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-74" class="definition"><strong>Definition 9.1  (variable-length single-shot lossless compression) </strong></span>A pair <span class="math inline">\((f, g)\)</span> is a variable-length single-shot lossless compressor if:</p>
+<p><span id="def:unlabeled-div-76" class="definition"><strong>Definition 9.1  (variable-length single-shot lossless compression) </strong></span>A pair <span class="math inline">\((f, g)\)</span> is a variable-length single-shot lossless compressor if:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(f\)</span> is of the type <span class="math inline">\(f:\mathcal X\to \{0, 1\}^*\)</span>. The image of <span class="math inline">\(f\)</span>
 is a codebook, and an element <span class="math inline">\(f(x)\)</span> in the image of <span class="math inline">\(f\)</span> is a codeword.</li>
@@ -207,12 +207,12 @@ is a codebook, and an element <span class="math inline">\(f(x)\)</span> in the i
 so that <span class="math inline">\(P(0)\geq P(1)\geq \cdots\)</span>.</li>
 </ul>
 <div class="definition">
-<p><span id="def:unlabeled-div-75" class="definition"><strong>Definition 9.2  (stochastic dominance) </strong></span>Given two real-valued stochastic variables <span class="math inline">\(X, Y\)</span>, we say that <span class="math inline">\(X\preceq Y\)</span>,
+<p><span id="def:unlabeled-div-77" class="definition"><strong>Definition 9.2  (stochastic dominance) </strong></span>Given two real-valued stochastic variables <span class="math inline">\(X, Y\)</span>, we say that <span class="math inline">\(X\preceq Y\)</span>,
 or <span class="math inline">\(Y\)</span> stochastically dominates <span class="math inline">\(X\)</span>, if the CDF of <span class="math inline">\(X\)</span> dominates that of <span class="math inline">\(Y\)</span>
 everywhere.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-76" class="definition"><strong>Definition 9.3  (optimal single-shot lossless compressor) </strong></span>For a down-sorted PMF <span class="math inline">\(P(X)\)</span>, the optimal single-shot lossless compressor
+<p><span id="def:unlabeled-div-78" class="definition"><strong>Definition 9.3  (optimal single-shot lossless compressor) </strong></span>For a down-sorted PMF <span class="math inline">\(P(X)\)</span>, the optimal single-shot lossless compressor
 assigns strings with increasing lengths to symbol <span class="math inline">\(j\in \mathcal X=\mathbb N\)</span>.
 In particular, <span class="math inline">\(l(f^*(j)) = \lfloor \log_2 j\rfloor\)</span>, where <span class="math inline">\(l\)</span> is the
 string-length function.</p>
@@ -220,7 +220,7 @@ string-length function.</p>
 <p>An immediate corollary of the following result is that
 <span class="math inline">\(\mathbb E[(l\circ f^*)(X)] \leq \mathbb E[(l\circ f)(X)]\)</span> for any <span class="math inline">\(X\)</span>.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-77" class="proposition"><strong>Proposition 9.1  </strong></span>For any lossless single-shot compressor <span class="math inline">\(f\)</span> and source distribution <span class="math inline">\(X\)</span>,
+<p><span id="prp:unlabeled-div-79" class="proposition"><strong>Proposition 9.1  </strong></span>For any lossless single-shot compressor <span class="math inline">\(f\)</span> and source distribution <span class="math inline">\(X\)</span>,
 <span class="math inline">\(l\circ f^*\preceq l\circ f\)</span>.</p>
 </div>
 <details>
@@ -247,7 +247,7 @@ optimal encoding is <span class="math inline">\(H(X)\)</span>. A coding theorem 
 limit <span class="math inline">\(\mathbb E[(l\circ f^*)(X)]\)</span>, which is an operational quantity,
 to an information measure <span class="math inline">\(H(X)\)</span>.</p>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-78" class="lemma"><strong>Lemma 9.1  </strong></span><span class="math inline">\(H(X|L=k)\leq k\)</span>. This follows from that <span class="math inline">\(X|L=k\)</span> can
+<p><span id="lem:unlabeled-div-80" class="lemma"><strong>Lemma 9.1  </strong></span><span class="math inline">\(H(X|L=k)\leq k\)</span>. This follows from that <span class="math inline">\(X|L=k\)</span> can
 take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution on which has entropy <span class="math inline">\(k\)</span>.</p>
 </div>
 <div class="lemma">

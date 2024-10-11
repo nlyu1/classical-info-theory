@@ -1,32 +1,41 @@
 # f-Divergence 
 
-Key takeaways:
+Properties of $f$-divergences:
 
 1. $f$-divergence is equivalent modulo $c(t-1)$; 
     convexity plus $f(1)=f'(1)=1$ (which implies $f\geq 0$) implies locally $\chi^2$.
 2. Convexity of $D_f$ \@ref(thm:fInfoProperties) $\iff$ 
     DPI \@ref(thm:fDPI) $\iff$ 
     monotonicity \@ref(thm:fMonotonicity) $\iff$ convexity of $f$. 
-3. Given a family of distributions parameterized by $\theta$, 
-    the Fisher information at a point is the Hessian of the log-likelihood. 
-    It is non-negative, monotonic, and has its own chain rule \@ref(prp:fisherChainRule). 
-4. Most $f$-divergences (with bounded $f''$) are locally $\chi^2$: 
-    theorem \@ref(thm:localChiExpansion). For regular families, $\chi^2$ 
-    (mixture interpolations, in particular) is locally determined 
-    by the Fisher information \@ref(thm:localFisherDiv).
-5. There is no chain rule for $f$-divergences other than 
+3. There is no chain rule for $f$-divergences other than 
     KL-divergence. Rényi divergence enjoys tensorization and chain rule (up to tilting); 
     it includes KL, $\chi^2$ and Hellinger as special cases. 
-6. TV as binary hypothesis testing. 
-7. Several divergences are metrics (JS, $H^2$); one fast way to 
+4. TV as binary hypothesis testing: to reason about TV, break spaces 
+    into $dP>dQ$ and $dP<dQ$. 
+5. Several divergences are metrics (JS, $H^2$); one fast way to 
     compare is to compare to metric, use triangle inequality, 
     then use comparison inequality again. 
-8. TV does not enjoy tensorization properties; 
+5. TV does not enjoy tensorization properties; 
     Hellinger divergence is both a metric and tensorizes well. 
-9. A powerful approximation theorem \@ref(thm:fFiniteApprox) 
+6. A powerful approximation theorem \@ref(thm:fFiniteApprox) 
     reduces arbitrary spaces to finite ones. Similarly, 
     the Harremoës-Vajda theorem \@ref(thm:harremoesVajda) 
     concludes the problem of joint range. 
+
+Locality and Fisher information:
+
+1. Most $f$-divergences (with bounded $f''$) are locally $\chi^2$: 
+    theorem \@ref(thm:localChiExpansion) <u>with respect to mixture 
+    interpolations</u>. 
+2. Fisher information is only defined <u>with respect to a 
+    family of distributions</u> parameterized by $\theta$. 
+    - It is the expectation of the Hessian of the log-pdf about $\theta$: 
+    equation \@ref(eq:fisherHessian). 
+    - For regular families, $\chi^2$ 
+    (mixture interpolations, in particular) is locally determined 
+    by the Fisher information \@ref(thm:localFisherDiv).
+3. Fisher information matrix is non-negative, monotonic, has its own 
+    chain rule \@ref(prp:fisherChainRule) and variational characterization. 
 
 
 ## Definition {-}
@@ -424,6 +433,40 @@ Now, the marginals are indeed $P, Q$, and this saturates
 the inequality since $P_{XY}[X\neq Y] = 1-\pi=\TV(P, Q)$
 </details>
 
+The total variation distance does not tensorize well, 
+but we have the following sandwich bound: 
+\[ 
+    \df 1 2 H^2 \leq \TV \leq 
+    H\sqrt{1 - \df{H^2}{4}} \leq 1
+    (\#eq:TVHellingerBound)
+\]  
+We also have the following asymptotic theorem: 
+
+:::{.theorem name="asymptotic equivalence of TV and Hellinger"}
+For any sequence of distributions $P_n, Q_n$ 
+\begin{align}
+\TV(P_n^{\otimes n}, Q_n^{\otimes n}) \to 0 
+&\iff H^2(P_n, Q_n) = o(1/n) \\ 
+\TV(P_n^{\otimes n}, Q_n^{\otimes n}) \to 1
+&\iff H^2(P_n, Q_n) = \omega(1/n) 
+\end{align}
+Recall that $o(1/n)$ means asymptotically smaller growth 
+than $1/n$, while $\omega(1/n)$ is the opposite. 
+:::
+<details>
+<summary>Proof</summary>
+We will need the following tensorization 
+result from corollary \@ref(cor:renyiTensorCor): 
+\[ 
+    H^2_n = 2 - 2\left(1 - \df 1 2 H^2_1\right)^n 
+    \approx 2 - 2\exp\left[-n\left(1 - \df 1 2 H^2_1\right)\right]
+\] 
+Using the sandwich bound \@ref(eq:TVHellingerBound), 
+$\TV\to 0$ implies the exponential going to $0$, 
+then $H^2_1$ has to grow slower than $1/n$. 
+The oppose is true for $\TV\to 1$. 
+</details>
+
 ## Joint range {-}
 
 We first provide a special case of an inequality. 
@@ -700,7 +743,7 @@ Specializing the chain rule to independent joints,
 \] 
 :::
 
-:::{.corollary name="tensorization of χ² and Hellinger"}
+:::{.corollary #renyiTensorCor name="tensorization of χ² and Hellinger"}
 Applying tensorization and proposition \@ref(prp:specialRenyi): 
 \begin{align}
     1 + \chi^2 \left(\prod_j P_j \| \prod_j Q_j\right) 
@@ -784,31 +827,164 @@ is defined by
 \[ 
     f^*(y) = \sup_{x\in \R_+} xy - f(x)
 \] 
+For a differentiable convex function, 
+$\mrm{dom}(f^*) = \{y: f^*(y)<\infty\}$ is the range of $\nabla f$. 
 The Legendre transform is convex, involutary, and satisfies 
 \[ 
     f(x) + f^*(y) \geq xy 
 \] 
 Similarly, the convex conjugate of any convex 
-functional $\Psi(P)$ is 
+functional $\Psi(P)$ is, under suitable technical conditions 
 \[ 
     \Psi^*(g) = \sup_P \int g\, dP - \Psi(P), \quad 
     \Psi(P) = \sup_g \int g\, dP - \Psi^*(g)
 \] 
+When $P$ is a probability measure, $\int g\, dP = \Exp_P[g]$. 
 In this section, we identify $f:(0, \infty)\to \R$ 
 with its convex extension $f:\R\to \R\cup \{+\infty\}$ 
 (one can just take $f = \infty$ for all inputs outside 
 the original domain); different choices of $f$'s extension 
-yields a different variational characterization. 
+yield different variational formulas: 
 
-:::{.theorem name="supremum characterization of f-divergences"}
+:::{.theorem #fVar name="supremum characterization of f-divergences"}
 Given probability measures $P, Q$ on $\mca X$; fix 
 an extension of $f$ and corresponding Legendre transform $f^*$; 
-denote $\mrm{dom}(f^*) = (f^*)^{-1}(\R-\{\infty\})$, then 
+denote $\mrm{dom}(f^*) = (f^*)^{-1}(\R)$, then 
 \[ 
     D_f(P\|Q) = \sup_{g:\mca X\to \mrm{dom}(f^*)} 
     \Exp_P[g(X)] - \Exp_Q[(f^*\circ g)(X)]
 \] 
 :::
+As a result of this variational characterization, we obtain: 
+
+1. Convexity: $(P, Q)\mapsto D_f(P\|Q)$ is convex since $D_f$ 
+    is a supremum of affine functions. 
+2. Weak lower semicontinuity: a simple counter-example to continuity 
+    is $\sum_{j=1}^n X_j/\sqrt n\to \mca N(0, 1)$ for 
+    $X_j=2\mrm{Ber}(1/2)-1$ but each partial sum remains discrete. 
+    By the same line of reasining in theorem \@ref(thm:semiContinuity):  
+    \[ 
+        \liminf_{n\to \infty} D_f(P_n\|Q_n) \geq D_f(P\|Q)
+    \] 
+3. Relation to DPI: again, variational characterizations can be 
+    used as a version of DPI when using $1_E$ 
+    since it allows one to bound the event variation using $f$-divergence. 
+
+:::{.example name="TV"}
+Recall, for $\TV, f(x)=|x-1|/2$; extending as such to $\R$ to obtain 
+the conjugate 
+\[ 
+    f^*(y) = \sup_x xy - \df 1 2 |x-1| 
+    = \begin{cases}
+        \infty & |y|>1/2 \\ 
+        y & |y| \leq 1/2
+    \end{cases}
+\] 
+Applying theorem \@ref(thm:fVar) yields 
+\[ 
+    \TV(P, Q) = \sup_{g(x)\in [-1/2, 1/2]} \Exp_P[g] 
+    - \Exp_Q[g]
+\] 
+This recovers theorem \@ref(thm:tvVarChar). 
+:::
+
+:::{.example name="Hellinger"}
+The conjugate for Hellinger $f(x) = (1-\sqrt x)^2$ 
+is $f^*(y) = \frac 1 {1-y} - 1$ with $y\in (-\infty, 1)$, yielding 
+\[ 
+    H^2(P, Q) = \sup_{g(x)\in (-\infty, 1)} \Exp_P[g] 
+    - \Exp_Q\left[\df 1 {1-g} - 1\right]
+    = \sup_{g> 0} \Exp_P[1-g] - \Exp_Q \df 1 g + 1
+    = 2 - \inf_{g> 0} \Exp_P g + \Exp_Q \df 1 g 
+\] 
+Given $f:\mca X\to [0, 1]$ and $\tau \in (0, 1)$, we have 
+$h=1-\tau f$ and $\frac 1 h \leq 1 + \frac{\tau}{1-\tau} f$, then 
+\[ 
+    \Exp_P[f] = \df 1 {1-\tau} \Exp_Q f + \df 1 \tau H^2(P, Q), \quad 
+    \forall f:\mca X\to [0, 1], \quad \tau \in (0, 1) 
+\] 
+:::
+
+:::{.example #chiVariation name="χ²-divergence"}
+Given $\chi^2$ and $f(x)=(x-1)^2$, the conjugate is 
+$f^*(y) = y + \frac{y^2}{4}$ and 
+\begin{align}
+    \chi^2(P\|Q) 
+    &= \sup_{g:\mca X\to \R} \Exp_P g - \Exp_Q \left[
+        g + \df{g^2}{4} \right] \\ 
+    &= \sup_{g:\mca X\to \R} \sup_{\lambda \in \R} \left[
+        \Exp_P g - \Exp_Q g 
+    \right] \lambda - \df{\Exp_Q[g^2]}{4} \lambda^2
+\end{align}
+Complete the square in the inner problem to obtain 
+\begin{align}
+    -a \lambda^2 + b\lambda 
+    &= -a\left(\lambda - \df b {2a}\right)^2 
+    + \df{b^2}{4a} \implies 
+    \chi^2(P\|Q) 
+    = \sup_{g:\mca X\to \R} 
+    \df{\left(\Exp_P g - \Exp_Q g\right)^2}{\Exp_Q[g^2]}
+\end{align}
+The choice of $g$ is invariant under $g\mapsto g+c$, so we obtain 
+\[ 
+    \chi^2(P\|Q) = \sup_{g:\mca X\to \R} 
+    \df{\left(\Exp_P g - \Exp_Q g\right)^2}{\mrm{Var}_Q[g^2]}
+    (\#eq:chiStatVar)
+\] 
+Given two hypotheses $P, Q$, $\chi^2$ is the maximum ratio 
+between the squared-distance between the mean statistic $g$ 
+and its variance under $Q$. 
+:::
+
+:::{.example #JSGAN name="Jenson-Shannon divergence"}
+For JS we have $f(x) = x\log \df{2x}{1+x} + \log \df{2}{1+x}$ 
+with conjugate and variational characterization
+\begin{align}
+    f^*(s) 
+    &= -\log(2 - e^s), \quad s\in (-\infty, \log 2) \\ 
+    \JS(P, Q) 
+    &= \sup_{g(x)<\log 2} \Exp_P g + \Exp_Q \log(2 - e^g)
+\end{align}
+Reparameterize with $h=e^g/2$ to obtain 
+\[ 
+    \JS(P, Q) = \log 2 + \sup_{h(x)\in (0, 1)} \Exp_P \log h 
+    + \Exp_Q\log(1-h)
+\] 
+In desity estimation, suppose $P$ is the data distribution 
+wish to approximate with $P_{f_\theta(Z)}$, then we have 
+\[ 
+    \inf_\theta \sup_\phi 
+    \Exp_{X\sim P} [\log h_\phi(X)]
+    + \Exp_{Z\sim \mca N} \log[1 - h_\phi(f_\theta(Z))]
+\] 
+Here $f_\theta$ is the generator, and $h_\phi$ is 
+the critic in GAN. 
+:::
+
+Note that we can never obtain Donsker-Varadhan 
+using theorem \@ref(thm:fVar) since DV claims 
+\[ 
+    D(P\|Q) = \sup_{g(x)\in \R} \Exp_Pg - \log \Exp_Q e^g 
+\] 
+while the theorem result is always linear in $Q$. 
+To do so, we need to consider an extension of $D_f(P\|Q)$ 
+to non-probability measures. 
+
+:::{.theorem name="extended variational characterization"}
+Define $f(x)=\infty$ for $x<0$ and let $S=\{x:q(x)>0\}$ where 
+$dQ = q(x) d\mu$, then 
+\begin{align}
+    D_f(P\|Q) 
+    &= f'(\infty) (1-P[S]) + \sup_g \Exp_P[g 1_S] - \Psi^*_{QP}(g) \\ 
+    \Psi^*_{QP}(g) = \inf_{a\in \R} \Exp_Q[(f^*\circ g) - a] + aP[S]
+\end{align}
+For the special case $f'(\infty) = \infty$, which includes KL, we have 
+\[ 
+    D_f(P\|Q) = \sup_G E_P[g] - \Psi^*_Q(g), \quad 
+    \Psi_Q^*(g) = \inf_{a\in \R} \Exp_Q[f^*\circ g - a] + a
+\] 
+:::
+
 
 ## Empirical distribution and χ² {-}
 
@@ -843,6 +1019,7 @@ Under technical regularity conditions, we have:
         \df 1 {p_\theta} \pd k p_\theta
     \right) = -\df {(\pd j p_\theta)(\pd k p_\theta)} {p_\theta^2} 
     + \left[\df 1 {p_\theta} \pd {jk}^2 p_\theta\right]_{=0} = (VV^T)_{jk}
+    (\#eq:fisherHessian)
 \end{align}
 The second term vanishes when we take the expectation. 
 3. $D(P_{\theta} \| P_{\theta + \xi}) 
@@ -947,9 +1124,12 @@ The first theorem gives the linear coefficient of
 $D_f(\lambda P + \bar \lambda Q \| Q)$ as $\lambda\to 0^+$. 
 When $P\ll Q$, the decay is always sublinear with 
 quadratic coefficient given by theorem \@ref(thm:localChiExpansion). 
-Else the linear coefficient is given by the theorem below. 
+Else the linear coefficient is given by theorem \@ref(thm:flocalLinearCoeff). 
+When a distribution family satisfies additional regularity conditions 
+\@ref(def:fisherRegularity), its local quadratic behavior is governed 
+by the Fisher information matrix using theorem \@ref(thm:fisherLocalDiv). 
 
-:::{.theorem name="local linear coefficient"}
+:::{.theorem #flocalLinearCoeff name="local linear coefficient"}
 Suppose $D_f(P\|Q)<\infty$ and $f'(1)$ exists, then 
 \[ 
     \lim_{\lambda\to 0} \df 1 \lambda D_f(\lambda P + \bar \lambda Q \|Q) 
@@ -1090,3 +1270,21 @@ apply the monotone convergence theorem to yield
     &= \int d\mu \df{\dot p_0(x)^2}{p_0(x)} = J_F(0)
 \end{align}
 </details>
+
+
+:::{.proposition name="variational characterization of Fisher information"}
+For a density $P$ on $\R$, the location family Fisher information 
+\[ 
+    J(P) = \sup_h \df{\Exp_P[h']^2}{\Exp_P[h]}
+\] 
+where the supremum is over test functions which are continuously 
+differentiable and compactly supported such that $\Exp_P[h^2] > 0$. 
+:::
+We defer details to textbook 7.13. This can be anticipated 
+from the variational $\chi^2$ formula \@ref(eq:chiStatVar) 
+together with the local $\chi^2$ expansion \@ref(thm:localChiExpansion). 
+\[ 
+    \chi^2(P_t \| P) 
+    = \sup \df{\left(\Exp[h(X+t) - h(X)\right)^2}{\Exp[h^2]}
+    = \sup \df{\Exp[h']^2}{\Exp[h^2]} t^2 + o(t^2)
+\] 

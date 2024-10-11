@@ -224,7 +224,8 @@ Recall that weak convergence is pointwise convergence in distribution.
 This follows from Donsker-Varadhan by $\Exp_{P_n}[f]\to \Exp_P[f]$ and 
 $\Exp_{Q_n}[e^f]\to \Exp_Q[e^f]$. To reason about $\liminf$: choose a 
 subsequence such that $D(P_n\|Q_n)$ decreases monotonically, 
-then $\liminf\mapsto \lim$; equality cannot be established by the previous example: 
+then $\liminf\mapsto \lim$; equality cannot be 
+established due to the the previous example: 
 a more fundamental reason is because weak convergence guarantees 
 the convergence of expectations for each individual function but not 
 convergence for the supremum. 

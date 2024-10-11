@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-10" />
+<meta name="date" content="2024-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,7 +174,7 @@
 <div id="header">
 <h1 class="title">6.7480 Notes</h1>
 <p class="author"><em>Nicholas Lyu</em></p>
-<p class="date"><em>2024-10-10</em></p>
+<p class="date"><em>2024-10-11</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -220,20 +220,21 @@ and given distribution, and we can bound the event for the given distribution.</
 <li><u>Golden formula</u>: variational characterization of mutual information.</li>
 <li><u>Saddle point characterization of mutual information</u>.</li>
 <li><u>Donsker-Varadhan</u> (theorem <a href="variational-measures-of-information.html#thm:donskerVaradhan">5.5</a>):
-variational characterization of KL.</li>
+variational characterization of KL, extended to <span class="math inline">\(f\)</span>-divergences
+in theorem <a href="f-divergence.html#thm:fVar">8.9</a>.</li>
 <li>Finite-partition approximation theorem for <span class="math inline">\(f\)</span>-divergence.</li>
-<li><u>Harremoës-Vadja</u> (theorem <a href="f-divergence.html#thm:harremoesVajda">8.7</a>):
+<li><u>Harremoës-Vadja</u> (theorem <a href="f-divergence.html#thm:harremoesVajda">8.8</a>):
 one theorem to rule them all for <span class="math inline">\(f\)</span>-divergence inequalities.</li>
 <li>Most <span class="math inline">\(f\)</span>-divergences are locally <span class="math inline">\(\chi^2\)</span>-like about
 <span class="math inline">\(\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)\)</span>
-and decays quadratically (theorem <a href="f-divergence.html#thm:localChiExpansion">8.10</a>).</li>
+and decays quadratically (theorem <a href="f-divergence.html#thm:localChiExpansion">8.12</a>).</li>
 </ol>
 <p>Useful proof ideas:</p>
 <ol style="list-style-type: decimal">
 <li>Asymptotic analysis proofs: rewrite a difference as an integral, then
 apply the monotone convergence theorem.
 <ul>
-<li>Theorems <a href="f-divergence.html#thm:localFisherDiv">8.11</a>, <a href="f-divergence.html#thm:localChiExpansion">8.10</a>.</li>
+<li>Theorems <a href="f-divergence.html#thm:localFisherDiv">8.13</a>, <a href="f-divergence.html#thm:localChiExpansion">8.12</a>.</li>
 </ul></li>
 <li>Unique extremality proofs: reduce the desired inequality to
 the information inequality (theorem <a href="divergence.html#thm:infoInequality">3.1</a>)
@@ -269,6 +270,12 @@ then use decomposition.
 then upper-bound the joint-entropy by marginal bound, Han’s inequality, or chain rule.</li>
 <li>Typicality methods (compression): break region into tractable region of
 large probability and difficult region with low probability.</li>
+<li>Break a single <span class="math inline">\(\sup\)</span> into nested ones.
+<ul>
+<li>Solve the inner <span class="math inline">\(\sup\)</span> analytically:
+useful characterization of <span class="math inline">\(\chi^2\)</span> <a href="f-divergence.html#eq:chiStatVar">(8.4)</a>.</li>
+<li>Alternate inner and alter closed-form solution: EM algorithm.</li>
+</ul></li>
 </ol>
 <div id="administrative-trivia" class="section level2 unnumbered hasAnchor">
 <h2>Administrative trivia<a href="index.html#administrative-trivia" class="anchor-section" aria-label="Anchor link to header"></a></h2>

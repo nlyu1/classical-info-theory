@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-10" />
+<meta name="date" content="2024-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -209,7 +209,7 @@ Recall that Donsker-varadhan is not linear in <span class="math inline">\(\mathb
 but there is a standard trick to rewrite the expectation.</p>
 <p>We now apply the variational characterization to <span class="math inline">\(\chi^2\)</span>;</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-79" class="proposition"><strong>Proposition 10.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
+<p><span id="prp:unlabeled-div-81" class="proposition"><strong>Proposition 10.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
 </div>
 <p>Expanding this out, the first term is very useful;
 but the second is not. The first step is to break a single
@@ -297,7 +297,7 @@ towards it.</p>
 <div id="hcr-inequality-fisher-information" class="section level3 unnumbered hasAnchor">
 <h3>HCR inequality; Fisher information<a href="lecture-notes.html#hcr-inequality-fisher-information" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-80" class="proposition"><strong>Proposition 10.2  </strong></span><span class="math inline">\(\forall \hat \theta\)</span> and <span class="math inline">\(\theta, \theta_0\)</span> we have
+<p><span id="prp:unlabeled-div-82" class="proposition"><strong>Proposition 10.2  </strong></span><span class="math inline">\(\forall \hat \theta\)</span> and <span class="math inline">\(\theta, \theta_0\)</span> we have
 <span class="math display">\[
     R_n^* \geq \mathrm{Var}_{P^\theta} \geq \dfrac{
         \left(\mathbb E_{P^\theta} \hat \theta
@@ -363,7 +363,7 @@ more assumptions.</p>
 <div id="oct-7-data-compression" class="section level2 unnumbered hasAnchor">
 <h2>Oct 7: Data compression<a href="lecture-notes.html#oct-7-data-compression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-81" class="theorem"><strong>Theorem 10.1  (local expansion of χ) </strong></span>For <span class="math inline">\(\theta_0 = 0\)</span>, when the following conditions hold:</p>
+<p><span id="thm:unlabeled-div-83" class="theorem"><strong>Theorem 10.1  (local expansion of χ) </strong></span>For <span class="math inline">\(\theta_0 = 0\)</span>, when the following conditions hold:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\theta \in [0, \tau)\)</span>.</li>
 <li>There exists <span class="math inline">\(\dot p^\theta(x)\)</span> satisfying
@@ -402,7 +402,7 @@ a one-parameter family; with the notation <span class="math inline">\(\mathcal J
 we’re assuming the one-parameter family to be the location family
 of the given density.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-82" class="theorem"><strong>Theorem 10.2  (van Trees inequality) </strong></span>Under regularity assumptions on <span class="math inline">\(P^\theta\)</span>,
+<p><span id="thm:unlabeled-div-84" class="theorem"><strong>Theorem 10.2  (van Trees inequality) </strong></span>Under regularity assumptions on <span class="math inline">\(P^\theta\)</span>,
 for every estimator <span class="math inline">\(\hat \theta(X)\)</span> and prior
 <span class="math inline">\(\pi\)</span>
 <span class="math display">\[
@@ -413,7 +413,7 @@ for every estimator <span class="math inline">\(\hat \theta(X)\)</span> and prio
 \]</span></p>
 </div>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-83" class="corollary"><strong>Corollary 10.1  </strong></span>For <span class="math inline">\(n\)</span> i.i.d. observations, for every <span class="math inline">\(\pi\)</span>
+<p><span id="cor:unlabeled-div-85" class="corollary"><strong>Corollary 10.1  </strong></span>For <span class="math inline">\(n\)</span> i.i.d. observations, for every <span class="math inline">\(\pi\)</span>
 <span class="math display">\[
     R_n^* \geq \dfrac 1 {\mathcal J(\pi) +
     n\mathbb E_{\theta \sim \pi} \mathcal J_F(\theta)}
@@ -479,7 +479,7 @@ law of large numbers (in log-space).</li>
 <p>Distribution of compression length is distributed (up to constants)
 as the entropy density. This is great because entropy density tensorizes.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-84" class="proposition"><strong>Proposition 10.3  (distribution of compression length) </strong></span>Define random variable <span class="math inline">\(L^* = l(f^*(X))\)</span>.
+<p><span id="prp:unlabeled-div-86" class="proposition"><strong>Proposition 10.3  (distribution of compression length) </strong></span>Define random variable <span class="math inline">\(L^* = l(f^*(X))\)</span>.
 Denote the entropy density <span class="math inline">\(i_X(a) = -\log P_X(a)\)</span>;
 the optimal compressor should compress symbol <span class="math inline">\(a\)</span> to roughly
 this length:
@@ -558,7 +558,7 @@ then we can close-to-optimal compress a non-i.i.d. distribution
 by combining this with the arithmetic encoder.
 </u></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-85" class="theorem"><strong>Theorem 10.3  (Shannon-McMillan-Breimen) </strong></span>A.e.p. holds w.r.t. the entropy rate
+<p><span id="thm:unlabeled-div-87" class="theorem"><strong>Theorem 10.3  (Shannon-McMillan-Breimen) </strong></span>A.e.p. holds w.r.t. the entropy rate
 if <span class="math inline">\(\{X_j\}\)</span> is a stationary (ensures
 existence of the entropy rate) ergodic process.</p>
 </div>
@@ -570,7 +570,7 @@ approximated by a <span class="math inline">\(m\to \infty\)</span>-order Markov 
 <h3>Lempel-Ziv<a href="lecture-notes.html#lempel-ziv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Central question: how to compress well without <span class="math inline">\(P_{X^n}\)</span>?</p>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-86" class="lemma"><strong>Lemma 10.1  (Katz's lemma) </strong></span>Given a stationary ergodic process <span class="math inline">\((X_{j\in \mathbb Z})\)</span>.
+<p><span id="lem:unlabeled-div-88" class="lemma"><strong>Lemma 10.1  (Katz's lemma) </strong></span>Given a stationary ergodic process <span class="math inline">\((X_{j\in \mathbb Z})\)</span>.
 Define <span class="math inline">\(L = \inf\{t&gt;0: X_{-t}=X_0\}\)</span>, then
 <span class="math display">\[
     \mathbb E[L | X_0=u] = \mathrm{Pr}[X_0=u]^{-1}

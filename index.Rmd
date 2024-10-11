@@ -81,7 +81,8 @@ The foundational results in this book include:
 2. <u>Golden formula</u>: variational characterization of mutual information. 
 3. <u>Saddle point characterization of mutual information</u>. 
 4. <u>Donsker-Varadhan</u> (theorem \@ref(thm:donskerVaradhan)): 
-    variational characterization of KL. 
+    variational characterization of KL, extended to $f$-divergences 
+    in theorem \@ref(thm:fVar). 
 5. Finite-partition approximation theorem for $f$-divergence. 
 6. <u>Harremoës-Vadja</u> (theorem \@ref(thm:harremoesVajda)): 
     one theorem to rule them all for $f$-divergence inequalities. 
@@ -120,6 +121,10 @@ Useful proof ideas:
     then upper-bound the joint-entropy by marginal bound, Han's inequality, or chain rule. 
 7. Typicality methods (compression): break region into tractable region of 
     large probability and difficult region with low probability. 
+8. Break a single $\sup$ into nested ones. 
+    - Solve the inner $\sup$ analytically: 
+    useful characterization of $\chi^2$ \@ref(eq:chiStatVar). 
+    - Alternate inner and alter closed-form solution: EM algorithm. 
 
 
 ## Administrative trivia {-}
