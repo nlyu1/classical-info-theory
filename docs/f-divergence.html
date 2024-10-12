@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 f-Divergence | 6.7480 Notes</title>
   <meta name="description" content="8 f-Divergence | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 f-Divergence | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="tensorization.html"/>
-<link rel="next" href="data-compression.html"/>
+<link rel="next" href="statistical-decision-applications.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -129,15 +129,18 @@
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#variational-characterizations"><i class="fa fa-check"></i>Variational characterizations</a></li>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#empirical-distribution-and-χ²"><i class="fa fa-check"></i>Empirical distribution and χ²</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#fisher-information-location-family"><i class="fa fa-check"></i>Fisher information, location family</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#local-χ²-behavior"><i class="fa fa-check"></i>Local χ² behavior</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>9</b> Data compression</a>
+<li class="chapter" data-level="9" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html"><i class="fa fa-check"></i><b>9</b> Statistical Decision Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#definitions-risk"><i class="fa fa-check"></i>Definitions, risk</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
 <ul>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>10</b> Lecture notes</a>
+<li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -468,7 +471,8 @@ at 1, i.e. 
 \]</span>
 then <span class="math inline">\(D_f(P\|Q) = 0 \iff P=Q\)</span>.</li>
 <li><span style="color:blue">Conditional <span class="math inline">\(f\)</span>-divergence; conditioning increases divergence</span>:
-<span class="math inline">\(D_f(P_{Y|X} \circ P_X \| Q_{Y|X} \circ P_X) \leq D_f(P_{Y|X} \| Q_{Y|X} | Q_X)  = D_f(P_{Y|X} P_X \| Q_{Y|X} P_X)\)</span>.</li>
+<span class="math inline">\(D_f(P_{Y|X} \circ P_X \| Q_{Y|X} \circ P_X) \leq D_f(P_{Y|X} \| Q_{Y|X} | Q_X)
+     = D_f(P_{Y|X} P_X \| Q_{Y|X} P_X)\)</span>.</li>
 <li><span style="color:blue">Joint-convexity</span>: <span class="math inline">\((P, Q)\mapsto D_f(P\|Q)\)</span> is jointly convex;
 consequently, <span class="math inline">\(P\mapsto D_f(P\|Q)\)</span> and <span class="math inline">\(Q\mapsto D_f(P\|Q)\)</span>
 are also convex.</li>
@@ -519,7 +523,8 @@ where <span class="math inline">\(\sup\)</span> is over all finite <span class="
 <div class="definition">
 <p><span id="def:unlabeled-div-56" class="definition"><strong>Definition 8.4  (f-DPI) </strong></span>For <span class="math inline">\(U\to X\to Y\)</span>, we have <span class="math inline">\(I_f(U; Y) \leq I_f(U; X)\)</span>.</p>
 </div>
-<p>Proof: <span class="math inline">\(I_f(U; X) = D_f(P_{UX} \|P_UP_X) \geq D_f(P_{UY} \| P_UP_Y) = I_f(U; Y)\)</span>.</p>
+<p>Proof: <span class="math inline">\(I_f(U; X) = D_f(P_{UX} \|P_UP_X) \geq
+D_f(P_{UY} \| P_UP_Y) = I_f(U; Y)\)</span>.</p>
 </div>
 <div id="tv-and-hellinger-hypothesis-testing" class="section level2 unnumbered hasAnchor">
 <h2>TV and Hellinger, hypothesis testing<a href="f-divergence.html#tv-and-hellinger-hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1155,9 +1160,6 @@ For the special case <span class="math inline">\(f&#39;(\infty) = \infty\)</span
 \]</span></p>
 </div>
 </div>
-<div id="empirical-distribution-and-χ²" class="section level2 unnumbered hasAnchor">
-<h2>Empirical distribution and χ²<a href="f-divergence.html#empirical-distribution-and-χ²" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
 <div id="fisher-information-location-family" class="section level2 unnumbered hasAnchor">
 <h2>Fisher information, location family<a href="f-divergence.html#fisher-information-location-family" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We consider a parameterized set of distributions
@@ -1180,7 +1182,8 @@ The <em>random variable</em> <span class="math inline">\(V\)</span> is known as 
 \mathbb E_\theta[\nabla_\theta \ln p_\theta(X)]
 = \int \nabla_\theta p_\theta(x) = \nabla_\theta \int p_\theta = 0
 \]</span></li>
-<li><span class="math inline">\(\mathcal J_F(\theta) = \mathrm{Cov}_\theta(V)  = -\mathbb E_\theta \left[\mathcal H_\theta \ln p_\theta(X)\right]\)</span>: differentiating (1)
+<li><span class="math inline">\(\mathcal J_F(\theta) = \mathrm{Cov}_\theta(V)
+= -\mathbb E_\theta \left[\mathcal H_\theta \ln p_\theta(X)\right]\)</span>: differentiating (1)
 <span class="math display" id="eq:fisherHessian">\[\begin{align}
 \partial_{jk}^2 \ln p_\theta = \partial_{j} \left(
      \dfrac 1 {p_\theta} \partial_{k} p_\theta
@@ -1189,7 +1192,8 @@ The <em>random variable</em> <span class="math inline">\(V\)</span> is known as 
 \tag{8.5}
 \end{align}\]</span>
 The second term vanishes when we take the expectation.</li>
-<li><span class="math inline">\(D(P_{\theta} \| P_{\theta + \xi})  = \dfrac{\log e}{2} \xi^T \mathcal J_F(\theta)\xi + o(\|\xi\|^2)\)</span>:
+<li><span class="math inline">\(D(P_{\theta} \| P_{\theta + \xi})
+= \dfrac{\log e}{2} \xi^T \mathcal J_F(\theta)\xi + o(\|\xi\|^2)\)</span>:
 this is obtained by integrating
 <span class="math display">\[
 \ln p_{\theta + \xi}(x) = \ln p_\theta(x) + \xi^T \nabla_\theta \ln p_\theta(x)
@@ -1287,8 +1291,10 @@ When <span class="math inline">\(P\ll Q\)</span>, the decay is always sublinear 
 quadratic coefficient given by theorem <a href="f-divergence.html#thm:localChiExpansion">8.12</a>.
 Else the linear coefficient is given by theorem <a href="f-divergence.html#thm:flocalLinearCoeff">8.11</a>.
 When a distribution family satisfies additional regularity conditions
-<a href="f-divergence.html#def:fisherRegularity">8.11</a>, its local quadratic behavior is governed
-by the Fisher information matrix using theorem <a href="#thm:fisherLocalDiv"><strong>??</strong></a>.</p>
+<a href="f-divergence.html#def:fisherRegularity">8.11</a>, the local behavior of <span class="math inline">\(\chi^2(P_\theta \|P_0)\)</span>
+in $is governed
+by the Fisher information matrix using
+theorem <a href="f-divergence.html#thm:localFisherDiv">8.13</a>.</p>
 <div class="theorem">
 <p><span id="thm:flocalLinearCoeff" class="theorem"><strong>Theorem 8.11  (local linear coefficient) </strong></span>Suppose <span class="math inline">\(D_f(P\|Q)&lt;\infty\)</span> and <span class="math inline">\(f&#39;(1)\)</span> exists, then
 <span class="math display">\[
@@ -1455,7 +1461,7 @@ together with the local <span class="math inline">\(\chi^2\)</span> expansion <a
         </div>
       </div>
 <a href="tensorization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-compression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="statistical-decision-applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

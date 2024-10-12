@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Divergence | 6.7480 Notes</title>
   <meta name="description" content="3 Divergence | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Divergence | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -129,15 +129,18 @@
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#variational-characterizations"><i class="fa fa-check"></i>Variational characterizations</a></li>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#empirical-distribution-and-χ²"><i class="fa fa-check"></i>Empirical distribution and χ²</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#fisher-information-location-family"><i class="fa fa-check"></i>Fisher information, location family</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#local-χ²-behavior"><i class="fa fa-check"></i>Local χ² behavior</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>9</b> Data compression</a>
+<li class="chapter" data-level="9" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html"><i class="fa fa-check"></i><b>9</b> Statistical Decision Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#definitions-risk"><i class="fa fa-check"></i>Definitions, risk</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
 <ul>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>10</b> Lecture notes</a>
+<li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -439,7 +442,9 @@ This has the transition matrix in basis <span class="math inline">\(\{0, 1\}\)</
 \]</span></p>
 </div>
 <p>Matrix multiplication shows that
-<span class="math inline">\(\mathrm{BSC}_\delta \circ \mathrm{BSC}_\delta = \mathrm{BSC}_{2\delta \bar \delta} = \mathrm{BSC}_{\delta \ast \bar \delta}\)</span>.</p>
+<span class="math inline">\(\mathrm{BSC}_\delta \circ \mathrm{BSC}_\delta
+= \mathrm{BSC}_{2\delta \bar \delta}
+= \mathrm{BSC}_{\delta \ast \bar \delta}\)</span>.</p>
 <p>We will next see that the joint divergence can
 be written as the sum of marginal
 and conditional divergences;
@@ -532,9 +537,15 @@ Let <span class="math inline">\(m=|\mathcal B|\)</span>, the second claim follow
 <span class="math inline">\(D(P_{X, Y}\|Q_{X, Y}) \geq D(P_Y\|Q_Y)\)</span>
 (follows from chain rule + information inequality).</li>
 <li><span style="color:blue">Full chain rule</span>:
-<span class="math inline">\(D(P_{X_1\cdots X_n} \| Q_{X_1\cdots X_n})  = \sum_{j=1}^n D(  P_{X_j|X_1, \cdots, X_{j-1}} \|  Q_{X_j|X_1, \cdots, X_{j-1}} \, | \,  P_{X_1, \cdots, X_{j-1}}  )\)</span>.</li>
+<span class="math inline">\(D(P_{X_1\cdots X_n} \| Q_{X_1\cdots X_n})
+     = \sum_{j=1}^n D(
+         P_{X_j|X_1, \cdots, X_{j-1}} \|
+         Q_{X_j|X_1, \cdots, X_{j-1}} \, | \,
+         P_{X_1, \cdots, X_{j-1}}
+     )\)</span>.</li>
 <li><span style="color:blue"> Tensorization </span>:
-<span class="math inline">\(D\left(\prod P_{X_j} \| \prod Q_{X_j} \right)  = \sum D(P_{X_j} \| Q_{X_j})\)</span></li>
+<span class="math inline">\(D\left(\prod P_{X_j} \| \prod Q_{X_j} \right)
+     = \sum D(P_{X_j} \| Q_{X_j})\)</span></li>
 </ol>
 </div>
 <p><em>Proof</em>: The unconditional expression follows

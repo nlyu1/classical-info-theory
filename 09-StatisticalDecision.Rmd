@@ -1,0 +1,24 @@
+# Statistical Decision Applications 
+
+## Definitions, risk {-}
+
+- A **statistical model** is a collection 
+    $\mca P = \{P_\theta:\theta \in \Theta\}$ of distributions 
+    over some measurable space $(\mca X, \Sigma)$. 
+    Here $\Theta$ is the **parameter space**. 
+- An **estimand** $T(\theta)$ has signature $T:\Theta\to \mca Y$; 
+    in the trivial case $T$ is just the identity. 
+- An **estimator** (decision rule) has type $\hat T:\mca X\to \hat {\mca Y}$. 
+    The action space $\hat {\mca Y}$ does not have to be 
+    the estimand space $\mca Y$ (e.g. when we're estimating a confidence interval). 
+    - $\hat T$ can be deterministic or randomized. 
+- To evaluate the estimator, the **loss function** $l:\mca Y\times \hat{\mca Y}\to \R$ 
+    defines the **risk** of $\hat T$ for estimating $T$. 
+- The (expected) risk of the estimator $\hat T$ for estimating $T$ is 
+    <span style="color:green">a function of the true parameter $\theta$ 
+    and estimator $\hat T$ </span>: 
+\[ 
+    R_\theta(\hat T) 
+    = \Exp_{X\sim \theta}[l(T(\theta), \hat T(X)] 
+    = \int P_\theta(dx) P_{\hat T|X}(\hat t|x) l(T(\theta), \hat t)
+\] 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Extremization | 6.7480 Notes</title>
   <meta name="description" content="6 Extremization | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Extremization | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -129,15 +129,18 @@
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#variational-characterizations"><i class="fa fa-check"></i>Variational characterizations</a></li>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#empirical-distribution-and-χ²"><i class="fa fa-check"></i>Empirical distribution and χ²</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#fisher-information-location-family"><i class="fa fa-check"></i>Fisher information, location family</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#local-χ²-behavior"><i class="fa fa-check"></i>Local χ² behavior</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>9</b> Data compression</a>
+<li class="chapter" data-level="9" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html"><i class="fa fa-check"></i><b>9</b> Statistical Decision Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#definitions-risk"><i class="fa fa-check"></i>Definitions, risk</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
 <ul>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>10</b> Lecture notes</a>
+<li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -292,7 +295,7 @@ Whichever operation acts first strictly dominates.</p>
 </div>
 <p><em>Proof:</em> Fixing <span class="math inline">\(y=y_0\)</span> on the LHS,
 <span class="math inline">\(\sup_x f(x, y_0) \geq \sup_x \inf_y f(x, y)\)</span> by
-<span class="math inline">\(f(x, y_0)\geq \inf_y f(x, y)\)</span>.</p>
+<span class="math inline">\(f(x, y_0)\geq  \inf_y f(x, y)\)</span>.</p>
 <ol style="list-style-type: decimal">
 <li>Minimax equality is implied by the existence of a saddle
 point <span class="math inline">\((x^*, y^*)\)</span> such that
@@ -446,7 +449,8 @@ which maximizes <span class="math inline">\(D(P_{Y|X=x} \| P_Y^*)\)</span>.</p>
 <div id="gaussian-saddle-point" class="section level2 unnumbered hasAnchor">
 <h2>Gaussian saddle point<a href="extremization.html#gaussian-saddle-point" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-49" class="theorem"><strong>Theorem 6.6  (extremality of Gaussian channels) </strong></span>Let <span class="math inline">\(X_g\sim \mathcal N(0, \sigma_X^2), N_g\sim \mathcal N(0, \sigma_N^2)\perp\!\!\!\perp X_g\)</span>, then</p>
+<p><span id="thm:unlabeled-div-49" class="theorem"><strong>Theorem 6.6  (extremality of Gaussian channels) </strong></span>Let <span class="math inline">\(X_g\sim \mathcal N(0, \sigma_X^2),
+N_g\sim \mathcal N(0, \sigma_N^2)\perp\!\!\!\perp X_g\)</span>, then</p>
 <ol style="list-style-type: decimal">
 <li><em>Gaussian capacity:</em>
 <span class="math display">\[

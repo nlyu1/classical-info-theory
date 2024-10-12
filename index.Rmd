@@ -61,6 +61,7 @@ observations. Some recurring themes in the book are:
 2. Divergence as a fundamental concept in information theory. 
     a. Quantifies difference between distributions; 
     the choice of this quantification depends on our problem. 
+    b. Divergence gives rise to mutual information; monotonicity yields DPI. 
 3. **Convexity** of $f$ for $f$-divergence is mathematically equivalent 
     to our information intuitions: data-processing inequality, monotonicity, etc. 
     a. KL-divergence (and Rényi) is special because its $\log$ form 
@@ -83,10 +84,9 @@ The foundational results in this book include:
 4. <u>Donsker-Varadhan</u> (theorem \@ref(thm:donskerVaradhan)): 
     variational characterization of KL, extended to $f$-divergences 
     in theorem \@ref(thm:fVar). 
-5. Finite-partition approximation theorem for $f$-divergence. 
-6. <u>Harremoës-Vadja</u> (theorem \@ref(thm:harremoesVajda)): 
+5. <u>Harremoës-Vadja</u> (theorem \@ref(thm:harremoesVajda)): 
     one theorem to rule them all for $f$-divergence inequalities. 
-7. Most $f$-divergences are locally $\chi^2$-like about 
+6. Most $f$-divergences are locally $\chi^2$-like about 
     $\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)$ 
     and decays quadratically (theorem \@ref(thm:localChiExpansion)). 
 

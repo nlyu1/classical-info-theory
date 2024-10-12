@@ -143,5 +143,6 @@ variational-measures-of-information
 extremization
 tensorization
 f-divergence
+statistical-decision-applications
 data-compression
 lecture-notes

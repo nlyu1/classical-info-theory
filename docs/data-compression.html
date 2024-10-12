@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Data compression | 6.7480 Notes</title>
-  <meta name="description" content="9 Data compression | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <title>10 Data compression | 6.7480 Notes</title>
+  <meta name="description" content="10 Data compression | 6.7480 Notes" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Data compression | 6.7480 Notes" />
+  <meta property="og:title" content="10 Data compression | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Data compression | 6.7480 Notes" />
+  <meta name="twitter:title" content="10 Data compression | 6.7480 Notes" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="f-divergence.html"/>
+<link rel="prev" href="statistical-decision-applications.html"/>
 <link rel="next" href="lecture-notes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -129,15 +129,18 @@
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#variational-characterizations"><i class="fa fa-check"></i>Variational characterizations</a></li>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#empirical-distribution-and-χ²"><i class="fa fa-check"></i>Empirical distribution and χ²</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#fisher-information-location-family"><i class="fa fa-check"></i>Fisher information, location family</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#local-χ²-behavior"><i class="fa fa-check"></i>Local χ² behavior</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>9</b> Data compression</a>
+<li class="chapter" data-level="9" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html"><i class="fa fa-check"></i><b>9</b> Statistical Decision Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#definitions-risk"><i class="fa fa-check"></i>Definitions, risk</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
 <ul>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>10</b> Lecture notes</a>
+<li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -171,8 +174,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-compression" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">9</span> Data compression<a href="data-compression.html#data-compression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="data-compression" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Data compression<a href="data-compression.html#data-compression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This section corresponds to Chapters 10-12 of the book.</p>
 <p>Fixing a source domain <span class="math inline">\(\mathcal X\)</span>, we can define:</p>
 <ul>
@@ -182,7 +185,7 @@
 <p>Highlights include:</p>
 <ol style="list-style-type: decimal">
 <li>The average compression length of the optimal single-shot lossless
-compressor (theorem <a href="data-compression.html#thm:optimalEncodingAvg">9.1</a>).</li>
+compressor (theorem <a href="data-compression.html#thm:optimalEncodingAvg">10.1</a>).</li>
 </ol>
 <div id="source-coding-theorems" class="section level2 unnumbered hasAnchor">
 <h2>Source coding theorems<a href="data-compression.html#source-coding-theorems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -192,7 +195,7 @@ compressing many then decompressing them; this we do not
 need to impose any constraints on <span class="math inline">\(f\)</span>, such as prefix-freeness or
 unique-decodability.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-76" class="definition"><strong>Definition 9.1  (variable-length single-shot lossless compression) </strong></span>A pair <span class="math inline">\((f, g)\)</span> is a variable-length single-shot lossless compressor if:</p>
+<p><span id="def:unlabeled-div-76" class="definition"><strong>Definition 10.1  (variable-length single-shot lossless compression) </strong></span>A pair <span class="math inline">\((f, g)\)</span> is a variable-length single-shot lossless compressor if:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(f\)</span> is of the type <span class="math inline">\(f:\mathcal X\to \{0, 1\}^*\)</span>. The image of <span class="math inline">\(f\)</span>
 is a codebook, and an element <span class="math inline">\(f(x)\)</span> in the image of <span class="math inline">\(f\)</span> is a codeword.</li>
@@ -207,12 +210,12 @@ is a codebook, and an element <span class="math inline">\(f(x)\)</span> in the i
 so that <span class="math inline">\(P(0)\geq P(1)\geq \cdots\)</span>.</li>
 </ul>
 <div class="definition">
-<p><span id="def:unlabeled-div-77" class="definition"><strong>Definition 9.2  (stochastic dominance) </strong></span>Given two real-valued stochastic variables <span class="math inline">\(X, Y\)</span>, we say that <span class="math inline">\(X\preceq Y\)</span>,
+<p><span id="def:unlabeled-div-77" class="definition"><strong>Definition 10.2  (stochastic dominance) </strong></span>Given two real-valued stochastic variables <span class="math inline">\(X, Y\)</span>, we say that <span class="math inline">\(X\preceq Y\)</span>,
 or <span class="math inline">\(Y\)</span> stochastically dominates <span class="math inline">\(X\)</span>, if the CDF of <span class="math inline">\(X\)</span> dominates that of <span class="math inline">\(Y\)</span>
 everywhere.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-78" class="definition"><strong>Definition 9.3  (optimal single-shot lossless compressor) </strong></span>For a down-sorted PMF <span class="math inline">\(P(X)\)</span>, the optimal single-shot lossless compressor
+<p><span id="def:unlabeled-div-78" class="definition"><strong>Definition 10.3  (optimal single-shot lossless compressor) </strong></span>For a down-sorted PMF <span class="math inline">\(P(X)\)</span>, the optimal single-shot lossless compressor
 assigns strings with increasing lengths to symbol <span class="math inline">\(j\in \mathcal X=\mathbb N\)</span>.
 In particular, <span class="math inline">\(l(f^*(j)) = \lfloor \log_2 j\rfloor\)</span>, where <span class="math inline">\(l\)</span> is the
 string-length function.</p>
@@ -220,7 +223,7 @@ string-length function.</p>
 <p>An immediate corollary of the following result is that
 <span class="math inline">\(\mathbb E[(l\circ f^*)(X)] \leq \mathbb E[(l\circ f)(X)]\)</span> for any <span class="math inline">\(X\)</span>.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-79" class="proposition"><strong>Proposition 9.1  </strong></span>For any lossless single-shot compressor <span class="math inline">\(f\)</span> and source distribution <span class="math inline">\(X\)</span>,
+<p><span id="prp:unlabeled-div-79" class="proposition"><strong>Proposition 10.1  </strong></span>For any lossless single-shot compressor <span class="math inline">\(f\)</span> and source distribution <span class="math inline">\(X\)</span>,
 <span class="math inline">\(l\circ f^*\preceq l\circ f\)</span>.</p>
 </div>
 <details>
@@ -247,11 +250,11 @@ optimal encoding is <span class="math inline">\(H(X)\)</span>. A coding theorem 
 limit <span class="math inline">\(\mathbb E[(l\circ f^*)(X)]\)</span>, which is an operational quantity,
 to an information measure <span class="math inline">\(H(X)\)</span>.</p>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-80" class="lemma"><strong>Lemma 9.1  </strong></span><span class="math inline">\(H(X|L=k)\leq k\)</span>. This follows from that <span class="math inline">\(X|L=k\)</span> can
+<p><span id="lem:unlabeled-div-80" class="lemma"><strong>Lemma 10.1  </strong></span><span class="math inline">\(H(X|L=k)\leq k\)</span>. This follows from that <span class="math inline">\(X|L=k\)</span> can
 take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution on which has entropy <span class="math inline">\(k\)</span>.</p>
 </div>
 <div class="lemma">
-<p><span id="lem:finiteExpectationExtremality" class="lemma"><strong>Lemma 9.2  </strong></span>For <span class="math inline">\(X\)</span> taking values on <span class="math inline">\(\mathbb N=\{1, 2, \cdots\}\)</span> and <span class="math inline">\(\mathbb E[X]&lt;\infty\)</span>,
+<p><span id="lem:finiteExpectationExtremality" class="lemma"><strong>Lemma 10.2  </strong></span>For <span class="math inline">\(X\)</span> taking values on <span class="math inline">\(\mathbb N=\{1, 2, \cdots\}\)</span> and <span class="math inline">\(\mathbb E[X]&lt;\infty\)</span>,
 we have
 <span class="math display">\[
     H(X) \leq h\left(\mathbb E[X]^{-1}\right)\mathbb E[X]
@@ -262,7 +265,8 @@ The inequality is saturated by the geometric distribution.</p>
 <summary>
 Proof
 </summary>
-Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1, \mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
+Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1,
+\mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
 <span class="math display">\[\begin{align}
     H(X) - \mathbb E[X] h(p)
     &amp;= \mathbb E\left[-\log p(x) - x[-p\log p - \bar p\log \bar p]\right] \\
@@ -276,7 +280,7 @@ Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <spa
 \end{align}\]</span>
 </details>
 <div class="theorem">
-<p><span id="thm:optimalEncodingAvg" class="theorem"><strong>Theorem 9.1  (average length of optimal encoding) </strong></span><span class="math inline">\(H(X) - \log_2[e(H(X)+1)] \leq \mathbb E[(l\circ f^*)(X)] \leq H(X)\)</span>.</p>
+<p><span id="thm:optimalEncodingAvg" class="theorem"><strong>Theorem 10.1  (average length of optimal encoding) </strong></span><span class="math inline">\(H(X) - \log_2[e(H(X)+1)] \leq \mathbb E[(l\circ f^*)(X)] \leq H(X)\)</span>.</p>
 </div>
 <details>
 <summary>
@@ -307,7 +311,7 @@ In the last tep steps, we used <span class="math inline">\(x\log(1+1/x) \leq \lo
           </div>
         </div>
       </div>
-<a href="f-divergence.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-decision-applications.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="lecture-notes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

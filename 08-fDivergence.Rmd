@@ -985,9 +985,6 @@ For the special case $f'(\infty) = \infty$, which includes KL, we have
 \] 
 :::
 
-
-## Empirical distribution and χ² {-}
-
 ## Fisher information, location family {-}
 
 We consider a parameterized set of distributions 
@@ -1126,8 +1123,10 @@ When $P\ll Q$, the decay is always sublinear with
 quadratic coefficient given by theorem \@ref(thm:localChiExpansion). 
 Else the linear coefficient is given by theorem \@ref(thm:flocalLinearCoeff). 
 When a distribution family satisfies additional regularity conditions 
-\@ref(def:fisherRegularity), its local quadratic behavior is governed 
-by the Fisher information matrix using theorem \@ref(thm:fisherLocalDiv). 
+\@ref(def:fisherRegularity), the local behavior of $\chi^2(P_\theta \|P_0)$ 
+in $\theta is governed 
+by the Fisher information matrix by
+theorem \@ref(thm:localFisherDiv). 
 
 :::{.theorem #flocalLinearCoeff name="local linear coefficient"}
 Suppose $D_f(P\|Q)<\infty$ and $f'(1)$ exists, then 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Mutual Information | 6.7480 Notes</title>
   <meta name="description" content="4 Mutual Information | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Mutual Information | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -129,15 +129,18 @@
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#variational-characterizations"><i class="fa fa-check"></i>Variational characterizations</a></li>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#empirical-distribution-and-χ²"><i class="fa fa-check"></i>Empirical distribution and χ²</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#fisher-information-location-family"><i class="fa fa-check"></i>Fisher information, location family</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#local-χ²-behavior"><i class="fa fa-check"></i>Local χ² behavior</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>9</b> Data compression</a>
+<li class="chapter" data-level="9" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html"><i class="fa fa-check"></i><b>9</b> Statistical Decision Applications</a>
+<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#definitions-risk"><i class="fa fa-check"></i>Definitions, risk</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
 <ul>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>10</b> Lecture notes</a>
+<li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -249,7 +252,8 @@ apply (4) to the projection transform <span class="math inline">\((X, Y)\mapsto 
 <div class="proposition">
 <p><span id="prp:unlabeled-div-27" class="proposition"><strong>Proposition 4.1  (Mutual information and entropy) </strong></span></p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\  \infty \text{ otherwise.}\end{cases}\)</span></li>
+<li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\
+\infty \text{ otherwise.}\end{cases}\)</span></li>
 <li>Given discrete <span class="math inline">\(X\)</span>, <span class="math inline">\(H(X) = I(X; Y) + H(X|Y)\)</span>.</li>
 <li>Given both <span class="math inline">\(X, Y\)</span> discrete, <span class="math inline">\(H(X)+H(Y) = I(X; Y) + H(X; Y)\)</span>.</li>
 </ol>
@@ -412,7 +416,8 @@ In other words, <span class="math inline">\(P_{X|T}\)</span> can be chosen not t
 <p><span id="thm:unlabeled-div-33" class="theorem"><strong>Theorem 4.3  (characterization of sufficiency) </strong></span>The following claims are equivalent:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(T\)</span> is a sufficient statistic of <span class="math inline">\(X\)</span> for <span class="math inline">\(\theta\)</span>.</li>
-<li><span class="math inline">\(\forall P_\theta, \theta \to T\to X \iff \forall P_\theta, I(\theta; X|T) = 0\)</span>.</li>
+<li><span class="math inline">\(\forall P_\theta, \theta \to T\to X
+\iff \forall P_\theta, I(\theta; X|T) = 0\)</span>.</li>
 </ol>
 </div>
 <p><span style="color:red">
