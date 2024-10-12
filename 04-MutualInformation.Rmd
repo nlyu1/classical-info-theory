@@ -230,31 +230,6 @@ _Proof:_ The markov kernel in question is simply $P_{Z|Y}$ applied to
 $(P_{Y|X=x}, P_Y) \mapsto (P_{Z|X=x}, P_Z)$. 
 
 
-## Sufficient statistic {-}
-Consider the following definitions: 
-
-- $P^\theta_X$ is a class of distributions for $X$ parameterized by $\theta\in \Theta$. 
-- Given kernel $P_{T|X}$, let $P_T^\theta = P_{T|X} \circ P^\theta_X$ be the induced 
-    distribution on $T$. 
-
-:::{.definition name="sufficient statistic"}
-$T$ is a sufficient statistic of $X$ for $\theta$ if there exists a 
-kernel $P_{X|T}$ such that $P_{T|X} P_X^\theta = P_{X|T} P^\theta_T$. 
-In other words, $P_{X|T}$ can be chosen not to depend on $\theta$. 
-:::
-
-:::{.theorem name="characterization of sufficiency"}
-The following claims are equivalent: 
-
-1. $T$ is a sufficient statistic of $X$ for $\theta$. 
-2. $\forall P_\theta, \theta \to T\to X 
-\iff \forall P_\theta, I(\theta; X|T) = 0$. 
-:::
-<span style="color:red">
-To finish. 
-</span>
-
-
 ## Probability of error, Fano's inequality {-}
 Given a R.V. $W$ and our prediction $\hat W$, we can 
 

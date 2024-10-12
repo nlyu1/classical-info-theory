@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Variational Measures of Information | 6.7480 Notes</title>
   <meta name="description" content="5 Variational Measures of Information | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Variational Measures of Information | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-11" />
+<meta name="date" content="2024-10-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,6 +74,8 @@
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#recurring-themes"><i class="fa fa-check"></i>Recurring themes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#insightful-proof-techniques"><i class="fa fa-check"></i>Insightful proof techniques</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
 <ul>
@@ -85,24 +87,23 @@
 <li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#combinatorial-properties"><i class="fa fa-check"></i>Combinatorial properties</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics and geometry</a>
+<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics</a>
 <ul>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
+<li class="chapter" data-level="3" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html"><i class="fa fa-check"></i><b>3</b> Kullback-Leibler Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#kl-divergence"><i class="fa fa-check"></i>KL-Divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
 <ul>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mi"><i class="fa fa-check"></i>Conditional MI</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#sufficient-statistic"><i class="fa fa-check"></i>Sufficient statistic</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
@@ -123,7 +124,7 @@
 <li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
 <li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition-1"><i class="fa fa-check"></i>Definition</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#information-properties-mi"><i class="fa fa-check"></i>Information properties, MI</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#tv-and-hellinger-hypothesis-testing"><i class="fa fa-check"></i>TV and Hellinger, hypothesis testing</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
@@ -139,6 +140,7 @@
 <li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
 <ul>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
 <ul>
@@ -209,7 +211,7 @@ The two sides expand to
     D(P_{Y|X} \| Q_Y|P_X) &amp;= D(P_{XY} \| P_XQ_Y) \\
     I(X; Y) + D(P_Y \|Q_Y) &amp;= D(P_{XY} \| P_XP_Y) + D(P_Y \|Q_Y)
 \end{align}\]</span>
-and are equal by the divergence chain rule <a href="divergence.html#prp:divergenceChainRule">3.2</a>.
+and are equal by the divergence chain rule <a href="kullback-leibler-divergence.html#prp:divergenceChainRule">3.2</a>.
 </details>
 <div class="corollary">
 <p><span id="cor:centerOfGravityMI" class="corollary"><strong>Corollary 5.1  (center of gravity formula) </strong></span><span class="math inline">\(I(X; Y) = \min_{Q_Y} D(P_{Y|X} \| Q_Y|P_X)\)</span>, the
@@ -228,7 +230,7 @@ The unique minimizer of this is <span class="math inline">\(P_Y\)</span>, with m
 <p>One can also see that mutual information is small if masses are concentrated:
 this coincides with <span class="math inline">\(I(X; Y) = H(Y) - H(Y|X)\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-34" class="theorem"><strong>Theorem 5.2  (minimum distance from independence) </strong></span><span class="math inline">\(I(X; Y) = \min_{Q_X, Q_Y} D(P_{XY} \|Q_XQ_Y)\)</span>.
+<p><span id="thm:unlabeled-div-32" class="theorem"><strong>Theorem 5.2  (minimum distance from independence) </strong></span><span class="math inline">\(I(X; Y) = \min_{Q_X, Q_Y} D(P_{XY} \|Q_XQ_Y)\)</span>.
 The unique minimizer is <span class="math inline">\(Q_X, Q_Y = P_X, P_Y\)</span>.</p>
 </div>
 <details>
@@ -244,7 +246,7 @@ Decompose the divergence on the RHS
 \end{align}\]</span>
 </details>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-35" class="theorem"><strong>Theorem 5.3  (minimum distance from markov chain) </strong></span>Minimizing over all <span class="math inline">\(Q_{XYZ} = Q_XQ_{Y|X}Q_{Z|Y}\)</span>,
+<p><span id="thm:unlabeled-div-33" class="theorem"><strong>Theorem 5.3  (minimum distance from markov chain) </strong></span>Minimizing over all <span class="math inline">\(Q_{XYZ} = Q_XQ_{Y|X}Q_{Z|Y}\)</span>,
 <span class="math display">\[
     I(X; Z|Y) = \min_{Q_{XYZ}:X\to Y\to Z} D(P_{XYZ} \| Q_{XYZ})
 \]</span></p>
@@ -253,7 +255,7 @@ Decompose the divergence on the RHS
 <div id="lower-variational-bounds" class="section level2 unnumbered hasAnchor">
 <h2>Lower variational bounds<a href="variational-measures-of-information.html#lower-variational-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-36" class="theorem"><strong>Theorem 5.4  (lower variational bound of MI) </strong></span>For any Markov kernel <span class="math inline">\(Q_{X|Y}\)</span> such that <span class="math inline">\(Q_{X|Y=y} \ll P_X\)</span> for
+<p><span id="thm:unlabeled-div-34" class="theorem"><strong>Theorem 5.4  (lower variational bound of MI) </strong></span>For any Markov kernel <span class="math inline">\(Q_{X|Y}\)</span> such that <span class="math inline">\(Q_{X|Y=y} \ll P_X\)</span> for
 <span class="math inline">\(P_Y\)</span> almost everywhere we have
 <span class="math display">\[
     I(X; Y) \geq \mathbb E_{P_{X, Y}} \left[\log \dfrac{d Q_{X|Y}}{dP_X}\right]
@@ -333,7 +335,7 @@ Then
 Equality is saturated when <span class="math inline">\(Q^f = P \iff f = \log \dfrac{dP}{dQ}\)</span>.
 </details>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-37" class="corollary"><strong>Corollary 5.2  </strong></span>The supremum in Donsker-Varadhan is equivalent to,
+<p><span id="cor:unlabeled-div-35" class="corollary"><strong>Corollary 5.2  </strong></span>The supremum in Donsker-Varadhan is equivalent to,
 <span class="math inline">\(\forall f\in \mathcal C_Q\)</span>
 <span class="math display">\[
     \mathbb E_P f(X) \leq D(P\|Q) + \psi_f,
@@ -352,7 +354,7 @@ is a well-behaved function <span class="math inline">\(f\)</span>, and <span cla
 to the functional <span class="math inline">\(f\mapsto \psi_f\)</span>. This is a functional
 Legendre transform. The following result will then not be too surprising.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-38" class="proposition"><strong>Proposition 5.1  (Gibbs variational principle) </strong></span>Given measurable <span class="math inline">\(\mathcal X:\mathbb R\cup \{-\infty\}\)</span>
+<p><span id="prp:unlabeled-div-36" class="proposition"><strong>Proposition 5.1  (Gibbs variational principle) </strong></span>Given measurable <span class="math inline">\(\mathcal X:\mathbb R\cup \{-\infty\}\)</span>
 and a probability measure <span class="math inline">\(Q\)</span> on <span class="math inline">\(\mathcal X\)</span>
 <span class="math display">\[
     \log \mathbb E_Q\left[e^{f(X)}\right] = \sup_P \mathbb E_P [f(X)] - D(P\|Q)
@@ -363,7 +365,7 @@ If the LHS is finite, then the unique maximizer in the RHS is <span class="math 
 <div id="continuity" class="section level2 unnumbered hasAnchor">
 <h2>Continuity<a href="variational-measures-of-information.html#continuity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-39" class="proposition"><strong>Proposition 5.2  (Single-argument continuity of divergence for finite alphabets) </strong></span>Fixing finite <span class="math inline">\(\mathcal X\)</span> with a strictly positive distribution <span class="math inline">\(Q\)</span> over <span class="math inline">\(\mathcal X\)</span>,
+<p><span id="prp:unlabeled-div-37" class="proposition"><strong>Proposition 5.2  (Single-argument continuity of divergence for finite alphabets) </strong></span>Fixing finite <span class="math inline">\(\mathcal X\)</span> with a strictly positive distribution <span class="math inline">\(Q\)</span> over <span class="math inline">\(\mathcal X\)</span>,
 then <span class="math inline">\(P\mapsto D(P\|Q)\)</span> is continuous; in particular, <span class="math inline">\(P\mapsto H(P)\)</span> is continuous.</p>
 </div>
 <p><span style="color:green">
@@ -377,7 +379,7 @@ while the arguments converge to <span class="math inline">\(0\)</span>: <em>info
 </span></p>
 <div style="color:green">
 <div class="remark">
-<p><span id="unlabeled-div-40" class="remark"><em>Remark</em>. </span><span class="math inline">\(D(P\|Q)\)</span> is not continuous in either <span class="math inline">\(P\)</span> or <span class="math inline">\(Q\)</span> for general alphabets:
+<p><span id="unlabeled-div-38" class="remark"><em>Remark</em>. </span><span class="math inline">\(D(P\|Q)\)</span> is not continuous in either <span class="math inline">\(P\)</span> or <span class="math inline">\(Q\)</span> for general alphabets:
 consider <span class="math inline">\(X_j\sim 2\mathrm{Ber}_{1/2}-1\)</span>, then <span class="math inline">\(\bar X_j\to \mathcal N(0, 1)\)</span>
 but <span class="math inline">\(D(\bar X_j \|\mathcal N(0, 1))=\infty\)</span> because <span class="math inline">\(\bar X_j\)</span> is discrete for all <span class="math inline">\(n\)</span>.</p>
 </div>
@@ -408,7 +410,7 @@ Convergence in the weaker metric topology only implies weak
 semi-continuity in the stronger Jensen metric.
 </span></p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-41" class="proposition"><strong>Proposition 5.3  (continuity of MI) </strong></span></p>
+<p><span id="prp:unlabeled-div-39" class="proposition"><strong>Proposition 5.3  (continuity of MI) </strong></span></p>
 <ol style="list-style-type: lower-alpha">
 <li>Given finite alphabets <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, <span class="math inline">\(P_{XY}\mapsto I(X; Y)\)</span> is continuous.</li>
 <li>If <span class="math inline">\(\mathcal X\)</span> is finite, then <span class="math inline">\(P_X\mapsto I(X; Y)\)</span> is continuous.</li>

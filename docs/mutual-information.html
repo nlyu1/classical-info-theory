@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Mutual Information | 6.7480 Notes</title>
   <meta name="description" content="4 Mutual Information | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Mutual Information | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,14 +23,14 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-11" />
+<meta name="date" content="2024-10-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="divergence.html"/>
+<link rel="prev" href="kullback-leibler-divergence.html"/>
 <link rel="next" href="variational-measures-of-information.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -74,6 +74,8 @@
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#recurring-themes"><i class="fa fa-check"></i>Recurring themes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#insightful-proof-techniques"><i class="fa fa-check"></i>Insightful proof techniques</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
 <ul>
@@ -85,24 +87,23 @@
 <li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#combinatorial-properties"><i class="fa fa-check"></i>Combinatorial properties</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics and geometry</a>
+<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics</a>
 <ul>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
+<li class="chapter" data-level="3" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html"><i class="fa fa-check"></i><b>3</b> Kullback-Leibler Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#kl-divergence"><i class="fa fa-check"></i>KL-Divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
 <ul>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mi"><i class="fa fa-check"></i>Conditional MI</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#sufficient-statistic"><i class="fa fa-check"></i>Sufficient statistic</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
@@ -123,7 +124,7 @@
 <li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
 <li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition-1"><i class="fa fa-check"></i>Definition</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#information-properties-mi"><i class="fa fa-check"></i>Information properties, MI</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#tv-and-hellinger-hypothesis-testing"><i class="fa fa-check"></i>TV and Hellinger, hypothesis testing</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
@@ -139,6 +140,7 @@
 <li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
 <ul>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
 <ul>
@@ -195,7 +197,7 @@ satisfying DPI, we can define a mutual-information like quantity
 information is <a href="mutual-information.html#thm:mutInfoMoreProperties">4.2</a>.</li>
 <li>Mutual information is the weighted divergence from the marginal
 to the conditionals (definition <a href="mutual-information.html#def:mutInfDef">4.1</a>).</li>
-<li>General proof technique (see <a href="mutual-information.html#thm:simpleFano">4.4</a>);
+<li>General proof technique (see <a href="mutual-information.html#thm:simpleFano">4.3</a>);
 to derive bounds on general statements, derive one for
 a tractable statement then apply divergence inequalitites
 (DPI, Donsker-Varadhan etc).</li>
@@ -233,15 +235,15 @@ transform of <span class="math inline">\(X\)</span>.</li>
 </ol>
 </div>
 <p><em>Proof:</em> The conditional expression follows from the decomposition in
-theorem <a href="divergence.html#thm:divergenceProperties">3.4</a>. For symmetry, consider
+theorem <a href="kullback-leibler-divergence.html#thm:divergenceProperties">3.4</a>. For symmetry, consider
 a swap-channel on the joint which maps <span class="math inline">\(P_XP_Y\mapsto P_YP_X\)</span>, then
-applying the KL-DPI <a href="divergence.html#thm:klDPI">3.5</a> to the joint <span class="math inline">\(K\circ P_{XY} = P_{YX}\)</span>
+applying the KL-DPI <a href="kullback-leibler-divergence.html#thm:klDPI">3.5</a> to the joint <span class="math inline">\(K\circ P_{XY} = P_{YX}\)</span>
 and the marginal <span class="math inline">\(K\circ P_XP_Y = P_YP_X\)</span> yields
 <span class="math display">\[
     D(P_{XY} \| P_XP_Y) = D(P_{YX} \| P_YP_X) \iff I(X; Y) = I(Y; X)
 \]</span>
 the DPI inequality is made into an equality by a symmetry argument.
-Positivity is established by the information inequality <a href="divergence.html#thm:infoInequality">3.1</a>.
+Positivity is established by the information inequality <a href="kullback-leibler-divergence.html#thm:infoInequality">3.1</a>.
 For claim (4), consider the kernel <span class="math inline">\(K\circ (X, Y) = (f(X), Y)\)</span> and apply KL-DPI
 <span class="math display">\[
     D(P_{f(X)Y} \| P_{f(X)}P_Y) \leq D(P_{XY} \| P_XP_Y)
@@ -252,8 +254,7 @@ apply (4) to the projection transform <span class="math inline">\((X, Y)\mapsto 
 <div class="proposition">
 <p><span id="prp:unlabeled-div-27" class="proposition"><strong>Proposition 4.1  (Mutual information and entropy) </strong></span></p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\
-\infty \text{ otherwise.}\end{cases}\)</span></li>
+<li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\  \infty \text{ otherwise.}\end{cases}\)</span></li>
 <li>Given discrete <span class="math inline">\(X\)</span>, <span class="math inline">\(H(X) = I(X; Y) + H(X|Y)\)</span>.</li>
 <li>Given both <span class="math inline">\(X, Y\)</span> discrete, <span class="math inline">\(H(X)+H(Y) = I(X; Y) + H(X; Y)\)</span>.</li>
 </ol>
@@ -332,7 +333,7 @@ and the information inequality:
     I(X; Z|Y)
     = D(P_{XZ}P_Y \| P_XP_ZP_Y) \geq 0
 \]</span>
-For the chain rule, factor the LHS using proposition <a href="divergence.html#prp:divergenceChainRule">3.2</a>
+For the chain rule, factor the LHS using proposition <a href="kullback-leibler-divergence.html#prp:divergenceChainRule">3.2</a>
 against <span class="math inline">\(X, Z\)</span> to obtain
 <span class="math display">\[\begin{align}
     I(X, Y; Z)
@@ -389,7 +390,7 @@ Let <span class="math inline">\(X, Z\sim \mathrm{Ber}(1/2)\)</span> i.i.d and <s
 </div>
 <div class="proposition">
 <p><span id="prp:miDpiPerspective" class="proposition"><strong>Proposition 4.2  (alternate proof of mutual information DPI) </strong></span>Mutual information DPI is implied by the divergence-DPI
-theorem <a href="divergence.html#thm:klDPI">3.5</a>. Given a Markov chain <span class="math inline">\(X\to Y\to Z\)</span>, we have
+theorem <a href="kullback-leibler-divergence.html#thm:klDPI">3.5</a>. Given a Markov chain <span class="math inline">\(X\to Y\to Z\)</span>, we have
 <span class="math display">\[
     I(X; Z) = D(P_{XZ} \| P_XP_Z)
     = D(P_{Z|X} \| P_Z | P_X) \leq D(P_{Y|X} \| P_Y | P_X)
@@ -398,31 +399,6 @@ theorem <a href="divergence.html#thm:klDPI">3.5</a>. Given a Markov chain <span 
 </div>
 <p><em>Proof:</em> The markov kernel in question is simply <span class="math inline">\(P_{Z|Y}\)</span> applied to
 <span class="math inline">\((P_{Y|X=x}, P_Y) \mapsto (P_{Z|X=x}, P_Z)\)</span>.</p>
-</div>
-<div id="sufficient-statistic" class="section level2 unnumbered hasAnchor">
-<h2>Sufficient statistic<a href="mutual-information.html#sufficient-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Consider the following definitions:</p>
-<ul>
-<li><span class="math inline">\(P^\theta_X\)</span> is a class of distributions for <span class="math inline">\(X\)</span> parameterized by <span class="math inline">\(\theta\in \Theta\)</span>.</li>
-<li>Given kernel <span class="math inline">\(P_{T|X}\)</span>, let <span class="math inline">\(P_T^\theta = P_{T|X} \circ P^\theta_X\)</span> be the induced
-distribution on <span class="math inline">\(T\)</span>.</li>
-</ul>
-<div class="definition">
-<p><span id="def:unlabeled-div-32" class="definition"><strong>Definition 4.3  (sufficient statistic) </strong></span><span class="math inline">\(T\)</span> is a sufficient statistic of <span class="math inline">\(X\)</span> for <span class="math inline">\(\theta\)</span> if there exists a
-kernel <span class="math inline">\(P_{X|T}\)</span> such that <span class="math inline">\(P_{T|X} P_X^\theta = P_{X|T} P^\theta_T\)</span>.
-In other words, <span class="math inline">\(P_{X|T}\)</span> can be chosen not to depend on <span class="math inline">\(\theta\)</span>.</p>
-</div>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-33" class="theorem"><strong>Theorem 4.3  (characterization of sufficiency) </strong></span>The following claims are equivalent:</p>
-<ol style="list-style-type: decimal">
-<li><span class="math inline">\(T\)</span> is a sufficient statistic of <span class="math inline">\(X\)</span> for <span class="math inline">\(\theta\)</span>.</li>
-<li><span class="math inline">\(\forall P_\theta, \theta \to T\to X
-\iff \forall P_\theta, I(\theta; X|T) = 0\)</span>.</li>
-</ol>
-</div>
-<p><span style="color:red">
-To finish.
-</span></p>
 </div>
 <div id="probability-of-error-fanos-inequality" class="section level2 unnumbered hasAnchor">
 <h2>Probability of error, Fano’s inequality<a href="mutual-information.html#probability-of-error-fanos-inequality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -444,7 +420,7 @@ should be largest when <span class="math inline">\(P_0 = 1/M\)</span> and decay 
 <p>The second statement in the following theorem can be viewed
 as a bound on entropy using the <span class="math inline">\(\infty\)</span>-Renyi entropy.</p>
 <div class="theorem">
-<p><span id="thm:simpleFano" class="theorem"><strong>Theorem 4.4  (entropy bound using independent guess) </strong></span>Given a finite alphabet <span class="math inline">\(|\mathcal X|=M&lt;\infty\)</span>, for any <span class="math inline">\(\hat X\perp\!\!\!\perp X\)</span>
+<p><span id="thm:simpleFano" class="theorem"><strong>Theorem 4.3  (entropy bound using independent guess) </strong></span>Given a finite alphabet <span class="math inline">\(|\mathcal X|=M&lt;\infty\)</span>, for any <span class="math inline">\(\hat X\perp\!\!\!\perp X\)</span>
 <span class="math display">\[
     H(X) \leq F_M(\mathrm{Pr}[X=\hat X]), \quad F_M(x) = (1-x)\log(M-1)+h(x)
 \]</span>
@@ -483,7 +459,7 @@ DPI to <span class="math inline">\((X, \hat X)\mapsto 1[X=\hat X]\)</span> yield
 To prove the second claim, choose <span class="math inline">\(\hat X\)</span> to be the mode of <span class="math inline">\(X\)</span>.
 </details>
 <div class="theorem">
-<p><span id="thm:fanoInequality" class="theorem"><strong>Theorem 4.5  (Fano's inequality) </strong></span>Let <span class="math inline">\(|\mathcal X|=M\)</span> and <span class="math inline">\(X\to Y\to \hat X\)</span>.
+<p><span id="thm:fanoInequality" class="theorem"><strong>Theorem 4.4  (Fano's inequality) </strong></span>Let <span class="math inline">\(|\mathcal X|=M\)</span> and <span class="math inline">\(X\to Y\to \hat X\)</span>.
 Let <span class="math inline">\(p_e = P[X\neq \hat X]\)</span>, then
 <span class="math display">\[
     H(X|Y) \leq F_M(1-p_e) = p_e\log(M-1) + h(p_e)
@@ -508,7 +484,7 @@ To finish.
           </div>
         </div>
       </div>
-<a href="divergence.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="kullback-leibler-divergence.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="variational-measures-of-information.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

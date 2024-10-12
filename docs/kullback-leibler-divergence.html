@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Divergence | 6.7480 Notes</title>
-  <meta name="description" content="3 Divergence | 6.7480 Notes" />
+  <title>3 Kullback-Leibler Divergence | 6.7480 Notes</title>
+  <meta name="description" content="3 Kullback-Leibler Divergence | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Divergence | 6.7480 Notes" />
+  <meta property="og:title" content="3 Kullback-Leibler Divergence | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Divergence | 6.7480 Notes" />
+  <meta name="twitter:title" content="3 Kullback-Leibler Divergence | 6.7480 Notes" />
   
   
   
@@ -92,19 +92,18 @@
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
 <li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
+<li class="chapter" data-level="3" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html"><i class="fa fa-check"></i><b>3</b> Kullback-Leibler Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#kl-divergence"><i class="fa fa-check"></i>KL-Divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
 <ul>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mi"><i class="fa fa-check"></i>Conditional MI</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#sufficient-statistic"><i class="fa fa-check"></i>Sufficient statistic</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
@@ -125,7 +124,7 @@
 <li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
 <li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition-1"><i class="fa fa-check"></i>Definition</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#information-properties-mi"><i class="fa fa-check"></i>Information properties, MI</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#tv-and-hellinger-hypothesis-testing"><i class="fa fa-check"></i>TV and Hellinger, hypothesis testing</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
@@ -177,13 +176,14 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="divergence" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">3</span> Divergence<a href="divergence.html#divergence" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="kullback-leibler-divergence" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Kullback-Leibler Divergence<a href="kullback-leibler-divergence.html#kullback-leibler-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><span style="color:green">
 Divergence is a fundamental object in information theory.
-</span>
+</span> We begin with KL divergence and proceed
+later to more general <span class="math inline">\(f\)</span>-divergences.
 Shannon-entropy is related to KL-divergence by
-equation <a href="divergence.html#prp:entropyDivergenceRelation">3.3</a>.
+equation <a href="kullback-leibler-divergence.html#prp:entropyDivergenceRelation">3.3</a>.
 It sheds light on the following relations:</p>
 <ol style="list-style-type: decimal">
 <li>Entropy subadditivity <span class="math inline">\(H(A, B)\leq H(A)+H(B)\)</span>
@@ -193,13 +193,13 @@ sampling distribution is factorizable
      D(P_{AB} \|Q_AQ_B) \geq D(P_AP_B \| Q_AQ_B) = D(P_A\|Q_A) + D(P_B \|Q_B)
 \]</span>
 with equality iff <span class="math inline">\(P_{AB} = P_AP_B\)</span>
-(special case of full chain rule <a href="divergence.html#prp:specialDivChainRule">3.5</a>).</li>
+(special case of full chain rule <a href="kullback-leibler-divergence.html#prp:specialDivChainRule">3.5</a>).</li>
 <li>Conditional factorization: the definition of <span class="math inline">\(H(Y|X)\)</span> satisfying
 <span class="math display">\[
      H(Y|X) = H(X, Y) - H(X)
 \]</span>
 corresponds to the conditional factorization of divergence in
-<a href="divergence.html#prp:divergenceChainRule">3.2</a>
+<a href="kullback-leibler-divergence.html#prp:divergenceChainRule">3.2</a>
 <span class="math display">\[
      D(P_{Y|X} \| Q_{Y|X} \, | \, P_X) = D(P_{XY}|Q_{XY}) - D(P_Y \| P_X)
 \]</span></li>
@@ -229,16 +229,16 @@ In the function picture, composition is function composition
 <span class="math inline">\(f, g\mapsto (x\mapsto f(g(x))\)</span>, while multiplication corresponds
 to a more complicated operation.</li>
 <li>The singular most important tool for divergence is
-chain rule <a href="divergence.html#prp:divergenceChainRule">3.2</a>.</li>
+chain rule <a href="kullback-leibler-divergence.html#prp:divergenceChainRule">3.2</a>.</li>
 <li><span style="color:green">To produce conditional-quantity bounds, consider the joint quantity and
 decompose in <span class="math inline">\(2\)</span> different ways; this underpins the proof of KL-DPI and
 monotonicity of divergence under conditioning.
 </span></li>
-<li>The large deviations estimate <a href="divergence.html#cor:largeDevEstimate">3.3</a> demonstrates
+<li>The large deviations estimate <a href="kullback-leibler-divergence.html#cor:largeDevEstimate">3.3</a> demonstrates
 how KL gives a uniform (across all events)</li>
 </ol>
-<div id="kl-divergence" class="section level2 unnumbered hasAnchor">
-<h2>KL-Divergence<a href="divergence.html#kl-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="definition" class="section level2 unnumbered hasAnchor">
+<h2>Definition<a href="kullback-leibler-divergence.html#definition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
 <p><span id="def:unlabeled-div-16" class="definition"><strong>Definition 3.1  (KL-Divergence) </strong></span>Given distributions <span class="math inline">\(P, Q\)</span> on <span class="math inline">\(\mathcal A\)</span> with <span class="math inline">\(Q\)</span>
 being the reference measure, the (Kullback-Leibler)
@@ -299,7 +299,7 @@ producing the “candidate” distribution <span class="math inline">\(P\)</span
 </div>
 </div>
 <div id="differential-entropy" class="section level2 unnumbered hasAnchor">
-<h2>Differential entropy<a href="divergence.html#differential-entropy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Differential entropy<a href="kullback-leibler-divergence.html#differential-entropy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The differential entropy generalizes entropy to
 non-probability measures; it does not have many
 of the desirable properties of divergence, however
@@ -396,7 +396,7 @@ definite <span class="math inline">\(n\times n\)</span> matrices.</p>
 convexity follows from <span class="math inline">\(h(X) \leq (X|\lambda)\)</span>.</p>
 </div>
 <div id="channel-conditional-divergence" class="section level2 unnumbered hasAnchor">
-<h2>Channel, conditional divergence<a href="divergence.html#channel-conditional-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Channel, conditional divergence<a href="kullback-leibler-divergence.html#channel-conditional-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Information theorists see Markov kernels everywhere!</p>
 <div class="definition">
 <p><span id="def:unlabeled-div-23" class="definition"><strong>Definition 3.4  (Markov kernel (channel)) </strong></span>A Markov kernel is a function <span class="math inline">\(K(-|-)\)</span>,
@@ -462,7 +462,7 @@ the divergence between <span class="math inline">\(P, Q\)</span> given <span cla
 </div>
 </div>
 <div id="chain-rule-dpi" class="section level2 unnumbered hasAnchor">
-<h2>Chain Rule, DPI<a href="divergence.html#chain-rule-dpi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Chain Rule, DPI<a href="kullback-leibler-divergence.html#chain-rule-dpi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="proposition">
 <p><span id="prp:divergenceChainRule" class="proposition"><strong>Proposition 3.2  (chain rule) </strong></span></p>
 <span style="color:green">
@@ -544,13 +544,13 @@ Let <span class="math inline">\(m=|\mathcal B|\)</span>, the second claim follow
 </ol>
 </div>
 <p><em>Proof</em>: The unconditional expression follows
-from chain rule <a href="divergence.html#prp:divergenceChainRule">3.2</a>
+from chain rule <a href="kullback-leibler-divergence.html#prp:divergenceChainRule">3.2</a>
 <span class="math display">\[
         D(P_{Y|X} P_X\|Q_{Y|X} P_X) = D(P_{Y|X} P_X\|Q_{Y|X} P_X) - D(P_X\|P_X)
         = D(P_{Y|X} P_X\|Q_{Y|X} P_X)
     \]</span>
 The full chain rule follows from inductive application of the chain rule.
-For tensorization, see proposition <a href="divergence.html#prp:specialDivChainRule">3.5</a> below.</p>
+For tensorization, see proposition <a href="kullback-leibler-divergence.html#prp:specialDivChainRule">3.5</a> below.</p>
 <div class="proposition">
 <p><span id="prp:conditionIncDiv" class="proposition"><strong>Proposition 3.4  (conditioning increases divergence) </strong></span>Given <span class="math inline">\(P_{Y|X}, Q_{Y|X}, P_X\)</span>, we have
 <span class="math display">\[
@@ -582,7 +582,7 @@ Here <span class="math inline">\(D(P_X \| Q_X)=0\)</span>; the equality conditio
 \]</span>
 with equality saturated iff <span class="math inline">\(P\)</span> is factorizable.</p>
 </div>
-<p><em>Proof:</em> Use the second equality in the chain rule <a href="divergence.html#prp:divergenceChainRule">3.2</a>
+<p><em>Proof:</em> Use the second equality in the chain rule <a href="kullback-leibler-divergence.html#prp:divergenceChainRule">3.2</a>
 inductively to swap out <span class="math inline">\(Q_{X_j}\)</span>.</p>
 <div class="theorem">
 <p><span id="thm:klDPI" class="theorem"><strong>Theorem 3.5  (data-processing inequality (DPI)) </strong></span>Given a Markov kernel <span class="math inline">\(K:\mathcal X\to \mathcal Y\)</span> and

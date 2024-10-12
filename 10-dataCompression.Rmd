@@ -9,8 +9,17 @@ Fixing a source domain $\mca X$, we can define:
 
 Highlights include:
 
-1. The average compression length of the optimal single-shot lossless 
-    compressor (theorem \@ref(thm:optimalEncodingAvg)). 
+1. Compression length of the optimal single-shot lossless is dominated 
+    (within constant) by the entropy density 
+    (prop \@ref(prp:entDensityDomination)); 
+    this yields the expected encoding length 
+    (theorem \@ref(thm:optimalEncodingAvg))
+    and the distribution (theorem \@ref(thm:varCompOptDistribution)). 
+    This results in powerful optimal-coding asymptotics for i.i.d. 
+    (corollary \@ref(cor:iidAsymp)). 
+2. The optimal **single-shot** coding is given by 
+    definition \@ref(def:singleShotOpt). Optimal prefix-free code 
+    is given by Huffman code \@ref(def:huffman). 
 
 ## Source coding theorems {-}
 
@@ -34,17 +43,37 @@ Two immediate results of this definition:
 - Without loss of generality, we can sort $\mca X$ 
 so that $P(0)\geq P(1)\geq \cdots$. 
 
+We begin with several definitions. 
+
+:::{.definition name="entropy density"}
+Given a finite alphabet and fixing binary units, 
+the entropy density function of a source $X$ is 
+\[ 
+    i_X(a) = \log_2 \df 1 {P_X(a)}\implies H(X) = \Exp[i_X(x)] 
+\] 
+:::
+
+:::{.definition name="varentropy"}
+The varentropy $V(S)$ of a source $S$ is 
+\[ 
+    V(S) = \Var[i_S] 
+\] 
+Note that $H(S)^2 + V(S)^2 = \Exp[i_S^2]$. 
+:::
+
 :::{.definition name="stochastic dominance"}
 Given two real-valued stochastic variables $X, Y$, we say that $X\preceq Y$, 
 or $Y$ stochastically dominates $X$, if the CDF of $X$ dominates that of $Y$ 
-everywhere. 
+everywhere; this formalizes the notion that 
+$X$ is concentrated on smaller values. 
 :::
 
-:::{.definition name="optimal single-shot lossless compressor"}
+:::{.definition #singleShotOpt name="optimal single-shot lossless compressor"}
 For a down-sorted PMF $P(X)$, the optimal single-shot lossless compressor 
 assigns strings with increasing lengths to symbol $j\in \mca X=\mbb N$. 
 In particular, $l(f^*(j)) = \lfloor \log_2 j\rfloor$, where $l$ is the 
-string-length function. 
+string-length function. <span style="color:blue"> Let $L(j) = \lfloor \log_2 j \rfloor$ 
+denote the compression length of input $j$</span>. 
 :::
 
 An immediate corollary of the following result is that 
@@ -72,14 +101,27 @@ sorts the PMF in descending order:
 \] 
 </details>
 
-Working in units of bits, the average compression length of the 
-optimal encoding is $H(X)$. A coding theorem relates a fundamental 
-limit $\Exp[(l\circ f^*)(X)]$, which is an operational quantity, 
-to an information measure $H(X)$. 
+:::{.proposition #entDensityDomination name="entropy density dominates encoding length"}
+When $X$ is sorted (as in the case of optimal compressor), $L\preceq i_X$. 
+:::
+<details>
+<summary>Proof</summary>
+Note that $1/x \leq P_X(x)$, then 
+\[ 
+    L(x) = \lfloor \log_2 x\rfloor\leq -\log_2 \df 1 x \leq 
+    -\log_2 P_X(x) = i_X(x)
+\] 
+Then $L(x)\leq i_X(x)\implies L\preceq i_X$. 
+</details>
+
+A coding theorem is one that relates an operational, 
+intractable compression quantity (e.g. $\Exp[L(X)]$) 
+to an information measure (e.g. $H(X)$). 
 
 :::{.lemma}
 $H(X|L=k)\leq k$. This follows from that $X|L=k$ can 
-take at most $2^k$ values, the uniform distribution on which has entropy $k$. 
+take at most $2^k$ values, the uniform distribution 
+on which has entropy $k$. 
 :::
 
 :::{.lemma #finiteExpectationExtremality}
@@ -108,16 +150,13 @@ Let $p = 1 / \Exp[X]$ and note that $\Exp[xp] = 1,
 </details>
 
 :::{.theorem #optimalEncodingAvg name="average length of optimal encoding"}
-$H(X) - \log_2[e(H(X)+1)] \leq \Exp[(l\circ f^*)(X)] \leq H(X)$. 
+$H(X) - \log_2[e(H(X)+1)] \leq \Exp[L(X)] \leq H(X)$. 
 :::
 <details>
 <summary>Proof</summary>
-Let $L(X) = (l\circ f^*)(X)$, assume $X$ sorted w.l.o.g, 
-then $P_X(x) \leq 1/x$ and 
-\[ 
-    L(x) = \lfloor \log_2(x)\rfloor \leq \log_2 \df 1 {P_X(x)} 
-    \implies \Exp[L(x)] \leq \Exp \left[\log_2 \df 1 {P_X(x)}\right] = H(X)
-\] 
+Assume $X$ sorted w.l.o.g, 
+in light of proposition \@ref(prp:entDensityDomination), 
+we have $L\preceq i_X\implies \Exp[L] \leq H(X)$. 
 On the other hand, first note that $H(X|L=k)\leq k$ since $X|L=k$ can 
 take at most $2^k$ values, the uniform distribution on which has entropy $k$. 
 \begin{align}
@@ -129,3 +168,158 @@ take at most $2^k$ values, the uniform distribution on which has entropy $k$.
 \end{align}
 In the last tep steps, we used $x\log(1+1/x) \leq \log e$ and $H(X)\leq \Exp[L]$. 
 </details>
+
+
+:::{.theorem #varCompOptDistribution name="code length distribution of optimal compression"}
+$\forall \tau>0, k\geq 0$: 
+\[ 
+    \Pr\left[i_X(X)\leq k \right] \leq 
+    \Pr[L(X) \leq k] \leq 
+    \Pr\left[i_X(X) \leq k + \tau\right] + 2^{1-\tau}
+\] 
+In other words, $-\log_2 P_X$ stochastically dominates $L$ but 
+only up to a constant factor. 
+:::
+<span style="color:green">
+Proof idea: $\Pr[A]= \Pr[A, B] + \Pr[A, B^c] \leq \Pr[B] + \Pr[A, B^c]$
+</span>
+<details>
+<summary>Proof</summary>
+- Lower bound (achievability, or "compression length is smaller than"): 
+    proposition \@ref(prp:entDensityDomination). 
+- Upper bound (converse, or "compression length cannot be greater than"):
+\begin{align}
+    \Pr[L\leq k] 
+    &= \Pr[L \leq k, i_X(X)\leq k+\tau] + \Pr[L\leq k, i_X(X)> k+\tau] \\ 
+    &= \Pr[i_X\leq k+\tau] + (2^{k+1}-1) \sup_{i_X(X)>k+\tau} P_X(x) \\ 
+    &= \Pr[i_X\leq k + \tau] + 2^{1-\tau}
+\end{align}
+To bound the first quantity, we used $\Pr[A, B]\leq \Pr[B]$. For the second, 
+there are at most $2^{k+1}-1$ atoms of mass at most $2^{-k-\tau}$. 
+</details>
+
+We can consider the source as a random process $(S_1, S_2, \cdots)$, 
+group the first $n$ (blocklength) symbols into a supersymbol $S^n$. 
+
+:::{.corollary name="asymptotic optimal-coding properties"}
+Let $(S_1, S_2, \cdots)$ be a random process (such that $S^n$ is sorted) 
+and $U, V$ real-valued r.vs, then 
+\begin{align}
+    \df 1 n i_{S^n(S^n)}\xra d U 
+    &\iff \df 1 n L(S^n)\xra d U  \\ 
+    \df 1 {\sqrt n} \left[
+        i_{S^n}(S^n) - H(S^n)
+    \right] \xra d V & \iff \df 1 {\sqrt n} \left[
+        L(S^n) - H(S^n) 
+    \right] \xra d V 
+\end{align}
+:::
+<details>
+<summary>Proof</summary>
+To obtain the first result, apply \@ref(thm:varCompOptDistribution) 
+with $k=un$ and $\tau = \sqrt n$. For the second, 
+apply with $k=H(S^n) + \sqrt n u$ and $\tau = n^{1/4}$. 
+\begin{align}
+\Pr[i_X \leq H + \sqrt n u]  &\leq \Pr[L \leq H + \sqrt n u] 
+\leq \Pr[i_X \leq H + \sqrt n u + n^{1/4}] + 2^{1-n^{1/4}} \\ 
+\Pr \left[
+    \df {i_X - H} {\sqrt n} \leq u 
+\right] &\leq \Pr\left[
+    \df {L-H}{\sqrt n} \leq u 
+\right] \leq \Pr \left[
+    \df {i_X - H}{\sqrt n} \leq u + n^{-1/4}
+\right] + 2^{1-n^{1/4}}
+\end{align}
+</details>
+
+:::{.corollary #iidAsymp name="i.i.d asymptotics"}
+When $S_j$ are i.i.d, we have 
+
+1. $L(S^n)/n \xra P H(S)$. 
+2. If varentropy $V(S)<\infty$, then $V$ is Gaussian by CLT and 
+\[ 
+    \df 1 {\sqrt n V(S)} [L(S^n) - nH(S)] \xra d \mca N(0, 1) 
+\] 
+equivalently, in shorthand $L(S^n) \sim nH(S) + \sqrt{nV(S)} \mca N(0, 1)$. 
+:::
+
+## Uniquely decodable codes {-}
+
+We now focus on compressors whose output stream can be uniquely decoded. 
+We consider a finite alphabet $\mca A$ and let 
+$\mca A^*=\bigcup_{j=1}^\infty A^j$. 
+
+:::{.definition name="code extension, unique decodability, prefix code"}
+The symbol-by-symbol extension of $f:\mca A\to \{0, 1\}^*$ to 
+$A^*\to \{0, 1\}^*$ is obtained by concatenating outputs. 
+A compressor $f$ is uniquely decodable if its extension is injective; 
+it is a prefix (-free) code if no codeword is a prefix of each other. 
+:::
+
+Lossless codes $\supsetneq$ 
+uniquely decodable codes $\supsetneq$ prefix codes. Consider 
+
+- $f(a)=0, f(b)=1, f(c)=10$: lossless but not uniquely decodable.
+- $f(a)=0, f(b)=01, f(c)=011, f(d)=0111$: 
+    uniquely decodable but not prefix; decoder needs to look for the next $0$ 
+    to know when token ends. 
+- $f(a)=0, f(b)=10, f(c)=11$: prefix code. 
+
+Prefix codes are in bijective correspondence with binary trees. 
+
+:::{.theorem #kraftMcMillan name="Kraft-McMillan"}
+Given a uniquely decodable $f:\mca A\to \{0, 1\}^*$ 
+and let $L=l\circ f$ be the code length function. Then $f$ 
+satisfies the Kraft inequality 
+\[ 
+    \sum_{a\in \mca A} 2^{-L(a)} \leq 1 
+\] 
+Conversely, for any set of code length $\{L(a):a\in \mca A\}$ 
+satisfying the Kraft inequality, there exists an efficiently 
+computable prefix code with length function $L$. 
+:::
+
+<details>
+<summary>Proof</summary>
+Let $f$ be a uniquely decodable code. Assuming $\mca A$ finite 
+and define $L^*=\max_{a\in \mca A} L(a)$. Let 
+\[ 
+    G(f, z) = \sum_{a\in \mca A} z^{L(a)} 
+    = \sum_{l=0}^{L^*} A(f, l) z^l 
+\] 
+here $A(f, l)$ is the number of codewords of length $l$ in $f$. 
+Consider the extension $f^{k\geq 1}$ and note that 
+\[ 
+    G(f^k, z) = \sum_{a^k \in \mca A^k} z^{L(a_1)+\cdots + L(a_k)} 
+    = G(f, z)^k = \sum_{l=0}^{kL} A(f^k, l)z^l
+\] 
+The key step here is the combinatorial equation 
+$G(f^k, z) = G(f, z)^k$. Since $f^k$ is lossless, we have 
+$A(f^k, \forall l)\leq 2^l$, then 
+
+- $G(f^k, 1/2) \leq kL$ for all $k$, then 
+    $G(f, 1/2) = G(f^k, 1/2)^{1/k} \leq (kL)^{1/k}$. 
+- Take the limit $k\to \infty (kL)^{1/k}=1$ 
+    to obtain $G(f, k)\leq 1$. 
+The countably infinite case concludes by the arbitrariness of 
+a finite subset $\mca A'\subset \mca A$. 
+For the converse, without loss of generality relabel $\mca A$ 
+to $\mca N$ and assume $1\leq L(1)\leq L(2) \leq \cdots$. 
+Given a set of lengths $\{L(a\in \mca A)\}$ 
+satisfying $\sum_{a\in \mca A} 2^{-L(a)} \leq 1$, define for each $j$ 
+\[ 
+    a_j = \sum_{k=1}^{j-1} 2^{-L(k)} \leq 1, \quad a_1 = 0 
+\] 
+Define $f(j)$ as the first $L(j)$ bits in the 
+binary expansion of $a_j$. 
+</details>
+
+In particular, the Kraft inequality implies that the sorted prefix-code 
+lengths can be at most $1, 2, \cdots$. One can also thus formulate 
+the prefix-code with _optimal length_ as the following integer-programming 
+problem: 
+\[ 
+    L^*(X) = \min_{L:\mca A\to \mbb N} 
+    \sum_{a\in \mca A} P_X(a) L(a) \text{  s.t.  }
+    \sum_{a\in \mca A}2^{-L(a)} \leq 1
+\] 

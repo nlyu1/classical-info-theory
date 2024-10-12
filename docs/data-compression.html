@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10 Data compression | 6.7480 Notes</title>
   <meta name="description" content="10 Data compression | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10 Data compression | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-11" />
+<meta name="date" content="2024-10-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,6 +74,8 @@
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#recurring-themes"><i class="fa fa-check"></i>Recurring themes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#insightful-proof-techniques"><i class="fa fa-check"></i>Insightful proof techniques</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
 <ul>
@@ -85,24 +87,23 @@
 <li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#combinatorial-properties"><i class="fa fa-check"></i>Combinatorial properties</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics and geometry</a>
+<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics</a>
 <ul>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
+<li class="chapter" data-level="3" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html"><i class="fa fa-check"></i><b>3</b> Kullback-Leibler Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#kl-divergence"><i class="fa fa-check"></i>KL-Divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
 <ul>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mi"><i class="fa fa-check"></i>Conditional MI</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#sufficient-statistic"><i class="fa fa-check"></i>Sufficient statistic</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
@@ -123,7 +124,7 @@
 <li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
 <li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition-1"><i class="fa fa-check"></i>Definition</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#information-properties-mi"><i class="fa fa-check"></i>Information properties, MI</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#tv-and-hellinger-hypothesis-testing"><i class="fa fa-check"></i>TV and Hellinger, hypothesis testing</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
@@ -139,6 +140,7 @@
 <li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
 <ul>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
 <ul>
@@ -184,8 +186,14 @@
 </ul>
 <p>Highlights include:</p>
 <ol style="list-style-type: decimal">
-<li>The average compression length of the optimal single-shot lossless
-compressor (theorem <a href="data-compression.html#thm:optimalEncodingAvg">10.1</a>).</li>
+<li>Compression length of the optimal single-shot lossless is dominated
+(within constant) by the entropy density
+(prop <a href="data-compression.html#prp:entDensityDomination">10.2</a>);
+this yields the expected encoding length
+(theorem <a href="data-compression.html#thm:optimalEncodingAvg">10.1</a>)
+and the distribution (theorem <a href="data-compression.html#thm:varCompOptDistribution">10.2</a>).
+This results in powerful optimal-coding asymptotics for i.i.d.
+(corollary <a href="data-compression.html#cor:iidAsymp">10.2</a>).</li>
 </ol>
 <div id="source-coding-theorems" class="section level2 unnumbered hasAnchor">
 <h2>Source coding theorems<a href="data-compression.html#source-coding-theorems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -195,7 +203,7 @@ compressing many then decompressing them; this we do not
 need to impose any constraints on <span class="math inline">\(f\)</span>, such as prefix-freeness or
 unique-decodability.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-76" class="definition"><strong>Definition 10.1  (variable-length single-shot lossless compression) </strong></span>A pair <span class="math inline">\((f, g)\)</span> is a variable-length single-shot lossless compressor if:</p>
+<p><span id="def:unlabeled-div-74" class="definition"><strong>Definition 10.1  (variable-length single-shot lossless compression) </strong></span>A pair <span class="math inline">\((f, g)\)</span> is a variable-length single-shot lossless compressor if:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(f\)</span> is of the type <span class="math inline">\(f:\mathcal X\to \{0, 1\}^*\)</span>. The image of <span class="math inline">\(f\)</span>
 is a codebook, and an element <span class="math inline">\(f(x)\)</span> in the image of <span class="math inline">\(f\)</span> is a codeword.</li>
@@ -209,16 +217,33 @@ is a codebook, and an element <span class="math inline">\(f(x)\)</span> in the i
 <li>Without loss of generality, we can sort <span class="math inline">\(\mathcal X\)</span>
 so that <span class="math inline">\(P(0)\geq P(1)\geq \cdots\)</span>.</li>
 </ul>
+<p>We begin with several definitions.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-77" class="definition"><strong>Definition 10.2  (stochastic dominance) </strong></span>Given two real-valued stochastic variables <span class="math inline">\(X, Y\)</span>, we say that <span class="math inline">\(X\preceq Y\)</span>,
-or <span class="math inline">\(Y\)</span> stochastically dominates <span class="math inline">\(X\)</span>, if the CDF of <span class="math inline">\(X\)</span> dominates that of <span class="math inline">\(Y\)</span>
-everywhere.</p>
+<p><span id="def:unlabeled-div-75" class="definition"><strong>Definition 10.2  (entropy density) </strong></span>Given a finite alphabet and fixing binary units,
+the entropy density function of a source <span class="math inline">\(X\)</span> is
+<span class="math display">\[
+    i_X(a) = \log_2 \dfrac 1 {P_X(a)}\implies H(X) = \mathbb E[i_X(x)]
+\]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-78" class="definition"><strong>Definition 10.3  (optimal single-shot lossless compressor) </strong></span>For a down-sorted PMF <span class="math inline">\(P(X)\)</span>, the optimal single-shot lossless compressor
+<p><span id="def:unlabeled-div-76" class="definition"><strong>Definition 10.3  (varentropy) </strong></span>The varentropy <span class="math inline">\(V(S)\)</span> of a source <span class="math inline">\(S\)</span> is
+<span class="math display">\[
+    V(S) = \mathrm{Var}[i_S]
+\]</span>
+Note that <span class="math inline">\(H(S)^2 + V(S)^2 = \mathbb E[i_S^2]\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-77" class="definition"><strong>Definition 10.4  (stochastic dominance) </strong></span>Given two real-valued stochastic variables <span class="math inline">\(X, Y\)</span>, we say that <span class="math inline">\(X\preceq Y\)</span>,
+or <span class="math inline">\(Y\)</span> stochastically dominates <span class="math inline">\(X\)</span>, if the CDF of <span class="math inline">\(X\)</span> dominates that of <span class="math inline">\(Y\)</span>
+everywhere; this formalizes the notion that
+<span class="math inline">\(X\)</span> is concentrated on smaller values.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-78" class="definition"><strong>Definition 10.5  (optimal single-shot lossless compressor) </strong></span>For a down-sorted PMF <span class="math inline">\(P(X)\)</span>, the optimal single-shot lossless compressor
 assigns strings with increasing lengths to symbol <span class="math inline">\(j\in \mathcal X=\mathbb N\)</span>.
 In particular, <span class="math inline">\(l(f^*(j)) = \lfloor \log_2 j\rfloor\)</span>, where <span class="math inline">\(l\)</span> is the
-string-length function.</p>
+string-length function. <span style="color:blue"> Let <span class="math inline">\(L(j) = \lfloor \log_2 j \rfloor\)</span>
+denote the compression length of input <span class="math inline">\(j\)</span></span>.</p>
 </div>
 <p>An immediate corollary of the following result is that
 <span class="math inline">\(\mathbb E[(l\circ f^*)(X)] \leq \mathbb E[(l\circ f)(X)]\)</span> for any <span class="math inline">\(X\)</span>.</p>
@@ -245,13 +270,27 @@ sorts the PMF in descending order:
     \leq \sum_{x\in A^*_k} P_X(x) = \mathrm{Pr}[(l\circ f^*)(X) \leq k]
 \]</span>
 </details>
-<p>Working in units of bits, the average compression length of the
-optimal encoding is <span class="math inline">\(H(X)\)</span>. A coding theorem relates a fundamental
-limit <span class="math inline">\(\mathbb E[(l\circ f^*)(X)]\)</span>, which is an operational quantity,
-to an information measure <span class="math inline">\(H(X)\)</span>.</p>
+<div class="proposition">
+<p><span id="prp:entDensityDomination" class="proposition"><strong>Proposition 10.2  (entropy density dominates encoding length) </strong></span>When <span class="math inline">\(X\)</span> is sorted (as in the case of optimal compressor), <span class="math inline">\(L\preceq i_X\)</span>.</p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+Note that <span class="math inline">\(1/x \leq P_X(x)\)</span>, then
+<span class="math display">\[
+    L(x) = \lfloor \log_2 x\rfloor\leq -\log_2 \dfrac 1 x \leq
+    -\log_2 P_X(x) = i_X(x)
+\]</span>
+Then <span class="math inline">\(L(x)\leq i_X(x)\implies L\preceq i_X\)</span>.
+</details>
+<p>A coding theorem is one that relates an operational,
+intractable compression quantity (e.g. <span class="math inline">\(\mathbb E[L(X)]\)</span>)
+to an information measure (e.g. <span class="math inline">\(H(X)\)</span>).</p>
 <div class="lemma">
 <p><span id="lem:unlabeled-div-80" class="lemma"><strong>Lemma 10.1  </strong></span><span class="math inline">\(H(X|L=k)\leq k\)</span>. This follows from that <span class="math inline">\(X|L=k\)</span> can
-take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution on which has entropy <span class="math inline">\(k\)</span>.</p>
+take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution
+on which has entropy <span class="math inline">\(k\)</span>.</p>
 </div>
 <div class="lemma">
 <p><span id="lem:finiteExpectationExtremality" class="lemma"><strong>Lemma 10.2  </strong></span>For <span class="math inline">\(X\)</span> taking values on <span class="math inline">\(\mathbb N=\{1, 2, \cdots\}\)</span> and <span class="math inline">\(\mathbb E[X]&lt;\infty\)</span>,
@@ -265,8 +304,7 @@ The inequality is saturated by the geometric distribution.</p>
 <summary>
 Proof
 </summary>
-Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1,
-\mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
+Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1, \mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
 <span class="math display">\[\begin{align}
     H(X) - \mathbb E[X] h(p)
     &amp;= \mathbb E\left[-\log p(x) - x[-p\log p - \bar p\log \bar p]\right] \\
@@ -280,18 +318,15 @@ Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <spa
 \end{align}\]</span>
 </details>
 <div class="theorem">
-<p><span id="thm:optimalEncodingAvg" class="theorem"><strong>Theorem 10.1  (average length of optimal encoding) </strong></span><span class="math inline">\(H(X) - \log_2[e(H(X)+1)] \leq \mathbb E[(l\circ f^*)(X)] \leq H(X)\)</span>.</p>
+<p><span id="thm:optimalEncodingAvg" class="theorem"><strong>Theorem 10.1  (average length of optimal encoding) </strong></span><span class="math inline">\(H(X) - \log_2[e(H(X)+1)] \leq \mathbb E[L(X)] \leq H(X)\)</span>.</p>
 </div>
 <details>
 <summary>
 Proof
 </summary>
-Let <span class="math inline">\(L(X) = (l\circ f^*)(X)\)</span>, assume <span class="math inline">\(X\)</span> sorted w.l.o.g,
-then <span class="math inline">\(P_X(x) \leq 1/x\)</span> and
-<span class="math display">\[
-    L(x) = \lfloor \log_2(x)\rfloor \leq \log_2 \dfrac 1 {P_X(x)}
-    \implies \mathbb E[L(x)] \leq \mathbb E\left[\log_2 \dfrac 1 {P_X(x)}\right] = H(X)
-\]</span>
+Assume <span class="math inline">\(X\)</span> sorted w.l.o.g,
+in light of proposition <a href="data-compression.html#prp:entDensityDomination">10.2</a>,
+we have <span class="math inline">\(L\preceq i_X\implies \mathbb E[L] \leq H(X)\)</span>.
 On the other hand, first note that <span class="math inline">\(H(X|L=k)\leq k\)</span> since <span class="math inline">\(X|L=k\)</span> can
 take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution on which has entropy <span class="math inline">\(k\)</span>.
 <span class="math display">\[\begin{align}
@@ -303,6 +338,161 @@ take at most <span class="math inline">\(2^k\)</span> values, the uniform distri
 \end{align}\]</span>
 In the last tep steps, we used <span class="math inline">\(x\log(1+1/x) \leq \log e\)</span> and <span class="math inline">\(H(X)\leq \mathbb E[L]\)</span>.
 </details>
+<div class="theorem">
+<p><span id="thm:varCompOptDistribution" class="theorem"><strong>Theorem 10.2  (code length distribution of optimal compression) </strong></span><span class="math inline">\(\forall \tau&gt;0, k\geq 0\)</span>:
+<span class="math display">\[
+    \mathrm{Pr}\left[i_X(X)\leq k \right] \leq
+    \mathrm{Pr}[L(X) \leq k] \leq
+    \mathrm{Pr}\left[i_X(X) \leq k + \tau\right] + 2^{1-\tau}
+\]</span>
+In other words, <span class="math inline">\(-\log_2 P_X\)</span> stochastically dominates <span class="math inline">\(L\)</span> but
+only up to a constant factor.</p>
+</div>
+<span style="color:green">
+Proof idea: <span class="math inline">\(\mathrm{Pr}[A]= \mathrm{Pr}[A, B] + \mathrm{Pr}[A, B^c] \leq \mathrm{Pr}[B] + \mathrm{Pr}[A, B^c]\)</span>
+</span>
+<details>
+<summary>
+Proof
+</summary>
+<ul>
+<li>Lower bound (achievability, or “compression length is smaller than”):
+proposition <a href="data-compression.html#prp:entDensityDomination">10.2</a>.</li>
+<li>Upper bound (converse, or “compression length cannot be greater than”):
+<span class="math display">\[\begin{align}
+  \mathrm{Pr}[L\leq k]
+  &amp;= \mathrm{Pr}[L \leq k, i_X(X)\leq k+\tau] + \mathrm{Pr}[L\leq k, i_X(X)&gt; k+\tau] \\
+  &amp;= \mathrm{Pr}[i_X\leq k+\tau] + (2^{k+1}-1) \sup_{i_X(X)&gt;k+\tau} P_X(x) \\
+  &amp;= \mathrm{Pr}[i_X\leq k + \tau] + 2^{1-\tau}
+\end{align}\]</span>
+To bound the first quantity, we used <span class="math inline">\(\mathrm{Pr}[A, B]\leq \mathrm{Pr}[B]\)</span>. For the second,
+there are at most <span class="math inline">\(2^{k+1}-1\)</span> atoms of mass at most <span class="math inline">\(2^{-k-\tau}\)</span>.</li>
+</ul>
+</details>
+<p>We can consider the source as a random process <span class="math inline">\((S_1, S_2, \cdots)\)</span>,
+group the first <span class="math inline">\(n\)</span> (blocklength) symbols into a supersymbol <span class="math inline">\(S^n\)</span>.</p>
+<div class="corollary">
+<p><span id="cor:unlabeled-div-81" class="corollary"><strong>Corollary 10.1  (asymptotic optimal-coding properties) </strong></span>Let <span class="math inline">\((S_1, S_2, \cdots)\)</span> be a random process (such that <span class="math inline">\(S^n\)</span> is sorted)
+and <span class="math inline">\(U, V\)</span> real-valued r.vs, then
+<span class="math display">\[\begin{align}
+    \dfrac 1 n i_{S^n(S^n)}\xrightarrow d U
+    &amp;\iff \dfrac 1 n L(S^n)\xrightarrow d U  \\
+    \dfrac 1 {\sqrt n} \left[
+        i_{S^n}(S^n) - H(S^n)
+    \right] \xrightarrow d V &amp; \iff \dfrac 1 {\sqrt n} \left[
+        L(S^n) - H(S^n)
+    \right] \xrightarrow d V
+\end{align}\]</span></p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+To obtain the first result, apply <a href="data-compression.html#thm:varCompOptDistribution">10.2</a>
+with <span class="math inline">\(k=un\)</span> and <span class="math inline">\(\tau = \sqrt n\)</span>. For the second,
+apply with <span class="math inline">\(k=H(S^n) + \sqrt n u\)</span> and <span class="math inline">\(\tau = n^{1/4}\)</span>.
+<span class="math display">\[\begin{align}
+\mathrm{Pr}[i_X \leq H + \sqrt n u]  &amp;\leq \mathrm{Pr}[L \leq H + \sqrt n u]
+\leq \mathrm{Pr}[i_X \leq H + \sqrt n u + n^{1/4}] + 2^{1-n^{1/4}} \\
+\mathrm{Pr}\left[
+    \dfrac{i_X - H} {\sqrt n} \leq u
+\right] &amp;\leq \mathrm{Pr}\left[
+    \dfrac{L-H}{\sqrt n} \leq u
+\right] \leq \mathrm{Pr}\left[
+    \dfrac{i_X - H}{\sqrt n} \leq u + n^{-1/4}
+\right] + 2^{1-n^{1/4}}
+\end{align}\]</span>
+</details>
+<div class="corollary">
+<p><span id="cor:iidAsymp" class="corollary"><strong>Corollary 10.2  (i.i.d asymptotics) </strong></span>When <span class="math inline">\(S_j\)</span> are i.i.d, we have</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(L(S^n)/n \xrightarrow P H(S)\)</span>.</li>
+<li>If varentropy <span class="math inline">\(V(S)&lt;\infty\)</span>, then <span class="math inline">\(V\)</span> is Gaussian by CLT and
+<span class="math display">\[
+\dfrac 1 {\sqrt n V(S)} [L(S^n) - nH(S)] \xrightarrow d \mathcal N(0, 1)
+\]</span>
+equivalently, in shorthand <span class="math inline">\(L(S^n) \sim nH(S) + \sqrt{nV(S)} \mathcal N(0, 1)\)</span>.</li>
+</ol>
+</div>
+</div>
+<div id="uniquely-decodable-codes" class="section level2 unnumbered hasAnchor">
+<h2>Uniquely decodable codes<a href="data-compression.html#uniquely-decodable-codes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We now focus on compressors whose output stream can be uniquely decoded.
+We consider a finite alphabet <span class="math inline">\(\mathcal A\)</span> and let
+<span class="math inline">\(\mathcal A^*=\bigcup_{j=1}^\infty A^j\)</span>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-82" class="definition"><strong>Definition 10.6  (code extension, unique decodability, prefix code) </strong></span>The symbol-by-symbol extension of <span class="math inline">\(f:\mathcal A\to \{0, 1\}^*\)</span> to
+<span class="math inline">\(A^*\to \{0, 1\}^*\)</span> is obtained by concatenating outputs.
+A compressor <span class="math inline">\(f\)</span> is uniquely decodable if its extension is injective;
+it is a prefix (-free) code if no codeword is a prefix of each other.</p>
+</div>
+<p>Lossless codes <span class="math inline">\(\supsetneq\)</span>
+uniquely decodable codes <span class="math inline">\(\supsetneq\)</span> prefix codes. Consider</p>
+<ul>
+<li><span class="math inline">\(f(a)=0, f(b)=1, f(c)=10\)</span>: lossless but not uniquely decodable.</li>
+<li><span class="math inline">\(f(a)=0, f(b)=01, f(c)=011, f(d)=0111\)</span>:
+uniquely decodable but not prefix; decoder needs to look for the next <span class="math inline">\(0\)</span>
+to know when token ends.</li>
+<li><span class="math inline">\(f(a)=0, f(b)=10, f(c)=11\)</span>: prefix code.</li>
+</ul>
+<p>Prefix codes are in bijective correspondence with binary trees.</p>
+<div class="theorem">
+<p><span id="thm:kraftMcMillan" class="theorem"><strong>Theorem 10.3  (Kraft-McMillan) </strong></span>Given a uniquely decodable <span class="math inline">\(f:\mathcal A\to \{0, 1\}^*\)</span>
+and let <span class="math inline">\(L=l\circ f\)</span> be the code length function. Then <span class="math inline">\(f\)</span>
+satisfies the Kraft inequality
+<span class="math display">\[
+    \sum_{a\in \mathcal A} 2^{-L(a)} \leq 1
+\]</span>
+Conversely, for any set of code length <span class="math inline">\(\{L(a):a\in \mathcal A\}\)</span>
+satisfying the Kraft inequality, there exists an efficiently
+computable prefix code with length function <span class="math inline">\(L\)</span>.</p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+<p>Let <span class="math inline">\(f\)</span> be a uniquely decodable code. Assuming <span class="math inline">\(\mathcal A\)</span> finite
+and define <span class="math inline">\(L^*=\max_{a\in \mathcal A} L(a)\)</span>. Let
+<span class="math display">\[
+    G(f, z) = \sum_{a\in \mathcal A} z^{L(a)}
+    = \sum_{l=0}^{L^*} A(f, l) z^l
+\]</span>
+here <span class="math inline">\(A(f, l)\)</span> is the number of codewords of length <span class="math inline">\(l\)</span> in <span class="math inline">\(f\)</span>.
+Consider the extension <span class="math inline">\(f^{k\geq 1}\)</span> and note that
+<span class="math display">\[
+    G(f^k, z) = \sum_{a^k \in \mathcal A^k} z^{L(a_1)+\cdots + L(a_k)}
+    = G(f, z)^k = \sum_{l=0}^{kL} A(f^k, l)z^l
+\]</span>
+The key step here is the combinatorial equation
+<span class="math inline">\(G(f^k, z) = G(f, z)^k\)</span>. Since <span class="math inline">\(f^k\)</span> is lossless, we have
+<span class="math inline">\(A(f^k, \forall l)\leq 2^l\)</span>, then</p>
+<ul>
+<li><span class="math inline">\(G(f^k, 1/2) \leq kL\)</span> for all <span class="math inline">\(k\)</span>, then
+<span class="math inline">\(G(f, 1/2) = G(f^k, 1/2)^{1/k} \leq (kL)^{1/k}\)</span>.</li>
+<li>Take the limit <span class="math inline">\(k\to \infty (kL)^{1/k}=1\)</span>
+to obtain <span class="math inline">\(G(f, k)\leq 1\)</span>.
+The countably infinite case concludes by the arbitrariness of
+a finite subset <span class="math inline">\(\mathcal A&#39;\subset \mathcal A\)</span>.
+For the converse, without loss of generality relabel <span class="math inline">\(\mathcal A\)</span>
+to <span class="math inline">\(\mathcal N\)</span> and assume <span class="math inline">\(1\leq L(1)\leq L(2) \leq \cdots\)</span>.
+Given a set of lengths <span class="math inline">\(\{L(a\in \mathcal A)\}\)</span>
+satisfying <span class="math inline">\(\sum_{a\in \mathcal A} 2^{-L(a)} \leq 1\)</span>, define for each <span class="math inline">\(j\)</span>
+<span class="math display">\[
+  a_j = \sum_{k=1}^{j-1} 2^{-L(k)} \leq 1, \quad a_1 = 0
+\]</span>
+Define <span class="math inline">\(f(j)\)</span> as the first <span class="math inline">\(L(j)\)</span> bits in the
+binary expansion of <span class="math inline">\(a_j\)</span>.</li>
+</ul>
+</details>
+<p>In particular, the Kraft inequality implies that the sorted prefix-code
+lengths can be at most <span class="math inline">\(1, 2, \cdots\)</span>. One can also thus formulate
+the prefix-code with optimal code length as the following integer-programming
+problem:
+<span class="math display">\[
+    L^*(X) = \min_{L:\mathcal A\to \mathbb N}
+    \sum_{a\in \mathcal A} P_X(a) L(a) \text{  s.t.  }
+    \sum_{a\in \mathcal A}2^{-L(a)} \leq 1
+\]</span></p>
 
 </div>
 </div>

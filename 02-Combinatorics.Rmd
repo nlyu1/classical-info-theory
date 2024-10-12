@@ -1,4 +1,4 @@
-# Entropy method in combinatorics and geometry 
+# Entropy method in combinatorics
 
 To bound the cardinality of a set $\mca C$, consider drawing 
 an element uniformly at random from $\mca C$, whose entropy 

@@ -43,10 +43,13 @@ link-citations: true
 \newcommand{\JS}{\mrm{JS}}
 \newcommand{\ot}{\otimes}
 
+\newcommand{\xra}{\xrightarrow}
+
 
 
 # Preface {-}
 
+## Recurring themes {-}
 Fundamentally, information and entropy captures 
 how our uncertainty in a quantity changes after 
 observations. Some recurring themes in the book are: 
@@ -76,7 +79,7 @@ observations. Some recurring themes in the book are:
     bound the event for a tractable distribution, bound the divergence between the tractable 
     and given distribution, and we can bound the event for the given distribution. 
 
-The foundational results in this book include:
+Foundational results in this book include:
 
 1. Additive decomposition of KL. 
 2. <u>Golden formula</u>: variational characterization of mutual information. 
@@ -90,7 +93,7 @@ The foundational results in this book include:
     $\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)$ 
     and decays quadratically (theorem \@ref(thm:localChiExpansion)). 
 
-Useful proof ideas:
+## Insightful proof techniques {-}
 
 1. Asymptotic analysis proofs: rewrite a difference as an integral, then 
     apply the monotone convergence theorem. 
@@ -121,6 +124,9 @@ Useful proof ideas:
     then upper-bound the joint-entropy by marginal bound, Han's inequality, or chain rule. 
 7. Typicality methods (compression): break region into tractable region of 
     large probability and difficult region with low probability. 
+    - $\Pr[A]= \Pr[A, B] + \Pr[A, B^c] \leq \Pr[B] + \Pr[A, B^c]$ then bound 
+    $\Pr[A, B^c]$ through atypicality of $B^c$:
+    soure coding distribution theorem \@ref(thm:varCompOptDistribution). 
 8. Break a single $\sup$ into nested ones. 
     - Solve the inner $\sup$ analytically: 
     useful characterization of $\chi^2$ \@ref(eq:chiStatVar). 
@@ -158,8 +164,6 @@ fisher information, mutual information.
 Mandatory:
 
 1. Gaussian saddle-point. 
-2. Variational characterizations of $f$-divergences. 
-3. Refine TV and Hellinger. 
 
 Optional: 
 

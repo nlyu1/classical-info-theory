@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 f-Divergence | 6.7480 Notes</title>
   <meta name="description" content="8 f-Divergence | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 f-Divergence | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-11" />
+<meta name="date" content="2024-10-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,6 +74,8 @@
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#recurring-themes"><i class="fa fa-check"></i>Recurring themes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#insightful-proof-techniques"><i class="fa fa-check"></i>Insightful proof techniques</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
 <ul>
@@ -85,24 +87,23 @@
 <li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="entropy.html"><a href="entropy.html#combinatorial-properties"><i class="fa fa-check"></i>Combinatorial properties</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics and geometry</a>
+<li class="chapter" data-level="2" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html"><i class="fa fa-check"></i><b>2</b> Entropy method in combinatorics</a>
 <ul>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
-<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics-and-geometry.html"><a href="entropy-method-in-combinatorics-and-geometry.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#binary-vectors-of-average-weights"><i class="fa fa-check"></i>Binary vectors of average weights</a></li>
+<li class="chapter" data-level="" data-path="entropy-method-in-combinatorics.html"><a href="entropy-method-in-combinatorics.html#counting-subgraphs"><i class="fa fa-check"></i>Counting subgraphs</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="divergence.html"><a href="divergence.html"><i class="fa fa-check"></i><b>3</b> Divergence</a>
+<li class="chapter" data-level="3" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html"><i class="fa fa-check"></i><b>3</b> Kullback-Leibler Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#kl-divergence"><i class="fa fa-check"></i>KL-Divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
-<li class="chapter" data-level="" data-path="divergence.html"><a href="divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#differential-entropy"><i class="fa fa-check"></i>Differential entropy</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#channel-conditional-divergence"><i class="fa fa-check"></i>Channel, conditional divergence</a></li>
+<li class="chapter" data-level="" data-path="kullback-leibler-divergence.html"><a href="kullback-leibler-divergence.html#chain-rule-dpi"><i class="fa fa-check"></i>Chain Rule, DPI</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
 <ul>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mi"><i class="fa fa-check"></i>Conditional MI</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#sufficient-statistic"><i class="fa fa-check"></i>Sufficient statistic</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
@@ -123,7 +124,7 @@
 <li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
 <li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
 <ul>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition"><i class="fa fa-check"></i>Definition</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition-1"><i class="fa fa-check"></i>Definition</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#information-properties-mi"><i class="fa fa-check"></i>Information properties, MI</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#tv-and-hellinger-hypothesis-testing"><i class="fa fa-check"></i>TV and Hellinger, hypothesis testing</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
@@ -139,6 +140,7 @@
 <li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
 <ul>
 <li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
 <ul>
@@ -215,10 +217,10 @@ by the Fisher information <a href="f-divergence.html#thm:localFisherDiv">8.13</a
 <li>Fisher information matrix is non-negative, monotonic, has its own
 chain rule <a href="f-divergence.html#prp:fisherChainRule">8.10</a> and variational characterization.</li>
 </ol>
-<div id="definition" class="section level2 unnumbered hasAnchor">
-<h2>Definition<a href="f-divergence.html#definition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="definition-1" class="section level2 unnumbered hasAnchor">
+<h2>Definition<a href="f-divergence.html#definition-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:unlabeled-div-50" class="definition"><strong>Definition 8.1  (f-divergence) </strong></span>Given a convex function <span class="math inline">\(f:(0, \infty)\to \mathbb R\)</span> with <span class="math inline">\(f(1)=0\)</span>,
+<p><span id="def:unlabeled-div-48" class="definition"><strong>Definition 8.1  (f-divergence) </strong></span>Given a convex function <span class="math inline">\(f:(0, \infty)\to \mathbb R\)</span> with <span class="math inline">\(f(1)=0\)</span>,
 for every two probability distributions over
 <span class="math inline">\(\mathcal X\)</span>, if <span class="math inline">\(P\ll Q\)</span> then the <span class="math inline">\(f\)</span> divergence is
 <span class="math display">\[
@@ -282,7 +284,7 @@ is a metric.</li>
 \]</span></li>
 </ol>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-51" class="proposition"><strong>Proposition 8.1  </strong></span><span class="math inline">\(\mathrm{TV}(P, Q) = \dfrac 1 2 \int |dP - dQ| = 1 - \int d(P\wedge Q)\)</span>.</p>
+<p><span id="prp:unlabeled-div-49" class="proposition"><strong>Proposition 8.1  </strong></span><span class="math inline">\(\mathrm{TV}(P, Q) = \dfrac 1 2 \int |dP - dQ| = 1 - \int d(P\wedge Q)\)</span>.</p>
 </div>
 <details>
 <summary>
@@ -299,14 +301,14 @@ Proof
 \end{align}\]</span>
 </details>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-52" class="proposition"><strong>Proposition 8.2  </strong></span>The following quantities derived from divergences are
+<p><span id="prp:unlabeled-div-50" class="proposition"><strong>Proposition 8.2  </strong></span>The following quantities derived from divergences are
 metrics on the space of probability distributions
 <span class="math display">\[
     \mathrm{TV}(P, Q), \quad H(P, Q), \quad \sqrt{\mathrm{JS}(P, Q)}, \quad \sqrt{\mathrm{LC}(P, Q)}
 \]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-53" class="proposition"><strong>Proposition 8.3  (closure properties) </strong></span></p>
+<p><span id="prp:unlabeled-div-51" class="proposition"><strong>Proposition 8.3  (closure properties) </strong></span></p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(D_f(Q \| P) = D_g(P \|Q)\)</span> for <span class="math inline">\(g(x) = xf(1/x)\)</span>.</li>
 <li><span class="math inline">\(D_f(P\|Q)\)</span> is a <span class="math inline">\(f\)</span>-divergence, then
@@ -419,7 +421,7 @@ Inequality is saturated when, for every <span class="math inline">\(x\)</span>,
 <span class="math inline">\(P_{Y|X=x}=Q_{Y|X=x}\)</span>.
 </details>
 <div class="definition">
-<p><span id="def:unlabeled-div-54" class="definition"><strong>Definition 8.2  (conditional f-divergence) </strong></span>Given <span class="math inline">\(P_{Y|X}, Q_{Y|X}\)</span> and <span class="math inline">\(P_X\)</span>, the conditional
+<p><span id="def:unlabeled-div-52" class="definition"><strong>Definition 8.2  (conditional f-divergence) </strong></span>Given <span class="math inline">\(P_{Y|X}, Q_{Y|X}\)</span> and <span class="math inline">\(P_X\)</span>, the conditional
 <span class="math inline">\(f\)</span>-divergence is
 <span class="math display">\[
     D_f(P_{Y|X} \| Q_{Y|X} | P_X)
@@ -471,8 +473,7 @@ at 1, i.e. 
 \]</span>
 then <span class="math inline">\(D_f(P\|Q) = 0 \iff P=Q\)</span>.</li>
 <li><span style="color:blue">Conditional <span class="math inline">\(f\)</span>-divergence; conditioning increases divergence</span>:
-<span class="math inline">\(D_f(P_{Y|X} \circ P_X \| Q_{Y|X} \circ P_X) \leq D_f(P_{Y|X} \| Q_{Y|X} | Q_X)
-     = D_f(P_{Y|X} P_X \| Q_{Y|X} P_X)\)</span>.</li>
+<span class="math inline">\(D_f(P_{Y|X} \circ P_X \| Q_{Y|X} \circ P_X) \leq D_f(P_{Y|X} \| Q_{Y|X} | Q_X)  = D_f(P_{Y|X} P_X \| Q_{Y|X} P_X)\)</span>.</li>
 <li><span style="color:blue">Joint-convexity</span>: <span class="math inline">\((P, Q)\mapsto D_f(P\|Q)\)</span> is jointly convex;
 consequently, <span class="math inline">\(P\mapsto D_f(P\|Q)\)</span> and <span class="math inline">\(Q\mapsto D_f(P\|Q)\)</span>
 are also convex.</li>
@@ -515,16 +516,15 @@ where <span class="math inline">\(\sup\)</span> is over all finite <span class="
 </div>
 <p>We omit the technical proof above.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-55" class="definition"><strong>Definition 8.3  (f-information) </strong></span>The <span class="math inline">\(f\)</span>-information is defined by
+<p><span id="def:unlabeled-div-53" class="definition"><strong>Definition 8.3  (f-information) </strong></span>The <span class="math inline">\(f\)</span>-information is defined by
 <span class="math display">\[
     I_f(X; Y) = D_f(P_{XY} | P_XP_Y)
 \]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-56" class="definition"><strong>Definition 8.4  (f-DPI) </strong></span>For <span class="math inline">\(U\to X\to Y\)</span>, we have <span class="math inline">\(I_f(U; Y) \leq I_f(U; X)\)</span>.</p>
+<p><span id="def:unlabeled-div-54" class="definition"><strong>Definition 8.4  (f-DPI) </strong></span>For <span class="math inline">\(U\to X\to Y\)</span>, we have <span class="math inline">\(I_f(U; Y) \leq I_f(U; X)\)</span>.</p>
 </div>
-<p>Proof: <span class="math inline">\(I_f(U; X) = D_f(P_{UX} \|P_UP_X) \geq
-D_f(P_{UY} \| P_UP_Y) = I_f(U; Y)\)</span>.</p>
+<p>Proof: <span class="math inline">\(I_f(U; X) = D_f(P_{UX} \|P_UP_X) \geq D_f(P_{UY} \| P_UP_Y) = I_f(U; Y)\)</span>.</p>
 </div>
 <div id="tv-and-hellinger-hypothesis-testing" class="section level2 unnumbered hasAnchor">
 <h2>TV and Hellinger, hypothesis testing<a href="f-divergence.html#tv-and-hellinger-hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -626,7 +626,7 @@ but we have the following sandwich bound:
 \]</span><br />
 We also have the following asymptotic theorem:</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-57" class="theorem"><strong>Theorem 8.6  (asymptotic equivalence of TV and Hellinger) </strong></span>For any sequence of distributions <span class="math inline">\(P_n, Q_n\)</span>
+<p><span id="thm:unlabeled-div-55" class="theorem"><strong>Theorem 8.6  (asymptotic equivalence of TV and Hellinger) </strong></span>For any sequence of distributions <span class="math inline">\(P_n, Q_n\)</span>
 <span class="math display">\[\begin{align}
 \mathrm{TV}(P_n^{\otimes n}, Q_n^{\otimes n}) \to 0
 &amp;\iff H^2(P_n, Q_n) = o(1/n) \\
@@ -656,7 +656,7 @@ The oppose is true for <span class="math inline">\(\mathrm{TV}\to 1\)</span>.
 <h2>Joint range<a href="f-divergence.html#joint-range" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We first provide a special case of an inequality.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-58" class="theorem"><strong>Theorem 8.7  (Pinsker's inequality) </strong></span>For any two distributions,
+<p><span id="thm:unlabeled-div-56" class="theorem"><strong>Theorem 8.7  (Pinsker's inequality) </strong></span>For any two distributions,
 <span class="math inline">\(D(P\|Q) \geq (2\log e) \mathrm{TV}(P, Q)^2\)</span></p>
 </div>
 <details>
@@ -679,7 +679,7 @@ the desired inequality per the TV
 variational characterization theorem <a href="f-divergence.html#thm:tvVarChar">8.5</a>.
 </details>
 <div class="definition">
-<p><span id="def:unlabeled-div-59" class="definition"><strong>Definition 8.5  (joint range) </strong></span>Given two <span class="math inline">\(f\)</span>-divergences <span class="math inline">\(D_f\)</span> and <span class="math inline">\(D_g\)</span>, their
+<p><span id="def:unlabeled-div-57" class="definition"><strong>Definition 8.5  (joint range) </strong></span>Given two <span class="math inline">\(f\)</span>-divergences <span class="math inline">\(D_f\)</span> and <span class="math inline">\(D_g\)</span>, their
 joint range <span class="math inline">\(\mathcal R\subset [0, \infty]^2\)</span>
 is defined by
 <span class="math display">\[
@@ -790,7 +790,7 @@ the divergence is an affine map:
 <p>The Rényi divergences are a monotone transformation
 of <span class="math inline">\(f\)</span>-divergences; they satisfy DPI and other properties.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-60" class="definition"><strong>Definition 8.6  (Rényi divergence) </strong></span>For <span class="math inline">\(\lambda\in \mathbb R- \{0, 1\}\)</span>, the Rényi divergence
+<p><span id="def:unlabeled-div-58" class="definition"><strong>Definition 8.6  (Rényi divergence) </strong></span>For <span class="math inline">\(\lambda\in \mathbb R- \{0, 1\}\)</span>, the Rényi divergence
 of order <span class="math inline">\(\lambda\)</span> between distributions <span class="math inline">\(P, Q\)</span> is
 <span class="math display">\[
     D_\lambda(P \| Q) = \dfrac 1 {\lambda - 1} \log \mathbb E_Q \left[
@@ -812,7 +812,7 @@ to keep <span class="math inline">\(f\)</span> convex):
     \tag{8.3}
 \]</span></p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-61" class="proposition"><strong>Proposition 8.6  </strong></span>Under regularity conditions,
+<p><span id="prp:unlabeled-div-59" class="proposition"><strong>Proposition 8.6  </strong></span>Under regularity conditions,
 <span class="math display">\[
     \lim_{\lambda \to 1} D_\lambda (P \|Q) = D(P \| Q)
 \]</span></p>
@@ -864,7 +864,7 @@ equation <a href="f-divergence.html#eq:hellingerDiv">(8.1)</a>
 <li>The Rényi entropy for finite alphabet is <span class="math inline">\(H_\lambda(P) = \log m - D_\lambda(P \| U)\)</span>.</li>
 </ol>
 <div class="definition">
-<p><span id="def:unlabeled-div-62" class="definition"><strong>Definition 8.7  (conditional Rényi entropy) </strong></span>Given <span class="math inline">\(P_{X|Y}, Q_{X|Y}\)</span> and <span class="math inline">\(P_Y\)</span>
+<p><span id="def:unlabeled-div-60" class="definition"><strong>Definition 8.7  (conditional Rényi entropy) </strong></span>Given <span class="math inline">\(P_{X|Y}, Q_{X|Y}\)</span> and <span class="math inline">\(P_Y\)</span>
 <span class="math display">\[\begin{align}
     D_\lambda(P_{X|Y} \| Q_{X|Y} | P_Y)
     &amp;= D_\lambda(P_{X|Y} P_Y \| Q_{X|Y} P_Y)
@@ -877,7 +877,7 @@ equation <a href="f-divergence.html#eq:hellingerDiv">(8.1)</a>
 \end{align}\]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-63" class="proposition"><strong>Proposition 8.8  (Rényi chain rule) </strong></span>Given <span class="math inline">\(P_{AB}, Q_{AB}\)</span>, define the <span class="math inline">\(\lambda\)</span>-tilting
+<p><span id="prp:unlabeled-div-61" class="proposition"><strong>Proposition 8.8  (Rényi chain rule) </strong></span>Given <span class="math inline">\(P_{AB}, Q_{AB}\)</span>, define the <span class="math inline">\(\lambda\)</span>-tilting
 of <span class="math inline">\(P_B\)</span> towards <span class="math inline">\(Q_B\)</span> by
 <span class="math display">\[
     P_B^{(\lambda)}(b) = P_B^\lambda(b) Q_B^{1-\lambda}(b)
@@ -917,7 +917,7 @@ Next up, computing the RHS explicitly, we have
 \end{align}\]</span>
 </details>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-64" class="corollary"><strong>Corollary 8.1  (Rényi tensorization) </strong></span>Specializing the chain rule to independent joints,
+<p><span id="cor:unlabeled-div-62" class="corollary"><strong>Corollary 8.1  (Rényi tensorization) </strong></span>Specializing the chain rule to independent joints,
 <span class="math display">\[
     D_\lambda \left(\prod P_{X_j} \| \prod Q_{X_j}\right)
     = \sum_j D_\lambda(P_{X_j} \| Q_{X_j})
@@ -933,7 +933,7 @@ Next up, computing the RHS explicitly, we have
 \end{align}\]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-65" class="proposition"><strong>Proposition 8.9  (variational characterization via KL) </strong></span>Show that <span class="math inline">\(\forall \alpha \in \mathbb R\)</span>:
+<p><span id="prp:unlabeled-div-63" class="proposition"><strong>Proposition 8.9  (variational characterization via KL) </strong></span>Show that <span class="math inline">\(\forall \alpha \in \mathbb R\)</span>:
 <span class="math display">\[
     \bar \alpha D_\alpha(P \|Q)
     = \inf_R \left[
@@ -1051,7 +1051,7 @@ used as a version of DPI when using <span class="math inline">\(1_E\)</span>
 since it allows one to bound the event variation using <span class="math inline">\(f\)</span>-divergence.</li>
 </ol>
 <div class="example">
-<p><span id="exm:unlabeled-div-66" class="example"><strong>Example 8.1  (TV) </strong></span>Recall, for <span class="math inline">\(\mathrm{TV}, f(x)=|x-1|/2\)</span>; extending as such to <span class="math inline">\(\mathbb R\)</span> to obtain
+<p><span id="exm:unlabeled-div-64" class="example"><strong>Example 8.1  (TV) </strong></span>Recall, for <span class="math inline">\(\mathrm{TV}, f(x)=|x-1|/2\)</span>; extending as such to <span class="math inline">\(\mathbb R\)</span> to obtain
 the conjugate
 <span class="math display">\[
     f^*(y) = \sup_x xy - \dfrac 1 2 |x-1|
@@ -1068,7 +1068,7 @@ Applying theorem <a href="f-divergence.html#thm:fVar">8.9</a> yields
 This recovers theorem <a href="f-divergence.html#thm:tvVarChar">8.5</a>.</p>
 </div>
 <div class="example">
-<p><span id="exm:unlabeled-div-67" class="example"><strong>Example 8.2  (Hellinger) </strong></span>The conjugate for Hellinger <span class="math inline">\(f(x) = (1-\sqrt x)^2\)</span>
+<p><span id="exm:unlabeled-div-65" class="example"><strong>Example 8.2  (Hellinger) </strong></span>The conjugate for Hellinger <span class="math inline">\(f(x) = (1-\sqrt x)^2\)</span>
 is <span class="math inline">\(f^*(y) = \frac 1 {1-y} - 1\)</span> with <span class="math inline">\(y\in (-\infty, 1)\)</span>, yielding
 <span class="math display">\[
     H^2(P, Q) = \sup_{g(x)\in (-\infty, 1)} \mathbb E_P[g]
@@ -1146,7 +1146,7 @@ while the theorem result is always linear in <span class="math inline">\(Q\)</sp
 To do so, we need to consider an extension of <span class="math inline">\(D_f(P\|Q)\)</span>
 to non-probability measures.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-68" class="theorem"><strong>Theorem 8.10  (extended variational characterization) </strong></span>Define <span class="math inline">\(f(x)=\infty\)</span> for <span class="math inline">\(x&lt;0\)</span> and let <span class="math inline">\(S=\{x:q(x)&gt;0\}\)</span> where
+<p><span id="thm:unlabeled-div-66" class="theorem"><strong>Theorem 8.10  (extended variational characterization) </strong></span>Define <span class="math inline">\(f(x)=\infty\)</span> for <span class="math inline">\(x&lt;0\)</span> and let <span class="math inline">\(S=\{x:q(x)&gt;0\}\)</span> where
 <span class="math inline">\(dQ = q(x) d\mu\)</span>, then
 <span class="math display">\[\begin{align}
     D_f(P\|Q)
@@ -1167,7 +1167,7 @@ For the special case <span class="math inline">\(f&#39;(\infty) = \infty\)</span
 subset of <span class="math inline">\(\mathbb R^d\)</span>. Further suppose that <span class="math inline">\(P_\theta(dx)=p_\theta(x)\mu(dx)\)</span>
 for some common dominating measure <span class="math inline">\(\mu\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-69" class="definition"><strong>Definition 8.8  (Fisher information, score) </strong></span>If for each fixed <span class="math inline">\(x\)</span>, the density <span class="math inline">\(p_\theta(x)\)</span> depends smoothly
+<p><span id="def:unlabeled-div-67" class="definition"><strong>Definition 8.8  (Fisher information, score) </strong></span>If for each fixed <span class="math inline">\(x\)</span>, the density <span class="math inline">\(p_\theta(x)\)</span> depends smoothly
 on <span class="math inline">\(\theta\)</span>, we define the Fisher information matrix w.r.t. <span class="math inline">\(\theta\)</span> as
 <span class="math display">\[
     \mathcal J_F(\theta) = \mathbb E_\theta(VV^T), \quad
@@ -1182,8 +1182,7 @@ The <em>random variable</em> <span class="math inline">\(V\)</span> is known as 
 \mathbb E_\theta[\nabla_\theta \ln p_\theta(X)]
 = \int \nabla_\theta p_\theta(x) = \nabla_\theta \int p_\theta = 0
 \]</span></li>
-<li><span class="math inline">\(\mathcal J_F(\theta) = \mathrm{Cov}_\theta(V)
-= -\mathbb E_\theta \left[\mathcal H_\theta \ln p_\theta(X)\right]\)</span>: differentiating (1)
+<li><span class="math inline">\(\mathcal J_F(\theta) = \mathrm{Cov}_\theta(V)  = -\mathbb E_\theta \left[\mathcal H_\theta \ln p_\theta(X)\right]\)</span>: differentiating (1)
 <span class="math display" id="eq:fisherHessian">\[\begin{align}
 \partial_{jk}^2 \ln p_\theta = \partial_{j} \left(
      \dfrac 1 {p_\theta} \partial_{k} p_\theta
@@ -1192,8 +1191,7 @@ The <em>random variable</em> <span class="math inline">\(V\)</span> is known as 
 \tag{8.5}
 \end{align}\]</span>
 The second term vanishes when we take the expectation.</li>
-<li><span class="math inline">\(D(P_{\theta} \| P_{\theta + \xi})
-= \dfrac{\log e}{2} \xi^T \mathcal J_F(\theta)\xi + o(\|\xi\|^2)\)</span>:
+<li><span class="math inline">\(D(P_{\theta} \| P_{\theta + \xi})  = \dfrac{\log e}{2} \xi^T \mathcal J_F(\theta)\xi + o(\|\xi\|^2)\)</span>:
 this is obtained by integrating
 <span class="math display">\[
 \ln p_{\theta + \xi}(x) = \ln p_\theta(x) + \xi^T \nabla_\theta \ln p_\theta(x)
@@ -1214,7 +1212,7 @@ called the Fisher-Rao metric.</li>
 under regularity conditions. Consider a joint distribution <span class="math inline">\(P^{XY}_\theta\)</span>
 parameterized by <span class="math inline">\(\theta\)</span> with marginals <span class="math inline">\(P^X_\theta, P^Y_\theta\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-70" class="definition"><strong>Definition 8.9  (conditional Fisher information) </strong></span>The conditional Fisher information <span class="math inline">\(\mathcal J^{Y|X}_\theta\)</span>
+<p><span id="def:unlabeled-div-68" class="definition"><strong>Definition 8.9  (conditional Fisher information) </strong></span>The conditional Fisher information <span class="math inline">\(\mathcal J^{Y|X}_\theta\)</span>
 is the semidefinite matrix of size <span class="math inline">\(n\)</span> defined as
 <span class="math display">\[
     \mathcal J^{Y|X}_F(\theta) = \mathbb E_X[\mathcal J^{Y|X=x}_F(\theta)]
@@ -1256,14 +1254,14 @@ The last term vanishes since
 \end{align}\]</span>
 </details>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-71" class="corollary"><strong>Corollary 8.3  (monotonicity) </strong></span><span class="math inline">\(\mathcal J^{XY}_F(\theta) \geq \mathcal J^X_F(\theta)\)</span>, here <span class="math inline">\(\geq\)</span>
+<p><span id="cor:unlabeled-div-69" class="corollary"><strong>Corollary 8.3  (monotonicity) </strong></span><span class="math inline">\(\mathcal J^{XY}_F(\theta) \geq \mathcal J^X_F(\theta)\)</span>, here <span class="math inline">\(\geq\)</span>
 is in the sense of positive-semidefinite matrices.</p>
 </div>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-72" class="corollary"><strong>Corollary 8.4  (DPI) </strong></span><span class="math inline">\(\mathcal J^{X}_F(\theta) \geq \mathcal J^Y_F(\theta)\)</span> if <span class="math inline">\(\theta\to X\to Y\)</span>.</p>
+<p><span id="cor:unlabeled-div-70" class="corollary"><strong>Corollary 8.4  (DPI) </strong></span><span class="math inline">\(\mathcal J^{X}_F(\theta) \geq \mathcal J^Y_F(\theta)\)</span> if <span class="math inline">\(\theta\to X\to Y\)</span>.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-73" class="definition"><strong>Definition 8.10  (location family) </strong></span>For any density <span class="math inline">\(p_0\)</span> on <span class="math inline">\(\mathbb R^d\)</span>, one can define a location
+<p><span id="def:unlabeled-div-71" class="definition"><strong>Definition 8.10  (location family) </strong></span>For any density <span class="math inline">\(p_0\)</span> on <span class="math inline">\(\mathbb R^d\)</span>, one can define a location
 family of distributions on <span class="math inline">\(\mathbb R^d\)</span> by setting
 <span class="math inline">\(P_\theta(dx) = p_0(x-\theta)dx\)</span>. In this case the Fisher information is
 translation-invariant, does not depend on <span class="math inline">\(\theta\)</span>, and its written instead
@@ -1276,7 +1274,7 @@ to emphasize its dependence on <span class="math inline">\(p_0\)</span>:
 \]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-74" class="proposition"><strong>Proposition 8.11  (properties of location family) </strong></span>Given distributions <span class="math inline">\(X, Y\)</span>, the following hold:</p>
+<p><span id="prp:unlabeled-div-72" class="proposition"><strong>Proposition 8.11  (properties of location family) </strong></span>Given distributions <span class="math inline">\(X, Y\)</span>, the following hold:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(J_F(XY) = J_F(X)+J_F(Y)\)</span>.</li>
 <li><span class="math inline">\(J_F(a\theta + X) = a^2J_F(X)\)</span></li>
@@ -1293,7 +1291,7 @@ Else the linear coefficient is given by theorem <a href="f-divergence.html#thm:f
 When a distribution family satisfies additional regularity conditions
 <a href="f-divergence.html#def:fisherRegularity">8.11</a>, the local behavior of <span class="math inline">\(\chi^2(P_\theta \|P_0)\)</span>
 in $is governed
-by the Fisher information matrix using
+by the Fisher information matrix by
 theorem <a href="f-divergence.html#thm:localFisherDiv">8.13</a>.</p>
 <div class="theorem">
 <p><span id="thm:flocalLinearCoeff" class="theorem"><strong>Theorem 8.11  (local linear coefficient) </strong></span>Suppose <span class="math inline">\(D_f(P\|Q)&lt;\infty\)</span> and <span class="math inline">\(f&#39;(1)\)</span> exists, then
@@ -1437,7 +1435,7 @@ apply the monotone convergence theorem to yield
 \end{align}\]</span>
 </details>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-75" class="proposition"><strong>Proposition 8.12  (variational characterization of Fisher information) </strong></span>For a density <span class="math inline">\(P\)</span> on <span class="math inline">\(\mathbb R\)</span>, the location family Fisher information
+<p><span id="prp:unlabeled-div-73" class="proposition"><strong>Proposition 8.12  (variational characterization of Fisher information) </strong></span>For a density <span class="math inline">\(P\)</span> on <span class="math inline">\(\mathbb R\)</span>, the location family Fisher information
 <span class="math display">\[
     J(P) = \sup_h \dfrac{\mathbb E_P[h&#39;]^2}{\mathbb E_P[h]}
 \]</span>

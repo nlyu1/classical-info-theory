@@ -1,8 +1,9 @@
-# Divergence 
+# Kullback-Leibler Divergence 
 
 <span style="color:green">
 Divergence is a fundamental object in information theory. 
-</span>
+</span> We begin with KL divergence and proceed 
+later to more general $f$-divergences. 
 Shannon-entropy is related to KL-divergence by 
 equation \@ref(prp:entropyDivergenceRelation). 
 It sheds light on the following relations: 
@@ -58,7 +59,7 @@ Some other ideas:
 7. The large deviations estimate \@ref(cor:largeDevEstimate) demonstrates 
     how KL gives a uniform (across all events) 
 
-## KL-Divergence {-}
+## Definition {-}
 :::{.definition name="KL-Divergence"}
 Given distributions $P, Q$ on $\mca A$ with $Q$ 
 being the reference measure, the (Kullback-Leibler) 
