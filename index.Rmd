@@ -83,12 +83,12 @@ Foundational results in this book include:
 
 1. Additive decomposition of KL. 
 2. <u>Golden formula</u>: variational characterization of mutual information. 
-3. <u>Saddle point characterization of mutual information</u>. 
+3. <u>Saddle point characterization of divergence</u>. 
 4. <u>Donsker-Varadhan</u> (theorem \@ref(thm:donskerVaradhan)): 
     variational characterization of KL, extended to $f$-divergences 
     in theorem \@ref(thm:fVar). 
 5. <u>Harremoës-Vadja</u> (theorem \@ref(thm:harremoesVajda)): 
-    one theorem to rule them all for $f$-divergence inequalities. 
+    one theorem to rule them all for $f$-divergence joint range. 
 6. Most $f$-divergences are locally $\chi^2$-like about 
     $\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)$ 
     and decays quadratically (theorem \@ref(thm:localChiExpansion)). 
