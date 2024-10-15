@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="statistical-decision-applications.html"/>
-<link rel="next" href="entropy-of-ergodic-processes.html"/>
+<link rel="next" href="fixed-length-compression.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -142,11 +142,15 @@
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>11</b> Entropy of Ergodic Processes</a>
+<li class="chapter" data-level="11" data-path="fixed-length-compression.html"><a href="fixed-length-compression.html"><i class="fa fa-check"></i><b>11</b> Fixed-length compression</a>
+<ul>
+<li class="chapter" data-level="" data-path="fixed-length-compression.html"><a href="fixed-length-compression.html#source-coding-theorems-1"><i class="fa fa-check"></i>Source coding theorems</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>12</b> Entropy of Ergodic Processes</a>
 <ul>
 <li class="chapter" data-level="" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>12</b> Lecture notes</a>
+<li class="chapter" data-level="13" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>13</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -325,12 +329,12 @@ sorts the PMF in descending order:
 <summary>
 Proof
 </summary>
-Note that <span class="math inline">\(1/x \leq P_X(x)\)</span>, then
+Note that <span class="math inline">\(1/x \leq P_X(x)\)</span>, then <span class="math inline">\(L(x)\leq i_X(x)\implies L\preceq i_X\)</span>
+based on
 <span class="math display">\[
     L(x) = \lfloor \log_2 x\rfloor\leq -\log_2 \dfrac 1 x \leq
     -\log_2 P_X(x) = i_X(x)
 \]</span>
-Then <span class="math inline">\(L(x)\leq i_X(x)\implies L\preceq i_X\)</span>.
 </details>
 <p>A coding theorem is one that relates an operational,
 intractable compression quantity (e.g. <span class="math inline">\(\mathbb E[L(X)]\)</span>)
@@ -591,7 +595,7 @@ and merged symbols as leaves. Repeat for <span class="math inline">\(|\mathcal A
         </div>
       </div>
 <a href="statistical-decision-applications.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="entropy-of-ergodic-processes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="fixed-length-compression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
