@@ -158,7 +158,10 @@ Assume $X$ sorted w.l.o.g,
 in light of proposition \@ref(prp:entDensityDomination), 
 we have $L\preceq i_X\implies \Exp[L] \leq H(X)$. 
 On the other hand, first note that $H(X|L=k)\leq k$ since $X|L=k$ can 
-take at most $2^k$ values, the uniform distribution on which has entropy $k$. 
+take at most $2^k$ values, 
+the uniform distribution on which has entropy $k$. 
+Next apply lemma \@ref(lem:finiteExpectationExtremality). 
+
 \begin{align}
     H(X) 
     &= H(X, L) = H(X|L) + H(L) \\ 
