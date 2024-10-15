@@ -106,12 +106,12 @@ When $X$ is sorted (as in the case of optimal compressor), $L\preceq i_X$.
 :::
 <details>
 <summary>Proof</summary>
-Note that $1/x \leq P_X(x)$, then 
+Note that $1/x \leq P_X(x)$, then $L(x)\leq i_X(x)\implies L\preceq i_X$
+based on 
 \[ 
     L(x) = \lfloor \log_2 x\rfloor\leq -\log_2 \df 1 x \leq 
     -\log_2 P_X(x) = i_X(x)
 \] 
-Then $L(x)\leq i_X(x)\implies L\preceq i_X$. 
 </details>
 
 A coding theorem is one that relates an operational, 

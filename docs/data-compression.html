@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10 Data compression | 6.7480 Notes</title>
   <meta name="description" content="10 Data compression | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10 Data compression | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-12" />
+<meta name="date" content="2024-10-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -194,6 +194,9 @@ this yields the expected encoding length
 and the distribution (theorem <a href="data-compression.html#thm:varCompOptDistribution">10.2</a>).
 This results in powerful optimal-coding asymptotics for i.i.d.
 (corollary <a href="data-compression.html#cor:iidAsymp">10.2</a>).</li>
+<li>The optimal <strong>single-shot</strong> coding is given by
+definition <a href="data-compression.html#def:singleShotOpt">10.5</a>. Optimal prefix-free code
+is given by Huffman code <a href="#def:huffman"><strong>??</strong></a>.</li>
 </ol>
 <div id="source-coding-theorems" class="section level2 unnumbered hasAnchor">
 <h2>Source coding theorems<a href="data-compression.html#source-coding-theorems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -239,7 +242,7 @@ everywhere; this formalizes the notion that
 <span class="math inline">\(X\)</span> is concentrated on smaller values.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-78" class="definition"><strong>Definition 10.5  (optimal single-shot lossless compressor) </strong></span>For a down-sorted PMF <span class="math inline">\(P(X)\)</span>, the optimal single-shot lossless compressor
+<p><span id="def:singleShotOpt" class="definition"><strong>Definition 10.5  (optimal single-shot lossless compressor) </strong></span>For a down-sorted PMF <span class="math inline">\(P(X)\)</span>, the optimal single-shot lossless compressor
 assigns strings with increasing lengths to symbol <span class="math inline">\(j\in \mathcal X=\mathbb N\)</span>.
 In particular, <span class="math inline">\(l(f^*(j)) = \lfloor \log_2 j\rfloor\)</span>, where <span class="math inline">\(l\)</span> is the
 string-length function. <span style="color:blue"> Let <span class="math inline">\(L(j) = \lfloor \log_2 j \rfloor\)</span>
@@ -248,7 +251,7 @@ denote the compression length of input <span class="math inline">\(j\)</span></s
 <p>An immediate corollary of the following result is that
 <span class="math inline">\(\mathbb E[(l\circ f^*)(X)] \leq \mathbb E[(l\circ f)(X)]\)</span> for any <span class="math inline">\(X\)</span>.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-79" class="proposition"><strong>Proposition 10.1  </strong></span>For any lossless single-shot compressor <span class="math inline">\(f\)</span> and source distribution <span class="math inline">\(X\)</span>,
+<p><span id="prp:unlabeled-div-78" class="proposition"><strong>Proposition 10.1  </strong></span>For any lossless single-shot compressor <span class="math inline">\(f\)</span> and source distribution <span class="math inline">\(X\)</span>,
 <span class="math inline">\(l\circ f^*\preceq l\circ f\)</span>.</p>
 </div>
 <details>
@@ -277,18 +280,18 @@ sorts the PMF in descending order:
 <summary>
 Proof
 </summary>
-Note that <span class="math inline">\(1/x \leq P_X(x)\)</span>, then
+Note that <span class="math inline">\(1/x \leq P_X(x)\)</span>, then <span class="math inline">\(L(x)\leq i_X(x)\implies L\preceq i_X\)</span>
+based on
 <span class="math display">\[
     L(x) = \lfloor \log_2 x\rfloor\leq -\log_2 \dfrac 1 x \leq
     -\log_2 P_X(x) = i_X(x)
 \]</span>
-Then <span class="math inline">\(L(x)\leq i_X(x)\implies L\preceq i_X\)</span>.
 </details>
 <p>A coding theorem is one that relates an operational,
 intractable compression quantity (e.g. <span class="math inline">\(\mathbb E[L(X)]\)</span>)
 to an information measure (e.g. <span class="math inline">\(H(X)\)</span>).</p>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-80" class="lemma"><strong>Lemma 10.1  </strong></span><span class="math inline">\(H(X|L=k)\leq k\)</span>. This follows from that <span class="math inline">\(X|L=k\)</span> can
+<p><span id="lem:unlabeled-div-79" class="lemma"><strong>Lemma 10.1  </strong></span><span class="math inline">\(H(X|L=k)\leq k\)</span>. This follows from that <span class="math inline">\(X|L=k\)</span> can
 take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution
 on which has entropy <span class="math inline">\(k\)</span>.</p>
 </div>
@@ -304,7 +307,8 @@ The inequality is saturated by the geometric distribution.</p>
 <summary>
 Proof
 </summary>
-Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1, \mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
+Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1,
+\mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
 <span class="math display">\[\begin{align}
     H(X) - \mathbb E[X] h(p)
     &amp;= \mathbb E\left[-\log p(x) - x[-p\log p - \bar p\log \bar p]\right] \\
@@ -324,11 +328,13 @@ Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <spa
 <summary>
 Proof
 </summary>
-Assume <span class="math inline">\(X\)</span> sorted w.l.o.g,
+<p>Assume <span class="math inline">\(X\)</span> sorted w.l.o.g,
 in light of proposition <a href="data-compression.html#prp:entDensityDomination">10.2</a>,
 we have <span class="math inline">\(L\preceq i_X\implies \mathbb E[L] \leq H(X)\)</span>.
 On the other hand, first note that <span class="math inline">\(H(X|L=k)\leq k\)</span> since <span class="math inline">\(X|L=k\)</span> can
-take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution on which has entropy <span class="math inline">\(k\)</span>.
+take at most <span class="math inline">\(2^k\)</span> values,
+the uniform distribution on which has entropy <span class="math inline">\(k\)</span>.
+Next apply lemma <a href="data-compression.html#lem:finiteExpectationExtremality">10.2</a>.</p>
 <span class="math display">\[\begin{align}
     H(X)
     &amp;= H(X, L) = H(X|L) + H(L) \\
@@ -372,7 +378,7 @@ there are at most <span class="math inline">\(2^{k+1}-1\)</span> atoms of mass a
 <p>We can consider the source as a random process <span class="math inline">\((S_1, S_2, \cdots)\)</span>,
 group the first <span class="math inline">\(n\)</span> (blocklength) symbols into a supersymbol <span class="math inline">\(S^n\)</span>.</p>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-81" class="corollary"><strong>Corollary 10.1  (asymptotic optimal-coding properties) </strong></span>Let <span class="math inline">\((S_1, S_2, \cdots)\)</span> be a random process (such that <span class="math inline">\(S^n\)</span> is sorted)
+<p><span id="cor:unlabeled-div-80" class="corollary"><strong>Corollary 10.1  (asymptotic optimal-coding properties) </strong></span>Let <span class="math inline">\((S_1, S_2, \cdots)\)</span> be a random process (such that <span class="math inline">\(S^n\)</span> is sorted)
 and <span class="math inline">\(U, V\)</span> real-valued r.vs, then
 <span class="math display">\[\begin{align}
     \dfrac 1 n i_{S^n(S^n)}\xrightarrow d U
@@ -421,7 +427,7 @@ equivalently, in shorthand <span class="math inline">\(L(S^n) \sim nH(S) + \sqrt
 We consider a finite alphabet <span class="math inline">\(\mathcal A\)</span> and let
 <span class="math inline">\(\mathcal A^*=\bigcup_{j=1}^\infty A^j\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-82" class="definition"><strong>Definition 10.6  (code extension, unique decodability, prefix code) </strong></span>The symbol-by-symbol extension of <span class="math inline">\(f:\mathcal A\to \{0, 1\}^*\)</span> to
+<p><span id="def:unlabeled-div-81" class="definition"><strong>Definition 10.6  (code extension, unique decodability, prefix code) </strong></span>The symbol-by-symbol extension of <span class="math inline">\(f:\mathcal A\to \{0, 1\}^*\)</span> to
 <span class="math inline">\(A^*\to \{0, 1\}^*\)</span> is obtained by concatenating outputs.
 A compressor <span class="math inline">\(f\)</span> is uniquely decodable if its extension is injective;
 it is a prefix (-free) code if no codeword is a prefix of each other.</p>
@@ -486,7 +492,7 @@ binary expansion of <span class="math inline">\(a_j\)</span>.</li>
 </details>
 <p>In particular, the Kraft inequality implies that the sorted prefix-code
 lengths can be at most <span class="math inline">\(1, 2, \cdots\)</span>. One can also thus formulate
-the prefix-code with optimal code length as the following integer-programming
+the prefix-code with <em>optimal length</em> as the following integer-programming
 problem:
 <span class="math display">\[
     L^*(X) = \min_{L:\mathcal A\to \mathbb N}
