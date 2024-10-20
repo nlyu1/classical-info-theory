@@ -24,7 +24,9 @@ Important takeaways:
     a supersymbol (corollary \@ref(cor:iidAsymp)). 
 3. Kraft-McMillan (theorem \@ref(thm:kraftMcMillan)): 
     constructive bijection between inequality-satisfying code 
-    lengths and prefix-free code>s. 
+    lengths and prefix-free codes. In particular, in terms 
+    of encoding length, the uniquely decodable codes do not 
+    offer any advantage over prefix codes. 
 4. Theorem \@ref(thm:optimalPrefixLength): 
     bound on optimal prefix code. 
 5. Main inequality: theorems 

@@ -279,8 +279,13 @@ this will take unrealistically long.</p>
 events are deterministic.</p>
 </div>
 <ul>
-<li><p><span class="math inline">\(\{S_k = k^2\}\)</span>: ergodic but not stationary by definition <a href="entropy-of-ergodic-processes.html#def:stationarity">12.2</a>.</p></li>
-<li></li>
+<li><span class="math inline">\(\{S_k = k^2\}\)</span>: ergodic but not stationary by
+definition <a href="entropy-of-ergodic-processes.html#def:stationarity">12.2</a>.</li>
+<li><span class="math inline">\(\{S_k=S_0\}\)</span> stationary but not ergodic unless <span class="math inline">\(S_0\)</span> is constant.
+This is since the singleton <span class="math inline">\(E=\{(s, s, \cdots)\}\)</span> is
+shift-invariant but <span class="math inline">\(\mathrm{Pr}[S_1^\infty = E]=\mathrm{Pr}[S_0=s]\in (0, 1)\)</span>.</li>
+<li><span class="math inline">\((S_k)\)</span> i.i.d. is stationary and ergodic; by Kilmogorov’s 0-1 law,
+tail events of i.i.d. processes have no randomness.</li>
 </ul>
 
 </div>

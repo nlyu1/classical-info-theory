@@ -214,7 +214,9 @@ a supersymbol (corollary <a href="lossless-compression.html#cor:iidAsymp">10.2</
 </ul></li>
 <li>Kraft-McMillan (theorem <a href="lossless-compression.html#thm:kraftMcMillan">10.3</a>):
 constructive bijection between inequality-satisfying code
-lengths and prefix-free code&gt;s.</li>
+lengths and prefix-free codes. In particular, in terms
+of encoding length, the uniquely decodable codes do not
+offer any advantage over prefix codes.</li>
 <li>Theorem <a href="lossless-compression.html#thm:optimalPrefixLength">10.4</a>:
 bound on optimal prefix code.</li>
 <li>Main inequality: theorems
@@ -376,11 +378,13 @@ Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <spa
 <summary>
 Proof
 </summary>
-Assume <span class="math inline">\(X\)</span> sorted w.l.o.g,
+<p>Assume <span class="math inline">\(X\)</span> sorted w.l.o.g,
 in light of proposition <a href="lossless-compression.html#prp:entDensityDomination">10.2</a>,
 we have <span class="math inline">\(L\preceq i_X\implies \mathbb E[L] \leq H(X)\)</span>.
 On the other hand, first note that <span class="math inline">\(H(X|L=k)\leq k\)</span> since <span class="math inline">\(X|L=k\)</span> can
-take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution on which has entropy <span class="math inline">\(k\)</span>.
+take at most <span class="math inline">\(2^k\)</span> values,
+the uniform distribution on which has entropy <span class="math inline">\(k\)</span>.
+Next apply lemma <a href="lossless-compression.html#lem:finiteExpectationExtremality">10.2</a>.</p>
 <span class="math display">\[\begin{align}
     H(X)
     &amp;= H(X, L) = H(X|L) + H(L) \\

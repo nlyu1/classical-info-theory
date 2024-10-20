@@ -79,19 +79,21 @@ observations. Some recurring themes in the book are:
     bound the event for a tractable distribution, bound the divergence between the tractable 
     and given distribution, and we can bound the event for the given distribution. 
 
-Foundational results in this book include:
+Nontrivial results in this book include:
 
-1. Additive decomposition of KL. 
-2. <u>Golden formula</u>: variational characterization of mutual information. 
-3. <u>Saddle point characterization of divergence</u>. 
-4. <u>Donsker-Varadhan</u> (theorem \@ref(thm:donskerVaradhan)): 
+1. <u>Golden formula</u>: variational characterization of mutual information. 
+2. <u>Saddle point characterization of divergence</u>. 
+3. <u>Donsker-Varadhan</u> (theorem \@ref(thm:donskerVaradhan)): 
     variational characterization of KL, extended to $f$-divergences 
     in theorem \@ref(thm:fVar). 
-5. <u>Harremoës-Vadja</u> (theorem \@ref(thm:harremoesVajda)): 
+4. <u>Harremoës-Vadja</u> (theorem \@ref(thm:harremoesVajda)): 
     one theorem to rule them all for $f$-divergence joint range. 
-6. Most $f$-divergences are locally $\chi^2$-like about 
+5. Most $f$-divergences are locally $\chi^2$-like about 
     $\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)$ 
-    and decays quadratically (theorem \@ref(thm:localChiExpansion)). 
+    and decays quadratically (theorem \@ref(thm:localChiExpansion)).
+6. <u>Kraft-McMillan</u> (theorem \@ref(thm:kraftMcMillan)): 
+    constructive bijection between inequality-satisfying code 
+    lengths and prefix-free codes.
 
 ## Insightful proof techniques {-}
 
