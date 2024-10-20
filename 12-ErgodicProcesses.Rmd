@@ -101,6 +101,10 @@ $\Pr[E]=0$ or $\Pr[E]=1$. In other words, all shift-invariant
 events are deterministic. 
 :::
 
-- $\{S_k = k^2\}$: ergodic but not stationary by definition \@ref(def:stationarity). 
-
-- 
+- $\{S_k = k^2\}$: ergodic but not stationary by 
+    definition \@ref(def:stationarity). 
+- $\{S_k=S_0\}$ stationary but not ergodic unless $S_0$ is constant. 
+    This is since the singleton $E=\{(s, s, \cdots)\}$ is 
+    shift-invariant but $\Pr[S_1^\infty = E]=\Pr[S_0=s]\in (0, 1)$. 
+- $(S_k)$ i.i.d. is stationary and ergodic; by Kilmogorov's 0-1 law, 
+    tail events of i.i.d. processes have no randomness. 
