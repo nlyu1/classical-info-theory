@@ -135,6 +135,7 @@ def:uniqueDecodability
 thm:kraftMcMillan
 eq:optimalPrefix
 thm:optimalPrefixLength
+def:flal
 def:unlabeled-div-80
 def:stationarity
 def:unlabeled-div-81
@@ -160,5 +161,6 @@ tensorization
 f-divergence
 statistical-decision-applications
 lossless-compression
+fixed-length-compression
 entropy-of-ergodic-processes
 lecture-notes

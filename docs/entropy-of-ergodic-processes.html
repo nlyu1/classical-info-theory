@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11 Entropy of Ergodic Processes | 6.7480 Notes</title>
-  <meta name="description" content="11 Entropy of Ergodic Processes | 6.7480 Notes" />
+  <title>12 Entropy of Ergodic Processes | 6.7480 Notes</title>
+  <meta name="description" content="12 Entropy of Ergodic Processes | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11 Entropy of Ergodic Processes | 6.7480 Notes" />
+  <meta property="og:title" content="12 Entropy of Ergodic Processes | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11 Entropy of Ergodic Processes | 6.7480 Notes" />
+  <meta name="twitter:title" content="12 Entropy of Ergodic Processes | 6.7480 Notes" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lossless-compression.html"/>
+<link rel="prev" href="fixed-length-compression.html"/>
 <link rel="next" href="lecture-notes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -142,11 +142,15 @@
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>11</b> Entropy of Ergodic Processes</a>
+<li class="chapter" data-level="11" data-path="fixed-length-compression.html"><a href="fixed-length-compression.html"><i class="fa fa-check"></i><b>11</b> Fixed-length compression</a>
+<ul>
+<li class="chapter" data-level="" data-path="fixed-length-compression.html"><a href="fixed-length-compression.html#source-coding-theorems-1"><i class="fa fa-check"></i>Source coding theorems</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>12</b> Entropy of Ergodic Processes</a>
 <ul>
 <li class="chapter" data-level="" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>12</b> Lecture notes</a>
+<li class="chapter" data-level="13" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>13</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -180,14 +184,14 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="entropy-of-ergodic-processes" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">11</span> Entropy of Ergodic Processes<a href="entropy-of-ergodic-processes.html#entropy-of-ergodic-processes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="entropy-of-ergodic-processes" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">12</span> Entropy of Ergodic Processes<a href="entropy-of-ergodic-processes.html#entropy-of-ergodic-processes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In this section, we consider random variables
 over a common space <span class="math inline">\((\Omega, \Sigma)\)</span>.</p>
 <div id="preliminaries" class="section level2 unnumbered hasAnchor">
 <h2>Preliminaries<a href="entropy-of-ergodic-processes.html#preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:unlabeled-div-80" class="definition"><strong>Definition 11.1  (measure-preserving transformation) </strong></span><span class="math inline">\(\tau:\Omega\to \Omega\)</span> is a measure preserving transformation,
+<p><span id="def:unlabeled-div-80" class="definition"><strong>Definition 12.1  (measure-preserving transformation) </strong></span><span class="math inline">\(\tau:\Omega\to \Omega\)</span> is a measure preserving transformation,
 or probability preserving transformation (p.p.t.) if
 <span class="math display">\[
     \mathrm{Pr}(\forall E\in \Sigma) = \mathrm{Pr}(\tau^{-1}E)
@@ -197,7 +201,7 @@ The collection of all <span class="math inline">\(\tau\)</span>-invariant sets f
 <span class="math inline">\(\Sigma_{\mathrm{inv}}\)</span>.</p>
 </div>
 <div class="definition">
-<p><span id="def:stationarity" class="definition"><strong>Definition 11.2  (stationary process) </strong></span>A random process consisting of a sequence of
+<p><span id="def:stationarity" class="definition"><strong>Definition 12.2  (stationary process) </strong></span>A random process consisting of a sequence of
 random varables <span class="math inline">\(\{S_1, S_2, \cdots\}\)</span> (of signature <span class="math inline">\(\Omega\to \mathbb R\)</span>)
 is stationary if there exists a measure-preserving
 <span class="math inline">\(\tau:\Omega\to \Omega\)</span> such that <span class="math inline">\(S_j = S_0\circ \tau^j\)</span>.</p>
@@ -214,7 +218,7 @@ with p.p.t. defined as
 <p>An event <span class="math inline">\(E\in \Sigma\)</span> is <em>shift-invariant</em> if <span class="math inline">\(E=\tau^{-1} E\)</span>
 for the shift-operator <span class="math inline">\(\tau\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-81" class="definition"><strong>Definition 11.3  (tail algebra) </strong></span>The tail <span class="math inline">\(\sigma\)</span>-algebra contains events invariant to any
+<p><span id="def:unlabeled-div-81" class="definition"><strong>Definition 12.3  (tail algebra) </strong></span>The tail <span class="math inline">\(\sigma\)</span>-algebra contains events invariant to any
 finite number of initial changes
 <span class="math display">\[
     \Sigma_{\mathrm{tail}} = \bigcap_{n\geq 1} \sigma(S_n, S_{n+1}, \cdots)
@@ -230,13 +234,13 @@ the Borel algebra,
 \]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-82" class="proposition"><strong>Proposition 11.1  (shift-invariant events and tail algebra) </strong></span>All shift-invariant events belong to a strict subset of tail events
+<p><span id="prp:unlabeled-div-82" class="proposition"><strong>Proposition 12.1  (shift-invariant events and tail algebra) </strong></span>All shift-invariant events belong to a strict subset of tail events
 <span class="math inline">\(\Sigma_{\mathrm{inv}}\subsetneq \Sigma_{\mathrm{tail}}\)</span>.
 Consider, for example,
 <span class="math inline">\(\{\exists n:x_0=0, \,\,\forall \text{ odd }i\geq n\}\)</span>.</p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-83" class="proposition"><strong>Proposition 11.2  (Poincare recurrence) </strong></span>Given a measure-preserving <span class="math inline">\(\tau\)</span>, for any measurable <span class="math inline">\(A\)</span>
+<p><span id="prp:unlabeled-div-83" class="proposition"><strong>Proposition 12.2  (Poincare recurrence) </strong></span>Given a measure-preserving <span class="math inline">\(\tau\)</span>, for any measurable <span class="math inline">\(A\)</span>
 with <span class="math inline">\(\mathrm{Pr}[A]&gt;0\)</span> we have
 <span class="math display">\[
     \mathrm{Pr}\left[
@@ -259,7 +263,7 @@ Recall that <span class="math inline">\(\tau^{-1}\)</span> is the forward-evolut
 \]</span>
 </details>
 <div class="example">
-<p><span id="exm:unlabeled-div-84" class="example"><strong>Example 11.1  (physical recurrence) </strong></span>The phase space flow in classical Hamiltonian mechanics
+<p><span id="exm:unlabeled-div-84" class="example"><strong>Example 12.1  (physical recurrence) </strong></span>The phase space flow in classical Hamiltonian mechanics
 is a measure-preserving transform by Liouville’s theorem.
 Consider a system of two cylinders of gas immediately before they’re
 allowed to mix with <span class="math inline">\(A\)</span> the set of
@@ -270,12 +274,12 @@ their initial state) infinitely often. Thermodynamically, however,
 this will take unrealistically long.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-85" class="definition"><strong>Definition 11.4  (ergodicity) </strong></span><span class="math inline">\(\tau\)</span> is ergodic if <span class="math inline">\(\forall E\in \Sigma_{\mathrm{inv}}\)</span>, we have
+<p><span id="def:unlabeled-div-85" class="definition"><strong>Definition 12.4  (ergodicity) </strong></span><span class="math inline">\(\tau\)</span> is ergodic if <span class="math inline">\(\forall E\in \Sigma_{\mathrm{inv}}\)</span>, we have
 <span class="math inline">\(\mathrm{Pr}[E]=0\)</span> or <span class="math inline">\(\mathrm{Pr}[E]=1\)</span>. In other words, all shift-invariant
 events are deterministic.</p>
 </div>
 <ul>
-<li><p><span class="math inline">\(\{S_k = k^2\}\)</span>: ergodic but not stationary by definition <a href="entropy-of-ergodic-processes.html#def:stationarity">11.2</a>.</p></li>
+<li><p><span class="math inline">\(\{S_k = k^2\}\)</span>: ergodic but not stationary by definition <a href="entropy-of-ergodic-processes.html#def:stationarity">12.2</a>.</p></li>
 <li></li>
 </ul>
 
@@ -286,7 +290,7 @@ events are deterministic.</p>
           </div>
         </div>
       </div>
-<a href="lossless-compression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fixed-length-compression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="lecture-notes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

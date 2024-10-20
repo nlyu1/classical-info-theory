@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.7480 Notes</title>
-  <meta name="description" content="6.7480 Notes" />
+  <title>11 Fixed-length compression | 6.7480 Notes</title>
+  <meta name="description" content="11 Fixed-length compression | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.7480 Notes" />
+  <meta property="og:title" content="11 Fixed-length compression | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.7480 Notes" />
+  <meta name="twitter:title" content="11 Fixed-length compression | 6.7480 Notes" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="entropy.html"/>
+<link rel="prev" href="lossless-compression.html"/>
+<link rel="next" href="entropy-of-ergodic-processes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -184,161 +184,17 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">6.7480 Notes</h1>
-<p class="author"><em>Nicholas Lyu</em></p>
-<p class="date"><em>2024-10-20</em></p>
+<div id="fixed-length-compression" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">11</span> Fixed-length compression<a href="fixed-length-compression.html#fixed-length-compression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>To be precise, we consider
+<strong>fixed-length almost-lossless</strong> compression
+(definition <a href="fixed-length-compression.html#def:flal">11.1</a>).</p>
+<div id="source-coding-theorems-1" class="section level2 unnumbered hasAnchor">
+<h2>Source coding theorems<a href="fixed-length-compression.html#source-coding-theorems-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:flal" class="definition"><strong>Definition 11.1  (fixed-length almost-lossless compression) </strong></span>placeholder.</p>
 </div>
-<div id="preface" class="section level1 unnumbered hasAnchor">
-<h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="recurring-themes" class="section level2 unnumbered hasAnchor">
-<h2>Recurring themes<a href="index.html#recurring-themes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Fundamentally, information and entropy captures
-how our uncertainty in a quantity changes after
-observations. Some recurring themes in the book are:</p>
-<ol style="list-style-type: decimal">
-<li>Fundamental properties of information measures (e.g. entropy, mutual information, divergence,
-Fisher information) are:
-<ul>
-<li>Nonnegativity.</li>
-<li>Monotonicity: joint provides more information than marginals.
-For especially well-behaved ones (entropy, KL, Fisher information) we expect
-additive decomposition, i.e. chain rule.</li>
-<li>Data-processing inequality.</li>
-</ul></li>
-<li>Divergence as a fundamental concept in information theory.
-<ol style="list-style-type: lower-alpha">
-<li>Quantifies difference between distributions;
-the choice of this quantification depends on our problem.</li>
-<li>Divergence gives rise to mutual information; monotonicity yields DPI.</li>
-</ol></li>
-<li><strong>Convexity</strong> of <span class="math inline">\(f\)</span> for <span class="math inline">\(f\)</span>-divergence is mathematically equivalent
-to our information intuitions: data-processing inequality, monotonicity, etc.
-<ol style="list-style-type: lower-alpha">
-<li>KL-divergence (and Rényi) is special because its <span class="math inline">\(\log\)</span> form
-admits additive decomposition of joint divergence.</li>
-</ol></li>
-<li>Convexity of information measures correspond to <strong>variational characterizations</strong>,
-which are extremely useful because:
-<ol style="list-style-type: lower-alpha">
-<li>They provide bounds: choose the varied quantity to be our friend!</li>
-<li>Provide tractable variational approximations
-using numerical optimization methods (e.g. VAE, GAN).</li>
-</ol></li>
-<li>Mutual information as information radius, or center of gravity; capacity as a minimax saddle point.</li>
-<li>Divergence measures are extremely useful for bounding events:
-bound the event for a tractable distribution, bound the divergence between the tractable
-and given distribution, and we can bound the event for the given distribution.</li>
-</ol>
-<p>Foundational results in this book include:</p>
-<ol style="list-style-type: decimal">
-<li>Additive decomposition of KL.</li>
-<li><u>Golden formula</u>: variational characterization of mutual information.</li>
-<li><u>Saddle point characterization of mutual information</u>.</li>
-<li><u>Donsker-Varadhan</u> (theorem <a href="variational-measures-of-information.html#thm:donskerVaradhan">5.5</a>):
-variational characterization of KL, extended to <span class="math inline">\(f\)</span>-divergences
-in theorem <a href="f-divergence.html#thm:fVar">8.9</a>.</li>
-<li><u>Harremoës-Vadja</u> (theorem <a href="f-divergence.html#thm:harremoesVajda">8.8</a>):
-one theorem to rule them all for <span class="math inline">\(f\)</span>-divergence inequalities.</li>
-<li>Most <span class="math inline">\(f\)</span>-divergences are locally <span class="math inline">\(\chi^2\)</span>-like about
-<span class="math inline">\(\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)\)</span>
-and decays quadratically (theorem <a href="f-divergence.html#thm:localChiExpansion">8.12</a>).</li>
-</ol>
-</div>
-<div id="insightful-proof-techniques" class="section level2 unnumbered hasAnchor">
-<h2>Insightful proof techniques<a href="index.html#insightful-proof-techniques" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ol style="list-style-type: decimal">
-<li>Asymptotic analysis proofs: rewrite a difference as an integral, then
-apply the monotone convergence theorem.
-<ul>
-<li>Theorems <a href="f-divergence.html#thm:localFisherDiv">8.13</a>, <a href="f-divergence.html#thm:localChiExpansion">8.12</a>.</li>
-</ul></li>
-<li>Unique extremality proofs: reduce the desired inequality to
-the information inequality (theorem <a href="kullback-leibler-divergence.html#thm:infoInequality">3.1</a>)
-or a nonnegative information quantity (e.g. entropy).
-<ul>
-<li>Corollary <a href="kullback-leibler-divergence.html#cor:minimalCE">3.1</a>, theorem <a href="kullback-leibler-divergence.html#thm:gaussianCovExtremality">3.3</a>,
-lemma <a href="lossless-compression.html#lem:finiteExpectationExtremality">10.2</a>; the latter two
-characterized Gaussian and geometric distributions.</li>
-<li>Occasionally we need to introduce a tilted distribution based on
-both inputs, see Donsker-Varadhan (<a href="variational-measures-of-information.html#thm:donskerVaradhan">5.5</a>) or</li>
-</ul></li>
-<li>Bounds on conditional quantities: consider the joint quantity
-and decompose in <span class="math inline">\(2\)</span> different ways.
-<ul>
-<li>KL-DPI theorem <a href="kullback-leibler-divergence.html#thm:klDPI">3.5</a>.</li>
-</ul></li>
-<li>Meta-converse: instead of studying <span class="math inline">\(P_{X\hat X}\)</span> for
-arbitrary <span class="math inline">\(\hat X\)</span>, introduce a tractable <span class="math inline">\(Q_{X\hat X}\)</span>,
-to bound an event, then use DPI (or divergence inequalities like Donsker-Varadhan)
-to bound the same event for <span class="math inline">\(P_{X\hat X}\)</span> together with some
-divergence quantity.
-<ul>
-<li>Fano’s inequality <a href="mutual-information.html#thm:simpleFano">4.3</a>.</li>
-</ul></li>
-<li>Convexity proofs: introduce an additional parameter
-<span class="math inline">\(\theta \sim \mathrm{Ber}(\lambda)\)</span> to rewrite
-<span class="math inline">\(\lambda f(x)+\bar \lambda f(y)\)</span> as a conditional quantity,
-then use decomposition.
-<ul>
-<li>See section on <a href="extremization.html#extremizationConvexity">convexity</a>.</li>
-</ul></li>
-<li>Counting bounds: to bound <span class="math inline">\(|\mathcal C|\)</span>, draw an element uniformly from <span class="math inline">\(\mathcal C\)</span>,
-then upper-bound the joint-entropy by marginal bound, Han’s inequality, or chain rule.</li>
-<li>Typicality methods (compression): break region into tractable region of
-large probability and difficult region with low probability.
-<ul>
-<li><span class="math inline">\(\mathrm{Pr}[A]= \mathrm{Pr}[A, B] + \mathrm{Pr}[A, B^c] \leq \mathrm{Pr}[B] + \mathrm{Pr}[A, B^c]\)</span> then bound
-<span class="math inline">\(\mathrm{Pr}[A, B^c]\)</span> through atypicality of <span class="math inline">\(B^c\)</span>:
-soure coding distribution theorem <a href="lossless-compression.html#thm:varCompOptDistribution">10.2</a>.</li>
-</ul></li>
-<li>Break a single <span class="math inline">\(\sup\)</span> into nested ones.
-<ul>
-<li>Solve the inner <span class="math inline">\(\sup\)</span> analytically:
-useful characterization of <span class="math inline">\(\chi^2\)</span> <a href="f-divergence.html#eq:chiStatVar">(8.4)</a>.</li>
-<li>Alternate inner and alter closed-form solution: EM algorithm.</li>
-</ul></li>
-</ol>
-</div>
-<div id="administrative-trivia" class="section level2 unnumbered hasAnchor">
-<h2>Administrative trivia<a href="index.html#administrative-trivia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Professor email: <code>yp@mit.edu</code>.</p>
-<p>Office Hours: LIDS (<span class="math inline">\(6\)</span>th floor of <span class="math inline">\(D\)</span>-tower, lobby).</p>
-</div>
-<div id="motivation" class="section level2 unnumbered hasAnchor">
-<h2>Motivation<a href="index.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ol style="list-style-type: decimal">
-<li>Why is training GPT <span class="math inline">\(\iff\)</span> building a great text compressor?</li>
-<li>Given <span class="math inline">\(2\)</span> families of distributions
-<span class="math inline">\(P_\theta, \theta\in \Theta_1, \Theta_2\)</span>.
-To have <span class="math inline">\(P_{\mathrm{err}} \leq \delta\)</span>, the number of samples
-is asymptotically
-<span class="math inline">\(\left(\min D(P_{\theta_1}\|P_{\theta_2})\right)^{-1} \log(1/\delta)\)</span></li>
-<li>Noisy channel coding.</li>
-<li>Cramer-Rau bound
-<span class="math display">\[
-\min_{\hat \theta}
-\max_{\theta\in \Theta} \mathbb E[(\theta - \hat \theta^2]
-\asymp \dfrac 1 {n\min \mathcal I_F(\theta)}
-\]</span></li>
-<li>How many bits to represent a random function / signal / picture
-with fidelity <span class="math inline">\(\epsilon\)</span>.</li>
-</ol>
-<p>Key concepts: entropy, KL-divergence, mutual information,
-fisher information, mutual information.</p>
-<div id="todo-list" class="section level3 unnumbered hasAnchor">
-<h3>Todo list<a href="index.html#todo-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Mandatory:</p>
-<ol style="list-style-type: decimal">
-<li>Gaussian saddle-point.</li>
-</ol>
-<p>Optional:</p>
-<ol style="list-style-type: decimal">
-<li>Entropy-power inequality</li>
-<li>Sufficient statistic.</li>
-</ol>
 
-</div>
 </div>
 </div>
             </section>
@@ -346,8 +202,8 @@ fisher information, mutual information.</p>
           </div>
         </div>
       </div>
-
-<a href="entropy.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lossless-compression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="entropy-of-ergodic-processes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
