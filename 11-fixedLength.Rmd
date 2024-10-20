@@ -138,12 +138,12 @@ When $X$ is sorted (as in the case of optimal compressor), $L\preceq i_X$.
 :::
 <details>
 <summary>Proof</summary>
-Note that $1/x \leq P_X(x)$, then $L(x)\leq i_X(x)\implies L\preceq i_X$
-based on 
+Note that $1/x \leq P_X(x)$, then 
 \[ 
     L(x) = \lfloor \log_2 x\rfloor\leq -\log_2 \df 1 x \leq 
     -\log_2 P_X(x) = i_X(x)
 \] 
+Then $L(x)\leq i_X(x)\implies L\preceq i_X$. 
 </details>
 
 A coding theorem is one that relates an operational, 
@@ -190,10 +190,7 @@ Assume $X$ sorted w.l.o.g,
 in light of proposition \@ref(prp:entDensityDomination), 
 we have $L\preceq i_X\implies \Exp[L] \leq H(X)$. 
 On the other hand, first note that $H(X|L=k)\leq k$ since $X|L=k$ can 
-take at most $2^k$ values, 
-the uniform distribution on which has entropy $k$. 
-Next apply lemma \@ref(lem:finiteExpectationExtremality). 
-
+take at most $2^k$ values, the uniform distribution on which has entropy $k$. 
 \begin{align}
     H(X) 
     &= H(X, L) = H(X|L) + H(L) \\ 

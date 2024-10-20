@@ -1,0 +1,106 @@
+# Entropy of Ergodic Processes 
+
+
+In this section, we consider random variables 
+over a common space $(\Omega, \Sigma)$. 
+
+## Preliminaries {-}
+
+:::{.definition name="measure-preserving transformation"}
+$\tau:\Omega\to \Omega$ is a measure preserving transformation, 
+or probability preserving transformation (p.p.t.) if 
+\[ 
+    \Pr(\forall E\in \Sigma) = \Pr(\tau^{-1}E)
+\] 
+A set $E$ is $\tau$-invariant if $E=\tau^{-1}(E)$. 
+The collection of all $\tau$-invariant sets form a $\sigma$-algebra 
+$\Sigma_{\mrm{inv}}$. 
+:::
+
+:::{.definition #stationarity name="stationary process"}
+A random process consisting of a sequence of 
+random varables $\{S_1, S_2, \cdots\}$ (of signature $\Omega\to \R$) 
+is stationary if there exists a measure-preserving 
+$\tau:\Omega\to \Omega$ such that $S_j = S_0\circ \tau^j$. 
+
+One may take this definition to the joint distribution 
+and alternatively declare $\{S_1, \cdots\}$ stationary 
+if the joint distribution is invariant to shifts in time; 
+in this case the sample space corresponds to 
+the (infinite) joint sequence $\Omega=\mca S^{\infty}$ 
+with p.p.t. defined as 
+\[ 
+    (s_0, s_1, \cdots) \xrightarrow \tau (s_1, s_2, \cdots)
+\] 
+:::
+
+An event $E\in \Sigma$ is _shift-invariant_ if $E=\tau^{-1} E$ 
+for the shift-operator $\tau$. 
+
+:::{.definition name="tail algebra"}
+The tail $\sigma$-algebra contains events invariant to any 
+finite number of initial changes
+\[ 
+    \Sigma_{\mrm{tail}} = \bigcap_{n\geq 1} \sigma(S_n, S_{n+1}, \cdots)
+\] 
+Here $\sigma(S_n, S_{n+1}, \cdots)$ denotes the collection 
+of events which can be described in terms of these random variables. 
+More precisely, let $V$ be the codomain of $S_j$ and $\mca B(V)$ 
+the Borel algebra, 
+\[
+    \sigma(S_n, S_{n+1}, \dots) = 
+    \sigma\left(\left\{ S_n^{-1}(B) \mid B \in \mathcal{B}(V) \right\}, 
+    \left\{ S_{n+1}^{-1}(B) \mid B \in \mathcal{B}(V) \right\}, \ldots \right). 
+\]
+:::
+
+:::{.proposition name="shift-invariant events and tail algebra"}
+All shift-invariant events belong to a strict subset of tail events 
+$\Sigma_{\mrm{inv}}\subsetneq \Sigma_{\mrm{tail}}$. 
+Consider, for example, 
+$\{\exists n:x_0=0, \,\,\forall \text{ odd }i\geq n\}$. 
+:::
+
+:::{.proposition name="Poincare recurrence"}
+Given a measure-preserving $\tau$, for any measurable $A$ 
+with $\Pr[A]>0$ we have 
+\[ 
+    \Pr\left[
+        \bigcup_{k\geq 1} \tau^{-k} A \,\bigg|\, A 
+    \right] = \Pr[\tau^k(\omega\in A)\in A\text{ occurs infinite often } | A] = 1
+\] 
+:::
+<details>
+<summary>Proof</summary>
+Let $B = \bigcup \tau^{-k}A$, by Bayes it suffices to show that 
+$\Pr[A\cap B]=\Pr[A]\Pr[B|A]=\Pr[A]$, 
+which is equivalent to 
+$\Pr[A\cup B]=\Pr[B]+\Pr[A\cap \neg B]=\Pr[B]+\Pr[\neg B|A]_{=0}\Pr[A] = \Pr[B]$. 
+Recall that $\tau^{-1}$ is the forward-evolution map. Notice 
+\[ 
+    B = \tau^{-1}A \cup \tau^{-1}B = \tau^{-1}(A\cup B)\implies 
+    \Pr[B] = \Pr[\tau^{-1}(A\cup B)] = \Pr[A\cup B]
+\] 
+</details>
+
+:::{.example name="physical recurrence"}
+The phase space flow in classical Hamiltonian mechanics 
+is a measure-preserving transform by Liouville's theorem. 
+Consider a system of two cylinders of gas immediately before they're 
+allowed to mix with $A$ the set of 
+all separated states, and $\omega\in A$ an initial separated state. 
+Poincare recurrence states that all molecules in each cylinder 
+will exactly return to their cylinder (although not necessarily to 
+their initial state) infinitely often. Thermodynamically, however, 
+this will take unrealistically long. 
+:::
+
+:::{.definition name="ergodicity"}
+$\tau$ is ergodic if $\forall E\in \Sigma_{\mrm{inv}}$, we have 
+$\Pr[E]=0$ or $\Pr[E]=1$. In other words, all shift-invariant 
+events are deterministic. 
+:::
+
+- $\{S_k = k^2\}$: ergodic but not stationary by definition \@ref(def:stationarity). 
+
+- 

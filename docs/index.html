@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.7480 Notes</title>
   <meta name="description" content="6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-15" />
+<meta name="date" content="2024-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,12 +137,16 @@
 <ul>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#definitions-risk"><i class="fa fa-check"></i>Definitions, risk</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
+<li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
-<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
-<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
+<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>11</b> Lecture notes</a>
+<li class="chapter" data-level="11" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>11</b> Entropy of Ergodic Processes</a>
+<ul>
+<li class="chapter" data-level="" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>12</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -179,7 +183,7 @@
 <div id="header">
 <h1 class="title">6.7480 Notes</h1>
 <p class="author"><em>Nicholas Lyu</em></p>
-<p class="date"><em>2024-10-15</em></p>
+<p class="date"><em>2024-10-20</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -226,12 +230,12 @@ and given distribution, and we can bound the event for the given distribution.</
 <ol style="list-style-type: decimal">
 <li>Additive decomposition of KL.</li>
 <li><u>Golden formula</u>: variational characterization of mutual information.</li>
-<li><u>Saddle point characterization of divergence</u>.</li>
+<li><u>Saddle point characterization of mutual information</u>.</li>
 <li><u>Donsker-Varadhan</u> (theorem <a href="variational-measures-of-information.html#thm:donskerVaradhan">5.5</a>):
 variational characterization of KL, extended to <span class="math inline">\(f\)</span>-divergences
 in theorem <a href="f-divergence.html#thm:fVar">8.9</a>.</li>
 <li><u>Harremoës-Vadja</u> (theorem <a href="f-divergence.html#thm:harremoesVajda">8.8</a>):
-one theorem to rule them all for <span class="math inline">\(f\)</span>-divergence joint range.</li>
+one theorem to rule them all for <span class="math inline">\(f\)</span>-divergence inequalities.</li>
 <li>Most <span class="math inline">\(f\)</span>-divergences are locally <span class="math inline">\(\chi^2\)</span>-like about
 <span class="math inline">\(\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)\)</span>
 and decays quadratically (theorem <a href="f-divergence.html#thm:localChiExpansion">8.12</a>).</li>
@@ -250,7 +254,7 @@ the information inequality (theorem <a href="kullback-leibler-divergence.html#th
 or a nonnegative information quantity (e.g. entropy).
 <ul>
 <li>Corollary <a href="kullback-leibler-divergence.html#cor:minimalCE">3.1</a>, theorem <a href="kullback-leibler-divergence.html#thm:gaussianCovExtremality">3.3</a>,
-lemma <a href="data-compression.html#lem:finiteExpectationExtremality">10.2</a>; the latter two
+lemma <a href="lossless-compression.html#lem:finiteExpectationExtremality">10.2</a>; the latter two
 characterized Gaussian and geometric distributions.</li>
 <li>Occasionally we need to introduce a tilted distribution based on
 both inputs, see Donsker-Varadhan (<a href="variational-measures-of-information.html#thm:donskerVaradhan">5.5</a>) or</li>
@@ -282,7 +286,7 @@ large probability and difficult region with low probability.
 <ul>
 <li><span class="math inline">\(\mathrm{Pr}[A]= \mathrm{Pr}[A, B] + \mathrm{Pr}[A, B^c] \leq \mathrm{Pr}[B] + \mathrm{Pr}[A, B^c]\)</span> then bound
 <span class="math inline">\(\mathrm{Pr}[A, B^c]\)</span> through atypicality of <span class="math inline">\(B^c\)</span>:
-soure coding distribution theorem <a href="data-compression.html#thm:varCompOptDistribution">10.2</a>.</li>
+soure coding distribution theorem <a href="lossless-compression.html#thm:varCompOptDistribution">10.2</a>.</li>
 </ul></li>
 <li>Break a single <span class="math inline">\(\sup\)</span> into nested ones.
 <ul>

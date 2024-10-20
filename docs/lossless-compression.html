@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10 Data compression | 6.7480 Notes</title>
-  <meta name="description" content="10 Data compression | 6.7480 Notes" />
+  <title>10 Lossless compression | 6.7480 Notes</title>
+  <meta name="description" content="10 Lossless compression | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10 Data compression | 6.7480 Notes" />
+  <meta property="og:title" content="10 Lossless compression | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10 Data compression | 6.7480 Notes" />
+  <meta name="twitter:title" content="10 Lossless compression | 6.7480 Notes" />
   
   
   
@@ -137,10 +137,10 @@
 <ul>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#definitions-risk"><i class="fa fa-check"></i>Definitions, risk</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="data-compression.html"><a href="data-compression.html"><i class="fa fa-check"></i><b>10</b> Data compression</a>
+<li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
-<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
-<li class="chapter" data-level="" data-path="data-compression.html"><a href="data-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
+<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>11</b> Entropy of Ergodic Processes</a>
 <ul>
@@ -180,9 +180,10 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-compression" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">10</span> Data compression<a href="data-compression.html#data-compression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Important takeaways:</p>
+<div id="lossless-compression" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Lossless compression<a href="lossless-compression.html#lossless-compression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This section corresponds to Chapter 10 of the book.
+Important takeaways:</p>
 <ol style="list-style-type: decimal">
 <li>Regimes for lossless data compression:
 <ul>
@@ -190,30 +191,30 @@
 For single-shot encoding, one may consider grouping
 several symbols into a super-symbol; a special case of this
 is when the source is i.i.d.</li>
-<li>Code extension (definition <a href="data-compression.html#def:uniqueDecodability">10.6</a>):
+<li>Code extension (definition <a href="lossless-compression.html#def:uniqueDecodability">10.6</a>):
 codewords are concatenated.</li>
 </ul></li>
 <li>Compression length of the optimal single-shot lossless
 is related to the entropy density
-(proposition <a href="data-compression.html#prp:entDensityDomination">10.2</a>) and is optimal in
+(proposition <a href="lossless-compression.html#prp:entDensityDomination">10.2</a>) and is optimal in
 every sense by stochastic dominance
-(proposition <a href="data-compression.html#prp:optimalEncodingOptimality">10.1</a>).
+(proposition <a href="lossless-compression.html#prp:optimalEncodingOptimality">10.1</a>).
 <ul>
-<li>Theorem <a href="data-compression.html#thm:optimalEncodingAvg">10.1</a>
+<li>Theorem <a href="lossless-compression.html#thm:optimalEncodingAvg">10.1</a>
 for the the optimal average-length <span class="math inline">\(\mathbb E[L]\)</span>.</li>
 <li>The code length distribution is also
 related to that of entropy density
-(theorem <a href="data-compression.html#thm:varCompOptDistribution">10.2</a>), resulting
+(theorem <a href="lossless-compression.html#thm:varCompOptDistribution">10.2</a>), resulting
 in optimal-coding asymptotics for i.i.d. source grouped into
-a supersymbol (corollary <a href="data-compression.html#cor:iidAsymp">10.2</a>).</li>
+a supersymbol (corollary <a href="lossless-compression.html#cor:iidAsymp">10.2</a>).</li>
 </ul></li>
-<li>Kraft-McMillan (theorem <a href="data-compression.html#thm:kraftMcMillan">10.3</a>):
+<li>Kraft-McMillan (theorem <a href="lossless-compression.html#thm:kraftMcMillan">10.3</a>):
 constructive bijection between inequality-satisfying code
 lengths and prefix-free code&gt;s.</li>
-<li>Theorem <a href="data-compression.html#thm:optimalPrefixLength">10.4</a>:
+<li>Theorem <a href="lossless-compression.html#thm:optimalPrefixLength">10.4</a>:
 bound on optimal prefix code.</li>
 <li>Main inequality: theorems
-<a href="data-compression.html#thm:optimalEncodingAvg">10.1</a> and <a href="data-compression.html#thm:optimalPrefixLength">10.4</a>.
+<a href="lossless-compression.html#thm:optimalEncodingAvg">10.1</a> and <a href="lossless-compression.html#thm:optimalPrefixLength">10.4</a>.
 <span class="math display">\[
 H(X) - \log_2[e(H(X)+1)] \leq \mathbb E[L_{\mathrm{single-shot}}^*(X)]
 \leq H(X) \leq \mathbb E[L_{\mathrm{prefix}}^*(X)] \leq H(X)+1
@@ -238,7 +239,7 @@ while attaining <span class="math inline">\(H(S_1^n)\)</span> length.</li>
 </ul></li>
 </ol>
 <div id="source-coding-theorems" class="section level2 unnumbered hasAnchor">
-<h2>Source coding theorems<a href="data-compression.html#source-coding-theorems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Source coding theorems<a href="lossless-compression.html#source-coding-theorems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Fixing a source domain <span class="math inline">\(\mathcal X\)</span>, we can define:</p>
 <ul>
 <li>A <strong>compressor</strong> <span class="math inline">\(f:\mathcal X\to \{0, 1\}^*\)</span>.</li>
@@ -372,7 +373,7 @@ Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <spa
 Proof
 </summary>
 Assume <span class="math inline">\(X\)</span> sorted w.l.o.g,
-in light of proposition <a href="data-compression.html#prp:entDensityDomination">10.2</a>,
+in light of proposition <a href="lossless-compression.html#prp:entDensityDomination">10.2</a>,
 we have <span class="math inline">\(L\preceq i_X\implies \mathbb E[L] \leq H(X)\)</span>.
 On the other hand, first note that <span class="math inline">\(H(X|L=k)\leq k\)</span> since <span class="math inline">\(X|L=k\)</span> can
 take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution on which has entropy <span class="math inline">\(k\)</span>.
@@ -404,7 +405,7 @@ Proof
 </summary>
 <ul>
 <li>Lower bound (achievability, or “compression length is smaller than”):
-proposition <a href="data-compression.html#prp:entDensityDomination">10.2</a>.</li>
+proposition <a href="lossless-compression.html#prp:entDensityDomination">10.2</a>.</li>
 <li>Upper bound (converse, or “compression length cannot be greater than”):
 <span class="math display">\[\begin{align}
   \mathrm{Pr}[L\leq k]
@@ -435,7 +436,7 @@ and <span class="math inline">\(U, V\)</span> real-valued r.vs, then
 <summary>
 Proof
 </summary>
-To obtain the first result, apply <a href="data-compression.html#thm:varCompOptDistribution">10.2</a>
+To obtain the first result, apply <a href="lossless-compression.html#thm:varCompOptDistribution">10.2</a>
 with <span class="math inline">\(k=un\)</span> and <span class="math inline">\(\tau = \sqrt n\)</span>. For the second,
 apply with <span class="math inline">\(k=H(S^n) + \sqrt n u\)</span> and <span class="math inline">\(\tau = n^{1/4}\)</span>.
 <span class="math display">\[\begin{align}
@@ -463,7 +464,7 @@ equivalently, in shorthand <span class="math inline">\(L(S^n) \sim nH(S) + \sqrt
 </div>
 </div>
 <div id="uniquely-decodable-codes" class="section level2 unnumbered hasAnchor">
-<h2>Uniquely decodable codes<a href="data-compression.html#uniquely-decodable-codes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Uniquely decodable codes<a href="lossless-compression.html#uniquely-decodable-codes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We now focus on compressors whose output stream can be uniquely decoded.
 We consider a finite alphabet <span class="math inline">\(\mathcal A\)</span> and let
 <span class="math inline">\(\mathcal A^*=\bigcup_{j=1}^\infty A^j\)</span>.</p>
