@@ -187,9 +187,7 @@ consider the equally valid chains under bijection:
 
 <div style="color:green">
 :::{.remark name="mutual information chain rule"}
-Mutual information between $X; Y$ is a resource which can be consumed 
-when we condition on an additional variable $Z$. 
-Additionally, one should remember the Kolmogorov identities as a decomposition 
+One should remember the Kolmogorov identities as a decomposition 
 of $I(X, Y; Z)$ into an individual component $I(X; Z)$ plus 
 the second term $I(Y; Z|X)$, which is $I(Y; Z)$ adjusted for over-counting. 
 :::

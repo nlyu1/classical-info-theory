@@ -1,0 +1,10 @@
+# Universal compression 
+
+1. Arithmetic encoding provides near-entropy 
+    compression without sorting the pmf 
+    $Q_{X^n} = Q_{X_1\cdots X_n}$. However, it 
+    requires both the joint and the marginals to 
+    be easily computable. 
+
+## Arithmetic encoding {-}
+

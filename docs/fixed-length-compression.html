@@ -121,7 +121,10 @@
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#gaussian-saddle-point"><i class="fa fa-check"></i>Gaussian saddle point</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
+<li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a>
+<ul>
+<li class="chapter" data-level="" data-path="tensorization.html"><a href="tensorization.html#mutual-information-1"><i class="fa fa-check"></i>Mutual information</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
 <ul>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition-1"><i class="fa fa-check"></i>Definition</a></li>
@@ -150,7 +153,11 @@
 <ul>
 <li class="chapter" data-level="" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>13</b> Lecture notes</a>
+<li class="chapter" data-level="13" data-path="universal-compression.html"><a href="universal-compression.html"><i class="fa fa-check"></i><b>13</b> Universal compression</a>
+<ul>
+<li class="chapter" data-level="" data-path="universal-compression.html"><a href="universal-compression.html#arithmetic-encoding"><i class="fa fa-check"></i>Arithmetic encoding</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>14</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -189,10 +196,35 @@
 <p>To be precise, we consider
 <strong>fixed-length almost-lossless</strong> compression
 (definition <a href="fixed-length-compression.html#def:flal">11.1</a>).</p>
+<p>Key takeaways:</p>
+<ol style="list-style-type: decimal">
+<li>By fixed-length, we mean that the source is compressed to
+<span class="math inline">\(\{0, 1\}^k\)</span> instead of <span class="math inline">\(\{0, 1\}^*\)</span>.</li>
+</ol>
 <div id="source-coding-theorems-1" class="section level2 unnumbered hasAnchor">
 <h2>Source coding theorems<a href="fixed-length-compression.html#source-coding-theorems-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:flal" class="definition"><strong>Definition 11.1  (fixed-length almost-lossless compression) </strong></span>placeholder.</p>
+<p><span id="def:flal" class="definition"><strong>Definition 11.1  (fixed-length almost-lossless compression) </strong></span>A compressor-decompressor pair
+<span class="math inline">\(f:\mathcal X\to \{0, 1\}^k, g:\{0, 1\}^k\to\mathcal X\cup \{e\}\)</span>
+is a fixed-length almost-lossless
+<span class="math inline">\((k, \epsilon)\)</span> source-code for <span class="math inline">\(X\)</span> if
+<span class="math display">\[
+    (g\circ f)(\forall x) \in \{x, e\}
+    \text{ and } \mathrm{Pr}[g\circ f = e] \leq \epsilon
+\]</span>
+Fixing <span class="math inline">\(X, k\)</span>, the fundamental limit of fixed-length compression is
+<span class="math display">\[
+    \epsilon^*(X, k) = \inf\{\epsilon:
+    \exists (k, \epsilon)\text{-code for } X\}
+\]</span></p>
+</div>
+<p>Recall the optimal single-shot (variable-length) lossless
+compressor length <span class="math inline">\(L\)</span> in definition <a href="lossless-compression.html#def:singleShotOpt">10.5</a>.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-80" class="theorem"><strong>Theorem 11.1  (fundamental limit of fixed-length compression) </strong></span>Assuming sorted alphabet on <span class="math inline">\(\mathbb N\)</span>, then
+<span class="math display">\[
+    \epsilon^*(X, k) = \mathrm{Pr}[L(X) \geq k] = \sum_{x\geq 2^k} P_X(x)
+\]</span></p>
 </div>
 
 </div>

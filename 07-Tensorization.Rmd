@@ -1,4 +1,45 @@
 # Tensorization 
 
+1. Theorem \@ref(thm:miTensorization) 
+    states that the MI-maximizing input for product channel 
+    is product input, and the MI-minimizing channel 
+    for product input is the product channel.
 
-Placeholder. 
+## Mutual information {-}
+
+:::{.theorem #miTensorization name="MI behavior"}
+
+1. For a memoryless channel $P_{Y^n|X^n} = \prod P_{Y_j|X_j}$ 
+\[ 
+    I(X^n; Y^n) \leq \sum_{j=1}^n I(X_j; Y_j) 
+\] 
+    with equality iff $P_{Y^n} = \prod P_{Y_j}$. 
+2. The (unconstrained) capacity is additive for memoryless channels: 
+\[ 
+    \max_{P_X^n} I(X^n; Y^n) = \sum_{j=1}^n \max_{P_{X_j}} I(X_j; Y_j)
+\] 
+3. If the source is memoryless $P_{X^n} = \prod P_{X_j}$, then 
+\[ 
+    I(X^n; Y) \geq \sum_{j=1}^n I(X_j; Y) 
+\] 
+with equality iff $P_{X^n|Y} = \prod P_{X_j|Y}$ almost-surely 
+under $P_Y$. 
+4. $\min_{P_{Y^n|X^n}} I(X^n; Y^n) = \sum_j 
+    \min_{P_{Y_j|X_j}} I(X_j; Y_j)$. 
+:::
+
+For (1), recall definition \@ref(def:mutInfDef) for MI: 
+\begin{align}
+    I(X^n; Y^n) 
+    &= D(P_{X^nY^n} \| P_{X^n} P_{Y^n}) 
+    = D\left(\prod P_{Y_j|X_j}\| P_{Y^n} | P_{X^n}\right) \\ 
+    \sum_j I(X_j; Y_j) 
+    &= \sum_j D(P_{Y_j|X_j} \| P_{Y_j} | P_{X_j}) 
+    = D\left(\prod P_{Y_j|X_j} \| \prod P_{Y_j} 
+    | \prod P_{X_j}\right)
+\end{align}
+It remains to show that the following difference is positive 
+\begin{align}
+    D(P_{Y^n|X^n} \| P_{Y^n} | P_{X^n}) 
+    - D(P_{Y^n | X^n} \| \prod P_{Y_j} | \prod P_{X_j})
+\end{align}

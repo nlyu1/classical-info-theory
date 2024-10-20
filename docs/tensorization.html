@@ -121,7 +121,10 @@
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#gaussian-saddle-point"><i class="fa fa-check"></i>Gaussian saddle point</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a></li>
+<li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a>
+<ul>
+<li class="chapter" data-level="" data-path="tensorization.html"><a href="tensorization.html#mutual-information-1"><i class="fa fa-check"></i>Mutual information</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
 <ul>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#definition-1"><i class="fa fa-check"></i>Definition</a></li>
@@ -150,7 +153,11 @@
 <ul>
 <li class="chapter" data-level="" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>13</b> Lecture notes</a>
+<li class="chapter" data-level="13" data-path="universal-compression.html"><a href="universal-compression.html"><i class="fa fa-check"></i><b>13</b> Universal compression</a>
+<ul>
+<li class="chapter" data-level="" data-path="universal-compression.html"><a href="universal-compression.html#arithmetic-encoding"><i class="fa fa-check"></i>Arithmetic encoding</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>14</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -186,8 +193,52 @@
             <section class="normal" id="section-">
 <div id="tensorization" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">7</span> Tensorization<a href="tensorization.html#tensorization" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Placeholder.</p>
+<ol style="list-style-type: decimal">
+<li>Theorem <a href="tensorization.html#thm:miTensorization">7.1</a>
+states that the MI-maximizing input for product channel
+is product input, and the MI-minimizing channel
+for product input is the product channel.</li>
+</ol>
+<div id="mutual-information-1" class="section level2 unnumbered hasAnchor">
+<h2>Mutual information<a href="tensorization.html#mutual-information-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="theorem">
+<p><span id="thm:miTensorization" class="theorem"><strong>Theorem 7.1  (MI behavior) </strong></span></p>
+<ol style="list-style-type: decimal">
+<li>For a memoryless channel <span class="math inline">\(P_{Y^n|X^n} = \prod P_{Y_j|X_j}\)</span>
+<span class="math display">\[
+I(X^n; Y^n) \leq \sum_{j=1}^n I(X_j; Y_j)
+\]</span>
+with equality iff <span class="math inline">\(P_{Y^n} = \prod P_{Y_j}\)</span>.</li>
+<li>The (unconstrained) capacity is additive for memoryless channels:
+<span class="math display">\[
+\max_{P_X^n} I(X^n; Y^n) = \sum_{j=1}^n \max_{P_{X_j}} I(X_j; Y_j)
+\]</span></li>
+<li>If the source is memoryless <span class="math inline">\(P_{X^n} = \prod P_{X_j}\)</span>, then
+<span class="math display">\[
+I(X^n; Y) \geq \sum_{j=1}^n I(X_j; Y)
+\]</span>
+with equality iff <span class="math inline">\(P_{X^n|Y} = \prod P_{X_j|Y}\)</span> almost-surely
+under <span class="math inline">\(P_Y\)</span>.</li>
+<li><span class="math inline">\(\min_{P_{Y^n|X^n}} I(X^n; Y^n) = \sum_j  \min_{P_{Y_j|X_j}} I(X_j; Y_j)\)</span>.</li>
+</ol>
+</div>
+<p>For (1), recall definition <a href="mutual-information.html#def:mutInfDef">4.1</a> for MI:
+<span class="math display">\[\begin{align}
+    I(X^n; Y^n)
+    &amp;= D(P_{X^nY^n} \| P_{X^n} P_{Y^n})
+    = D\left(\prod P_{Y_j|X_j}\| P_{Y^n} | P_{X^n}\right) \\
+    \sum_j I(X_j; Y_j)
+    &amp;= \sum_j D(P_{Y_j|X_j} \| P_{Y_j} | P_{X_j})
+    = D\left(\prod P_{Y_j|X_j} \| \prod P_{Y_j}
+    | \prod P_{X_j}\right)
+\end{align}\]</span>
+It remains to show that the following difference is positive
+<span class="math display">\[\begin{align}
+    D(P_{Y^n|X^n} \| P_{Y^n} | P_{X^n})
+    - D(P_{Y^n | X^n} \| \prod P_{Y_j} | \prod P_{X_j})
+\end{align}\]</span></p>
 
+</div>
 </div>
             </section>
 
