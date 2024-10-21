@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Extremization | 6.7480 Notes</title>
-  <meta name="description" content="6 Extremization | 6.7480 Notes" />
+  <title>5 Variational Characterizations | 6.7480 Notes</title>
+  <meta name="description" content="5 Variational Characterizations | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Extremization | 6.7480 Notes" />
+  <meta property="og:title" content="5 Variational Characterizations | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Extremization | 6.7480 Notes" />
+  <meta name="twitter:title" content="5 Variational Characterizations | 6.7480 Notes" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="variational-characterizations.html"/>
-<link rel="next" href="tensorization.html"/>
+<link rel="prev" href="mutual-information.html"/>
+<link rel="next" href="extremization.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -191,277 +191,280 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="extremization" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">6</span> Extremization<a href="extremization.html#extremization" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Key perspectives:</p>
+<div id="variational-characterizations" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Variational Characterizations<a href="variational-characterizations.html#variational-characterizations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Key takeaways:</p>
 <ol style="list-style-type: decimal">
-<li><em>Capacity:</em> Given channel <span class="math inline">\(P_{Y|X}\)</span>, maximize <span class="math inline">\(I(X; Y)\)</span>
-over a convex set of inputs <span class="math inline">\(P_X\)</span>.</li>
-<li><em>Rate-distortion:</em> Given <span class="math inline">\(P_X\)</span>, minimize <span class="math inline">\(I(X; Y)\)</span>
-over a convex set of <span class="math inline">\(P_{Y|X}\)</span>.</li>
-<li><em>Maximum likelihood:</em> Given <span class="math inline">\(P\)</span>, minimize <span class="math inline">\(D(P\|Q)\)</span>
-over a class of <span class="math inline">\(Q\)</span>.</li>
-<li><em>Information projection:</em> Given <span class="math inline">\(Q\)</span>, minimize <span class="math inline">\(D(P\|Q)\)</span>
-over a convex class of <span class="math inline">\(P\)</span>.</li>
+<li>Variational characterizations are important because
+they provide convenient bounds when we choose an easily-computable candidate.</li>
+<li>For each convex quantity there is a dual variational characterization per
+the Legendre transformation.</li>
+<li>To analyze mutual information with a mixture distribution: add a latent
+variable as an upper bound, then use the Kolmogorov identities to
+analyze the gap / decompose in another way.</li>
+<li>Mutual information is “average divergence” achieved
+using center of gravity <a href="variational-characterizations.html#cor:centerOfGravityMI">5.1</a>.</li>
 </ol>
-<p>The first two minimax objectives correspond to the
-concavity of <span class="math inline">\(I(P_X; P_{Y|X})\)</span> in the first argument and
-convexity in the second argument. The last two objectives
-correspond to the convexity of <span class="math inline">\(D(P\|Q)\)</span> in both arguments.</p>
-<p>Key mathematical ideas:</p>
-<ol style="list-style-type: decimal">
-<li>Convexity of <span class="math inline">\(D(P\|Q)\)</span> is equivalent to “conditioning increases
-divergence” (proposition <a href="kullback-leibler-divergence.html#prp:conditionIncDiv">3.4</a>)
-<span class="math inline">\(\iff\)</span> “mixing decreases divergence.”</li>
-<li>For convexity proofs, introduce a Bernoulli latent variable,
-then use chain rule to decompose the quantity (MI, KL, entropy, etc)
-into the two compared components.</li>
-<li>The saddle point of mutual information yields a game-theoretic
-perspective to the duality between achieving capacity and
-rate distortion: corollary <a href="extremization.html#cor:MIMinimax">6.2</a>.</li>
-<li>The capacity of a channel is the radius of posteriors under
-divergence.</li>
-</ol>
-<div id="extremizationConvexity" class="section level2 unnumbered hasAnchor">
-<h2>Convexity<a href="extremization.html#extremizationConvexity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="geometric-interpretation-of-mi" class="section level2 unnumbered hasAnchor">
+<h2>Geometric interpretation of MI<a href="variational-characterizations.html#geometric-interpretation-of-mi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-39" class="theorem"><strong>Theorem 6.1  (KL convexity) </strong></span>The map <span class="math inline">\((P, Q)\mapsto D(P\|Q)\)</span> is convex:
+<p><span id="thm:goldenFormula" class="theorem"><strong>Theorem 5.1  (golden formula) </strong></span>For any <span class="math inline">\(Q_Y\)</span> we have
 <span class="math display">\[
-    \forall \lambda \in [0, 1]:
-    \lambda D(P_0 \| Q_0) + \bar \lambda D(P_1\|Q_1)
-    \geq D(\lambda P_0 + \bar \lambda P_1 \|
-    \lambda Q_0 + \bar \lambda Q_1)
+    D(P_{Y|X} \| Q_Y|P_X) = I(X; Y) + D(P_Y\|Q_Y)
+\]</span>
+In particular, if <span class="math inline">\(P_Y \ll Q_Y\)</span>, then
+<span class="math display">\[
+    I(X; Y) = D(P_{Y|X} \| Q_Y|P_X) - D(P_Y\|Q_Y)
 \]</span></p>
 </div>
-<p><em>Proof:</em> The first quantity can be seen as an expected divergence
-over <span class="math inline">\(R\sim \mathrm{Ber}(\lambda)\)</span>:
-<span class="math display">\[
-    \lambda D(P_0 \| Q_0) + \bar \lambda D(P_1\|Q_1)
-    = D(P\|Q | R), \quad (P, Q)_{R=j} = (P_j, Q_j)
-\]</span>
-The second quantity is simply the divergence of the marginal,
-then by chain rule we have
+<details>
+<summary>
+Proof
+</summary>
+The two sides expand to
 <span class="math display">\[\begin{align}
-    D(P\|Q | R)
-    = D(PR \|QR) \geq D(P\|Q)
-\end{align}\]</span></p>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-40" class="theorem"><strong>Theorem 6.2  (concavity of entropy) </strong></span><span class="math inline">\(P_X\mapsto H(X)\)</span> is concave. Fixing channel
-<span class="math inline">\(P_{Y|X}\)</span>, <span class="math inline">\(P_X\mapsto H(X|Y)\)</span> is concave
-and continuous if <span class="math inline">\(\mathcal X\)</span> finite.</p>
-</div>
-<p><em>Proof:</em> The first proof is complete by the
-KL-entropy relation <span class="math inline">\(H(X) = \log |\mathcal X| - D(P_X\|U_X)\)</span>.
-The second proof follows by a similar latent
-variable argument: consider <span class="math inline">\(U\sim \mathrm{Ber}(\lambda)\)</span> and
-<span class="math inline">\(U\to X\to Y\)</span>; let <span class="math inline">\(f(P_X) = H(X|Y)\)</span>, then
-<span class="math display">\[\begin{align}
-    f(\lambda P_0 + \bar \lambda P_1) = H(X|Y), \quad
-    \lambda f(P_0) + \bar \lambda f(P_1) = H(X|Y, U)
+    D(P_{Y|X} \| Q_Y|P_X) &amp;= D(P_{XY} \| P_XQ_Y) \\
+    I(X; Y) + D(P_Y \|Q_Y) &amp;= D(P_{XY} \| P_XP_Y) + D(P_Y \|Q_Y)
 \end{align}\]</span>
-concavity follows from <span class="math inline">\(H(X|Y) \leq H(X|Y, U)\)</span>. Continuity
-follows <span class="math inline">\(H(Y|X) = H(Y) - I(X; Y)\)</span> both continuous.</p>
-<div class="theorem">
-<p><span id="thm:MIextremality" class="theorem"><strong>Theorem 6.3  (extremality of MI) </strong></span></p>
-<ol style="list-style-type: decimal">
-<li>Fixing channel <span class="math inline">\(P_{Y|X}\)</span>, <span class="math inline">\(P_X\mapsto I(P_X, P_{Y|X})\)</span> is concave.</li>
-<li>Fixing input distribution <span class="math inline">\(P_X\)</span>, <span class="math inline">\(P_{Y|X} \mapsto I(P_X, P_{Y|X})\)</span>
-is convex.</li>
-</ol>
+and are equal by the divergence chain rule <a href="kullback-leibler-divergence.html#prp:divergenceChainRule">3.2</a>.
+</details>
+<div class="corollary">
+<p><span id="cor:centerOfGravityMI" class="corollary"><strong>Corollary 5.1  (center of gravity formula) </strong></span><span class="math inline">\(I(X; Y) = \min_{Q_Y} D(P_{Y|X} \| Q_Y|P_X)\)</span>, the
+unique minimizer is <span class="math inline">\(Q_Y=P_Y\)</span>.</p>
 </div>
-<p><em>Proof</em> Consider 3 proofs for the first statement:
+<p><em>Proof:</em> Follows from the golden formula and information inequality.</p>
+<p>To properly interpret this corollary as the center of gravity:
+consider the simplex of conditionals <span class="math inline">\(\{P_{Y|X=x}\}\)</span>. Given
+a candidate marginal <span class="math inline">\(Q_Y\)</span>, we can compute its divergence
+from each conditional, weighted by their incidence probability
 <span class="math display">\[
-    \lambda I(P^0_X; P_{Y|X} \circ P^0_X) +
-    \bar \lambda I(P^1_X; P_{Y|X} \circ P^1_X)
-    \geq
-    I(P_X; P_{Y|X}\circ P_X), \quad
-    P_X = \lambda P^0_X + \bar \lambda P^1_X
-\]</span></p>
-<ol style="list-style-type: decimal">
-<li><em>Standard latent variable proof:</em> Consider the standard
-latent variable proof <span class="math inline">\(Z\to X\to Y\)</span> with
-<span class="math inline">\(Z\sim \mathrm{Ber}(\lambda)\perp\!\!\!\perp Y\)</span>,
-then the RHS is <span class="math inline">\(I(X; Y)\)</span> while the LHS is
-<span class="math display">\[
-     I(Y; X, Z) = I(Y; X | Z) + I(Y; Z)_{=0}
+    D(P_{Y|X} \| Q_Y|P_X)
+    = \mathbb E_{x\sim P_X} \left[D(P_{Y|X=x} \| Q_Y)\right]
 \]</span>
-the result follows from the fact that mutual information increases
-with more deta.</li>
-<li><em>Center of gravity formula:</em>
-Use corollary <a href="variational-characterizations.html#cor:centerOfGravityMI">5.1</a>:
-<span class="math inline">\(I(X; Y) = \min_{Q_Y} D(P_{Y|X} \|Q_Y | P_X)\)</span>; this is
-the pointwise minimum of affine functions in <span class="math inline">\(P_X\)</span>
-hence concave.</li>
-<li><em>Golden formula:</em> Since
-<span class="math inline">\(I(X; Y) = D(P_{Y|X} \|Q_Y|P_X) - D(P_Y\|Q_Y)\)</span>,
-the map <span class="math inline">\(P_X\mapsto D(P_{Y|X} \circ P_X \|Q_Y)\)</span>
-is convex and the first term is affine, so the
-combination is concave.</li>
-</ol>
-<p>To prove the second argument, note that
-<span class="math inline">\(I(X; Y) = D(P_{Y|X} \| P_Y|P_X)\)</span>; here <span class="math inline">\(D(P_{Y|X=x} \| P_Y)\)</span>
-is jointly convex, and <span class="math inline">\(P_Y\)</span> is linear function of <span class="math inline">\(P_{Y|X}\)</span>.</p>
+The unique minimizer of this is <span class="math inline">\(P_Y\)</span>, with minimized value <span class="math inline">\(I(X; Y)\)</span>.</p>
+<p>One can also see that mutual information is small if masses are concentrated:
+this coincides with <span class="math inline">\(I(X; Y) = H(Y) - H(Y|X)\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-32" class="theorem"><strong>Theorem 5.2  (minimum distance from independence) </strong></span><span class="math inline">\(I(X; Y) = \min_{Q_X, Q_Y} D(P_{XY} \|Q_XQ_Y)\)</span>.
+The unique minimizer is <span class="math inline">\(Q_X, Q_Y = P_X, P_Y\)</span>.</p>
 </div>
-<div id="minimax-and-saddle-point" class="section level2 unnumbered hasAnchor">
-<h2>Minimax and saddle-point<a href="extremization.html#minimax-and-saddle-point" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details>
+<summary>
+Proof
+</summary>
+Decompose the divergence on the RHS
+<span class="math display">\[\begin{align}
+    D(P_{XY} \|Q_XQ_Y)
+    &amp;= D(P_{XY} \| Q_X P_Y) + D(P_Y \|Q_Y) \\
+    &amp;= D(P_{XY} \| P_X P_Y) + D(P_Y \|Q_Y) + D(P_X \| Q_X) \\
+    &amp;= I(X; Y) + D(P_Y \|Q_Y) + D(P_X \| Q_X)
+\end{align}\]</span>
+</details>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-33" class="theorem"><strong>Theorem 5.3  (minimum distance from markov chain) </strong></span>Minimizing over all <span class="math inline">\(Q_{XYZ} = Q_XQ_{Y|X}Q_{Z|Y}\)</span>,
+<span class="math display">\[
+    I(X; Z|Y) = \min_{Q_{XYZ}:X\to Y\to Z} D(P_{XYZ} \| Q_{XYZ})
+\]</span></p>
+</div>
+</div>
+<div id="lower-variational-bounds" class="section level2 unnumbered hasAnchor">
+<h2>Lower variational bounds<a href="variational-characterizations.html#lower-variational-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="theorem">
+<p><span id="thm:miLowerBound" class="theorem"><strong>Theorem 5.4  (lower variational bound of MI) </strong></span>For any Markov kernel <span class="math inline">\(Q_{X|Y}\)</span> such that <span class="math inline">\(Q_{X|Y=y} \ll P_X\)</span> for
+<span class="math inline">\(P_Y\)</span> almost everywhere we have
+<span class="math display">\[
+    I(X; Y) \geq \mathbb E_{P_{X, Y}} \left[\log \dfrac{d Q_{X|Y}}{dP_X}\right]
+\]</span>
+if <span class="math inline">\(I(X; Y) &lt; \infty\)</span>, then
+<span class="math display">\[
+    I(X; Y) = \sup_{Q_{X|Y}} \mathbb E_{P_{XY}} \left[
+        \log \dfrac{dQ_{X|Y}}{dP_X}
+    \right]
+\]</span>
+equality is saturated when <span class="math inline">\(Q_{X|Y} = P_{X|Y}\)</span>.</p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+Without dealing with limit arguments,
+<span class="math display">\[\begin{align}
+    \mathbb E_{P_{X|Y=y}} \left[
+        \log \dfrac{Q_{X|Y}(x|y)}{P_X(x)}
+    \right]
+    &amp;= \mathbb E_{P_{X|Y=y}} \left[
+        \log \left(
+            \dfrac{Q_{X|Y}(x|y)}{P_{X|Y}(x|y)}
+            \dfrac{P_{X|Y}(x|y)}{P_X(x)}
+        \right)
+    \right] \\
+    &amp;= \mathbb E_{P_{X|Y=y}} \left[
+        -D(P_{X|Y=y} \| Q_{X|Y=y}) + D(P_{X|Y=y} \| P_X)
+    \right]
+\end{align}\]</span>
+Take expectation over <span class="math inline">\(y\)</span> to obtain
+<span class="math display">\[\begin{align}
+    \mathbb E_{P_{XY}} \left[
+        \log \dfrac{dQ_{X|Y}}{dP_X}
+    \right]
+    &amp;= D(P_{X|Y=y} \| P_X | P_Y) - D(P_{X|Y} \| Q_{X|Y} | P_Y) \\
+    &amp;= I(X; Y) - D(P_{X|Y} \| Q_{X|Y} | P_Y)
+\end{align}\]</span>
+</details>
+<div class="theorem">
+<p><span id="thm:donskerVaradhan" class="theorem"><strong>Theorem 5.5  (Donsker-Varadhan) </strong></span>Given probability measures <span class="math inline">\(P, Q\)</span> over <span class="math inline">\(\mathcal X\)</span>,
+denote a class of functions
+<span class="math display">\[\begin{align}
+    \mathcal C_Q &amp;= \{
+        f:\mathcal X\to \mathbb R\cup \{-\infty\} |
+        0 &lt; \mathbb E_Q[e^{f(X)}] &lt; \infty
+    \} \\
+    D(P \| Q) &amp;= \sup_{f\in \mathcal C_Q}
+        \mathbb E_P f(X) - \log \mathbb E_Q\left[e^{f(X)}\right]
+\end{align}\]</span>
+If <span class="math inline">\(\mathcal X\)</span> is a metric space with the
+Borel <span class="math inline">\(\sigma\)</span>-algebra, then the supremum can be
+taken over the class of all bounded continuous functions.</p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+Again, for clarity we’re ignoring measurability
+(or infinity) subtleties.
+The key idea is, given <span class="math inline">\(f\in \mathcal C_Q\)</span>, to
+define a tilted distribution <span class="math inline">\(Q^f\)</span> such that
+<span class="math display">\[
+    Q^f(dx) = e^{f(dx) - \psi_f} Q(dx), \quad
+    \psi_f = \log \mathbb E_Q\left(e^{f(X)}\right)
+\]</span>
+Here <span class="math inline">\(\psi_f\)</span> is just a <span class="math inline">\(f\)</span>-dependent normalization constant.
+Then
+<span class="math display">\[\begin{align}
+    \mathbb E_P[f(X) - \psi_f]
+    &amp;= \mathbb E_P[\log e^{f(X) - \psi_f}]
+    = \mathbb E_P\left[\log \dfrac{dQ^f}{dQ}\right]\\
+    &amp;= \mathbb E_P\left[\log \dfrac{dP}{dQ}- \log \dfrac{dP}{dQ^f}\right]
+    = D(P\|Q) - D(P\|Q^f) \leq D(P\|Q)
+\end{align}\]</span>
+Equality is saturated when <span class="math inline">\(Q^f = P \iff f = \log \dfrac{dP}{dQ}\)</span>.
+</details>
+<div class="corollary">
+<p><span id="cor:unlabeled-div-34" class="corollary"><strong>Corollary 5.2  </strong></span>The supremum in Donsker-Varadhan is equivalent to,
+<span class="math inline">\(\forall f\in \mathcal C_Q\)</span>
+<span class="math display">\[
+    \mathbb E_P f(X) \leq D(P\|Q) + \psi_f,
+    \quad \psi_f = \log \mathbb E_Q\left(e^{f(X)}\right)
+\]</span>
+This allows us to upper-bound <span class="math inline">\(\mathbb E_P f(X)\)</span> for difficult <span class="math inline">\(P\)</span>
+by substituting with an easier <span class="math inline">\(Q\)</span>.</p>
+</div>
+<p>Recall the Legendre transform: given a convex function <span class="math inline">\(f(x)\)</span>,
+its Legendre transform is
+<span class="math display">\[
+    g(p) = \sup_x\left[\langle x, p\rangle- f(x)\right]
+\]</span>
+Here, <span class="math inline">\(g(p)\)</span> is the function <span class="math inline">\(P\mapsto D(P\|Q)\)</span>, <span class="math inline">\(x\)</span>
+is a well-behaved function <span class="math inline">\(f\)</span>, and <span class="math inline">\(f(x)\)</span> corresponds
+to the functional <span class="math inline">\(f\mapsto \psi_f\)</span>. This is a functional
+Legendre transform. The following result will then not be too surprising.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-41" class="proposition"><strong>Proposition 6.1  (minimax inequality) </strong></span><span class="math display">\[
-    \inf_y \sup_x f(x, y) \geq \sup_x \inf_y f(x, y)
-\]</span>
-Whichever operation acts first strictly dominates.</p>
-</div>
-<p><em>Proof:</em> Fixing <span class="math inline">\(y=y_0\)</span> on the LHS,
-<span class="math inline">\(\sup_x f(x, y_0) \geq \sup_x \inf_y f(x, y)\)</span> by
-<span class="math inline">\(f(x, y_0)\geq \inf_y f(x, y)\)</span>.</p>
-<ol style="list-style-type: decimal">
-<li>Minimax equality is implied by the existence of a saddle
-point <span class="math inline">\((x^*, y^*)\)</span> such that
+<p><span id="prp:unlabeled-div-35" class="proposition"><strong>Proposition 5.1  (Gibbs variational principle) </strong></span>Given measurable <span class="math inline">\(\mathcal X:\mathbb R\cup \{-\infty\}\)</span>
+and a probability measure <span class="math inline">\(Q\)</span> on <span class="math inline">\(\mathcal X\)</span>
 <span class="math display">\[
-     f(x, y^*) \leq f(x^*, y^*) \leq f(x^*, y), \quad \forall x, y
+    \log \mathbb E_Q\left[e^{f(X)}\right] = \sup_P \mathbb E_P [f(X)] - D(P\|Q)
 \]</span>
-here <span class="math inline">\(x^*\)</span> is the dominant strategy given <span class="math inline">\(y^*\)</span>, and
-<span class="math inline">\(y^*\)</span> is the dominant strategy given <span class="math inline">\(x^*\)</span>.</li>
-<li>If <span class="math inline">\(\inf, \sup\mapsto \min, \max\)</span>, then equality implies
-the existence of a saddle point.</li>
-<li><em>von Neumann</em>: Given <span class="math inline">\(A, B\)</span> with finite alphabets and <span class="math inline">\(g(A, B)\)</span>
-arbitrary, then
-<span class="math display">\[
-     \min_{P_A} \max_{P_B} \mathbb E[g(A, B)]
-     = \max_{P_B} \min_{P_A} \mathbb E[g(A, B)]
-\]</span>
-this is a special case of minimax with
-<span class="math inline">\(f(x, y) = \sum_{ab} P_A(a)P_B(b) g(a, b)\)</span>.</li>
-</ol>
-<div class="theorem">
-<p><span id="thm:minimaxEquality" class="theorem"><strong>Theorem 6.4  (minimax theorem) </strong></span>If <span class="math inline">\(\mathcal X, \mathcal Y\)</span> are compact domains in <span class="math inline">\(\mathbb R^n\)</span>, and
-<span class="math inline">\(f(x, y)\)</span> is continuous in <span class="math inline">\((x, y)\)</span>, concave in <span class="math inline">\(x\)</span> and
-convex in <span class="math inline">\(y\)</span>, then
-<span class="math display">\[
-    \max_x \min_y f(x, y) = \min_y \max_x f(x, y)
-\]</span>
-In particular, this implies the existence of a saddle point.</p>
+If the LHS is finite, then the unique maximizer in the RHS is <span class="math inline">\(P=Q^f\)</span>.</p>
 </div>
 </div>
-<div id="capacity-saddle-point-of-mi" class="section level2 unnumbered hasAnchor">
-<h2>Capacity, Saddle point of MI<a href="extremization.html#capacity-saddle-point-of-mi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="definition">
-<p><span id="def:unlabeled-div-42" class="definition"><strong>Definition 6.1  (capacity, caid, caod) </strong></span>The capacity of a channel <span class="math inline">\(P_{Y|X}\)</span> over a set <span class="math inline">\(\mathcal P\)</span>
-of (usually convex) input distributions is
-<span class="math display">\[
-    C = \sup_{P_X\in \mathcal P} I(P_X, P_{Y|X})
-    = \sup_{P_X} D(P_{Y|X}P_X \| (P_{Y|X}\circ P_X)P_X)
-\]</span>
-If equality is saturated by <span class="math inline">\(P_X^*\in\mathcal P\)</span>, then
-<span class="math inline">\(P_X^*\)</span> is a capacity-achieving input distribution
-(caid) and <span class="math inline">\(P_Y^* = P_{Y|X}\circ P_X^*\)</span> is the capacity-achieving
-output distribution (caod).</p>
-</div>
-<div class="theorem">
-<p><span id="thm:MISaddleInequality" class="theorem"><strong>Theorem 6.5  (implications of MI saddle point) </strong></span>Fixing a convex <span class="math inline">\(\mathcal P\)</span> on <span class="math inline">\(\mathcal X\)</span>. The existence of a caid
-implies, for every <span class="math inline">\(P_X\in \mathcal P, P_Y\in P_{Y|X} \circ \mathcal P\)</span>,
-<span class="math display">\[
-    D(P_{Y|X} \| P_Y^* |P_X) \leq D(P_{Y|X} \| P_Y^* | P_X^*)
-    \leq D(P_{Y|X} \| Q_Y | P_X^*)
-\]</span></p>
-</div>
-<p><em>Proof:</em> The second inequality is simply center of gravity
-formula <a href="variational-characterizations.html#cor:centerOfGravityMI">5.1</a> applied to the
-middle quantity <span class="math inline">\(C=I(X^*, Y^*) = D(P_{Y|X} \| P_Y^* | P_X^*)\)</span>.
-For the first inequality, let <span class="math inline">\(C&lt;\infty\)</span> and let
-<span class="math display">\[
-    P_{X_\lambda} = \lambda P_X + \bar \lambda P_X^*, \quad
-    P_{Y_\lambda} = P_{Y|X} \circ P_{X_\lambda} \implies
-    P_{Y_\lambda} = \lambda P_Y + \bar \lambda P_Y^*
-\]</span>
-The following chain yields (the third line applies the
-center of gravity characterization again)
-<span class="math display">\[\begin{align}
-    C
-    &amp;\geq I(X_\lambda; Y_\lambda)
-    = D(P_{Y|X} \| P_{Y_\lambda} | P_{X_\lambda}) \\
-    &amp;= \lambda D(P_{Y|X} \| P_{Y_\lambda} | P_X) +
-    \bar \lambda D(P_{Y|X} \| P_{Y_\lambda} | P_{X^*}) \\
-    &amp;\geq \lambda D(P_{Y|X} \| P_{Y_\lambda} | P_X) + \bar \lambda C \\
-    C &amp;\geq D(P_{Y|X} \| P_{Y_\lambda} | P_X)
-    = D(P_{Y|X} P_X \| P_{Y_\lambda} P_X)
-\end{align}\]</span>
-Apply lower semi-continuity <a href="variational-characterizations.html#thm:semiContinuity">5.6</a>
-by taking <span class="math inline">\(\liminf_{\lambda\to 0}\)</span> to obtain the desired quantity
-<span class="math display">\[
-    \liminf_{\lambda\to 0} P_{Y_\lambda} P_X = P_{Y^*}P_X \implies
-    D(P_{Y|X} \| P_{Y^*} | P_X) \leq
-    \liminf_{\lambda\to 0} D(P_{Y|X} P_X \| P_{Y_\lambda} P_X)  \leq C
-\]</span></p>
-<div class="corollary">
-<p><span id="cor:caodUniqueness" class="corollary"><strong>Corollary 6.1  (uniqueness of caod) </strong></span>In addition to the assumptions in theorem <a href="extremization.html#thm:MISaddleInequality">6.5</a>,
-if capacity is finite, then the caod <span class="math inline">\(P_Y^*\)</span> is unique and satisfies
-<span class="math display">\[
-    D(P_{Y|X} \circ P_X \| P_Y^*) \leq C &lt; \infty,
-    \quad \forall P_X\in \mathcal P
-\]</span>
-In particular, KL-finite implies <span class="math inline">\(P_Y \ll P_Y^*\)</span>.</p>
-</div>
-<p><em>Proof:</em> Recognize the capacity as a decomposed component
-in the divergence chain rule <a href="kullback-leibler-divergence.html#prp:divergenceChainRule">3.2</a>:
-<span class="math display">\[\begin{align}
-    C = D(P_{X^*Y^*} \| P_{Y^*}P_{X^*})
-    &amp;= D(P_{X^*Y^*} \| P_{Y^*} P_X) - D(P_{Y^*} \| P_Y) \\
-    &amp;= D(P_{X|Y} \| P_X | P_{Y^*}) - D(P_{Y^*} \| P_Y) \\
-    &amp;\geq D(P_{X|Y} \| P_{X^*} | P_{Y^*})_{=C} - D(P_{Y^*} \| P_Y)
-\end{align}\]</span>
-Saturated equality implies <span class="math inline">\(D(P_{Y^*} \| P_Y)=0\iff P_Y=P_{Y^*}\)</span>.</p>
-<p>Note that the caid need not be unique.</p>
-<div class="corollary">
-<p><span id="cor:MIMinimax" class="corollary"><strong>Corollary 6.2  (minimax MI) </strong></span>Under saddle point assumptions, we additionally have
-<span class="math display">\[\begin{align}
-    C = \max_{P_X\in \mathcal P} I(X; Y)
-    &amp;= \max_{P_X\in \mathcal P} \min_{Q_Y} D(P_{Y|X} \| Q_Y | P_X) \\
-    &amp;= \min_{Q_Y} \sup_{P_X\in \mathcal P} D(P_{Y|X} \| Q_Y|P_X)
-\end{align}\]</span></p>
-</div>
-<p><em>Proof:</em> The first <span class="math inline">\(\max\min\)</span> equation comes from the
-center of gravity characterization <a href="variational-characterizations.html#cor:centerOfGravityMI">5.1</a>.
-The second equation comes from applying center of gravity
-to the left inequality of theorem <a href="extremization.html#thm:MISaddleInequality">6.5</a>
-<span class="math display">\[
-    C = D(P_{Y|X} \| P_Y^* | P_X^*)
-    = \max_{P_X\in \mathcal P} D(P_{Y|X} \| P_Y^* | P_X)
-    = \min_{Q_Y} \sup_{P_X\in \mathcal P} D(P_{Y|X} \| P_Y^* | P_X)
-\]</span></p>
-</div>
-<div id="capacity-as-information-radius" class="section level2 unnumbered hasAnchor">
-<h2>Capacity as information radius<a href="extremization.html#capacity-as-information-radius" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Some review: given metric space <span class="math inline">\((X, d)\)</span> and bounded set <span class="math inline">\(A\)</span>.</p>
-<div class="definition">
-<p><span id="def:unlabeled-div-43" class="definition"><strong>Definition 6.2  (radius, diameter) </strong></span>The (Chebyshev) radius is the radius of the smallest ball
-that covers <span class="math inline">\(A\)</span>.
-<span class="math display">\[
-    \mathrm{rad}(A) = \inf_{y\in X}\sup_{x\in A} d(x, y)
-\]</span>
-The diameter of <span class="math inline">\(A\)</span> is the least upper bound on
-two distances in the set
-<span class="math display">\[
-    \mathrm{diam}(A) = \sup_{x, y\in A} d(x, y)
-\]</span></p>
+<div id="continuity" class="section level2 unnumbered hasAnchor">
+<h2>Continuity<a href="variational-characterizations.html#continuity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-36" class="proposition"><strong>Proposition 5.2  (Single-argument continuity of divergence for finite alphabets) </strong></span>Fixing finite <span class="math inline">\(\mathcal X\)</span> with a strictly positive distribution <span class="math inline">\(Q\)</span> over <span class="math inline">\(\mathcal X\)</span>,
+then <span class="math inline">\(P\mapsto D(P\|Q)\)</span> is continuous; in particular, <span class="math inline">\(P\mapsto H(P)\)</span> is continuous.</p>
 </div>
 <p><span style="color:green">
-Compare the radius to the second equation in corollary
-<a href="extremization.html#cor:MIMinimax">6.2</a>: channel capacity is the information
-radius of the conditionals.
-</span></p>
-<div class="corollary">
-<p><span id="cor:unlabeled-div-44" class="corollary"><strong>Corollary 6.3  </strong></span>Given finite <span class="math inline">\(\mathcal X\)</span> and channel <span class="math inline">\(P_{Y|X}\)</span>, the
-maximal mutual information over all input distributions
-satisfies
+For finite alphabets, divergence is never continuous in the pair: consider
 <span class="math display">\[
-    \max_{P_X} I(P_X; P_{Y|X})
-    = \max_{x\in \mathcal X} D(P_{Y|x=x} \| P_{Y^*})
-\]</span></p>
+    \lim_{n\to \infty} d(1/n \| 2^{-n})
+    = \dfrac 1 n \log \left(\dfrac{2^n} n\right) + \dfrac{n-1} n \log \left(\dfrac{1-1/n}{1-2^{-n}}\right)
+    = \log 2 \neq 0
+\]</span>
+while the arguments converge to <span class="math inline">\(0\)</span>: <em>information can be destroyed at the limit.</em>
+</span></p>
+<div style="color:green">
+<div class="remark">
+<p><span id="unlabeled-div-37" class="remark"><em>Remark</em>. </span><span class="math inline">\(D(P\|Q)\)</span> is not continuous in either <span class="math inline">\(P\)</span> or <span class="math inline">\(Q\)</span> for general alphabets:
+consider <span class="math inline">\(X_j\sim 2\mathrm{Ber}_{1/2}-1\)</span>, then <span class="math inline">\(\bar X_j\to \mathcal N(0, 1)\)</span>
+but <span class="math inline">\(D(\bar X_j \|\mathcal N(0, 1))=\infty\)</span> because <span class="math inline">\(\bar X_j\)</span> is discrete for all <span class="math inline">\(n\)</span>.</p>
 </div>
-<p><em>Proof:</em> This follows from the left equality
-<span class="math inline">\(C=\max_{P_X\in \mathcal P} D(P_{Y|X} \| P_Y^* | P_X)\)</span>: for finite
-alphabets, concentrate weight in the single <span class="math inline">\(x\in \mathcal X\)</span>
-which maximizes <span class="math inline">\(D(P_{Y|X=x} \| P_Y^*)\)</span>.</p>
+</div>
+<div class="theorem">
+<p><span id="thm:semiContinuity" class="theorem"><strong>Theorem 5.6  (Lower semicontinuity of divergence) </strong></span>Given a metric space <span class="math inline">\(\mathcal X\)</span> with Borel <span class="math inline">\(\sigma\)</span>-algebra <span class="math inline">\(\mathcal H\)</span>.
+If <span class="math inline">\(P_n, Q_n\)</span> converge weakly to <span class="math inline">\(P, Q\)</span>, respectively, then
+<span class="math display">\[
+    D(P\|Q) \leq \liminf_{n\to \infty} D(P_n\|Q_n)
+\]</span>
+Recall that weak convergence is pointwise convergence in distribution.</p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+This follows from Donsker-Varadhan by <span class="math inline">\(\mathbb E_{P_n}[f]\to \mathbb E_P[f]\)</span> and
+<span class="math inline">\(\mathbb E_{Q_n}[e^f]\to \mathbb E_Q[e^f]\)</span>. To reason about <span class="math inline">\(\liminf\)</span>: choose a
+subsequence such that <span class="math inline">\(D(P_n\|Q_n)\)</span> decreases monotonically,
+then <span class="math inline">\(\liminf\mapsto \lim\)</span>; equality cannot be
+established due to the the previous example:
+a more fundamental reason is because weak convergence guarantees
+the convergence of expectations for each individual function but not
+convergence for the supremum.
+</details>
+<p><span style="color:green">
+Convergence in the weaker metric topology only implies weak
+semi-continuity in the stronger Jensen metric.
+</span></p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-38" class="proposition"><strong>Proposition 5.3  (continuity of MI) </strong></span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Given finite alphabets <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, <span class="math inline">\(P_{XY}\mapsto I(X; Y)\)</span> is continuous.</li>
+<li>If <span class="math inline">\(\mathcal X\)</span> is finite, then <span class="math inline">\(P_X\mapsto I(X; Y)\)</span> is continuous.</li>
+<li>For general <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, let <span class="math inline">\(P_X\in \Pi = \mathrm{co}(P_1, \cdots, P_n)\)</span>
+be in the convex hull of <span class="math inline">\((P_j\)</span>; if <span class="math inline">\(I(P_j; P_{Y|X}&lt;\infty\)</span> for each
+<span class="math inline">\(P_j\)</span>, then the map <span class="math inline">\(P_X\mapsto I(X; Y)\)</span> is continuous.</li>
+</ol>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+For the first statement, <span class="math inline">\(I(X; Y)=H(X)+H(Y) - H(X, Y)\)</span> and entropy is
+continuous on finite alphabets. For the second statement, define the
+uniform mixture of conditionals <span class="math inline">\(Q_Y = |\mathcal X|^{-1}\sum P_{Y|X=x}\)</span>, then
+<span class="math display">\[
+    D(P_Y \|Q_Y) = \mathbb E_{Q_Y} \left[\varphi \left(\sum P_X(x)h_x(Y)\right)\right],
+    \quad \varphi(t) = t\log t
+\]</span>
+Here <span class="math inline">\(h_x(y) = \dfrac{dP_{Y|X=x}}{dQ_Y}(y)\)</span> is nonnegative and bounded by <span class="math inline">\(|\mathcal X|\)</span>,
+so using the bounded convergence theorem we have $P_X<span class="math inline">\(D(P_Y\|Q_Y)\)</span>
+continuous. By the golden formula,
+<span class="math display">\[
+    I(X; Y) = D(P_{Y|X} \|Q_Y|P_X) - D(P_Y\|Q_Y)
+\]</span>
+the first term is linear in <span class="math inline">\(P_X\)</span>. For the third claim, form
+a chain <span class="math inline">\(Z\to X\to Y\)</span> with <span class="math inline">\(Z\in [n]\)</span> mapping <span class="math inline">\(P_{X|Z=j}=P_j\)</span>. Then
+<span class="math display">\[
+    I(X; Y) = I(Z; Y) + I(X; Y|Z)
+\]</span>
+the first term is continuous in <span class="math inline">\(P_Z\)</span> while the second is linear in <span class="math inline">\(P_Z\)</span>.
+Thus <span class="math inline">\(P_Z\mapsto I(X; Y)\)</span> is continuous, and so is <span class="math inline">\(P_X\mapsto I(X; Y)\)</span>.
+</details>
+<p><span style="color:green">
+The bounded convergence theorem applies in proof of (b) because
+we have pointwise convergence of <span class="math inline">\(\sum_{x} P_X(x)h_x(y)\)</span> as <span class="math inline">\(P_X\)</span>
+approaches its limit, and <span class="math inline">\(\varphi\)</span> is continuous and bounded, so
+this allows us to pass the limit through composition with <span class="math inline">\(\varphi\)</span>.
+</span></p>
 
 </div>
 </div>
@@ -470,8 +473,8 @@ which maximizes <span class="math inline">\(D(P_{Y|X=x} \| P_Y^*)\)</span>.</p>
           </div>
         </div>
       </div>
-<a href="variational-characterizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tensorization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mutual-information.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="extremization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

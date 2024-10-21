@@ -1,4 +1,4 @@
-# Variational Measures of Information
+# Variational Characterizations 
 
 Key takeaways:
 
@@ -12,7 +12,7 @@ Key takeaways:
 4. Mutual information is "average divergence" achieved 
     using center of gravity \@ref(cor:centerOfGravityMI). 
 
-## Geometric interpretations of MI {-}
+## Geometric interpretation of MI {-}
 
 :::{.theorem #goldenFormula name="golden formula"}
 For any $Q_Y$ we have 
@@ -78,7 +78,7 @@ Minimizing over all $Q_{XYZ} = Q_XQ_{Y|X}Q_{Z|Y}$,
 ## Lower variational bounds {-}
 
 
-:::{.theorem name="lower variational bound of MI"}
+:::{.theorem #miLowerBound name="lower variational bound of MI"}
 For any Markov kernel $Q_{X|Y}$ such that $Q_{X|Y=y} \ll P_X$ for 
 $P_Y$ almost everywhere we have 
 \[ 

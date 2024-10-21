@@ -4,14 +4,23 @@
     states that the MI-maximizing input for product channel 
     is product input, and the MI-minimizing channel 
     for product input is the product channel.
+2. Gaussian saddle point problem: solve a $n=1$ problem by going to 
+    $n>1$ problem and use convexity / concavity of information measures 
+    and symmetry to obtain the optimal solution. 
 
-## Mutual information {-}
+<span style="color:red">
+5.25 and 5.26 in the textbook; 
+MI tensorization properties. 
+</span>
+
+## MI, Gaussian saddle point {-}
 
 :::{.theorem #miTensorization name="MI behavior"}
 
 1. For a memoryless channel $P_{Y^n|X^n} = \prod P_{Y_j|X_j}$ 
 \[ 
     I(X^n; Y^n) \leq \sum_{j=1}^n I(X_j; Y_j) 
+    (\#eq:tensorChannel)
 \] 
     with equality iff $P_{Y^n} = \prod P_{Y_j}$. 
 2. The (unconstrained) capacity is additive for memoryless channels: 
@@ -21,13 +30,15 @@
 3. If the source is memoryless $P_{X^n} = \prod P_{X_j}$, then 
 \[ 
     I(X^n; Y) \geq \sum_{j=1}^n I(X_j; Y) 
+    (\#eq:tensorInput)
 \] 
 with equality iff $P_{X^n|Y} = \prod P_{X_j|Y}$ almost-surely 
 under $P_Y$. 
 4. $\min_{P_{Y^n|X^n}} I(X^n; Y^n) = \sum_j 
     \min_{P_{Y_j|X_j}} I(X_j; Y_j)$. 
 :::
-
+<details>
+<summary>Proof</summary>
 For (1), recall definition \@ref(def:mutInfDef) for MI: 
 \begin{align}
     I(X^n; Y^n) 
@@ -43,3 +54,200 @@ It remains to show that the following difference is positive
     D(P_{Y^n|X^n} \| P_{Y^n} | P_{X^n}) 
     - D(P_{Y^n | X^n} \| \prod P_{Y_j} | \prod P_{X_j})
 \end{align}
+(1) naturally implies (2). To show (3), 
+\begin{align}
+    I(X^n; Y) 
+    &= D(P_{X^n|Y} \| P_{X^n} | P_Y)
+\end{align}
+</details>
+
+Several examples to the theorem above: 
+
+1. <u>Non-product input for non-product channels</u>: 
+    Let $X_1\indep X_2\sim \mrm{Ber}(1/2)$ and $Y_1=X_1+X_2, Y_2=X_1$, 
+    then $I(X_1; Y_1)=I(X_2; Y_2)=0$ but $I(X_1, X_2; Y_1, Y_2)=2$.
+2. <u>Strict inequality for 7.1.1</u>: 
+    for all inputs equal $Y_k=X_k=U\sim \mrm{Ber}(1/2)$, 
+    we have $I(X_k; Y_k)=I(X^n; Y^n)=1\leq n$.
+3. <u>Strict inequality for 7.1.3</u>: 
+    Let $X_1 \indep X_2\sim \mrm{Ber}(1/2)$ and $Y=X_1\oplus X_2$.
+
+:::{.theorem name="extremality of Gaussian channels"}
+Let $X_g\sim \mca N(0, \sigma_X^2), 
+N_g\sim \mca N(0, \sigma_N^2)\indep X_g$, then 
+
+1. _Gaussian capacity:_ 
+\[ 
+    C = I(X_g; X_g + N_g) = \df 1 2 \log \left(
+        1 + \df{\sigma_X^2}{\sigma_N^2}
+    \right)
+\] 
+2. _Gaussian input is the caid for Gaussian noise:_ under 
+    the power constraint $\Var(X) \leq \sigma_X^2$ and $X\indep N_g$ 
+\[ 
+    I(X; X+N_g) \leq I(X_g; X_g+N_g) 
+\] 
+with equality saturated iff $X=X_g$ (in distribution). 
+3. _Gaussian noise is the worst for Gaussian input:_ under 
+    the power constraint $\Exp[N^2] \leq \sigma_N^2$ and $\Exp[X_gN] = 0$ 
+\[ 
+    I(X_g; X_g+N) \geq I(X_g; X_g+N_g) 
+\] 
+with equality iff $N=N_g$ (in distribution and $N\indep X_g$. 
+:::
+
+<details>
+<summary>Proof by direct calculation</summary>
+Define $Y_g=X_g+N_g$ and the conditional divergence 
+\begin{align}
+    f(x) &= D(P_{Y_g|X_g=x} \| P_{Y_g}) 
+    = D(\mca N(x, \sigma_N^2) \| \mca N(0, \sigma_X^2 + \sigma_N^2)) \\ 
+    &= \df 1 2 \log \left(1 + \df{\sigma_X^2}{\sigma_N^2}\right) 
+    + \df{\log e}{2} \df{x^2 - \sigma_X^2}{\sigma_X^2 + \sigma_N^2}
+\end{align}
+
+1. By definition \@ref(def:mutInfDef) of mutual information, 
+    $I(X_g; X_g+N_g) = \Exp[f(X_g)] = C$. 
+2. By center of gravity formula \@ref(cor:centerOfGravityMI), 
+\[ 
+    I(X; X+N_g) \leq D(P_{Y|X} \| P_{Y_g} |P_X) \leq C 
+\] 
+    By the uniqueness of caod \@ref(cor:caodUniqueness), 
+    we have $P_Y=P_{Y_g}\implies X\sim \mca N(0, \sigma_X^2)$. 
+3. Let $P_{Y|X_g}$ denote the kernel $Y=X_g+N$, apply theorem 
+    \@ref(thm:miLowerBound), Baye's formula 
+\begin{align}
+    I(X_g; Y=X_g+N) 
+    &\geq \Exp \log \df{dP_{X_g|Y_g}(X_g|Y)}{dP_{X_g}(X_g)} 
+    = \Exp \log \df{dP_{Y_g|X_g}(Y|X_g)}{dP_{Y_g}(Y)} \\ 
+    &= C + \df {\log e}{2} \Exp \left[
+        \df{Y^2}{\sigma_X^2 + \sigma_N^2} 
+        - \df{N^2}{\sigma_N^2}
+    \right]
+\end{align}
+The first inequality is saturated when $P_{X_g|Y_g} = P_{Y|X_g}$; 
+the second term implies that $X_g$ must be conditionally Gaussian. 
+This is enough to imply that $Y$ is Gaussian. 
+</details>
+
+<details>
+<summary>Proof by symmetry and tensorization</summary>
+Proof of (1), (2): suppose we wish to solve, for $Z^n\sim \mca N(0, I_n)$, 
+the following equation. Apply equation \@ref(eq:tensorChannel) to obtain 
+\[ 
+    \max_{\Exp[\sum X_k^2]\leq n \sigma_X^2} I(X^n; X^n+Z^n) 
+    = \max_{\Exp[\sum X_k^2]\leq n \sigma_X^2} \sum_{k=1}^n I(X_k; X_k+Z_k)
+\] 
+Next apply an averaging argument: 
+given a distribution $P_{X^n}$, the average of its marginals 
+$\bar P_X = \frac 1 n \sum P_{X_k}$ 
+will also satisfy the constraint and 
+yield larger mutual information by the concavity 
+of $I(P_X, P_{Y|X})$ in $P_X$ (theorem \@ref(thm:MIextremality)). 
+Thus 
+\[ 
+    \max_{\Exp[\sum X_k^2]\leq n \sigma_X^2} I(X^n; X^n+Z^n) 
+    = n \max_{\Exp[X^2] \leq \sigma_X^2} I(X; X+Z)
+\] 
+Next, for any orthogonal transformation $U\in O(n)$, we have 
+\[ 
+    I(P_{X^n}, P_{Y^n|X^n}) = I(P_{UX^n}, P_{UY^n|UX^n}) 
+    = I(P_{UX^n}, P_{Y^n|X^n})
+\] 
+Averaging over all orthogonal rotations $U$ can only 
+make the mutual information larger, and the optimal input distribution 
+can be chosen to be invariant under orthogonal transformations. 
+The only product distribution satisfying power constraints and 
+rotational symmetry is the isotropic Gaussian, so 
+$P_{Y^n} = \mca N(0, 1+\sigma_X^2)^{\otimes n}$. 
+This also determines $P_{X^*}$ uniquely. 
+
+Proof of (3): apply equation \@ref(eq:tensorInput) and use 
+    the convexity of $P_{Y|X}\mapsto I(P_X; P_{Y|X})$ 
+    to argue that the channel additive noise $N$ must 
+    be additive and rotationally symmetric. 
+</details>
+
+## Information rates {-}
+
+See the [preliminaries](#stochasticProcessPrelim) 
+section for more details on stochastic processes. 
+
+:::{.definition #entropyRate name="entropy rate"}
+The entropy rate of a
+ random process $\mbb X=(X_1, X_2, \cdots)$ is 
+ \[ 
+    H(\mbb X) = \lim_{n\to \infty} \df 1 n H(X^n)
+ \] 
+:::
+
+:::{.theorem name="properties of stationary processes"} 
+Given $\mbb X$ stationary, 
+
+1. $H(X_n|X^{n-1}) \leq H(X_{n-1}|X^{n-2})$. 
+2. $H(X_n|X^{n-1}) \leq H(X^n)/n \leq H(X^{n-1})/(n-1)$.
+3. The entropy rate exists 
+    $H(\mbb X) = \lim_{n\to \infty} H(X^n)/n 
+    = \lim_{n\to \infty} H(X_n|X^{n-1})$
+    by approximation from above. 
+:::
+<details>
+<summary>Proof</summary>
+For (1), by conditioning and stationarity 
+\[ 
+    H(X_n|X^{n-1}) \leq H(X_n|X_2^{n-1}) = H(X_{n-1}, X^{n-2})
+\] 
+For (2), use the chain rule 
+\begin{align}
+    \df 1 n H(X^n) 
+    &= \df 1 n \sum H(X_j|X^{j-1}) \geq H(X_n|X^{n-1}) \\ 
+    H(X^n) 
+    &= H(X^{n-1}) + H(X_n|X^{n-1}) \leq H(X^{n-1}) + \df 1 n H(X^n) 
+\end{align}
+For (3), use the right inequality in (2) to argue that 
+$H(X^n)/n$ is a decreasing sequence lower-bounded by $0$, 
+so the limit $H(\mbb X)$ exists. 
+By the chain rule, the second sequence is the Cesaro's mean 
+by $H(X^n)/n = \sum H(X_j|X^{j-1})/n$. 
+</details>
+
+Examples of stationary processes:
+
+1. Memoryless source (i.i.d)
+2. A mixed source: given two stationary sources 
+    $\mbb X, \mbb Y$ and flip a single biased coin to set 
+    $\mbb Z=\mbb X$ or $\mbb Y$. 
+3. Stationary Markov process: let $\mbb X$ be a Markov 
+    chain $X_1\to X_2\to \cdots$ with transition 
+    kernel $K(b|a)$ and initialized with an invariant 
+    distribution $X_1\sim \mu$ so that $X_2\sim \mu$. 
+    Then $H(X_n|X^{n-1}) = H(X_n|X_{n-1}$ and 
+    \[ 
+        H(\mbb X) = H(X_2|X_1) 
+        = \sum_{ab}\mu(a)K(b|a) \log \df 1 {K(b|a)}
+    \] 
+
+:::{.definition name="Hidden Markov Model (HMM)"}
+Given a stationary Markov chain $\cdots, S_{-1}, S_0, S_1, \cdots$ 
+on state space $\mca S$ and a Markov kernel $P_{X|S}:\mca S\to \mca X$, 
+a HMM is a stationary process $\cdots, X_{-1}, X_0, X_1, \cdots$ 
+which is an observation of $\mbb S$ with a stationary 
+memoryless channel (emission channel) $P_{X_1|S_1}$. 
+:::
+
+:::{.proposition name="entropy rate of HMM"}
+Given a HMM process $\mbb X$ with state process $\mbb S$, we have 
+\[ 
+    H(X_n|X_1^{n-1}, S_0) \leq H(\mbb X)\leq H(X_n|X_1^{n-1})
+\] 
+Both sides converge monotonically as $n\to \infty$. 
+:::
+The upper bound is already established. 
+
+:::{.definition #miRate name="mutual information rate"}
+The mutual information rate between two processes 
+$(\mbb X, \mbb Y)$ is 
+\[ 
+    I(\mbb X, \mbb Y) = \lim_{n\to \infty} \df 1 n I(X^n; Y^n)
+\] 
+:::

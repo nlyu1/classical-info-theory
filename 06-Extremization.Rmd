@@ -62,7 +62,7 @@ and continuous if $\mca X$ finite.
 :::
 _Proof:_ The first proof is complete by the 
 KL-entropy relation $H(X) = \log |\mca X| - D(P_X\|U_X)$. 
-The second proof follows by a similarl latent 
+The second proof follows by a similar latent 
 variable argument: consider $U\sim \mrm{Ber}(\lambda)$ and 
 $U\to X\to Y$; let $f(P_X) = H(X|Y)$, then 
 \begin{align} 
@@ -73,7 +73,7 @@ concavity follows from $H(X|Y) \leq H(X|Y, U)$. Continuity
 follows $H(Y|X) = H(Y) - I(X; Y)$ both continuous. 
 
 
-:::{.theorem name="extremality of MI"}
+:::{.theorem #MIextremality name="extremality of MI"}
 
 1. Fixing channel $P_{Y|X}$, $P_X\mapsto I(P_X, P_{Y|X})$ is concave. 
 2. Fixing input distribution $P_X$, $P_{Y|X} \mapsto I(P_X, P_{Y|X})$ 
@@ -281,30 +281,3 @@ _Proof:_ This follows from the left equality
 $C=\max_{P_X\in \mca P} D(P_{Y|X} \| P_Y^* | P_X)$: for finite 
 alphabets, concentrate weight in the single $x\in \mca X$ 
 which maximizes $D(P_{Y|X=x} \| P_Y^*)$. 
-
-## Gaussian saddle point {-}
-
-:::{.theorem name="extremality of Gaussian channels"}
-Let $X_g\sim \mca N(0, \sigma_X^2), 
-N_g\sim \mca N(0, \sigma_N^2)\indep X_g$, then 
-
-1. _Gaussian capacity:_ 
-\[ 
-    C = I(X_g; X_g + N_g) = \df 1 2 \log \left(
-        1 + \df{\sigma_X^2}{\sigma_N^2}
-    \right)
-\] 
-2. _Gaussian input is the caid for Gaussian noise:_ under 
-    the power constraint $\Var(X) \leq \sigma_X^2$ and $X\indep N_g$ 
-\[ 
-    I(X; X+N_g) \leq I(X_g; X_g+N_g) 
-\] 
-with equality saturated iff $X=X_g$ (in distribution). 
-3. _Gaussian noise is the worst for Gaussian input:_ under 
-    the power constraint $\Exp[N^2] \leq \sigma_N^2$ and $\Exp[X_gN] = 0$ 
-\[ 
-    I(X_g; X_g+N) \geq I(X_g; X_g+N_g) 
-\] 
-with equality iff $N=N_g$ (in distribution and $N\indep X_g$. 
-:::
-_Proof:_ Placeholder. 

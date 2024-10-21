@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-20" />
+<meta name="date" content="2024-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="kullback-leibler-divergence.html"/>
-<link rel="next" href="variational-measures-of-information.html"/>
+<link rel="next" href="variational-characterizations.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -107,11 +107,11 @@
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html"><i class="fa fa-check"></i><b>5</b> Variational Measures of Information</a>
+<li class="chapter" data-level="5" data-path="variational-characterizations.html"><a href="variational-characterizations.html"><i class="fa fa-check"></i><b>5</b> Variational Characterizations</a>
 <ul>
-<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#geometric-interpretations-of-mi"><i class="fa fa-check"></i>Geometric interpretations of MI</a></li>
-<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#lower-variational-bounds"><i class="fa fa-check"></i>Lower variational bounds</a></li>
-<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#continuity"><i class="fa fa-check"></i>Continuity</a></li>
+<li class="chapter" data-level="" data-path="variational-characterizations.html"><a href="variational-characterizations.html#geometric-interpretation-of-mi"><i class="fa fa-check"></i>Geometric interpretation of MI</a></li>
+<li class="chapter" data-level="" data-path="variational-characterizations.html"><a href="variational-characterizations.html#lower-variational-bounds"><i class="fa fa-check"></i>Lower variational bounds</a></li>
+<li class="chapter" data-level="" data-path="variational-characterizations.html"><a href="variational-characterizations.html#continuity"><i class="fa fa-check"></i>Continuity</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="extremization.html"><a href="extremization.html"><i class="fa fa-check"></i><b>6</b> Extremization</a>
 <ul>
@@ -119,11 +119,11 @@
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#minimax-and-saddle-point"><i class="fa fa-check"></i>Minimax and saddle-point</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-saddle-point-of-mi"><i class="fa fa-check"></i>Capacity, Saddle point of MI</a></li>
 <li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#capacity-as-information-radius"><i class="fa fa-check"></i>Capacity as information radius</a></li>
-<li class="chapter" data-level="" data-path="extremization.html"><a href="extremization.html#gaussian-saddle-point"><i class="fa fa-check"></i>Gaussian saddle point</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tensorization.html"><a href="tensorization.html"><i class="fa fa-check"></i><b>7</b> Tensorization</a>
 <ul>
-<li class="chapter" data-level="" data-path="tensorization.html"><a href="tensorization.html#mutual-information-1"><i class="fa fa-check"></i>Mutual information</a></li>
+<li class="chapter" data-level="" data-path="tensorization.html"><a href="tensorization.html#mi-gaussian-saddle-point"><i class="fa fa-check"></i>MI, Gaussian saddle point</a></li>
+<li class="chapter" data-level="" data-path="tensorization.html"><a href="tensorization.html#information-rates"><i class="fa fa-check"></i>Information rates</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="f-divergence.html"><a href="f-divergence.html"><i class="fa fa-check"></i><b>8</b> f-Divergence</a>
 <ul>
@@ -132,7 +132,7 @@
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#tv-and-hellinger-hypothesis-testing"><i class="fa fa-check"></i>TV and Hellinger, hypothesis testing</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#joint-range"><i class="fa fa-check"></i>Joint range</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#rényi-divergence"><i class="fa fa-check"></i>Rényi divergence</a></li>
-<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#variational-characterizations"><i class="fa fa-check"></i>Variational characterizations</a></li>
+<li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#variational-characterizations-1"><i class="fa fa-check"></i>Variational characterizations</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#fisher-information-location-family"><i class="fa fa-check"></i>Fisher information, location family</a></li>
 <li class="chapter" data-level="" data-path="f-divergence.html"><a href="f-divergence.html#local-χ²-behavior"><i class="fa fa-check"></i>Local χ² behavior</a></li>
 </ul></li>
@@ -151,7 +151,7 @@
 </ul></li>
 <li class="chapter" data-level="12" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>12</b> Entropy of Ergodic Processes</a>
 <ul>
-<li class="chapter" data-level="" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html#stochasticProcessPrelim"><i class="fa fa-check"></i>Preliminaries</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="universal-compression.html"><a href="universal-compression.html"><i class="fa fa-check"></i><b>13</b> Universal compression</a>
 <ul>
@@ -498,7 +498,7 @@ To finish.
         </div>
       </div>
 <a href="kullback-leibler-divergence.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="variational-measures-of-information.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="variational-characterizations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Variational Measures of Information | 6.7480 Notes</title>
-  <meta name="description" content="5 Variational Measures of Information | 6.7480 Notes" />
+  <title>5 Variational Formulas | 6.7480 Notes</title>
+  <meta name="description" content="5 Variational Formulas | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Variational Measures of Information | 6.7480 Notes" />
+  <meta property="og:title" content="5 Variational Formulas | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Variational Measures of Information | 6.7480 Notes" />
+  <meta name="twitter:title" content="5 Variational Formulas | 6.7480 Notes" />
   
   
   
@@ -107,11 +107,11 @@
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html"><i class="fa fa-check"></i><b>5</b> Variational Measures of Information</a>
+<li class="chapter" data-level="5" data-path="variational-formulas.html"><a href="variational-formulas.html"><i class="fa fa-check"></i><b>5</b> Variational Formulas</a>
 <ul>
-<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#geometric-interpretations-of-mi"><i class="fa fa-check"></i>Geometric interpretations of MI</a></li>
-<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#lower-variational-bounds"><i class="fa fa-check"></i>Lower variational bounds</a></li>
-<li class="chapter" data-level="" data-path="variational-measures-of-information.html"><a href="variational-measures-of-information.html#continuity"><i class="fa fa-check"></i>Continuity</a></li>
+<li class="chapter" data-level="" data-path="variational-formulas.html"><a href="variational-formulas.html#geometric-interpretations-of-mi"><i class="fa fa-check"></i>Geometric interpretations of MI</a></li>
+<li class="chapter" data-level="" data-path="variational-formulas.html"><a href="variational-formulas.html#lower-variational-bounds"><i class="fa fa-check"></i>Lower variational bounds</a></li>
+<li class="chapter" data-level="" data-path="variational-formulas.html"><a href="variational-formulas.html#continuity"><i class="fa fa-check"></i>Continuity</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="extremization.html"><a href="extremization.html"><i class="fa fa-check"></i><b>6</b> Extremization</a>
 <ul>
@@ -190,8 +190,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="variational-measures-of-information" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">5</span> Variational Measures of Information<a href="variational-measures-of-information.html#variational-measures-of-information" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="variational-formulas" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Variational Formulas<a href="variational-formulas.html#variational-formulas" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Key takeaways:</p>
 <ol style="list-style-type: decimal">
 <li>Variational characterizations are important because
@@ -202,10 +202,10 @@ the Legendre transformation.</li>
 variable as an upper bound, then use the Kolmogorov identities to
 analyze the gap / decompose in another way.</li>
 <li>Mutual information is “average divergence” achieved
-using center of gravity <a href="variational-measures-of-information.html#cor:centerOfGravityMI">5.1</a>.</li>
+using center of gravity <a href="variational-formulas.html#cor:centerOfGravityMI">5.1</a>.</li>
 </ol>
 <div id="geometric-interpretations-of-mi" class="section level2 unnumbered hasAnchor">
-<h2>Geometric interpretations of MI<a href="variational-measures-of-information.html#geometric-interpretations-of-mi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Geometric interpretations of MI<a href="variational-formulas.html#geometric-interpretations-of-mi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
 <p><span id="thm:goldenFormula" class="theorem"><strong>Theorem 5.1  (golden formula) </strong></span>For any <span class="math inline">\(Q_Y\)</span> we have
 <span class="math display">\[
@@ -267,7 +267,7 @@ Decompose the divergence on the RHS
 </div>
 </div>
 <div id="lower-variational-bounds" class="section level2 unnumbered hasAnchor">
-<h2>Lower variational bounds<a href="variational-measures-of-information.html#lower-variational-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Lower variational bounds<a href="variational-formulas.html#lower-variational-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
 <p><span id="thm:unlabeled-div-34" class="theorem"><strong>Theorem 5.4  (lower variational bound of MI) </strong></span>For any Markov kernel <span class="math inline">\(Q_{X|Y}\)</span> such that <span class="math inline">\(Q_{X|Y=y} \ll P_X\)</span> for
 <span class="math inline">\(P_Y\)</span> almost everywhere we have
@@ -377,7 +377,7 @@ If the LHS is finite, then the unique maximizer in the RHS is <span class="math 
 </div>
 </div>
 <div id="continuity" class="section level2 unnumbered hasAnchor">
-<h2>Continuity<a href="variational-measures-of-information.html#continuity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Continuity<a href="variational-formulas.html#continuity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="proposition">
 <p><span id="prp:unlabeled-div-37" class="proposition"><strong>Proposition 5.2  (Single-argument continuity of divergence for finite alphabets) </strong></span>Fixing finite <span class="math inline">\(\mathcal X\)</span> with a strictly positive distribution <span class="math inline">\(Q\)</span> over <span class="math inline">\(\mathcal X\)</span>,
 then <span class="math inline">\(P\mapsto D(P\|Q)\)</span> is continuous; in particular, <span class="math inline">\(P\mapsto H(P)\)</span> is continuous.</p>

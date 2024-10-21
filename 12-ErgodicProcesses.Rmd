@@ -4,7 +4,7 @@
 In this section, we consider random variables 
 over a common space $(\Omega, \Sigma)$. 
 
-## Preliminaries {-}
+## Preliminaries {#stochasticProcessPrelim -}
 
 :::{.definition name="measure-preserving transformation"}
 $\tau:\Omega\to \Omega$ is a measure preserving transformation, 
