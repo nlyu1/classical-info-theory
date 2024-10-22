@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Tensorization | 6.7480 Notes</title>
   <meta name="description" content="7 Tensorization | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Tensorization | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -228,7 +228,8 @@ I(X^n; Y) \geq \sum_{j=1}^n I(X_j; Y)
 \]</span>
 with equality iff <span class="math inline">\(P_{X^n|Y} = \prod P_{X_j|Y}\)</span> almost-surely
 under <span class="math inline">\(P_Y\)</span>.</li>
-<li><span class="math inline">\(\min_{P_{Y^n|X^n}} I(X^n; Y^n) = \sum_j  \min_{P_{Y_j|X_j}} I(X_j; Y_j)\)</span>.</li>
+<li><span class="math inline">\(\min_{P_{Y^n|X^n}} I(X^n; Y^n) = \sum_j
+\min_{P_{Y_j|X_j}} I(X_j; Y_j)\)</span>.</li>
 </ol>
 </div>
 <details>
@@ -268,7 +269,8 @@ we have <span class="math inline">\(I(X_k; Y_k)=I(X^n; Y^n)=1\leq n\)</span>.</l
 Let <span class="math inline">\(X_1 \perp\!\!\!\perp X_2\sim \mathrm{Ber}(1/2)\)</span> and <span class="math inline">\(Y=X_1\oplus X_2\)</span>.</li>
 </ol>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-45" class="theorem"><strong>Theorem 7.2  (extremality of Gaussian channels) </strong></span>Let <span class="math inline">\(X_g\sim \mathcal N(0, \sigma_X^2), N_g\sim \mathcal N(0, \sigma_N^2)\perp\!\!\!\perp X_g\)</span>, then</p>
+<p><span id="thm:unlabeled-div-45" class="theorem"><strong>Theorem 7.2  (extremality of Gaussian channels) </strong></span>Let <span class="math inline">\(X_g\sim \mathcal N(0, \sigma_X^2),
+N_g\sim \mathcal N(0, \sigma_N^2)\perp\!\!\!\perp X_g\)</span>, then</p>
 <ol style="list-style-type: decimal">
 <li><em>Gaussian capacity:</em>
 <span class="math display">\[
@@ -382,8 +384,11 @@ random process <span class="math inline">\(\mathbb X=(X_1, X_2, \cdots)\)</span>
 <li><span class="math inline">\(H(X_n|X^{n-1}) \leq H(X_{n-1}|X^{n-2})\)</span>.</li>
 <li><span class="math inline">\(H(X_n|X^{n-1}) \leq H(X^n)/n \leq H(X^{n-1})/(n-1)\)</span>.</li>
 <li>The entropy rate exists
-<span class="math inline">\(H(\mathbb X) = \lim_{n\to \infty} H(X^n)/n  = \lim_{n\to \infty} H(X_n|X^{n-1})\)</span>
+<span class="math inline">\(H(\mathbb X) = \lim_{n\to \infty} H(X^n)/n
+= \lim_{n\to \infty} H(X_n|X^{n-1})\)</span>
 by approximation from above.</li>
+<li>If <span class="math inline">\(\mathbb X\)</span> can be extended to a <span class="math inline">\(\mathbb Z\)</span>-indexed stationary process, then
+<span class="math inline">\(H(\mathbb X) = H(X_1|X^0_{-\infty})\)</span> provided <span class="math inline">\(H(X_1)&lt;\infty\)</span>.</li>
 </ol>
 </div>
 <details>
@@ -406,6 +411,13 @@ For (3), use the right inequality in (2) to argue that
 so the limit <span class="math inline">\(H(\mathbb X)\)</span> exists.
 By the chain rule, the second sequence is the Cesaro’s mean
 by <span class="math inline">\(H(X^n)/n = \sum H(X_j|X^{j-1})/n\)</span>.
+For (4), use the limit definition of <span class="math inline">\(H(\mathbb X)\)</span> and pass the
+limit through the monotone convergence of mutual information:
+<span class="math display">\[
+    \lim_{n\to \infty} H(X_1) - H(X_1|X_{-n}^0)
+    = \lim_{n\to \infty} I(X_1; X_{-n}^0) = I(X_1; X_{-\infty}^0)
+    = H(X_1) - H(X_1|X_{-\infty}^0)
+\]</span>
 </details>
 <p>Examples of stationary processes:</p>
 <ol style="list-style-type: decimal">

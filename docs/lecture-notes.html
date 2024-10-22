@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14 Lecture notes | 6.7480 Notes</title>
   <meta name="description" content="14 Lecture notes | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14 Lecture notes | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -229,7 +229,10 @@ Recall that Donsker-varadhan is not linear in <span class="math inline">\(\mathb
 but there is a standard trick to rewrite the expectation.</p>
 <p>We now apply the variational characterization to <span class="math inline">\(\chi^2\)</span>;</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-88" class="proposition"><strong>Proposition 14.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
+<p><span id="prp:unlabeled-div-88" class="proposition"><strong>Proposition 14.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q)
+= \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[
+    h(X) + \dfrac{h(X)^2}{4}
+\right]\)</span></p>
 </div>
 <p>Expanding this out, the first term is very useful;
 but the second is not. The first step is to break a single
@@ -397,7 +400,8 @@ in a connected interval open interval about <span class="math inline">\(\theta_0
 \dfrac{\dot p^t(x)^2}{p^0(x)} &lt; \infty
 \]</span></li>
 </ol>
-<p>Then <span class="math inline">\(\chi^2(P^{\theta_0 + \delta} \| P^{\theta_0})  + \delta^2 \mathcal J_F(\theta_0) + o(\delta^2)\)</span>.</p>
+<p>Then <span class="math inline">\(\chi^2(P^{\theta_0 + \delta} \| P^{\theta_0})
+    + \delta^2 \mathcal J_F(\theta_0) + o(\delta^2)\)</span>.</p>
 </div>
 <p>The quadratic local behavior of <span class="math inline">\(\chi^2\)</span> requires
 not only finite Fisher information at <span class="math inline">\(\theta_0\)</span>;

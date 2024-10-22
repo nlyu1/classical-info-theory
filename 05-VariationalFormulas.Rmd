@@ -192,6 +192,7 @@ If the LHS is finite, then the unique maximizer in the RHS is $P=Q^f$.
 Fixing finite $\mca X$ with a strictly positive distribution $Q$ over $\mca X$, 
 then $P\mapsto D(P\|Q)$ is continuous; in particular, $P\mapsto H(P)$ is continuous. 
 :::
+_Proof:_ Follows from definition and nonnegativity of $Q$. 
 
 <span style="color:green">
 For finite alphabets, divergence is never continuous in the pair: consider 

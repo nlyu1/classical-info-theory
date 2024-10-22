@@ -190,6 +190,8 @@ Given $\mbb X$ stationary,
     $H(\mbb X) = \lim_{n\to \infty} H(X^n)/n 
     = \lim_{n\to \infty} H(X_n|X^{n-1})$
     by approximation from above. 
+4. If $\mbb X$ can be extended to a $\mbb Z$-indexed stationary process, then 
+    $H(\mbb X) = H(X_1|X^0_{-\infty})$ provided $H(X_1)<\infty$. 
 :::
 <details>
 <summary>Proof</summary>
@@ -209,6 +211,13 @@ $H(X^n)/n$ is a decreasing sequence lower-bounded by $0$,
 so the limit $H(\mbb X)$ exists. 
 By the chain rule, the second sequence is the Cesaro's mean 
 by $H(X^n)/n = \sum H(X_j|X^{j-1})/n$. 
+For (4), use the limit definition of $H(\mbb X)$ and pass the 
+limit through the monotone convergence of mutual information: 
+\[ 
+    \lim_{n\to \infty} H(X_1) - H(X_1|X_{-n}^0) 
+    = \lim_{n\to \infty} I(X_1; X_{-n}^0) = I(X_1; X_{-\infty}^0) 
+    = H(X_1) - H(X_1|X_{-\infty}^0)
+\] 
 </details>
 
 Examples of stationary processes:
