@@ -144,6 +144,7 @@
 <ul>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#hcr-lower-bound"><i class="fa fa-check"></i>HCR lower bound</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#example-bernoulli-estimation"><i class="fa fa-check"></i>Example: Bernoulli estimation</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
@@ -253,7 +254,7 @@ in theorem <a href="f-divergence.html#thm:fVar">8.9</a>.</li>
 one theorem to rule them all for <span class="math inline">\(f\)</span>-divergence joint range.</li>
 <li>Most <span class="math inline">\(f\)</span>-divergences are locally <span class="math inline">\(\chi^2\)</span>-like about
 <span class="math inline">\(\lim_{\lambda \to 0^+} D_f(\lambda P + \bar \lambda Q \| Q)\)</span>
-and decays quadratically (theorem <a href="f-divergence.html#thm:localChiExpansion">8.12</a>).</li>
+and decays quadratically (theorem <a href="f-divergence.html#thm:localChiExpansion">8.11</a>).</li>
 <li><u>Kraft-McMillan</u> (theorem <a href="lossless-compression.html#thm:kraftMcMillan">10.3</a>):
 constructive bijection between inequality-satisfying code
 lengths and prefix-free codes.</li>
@@ -267,7 +268,7 @@ at the heart of every minimax theorem is the hyperplane separation theorem.</li>
 <li>Asymptotic analysis proofs: rewrite a difference as an integral, then
 apply the monotone convergence theorem.
 <ul>
-<li>Theorems <a href="f-divergence.html#thm:localFisherDiv">8.13</a>, <a href="f-divergence.html#thm:localChiExpansion">8.12</a>.</li>
+<li>Theorems <a href="f-divergence.html#thm:localFisherDiv">8.12</a>, <a href="f-divergence.html#thm:localChiExpansion">8.11</a>.</li>
 </ul></li>
 <li>Unique extremality proofs: reduce the desired inequality to
 the information inequality (theorem <a href="kullback-leibler-divergence.html#thm:infoInequality">3.1</a>)
@@ -310,8 +311,10 @@ soure coding distribution theorem <a href="lossless-compression.html#thm:varComp
 </ul></li>
 <li>Break a single <span class="math inline">\(\sup\)</span> into nested ones.
 <ul>
-<li>Solve the inner <span class="math inline">\(\sup\)</span> analytically:
-useful characterization of <span class="math inline">\(\chi^2\)</span> <a href="f-divergence.html#eq:chiStatVar">(8.4)</a>.</li>
+<li>Solve the inner <span class="math inline">\(\sup\)</span> analytically after introducing a redundant
+linear (in fact any parameterized) bijective transform:
+useful characterization of <span class="math inline">\(\chi^2\)</span> <a href="f-divergence.html#eq:chiStatVar">(8.4)</a> and
+KL (proposition <a href="f-divergence.html#prp:klDV">8.10</a>).</li>
 <li>Alternate inner and alter closed-form solution: EM algorithm.</li>
 </ul></li>
 </ol>

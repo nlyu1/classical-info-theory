@@ -1,6 +1,6 @@
 # f-Divergence 
 
-Properties of $f$-divergences:
+Key takeaways: 
 
 1. $f$-divergence is equivalent modulo $c(t-1)$; 
     convexity plus $f(1)=f'(1)=1$ (which implies $f\geq 0$) implies locally $\chi^2$.
@@ -857,16 +857,16 @@ denote $\mrm{dom}(f^*) = (f^*)^{-1}(\R)$, then
 :::
 As a result of this variational characterization, we obtain: 
 
-1. Convexity: $(P, Q)\mapsto D_f(P\|Q)$ is convex since $D_f$ 
+1. <u>Joint convexity</u>: $(P, Q)\mapsto D_f(P\|Q)$ is convex since $D_f$ 
     is a supremum of affine functions. 
-2. Weak lower semicontinuity: a simple counter-example to continuity 
+2. <u>Weak lower semicontinuity</u>: a simple counter-example to continuity 
     is $\sum_{j=1}^n X_j/\sqrt n\to \mca N(0, 1)$ for 
     $X_j=2\mrm{Ber}(1/2)-1$ but each partial sum remains discrete. 
     By the same line of reasining in theorem \@ref(thm:semiContinuity):  
     \[ 
         \liminf_{n\to \infty} D_f(P_n\|Q_n) \geq D_f(P\|Q)
     \] 
-3. Relation to DPI: again, variational characterizations can be 
+3. <u>Relation to DPI</u>: again, variational characterizations can be 
     used as a version of DPI when using $1_E$ 
     since it allows one to bound the event variation using $f$-divergence. 
 
@@ -880,29 +880,31 @@ the conjugate
         y & |y| \leq 1/2
     \end{cases}
 \] 
-Applying theorem \@ref(thm:fVar) yields 
+Applying theorem \@ref(thm:fVar) recovers theorem \@ref(thm:tvVarChar): 
 \[ 
     \TV(P, Q) = \sup_{g(x)\in [-1/2, 1/2]} \Exp_P[g] 
     - \Exp_Q[g]
 \] 
-This recovers theorem \@ref(thm:tvVarChar). 
 :::
 
 :::{.example name="Hellinger"}
 The conjugate for Hellinger $f(x) = (1-\sqrt x)^2$ 
 is $f^*(y) = \frac 1 {1-y} - 1$ with $y\in (-\infty, 1)$, yielding 
-\[ 
-    H^2(P, Q) = \sup_{g(x)\in (-\infty, 1)} \Exp_P[g] 
-    - \Exp_Q\left[\df 1 {1-g} - 1\right]
-    = \sup_{g> 0} \Exp_P[1-g] - \Exp_Q \df 1 g + 1
+\begin{align}
+    H^2(P, Q) 
+    &= \sup_{g(x)\in (-\infty, 1)} \Exp_P[g] 
+    - \Exp_Q\left[\df 1 {1-g} - 1\right]\\
+    &= \sup_{g> 0} \Exp_P[1-g] - \Exp_Q \df 1 g + 1
     = 2 - \inf_{g> 0} \Exp_P g + \Exp_Q \df 1 g 
-\] 
+\end{align}
 Given $f:\mca X\to [0, 1]$ and $\tau \in (0, 1)$, we have 
 $h=1-\tau f$ and $\frac 1 h \leq 1 + \frac{\tau}{1-\tau} f$, then 
 \[ 
-    \Exp_P[f] = \df 1 {1-\tau} \Exp_Q f + \df 1 \tau H^2(P, Q), \quad 
+    \Exp_P[f] \leq \df 1 {1-\tau} \Exp_Q f + \df 1 \tau H^2(P, Q), \quad 
     \forall f:\mca X\to [0, 1], \quad \tau \in (0, 1) 
 \] 
+Note that for this inequality we don't need $h$ to saturate the 
+$\inf h>0$ condition: only a subset suffices. 
 :::
 
 :::{.example #chiVariation name="χ²-divergence"}
@@ -961,28 +963,22 @@ Here $f_\theta$ is the generator, and $h_\phi$ is
 the critic in GAN. 
 :::
 
-Note that we can never obtain Donsker-Varadhan 
-using theorem \@ref(thm:fVar) since DV claims 
+:::{.proposition #klDV name="KL"}
+We have $f(x\geq 0) = x\log x$. Extend to $f(x<0) = \infty$; 
+the convex conjugate is (in natural units) $f^*(y) = e^y/e$ thus 
 \[ 
-    D(P\|Q) = \sup_{g(x)\in \R} \Exp_Pg - \log \Exp_Q e^g 
+    D(P\|Q) = \sup_{g:\mca X\to R} \Exp_P[g] - \Exp_Q[e^g] + 1
 \] 
-while the theorem result is always linear in $Q$. 
-To do so, we need to consider an extension of $D_f(P\|Q)$ 
-to non-probability measures. 
-
-:::{.theorem name="extended variational characterization"}
-Define $f(x)=\infty$ for $x<0$ and let $S=\{x:q(x)>0\}$ where 
-$dQ = q(x) d\mu$, then 
-\begin{align}
-    D_f(P\|Q) 
-    &= f'(\infty) (1-P[S]) + \sup_g \Exp_P[g 1_S] - \Psi^*_{QP}(g) \\ 
-    \Psi^*_{QP}(g) = \inf_{a\in \R} \Exp_Q[(f^*\circ g) - a] + aP[S]
-\end{align}
-For the special case $f'(\infty) = \infty$, which includes KL, we have 
+Do the substitution $g\mapsto g+c$ to obtain the following expression, 
+and solve for the analytic optimal $c$. 
+Fixing $g$, let $\alpha = \Exp_Q[e^g]$ be a constant. The extremal value 
+of $c - a\cdot e^c$ is obtained at $c=-\ln a$ as  $-\ln a - 1$, yielding 
 \[ 
-    D_f(P\|Q) = \sup_G E_P[g] - \Psi^*_Q(g), \quad 
-    \Psi_Q^*(g) = \inf_{a\in \R} \Exp_Q[f^*\circ g - a] + a
+    D(P\|Q) = \sup_{g:\mca X\to \R} \sup_{c\in \R} 
+    \Exp_P[g] + c - e^c \Exp_Q[e^g] - 1 
+    = \sup_{g:\mca X\to \R} \Exp_P[g] + \ln \Exp_Q[e^g]
 \] 
+This recovers the Donsker-Varadhan \@ref(thm:fVar). 
 :::
 
 ## Fisher information, location family {-}

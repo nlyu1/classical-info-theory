@@ -144,6 +144,7 @@
 <ul>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#hcr-lower-bound"><i class="fa fa-check"></i>HCR lower bound</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#example-bernoulli-estimation"><i class="fa fa-check"></i>Example: Bernoulli estimation</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
@@ -198,7 +199,7 @@
             <section class="normal" id="section-">
 <div id="f-divergence" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">8</span> f-Divergence<a href="f-divergence.html#f-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Properties of <span class="math inline">\(f\)</span>-divergences:</p>
+<p>Key takeaways:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(f\)</span>-divergence is equivalent modulo <span class="math inline">\(c(t-1)\)</span>;
 convexity plus <span class="math inline">\(f(1)=f&#39;(1)=1\)</span> (which implies <span class="math inline">\(f\geq 0\)</span>) implies locally <span class="math inline">\(\chi^2\)</span>.</li>
@@ -223,7 +224,7 @@ concludes the problem of joint range.</li>
 <p>Locality and Fisher information:</p>
 <ol style="list-style-type: decimal">
 <li>Most <span class="math inline">\(f\)</span>-divergences (with bounded <span class="math inline">\(f&#39;&#39;\)</span>) are locally <span class="math inline">\(\chi^2\)</span>:
-theorem <a href="f-divergence.html#thm:localChiExpansion">8.12</a> <u>with respect to mixture
+theorem <a href="f-divergence.html#thm:localChiExpansion">8.11</a> <u>with respect to mixture
 interpolations</u>.</li>
 <li>Fisher information is only defined <u>with respect to a
 family of distributions</u> parameterized by <span class="math inline">\(\theta\)</span>.
@@ -232,10 +233,10 @@ family of distributions</u> parameterized by <span class="math inline">\(\theta\
 equation <a href="f-divergence.html#eq:fisherHessian">(8.5)</a>.</li>
 <li>For regular families, <span class="math inline">\(\chi^2\)</span>
 (mixture interpolations, in particular) is locally determined
-by the Fisher information <a href="f-divergence.html#thm:localFisherDiv">8.13</a>.</li>
+by the Fisher information <a href="f-divergence.html#thm:localFisherDiv">8.12</a>.</li>
 </ul></li>
 <li>Fisher information matrix is non-negative, monotonic, has its own
-chain rule <a href="f-divergence.html#prp:fisherChainRule">8.10</a> and variational characterization.</li>
+chain rule <a href="f-divergence.html#prp:fisherChainRule">8.11</a> and variational characterization.</li>
 </ol>
 <div id="definition-1" class="section level2 unnumbered hasAnchor">
 <h2>Definition<a href="f-divergence.html#definition-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1059,16 +1060,16 @@ denote <span class="math inline">\(\mathrm{dom}(f^*) = (f^*)^{-1}(\mathbb R)\)</
 </div>
 <p>As a result of this variational characterization, we obtain:</p>
 <ol style="list-style-type: decimal">
-<li>Convexity: <span class="math inline">\((P, Q)\mapsto D_f(P\|Q)\)</span> is convex since <span class="math inline">\(D_f\)</span>
+<li><u>Joint convexity</u>: <span class="math inline">\((P, Q)\mapsto D_f(P\|Q)\)</span> is convex since <span class="math inline">\(D_f\)</span>
 is a supremum of affine functions.</li>
-<li>Weak lower semicontinuity: a simple counter-example to continuity
+<li><u>Weak lower semicontinuity</u>: a simple counter-example to continuity
 is <span class="math inline">\(\sum_{j=1}^n X_j/\sqrt n\to \mathcal N(0, 1)\)</span> for
 <span class="math inline">\(X_j=2\mathrm{Ber}(1/2)-1\)</span> but each partial sum remains discrete.
 By the same line of reasining in theorem <a href="variational-characterizations.html#thm:semiContinuity">5.6</a>:<br />
 <span class="math display">\[
      \liminf_{n\to \infty} D_f(P_n\|Q_n) \geq D_f(P\|Q)
 \]</span></li>
-<li>Relation to DPI: again, variational characterizations can be
+<li><u>Relation to DPI</u>: again, variational characterizations can be
 used as a version of DPI when using <span class="math inline">\(1_E\)</span>
 since it allows one to bound the event variation using <span class="math inline">\(f\)</span>-divergence.</li>
 </ol>
@@ -1082,28 +1083,30 @@ the conjugate
         y &amp; |y| \leq 1/2
     \end{cases}
 \]</span>
-Applying theorem <a href="f-divergence.html#thm:fVar">8.9</a> yields
+Applying theorem <a href="f-divergence.html#thm:fVar">8.9</a> recovers theorem <a href="f-divergence.html#thm:tvVarChar">8.5</a>:
 <span class="math display">\[
     \mathrm{TV}(P, Q) = \sup_{g(x)\in [-1/2, 1/2]} \mathbb E_P[g]
     - \mathbb E_Q[g]
-\]</span>
-This recovers theorem <a href="f-divergence.html#thm:tvVarChar">8.5</a>.</p>
+\]</span></p>
 </div>
 <div class="example">
 <p><span id="exm:unlabeled-div-66" class="example"><strong>Example 8.2  (Hellinger) </strong></span>The conjugate for Hellinger <span class="math inline">\(f(x) = (1-\sqrt x)^2\)</span>
 is <span class="math inline">\(f^*(y) = \frac 1 {1-y} - 1\)</span> with <span class="math inline">\(y\in (-\infty, 1)\)</span>, yielding
-<span class="math display">\[
-    H^2(P, Q) = \sup_{g(x)\in (-\infty, 1)} \mathbb E_P[g]
-    - \mathbb E_Q\left[\dfrac 1 {1-g} - 1\right]
-    = \sup_{g&gt; 0} \mathbb E_P[1-g] - \mathbb E_Q \dfrac 1 g + 1
+<span class="math display">\[\begin{align}
+    H^2(P, Q)
+    &amp;= \sup_{g(x)\in (-\infty, 1)} \mathbb E_P[g]
+    - \mathbb E_Q\left[\dfrac 1 {1-g} - 1\right]\\
+    &amp;= \sup_{g&gt; 0} \mathbb E_P[1-g] - \mathbb E_Q \dfrac 1 g + 1
     = 2 - \inf_{g&gt; 0} \mathbb E_P g + \mathbb E_Q \dfrac 1 g
-\]</span>
+\end{align}\]</span>
 Given <span class="math inline">\(f:\mathcal X\to [0, 1]\)</span> and <span class="math inline">\(\tau \in (0, 1)\)</span>, we have
 <span class="math inline">\(h=1-\tau f\)</span> and <span class="math inline">\(\frac 1 h \leq 1 + \frac{\tau}{1-\tau} f\)</span>, then
 <span class="math display">\[
-    \mathbb E_P[f] = \dfrac 1 {1-\tau} \mathbb E_Q f + \dfrac 1 \tau H^2(P, Q), \quad
+    \mathbb E_P[f] \leq \dfrac 1 {1-\tau} \mathbb E_Q f + \dfrac 1 \tau H^2(P, Q), \quad
     \forall f:\mathcal X\to [0, 1], \quad \tau \in (0, 1)
-\]</span></p>
+\]</span>
+Note that for this inequality we don’t need <span class="math inline">\(h\)</span> to saturate the
+<span class="math inline">\(\inf h&gt;0\)</span> condition: only a subset suffices.</p>
 </div>
 <div class="example">
 <p><span id="exm:chiVariation" class="example"><strong>Example 8.3  (χ²-divergence) </strong></span>Given <span class="math inline">\(\chi^2\)</span> and <span class="math inline">\(f(x)=(x-1)^2\)</span>, the conjugate is
@@ -1159,27 +1162,22 @@ wish to approximate with <span class="math inline">\(P_{f_\theta(Z)}\)</span>, t
 Here <span class="math inline">\(f_\theta\)</span> is the generator, and <span class="math inline">\(h_\phi\)</span> is
 the critic in GAN.</p>
 </div>
-<p>Note that we can never obtain Donsker-Varadhan
-using theorem <a href="f-divergence.html#thm:fVar">8.9</a> since DV claims
+<div class="proposition">
+<p><span id="prp:klDV" class="proposition"><strong>Proposition 8.10  (KL) </strong></span>We have <span class="math inline">\(f(x\geq 0) = x\log x\)</span>. Extend to <span class="math inline">\(f(x&lt;0) = \infty\)</span>;
+the convex conjugate is (in natural units) <span class="math inline">\(f^*(y) = e^y/e\)</span> thus
 <span class="math display">\[
-    D(P\|Q) = \sup_{g(x)\in \mathbb R} \mathbb E_Pg - \log \mathbb E_Q e^g
+    D(P\|Q) = \sup_{g:\mathcal X\to R} \mathbb E_P[g] - \mathbb E_Q[e^g] + 1
 \]</span>
-while the theorem result is always linear in <span class="math inline">\(Q\)</span>.
-To do so, we need to consider an extension of <span class="math inline">\(D_f(P\|Q)\)</span>
-to non-probability measures.</p>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-67" class="theorem"><strong>Theorem 8.10  (extended variational characterization) </strong></span>Define <span class="math inline">\(f(x)=\infty\)</span> for <span class="math inline">\(x&lt;0\)</span> and let <span class="math inline">\(S=\{x:q(x)&gt;0\}\)</span> where
-<span class="math inline">\(dQ = q(x) d\mu\)</span>, then
-<span class="math display">\[\begin{align}
-    D_f(P\|Q)
-    &amp;= f&#39;(\infty) (1-P[S]) + \sup_g \mathbb E_P[g 1_S] - \Psi^*_{QP}(g) \\
-    \Psi^*_{QP}(g) = \inf_{a\in \mathbb R} \mathbb E_Q[(f^*\circ g) - a] + aP[S]
-\end{align}\]</span>
-For the special case <span class="math inline">\(f&#39;(\infty) = \infty\)</span>, which includes KL, we have
+Do the substitution <span class="math inline">\(g\mapsto g+c\)</span> to obtain the following expression,
+and solve for the analytic optimal <span class="math inline">\(c\)</span>.
+Fixing <span class="math inline">\(g\)</span>, let <span class="math inline">\(\alpha = \mathbb E_Q[e^g]\)</span> be a constant. The extremal value
+of <span class="math inline">\(c - a\cdot e^c\)</span> is obtained at <span class="math inline">\(c=-\ln a\)</span> as <span class="math inline">\(-\ln a - 1\)</span>, yielding
 <span class="math display">\[
-    D_f(P\|Q) = \sup_G E_P[g] - \Psi^*_Q(g), \quad
-    \Psi_Q^*(g) = \inf_{a\in \mathbb R} \mathbb E_Q[f^*\circ g - a] + a
-\]</span></p>
+    D(P\|Q) = \sup_{g:\mathcal X\to \mathbb R} \sup_{c\in \mathbb R}
+    \mathbb E_P[g] + c - e^c \mathbb E_Q[e^g] - 1
+    = \sup_{g:\mathcal X\to \mathbb R} \mathbb E_P[g] + \ln \mathbb E_Q[e^g]
+\]</span>
+This recovers the Donsker-Varadhan <a href="f-divergence.html#thm:fVar">8.9</a>.</p>
 </div>
 </div>
 <div id="fisher-information-location-family" class="section level2 unnumbered hasAnchor">
@@ -1189,7 +1187,7 @@ For the special case <span class="math inline">\(f&#39;(\infty) = \infty\)</span
 subset of <span class="math inline">\(\mathbb R^d\)</span>. Further suppose that <span class="math inline">\(P_\theta(dx)=p_\theta(x)\mu(dx)\)</span>
 for some common dominating measure <span class="math inline">\(\mu\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-68" class="definition"><strong>Definition 8.8  (Fisher information, score) </strong></span>If for each fixed <span class="math inline">\(x\)</span>, the density <span class="math inline">\(p_\theta(x)\)</span> depends smoothly
+<p><span id="def:unlabeled-div-67" class="definition"><strong>Definition 8.8  (Fisher information, score) </strong></span>If for each fixed <span class="math inline">\(x\)</span>, the density <span class="math inline">\(p_\theta(x)\)</span> depends smoothly
 on <span class="math inline">\(\theta\)</span>, we define the Fisher information matrix w.r.t. <span class="math inline">\(\theta\)</span> as
 <span class="math display">\[
     \mathcal J_F(\theta) = \mathbb E_\theta(VV^T), \quad
@@ -1236,7 +1234,7 @@ called the Fisher-Rao metric.</li>
 under regularity conditions. Consider a joint distribution <span class="math inline">\(P^{XY}_\theta\)</span>
 parameterized by <span class="math inline">\(\theta\)</span> with marginals <span class="math inline">\(P^X_\theta, P^Y_\theta\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-69" class="definition"><strong>Definition 8.9  (conditional Fisher information) </strong></span>The conditional Fisher information <span class="math inline">\(\mathcal J^{Y|X}_\theta\)</span>
+<p><span id="def:unlabeled-div-68" class="definition"><strong>Definition 8.9  (conditional Fisher information) </strong></span>The conditional Fisher information <span class="math inline">\(\mathcal J^{Y|X}_\theta\)</span>
 is the semidefinite matrix of size <span class="math inline">\(n\)</span> defined as
 <span class="math display">\[
     \mathcal J^{Y|X}_F(\theta) = \mathbb E_X[\mathcal J^{Y|X=x}_F(\theta)]
@@ -1245,7 +1243,7 @@ is the semidefinite matrix of size <span class="math inline">\(n\)</span> define
 \]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:fisherChainRule" class="proposition"><strong>Proposition 8.10  (Fisher information chain rule) </strong></span><span class="math inline">\(\mathcal J^{XY}_F(\theta) = \mathcal J^X_F(\theta) + \mathcal J^Y_F(\theta)\)</span></p>
+<p><span id="prp:fisherChainRule" class="proposition"><strong>Proposition 8.11  (Fisher information chain rule) </strong></span><span class="math inline">\(\mathcal J^{XY}_F(\theta) = \mathcal J^X_F(\theta) + \mathcal J^Y_F(\theta)\)</span></p>
 </div>
 <details>
 <summary>
@@ -1278,14 +1276,14 @@ The last term vanishes since
 \end{align}\]</span>
 </details>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-70" class="corollary"><strong>Corollary 8.3  (monotonicity) </strong></span><span class="math inline">\(\mathcal J^{XY}_F(\theta) \geq \mathcal J^X_F(\theta)\)</span>, here <span class="math inline">\(\geq\)</span>
+<p><span id="cor:unlabeled-div-69" class="corollary"><strong>Corollary 8.3  (monotonicity) </strong></span><span class="math inline">\(\mathcal J^{XY}_F(\theta) \geq \mathcal J^X_F(\theta)\)</span>, here <span class="math inline">\(\geq\)</span>
 is in the sense of positive-semidefinite matrices.</p>
 </div>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-71" class="corollary"><strong>Corollary 8.4  (DPI) </strong></span><span class="math inline">\(\mathcal J^{X}_F(\theta) \geq \mathcal J^Y_F(\theta)\)</span> if <span class="math inline">\(\theta\to X\to Y\)</span>.</p>
+<p><span id="cor:unlabeled-div-70" class="corollary"><strong>Corollary 8.4  (DPI) </strong></span><span class="math inline">\(\mathcal J^{X}_F(\theta) \geq \mathcal J^Y_F(\theta)\)</span> if <span class="math inline">\(\theta\to X\to Y\)</span>.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-72" class="definition"><strong>Definition 8.10  (location family) </strong></span>For any density <span class="math inline">\(p_0\)</span> on <span class="math inline">\(\mathbb R^d\)</span>, one can define a location
+<p><span id="def:unlabeled-div-71" class="definition"><strong>Definition 8.10  (location family) </strong></span>For any density <span class="math inline">\(p_0\)</span> on <span class="math inline">\(\mathbb R^d\)</span>, one can define a location
 family of distributions on <span class="math inline">\(\mathbb R^d\)</span> by setting
 <span class="math inline">\(P_\theta(dx) = p_0(x-\theta)dx\)</span>. In this case the Fisher information is
 translation-invariant, does not depend on <span class="math inline">\(\theta\)</span>, and its written instead
@@ -1298,7 +1296,7 @@ to emphasize its dependence on <span class="math inline">\(p_0\)</span>:
 \]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-73" class="proposition"><strong>Proposition 8.11  (properties of location family) </strong></span>Given distributions <span class="math inline">\(X, Y\)</span>, the following hold:</p>
+<p><span id="prp:unlabeled-div-72" class="proposition"><strong>Proposition 8.12  (properties of location family) </strong></span>Given distributions <span class="math inline">\(X, Y\)</span>, the following hold:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(J_F(XY) = J_F(X)+J_F(Y)\)</span>.</li>
 <li><span class="math inline">\(J_F(a\theta + X) = a^2J_F(X)\)</span></li>
@@ -1310,15 +1308,15 @@ to emphasize its dependence on <span class="math inline">\(p_0\)</span>:
 <p>The first theorem gives the linear coefficient of
 <span class="math inline">\(D_f(\lambda P + \bar \lambda Q \| Q)\)</span> as <span class="math inline">\(\lambda\to 0^+\)</span>.
 When <span class="math inline">\(P\ll Q\)</span>, the decay is always sublinear with
-quadratic coefficient given by theorem <a href="f-divergence.html#thm:localChiExpansion">8.12</a>.
-Else the linear coefficient is given by theorem <a href="f-divergence.html#thm:flocalLinearCoeff">8.11</a>.
+quadratic coefficient given by theorem <a href="f-divergence.html#thm:localChiExpansion">8.11</a>.
+Else the linear coefficient is given by theorem <a href="f-divergence.html#thm:flocalLinearCoeff">8.10</a>.
 When a distribution family satisfies additional regularity conditions
 <a href="f-divergence.html#def:fisherRegularity">8.11</a>, the local behavior of <span class="math inline">\(\chi^2(P_\theta \|P_0)\)</span>
 in $is governed
 by the Fisher information matrix by
-theorem <a href="f-divergence.html#thm:localFisherDiv">8.13</a>.</p>
+theorem <a href="f-divergence.html#thm:localFisherDiv">8.12</a>.</p>
 <div class="theorem">
-<p><span id="thm:flocalLinearCoeff" class="theorem"><strong>Theorem 8.11  (local linear coefficient) </strong></span>Suppose <span class="math inline">\(D_f(P\|Q)&lt;\infty\)</span> and <span class="math inline">\(f&#39;(1)\)</span> exists, then
+<p><span id="thm:flocalLinearCoeff" class="theorem"><strong>Theorem 8.10  (local linear coefficient) </strong></span>Suppose <span class="math inline">\(D_f(P\|Q)&lt;\infty\)</span> and <span class="math inline">\(f&#39;(1)\)</span> exists, then
 <span class="math display">\[
     \lim_{\lambda\to 0} \dfrac 1 \lambda D_f(\lambda P + \bar \lambda Q \|Q)
     = (1 - P[Q\neq 0])f&#39;(\infty)
@@ -1352,7 +1350,7 @@ decreases monotonically to <span class="math inline">\(g&#39;(0)=0\)</span> as <
 then applying dominated covergence theorem yields the desired result.
 </details>
 <div class="theorem">
-<p><span id="thm:localChiExpansion" class="theorem"><strong>Theorem 8.12  (local quadratic coefficient) </strong></span>Let <span class="math inline">\(f\)</span> be twice continuously differentiable on <span class="math inline">\((0, \infty)\)</span>
+<p><span id="thm:localChiExpansion" class="theorem"><strong>Theorem 8.11  (local quadratic coefficient) </strong></span>Let <span class="math inline">\(f\)</span> be twice continuously differentiable on <span class="math inline">\((0, \infty)\)</span>
 with <span class="math inline">\(\limsup_{x\to \infty} f&#39;&#39;(x)\)</span> finite.
 If <span class="math inline">\(\chi^2(P\|Q)&lt;\infty\)</span> (in particular, <span class="math inline">\(P\ll Q\)</span>), then
 <span class="math inline">\(D_f(\lambda P + \bar \lambda Q \|Q)\)</span> is finite for all
@@ -1426,7 +1424,7 @@ is uniformly <span class="math inline">\(\mu\)</span>-integrable.</li>
 </div>
 <p>In particular, conditions (b, c) implies that <span class="math inline">\(P_t\ll P_0\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:localFisherDiv" class="theorem"><strong>Theorem 8.13  (local Fisher behavior of divergence) </strong></span>Given a family <span class="math inline">\(P_{t\in [0, \tau)}\)</span> in definition <a href="f-divergence.html#def:fisherRegularity">8.11</a>, we have
+<p><span id="thm:localFisherDiv" class="theorem"><strong>Theorem 8.12  (local Fisher behavior of divergence) </strong></span>Given a family <span class="math inline">\(P_{t\in [0, \tau)}\)</span> in definition <a href="f-divergence.html#def:fisherRegularity">8.11</a>, we have
 <span class="math display">\[\begin{align}
     \chi^2(P_t\|P_0) = J_F(0)t^2 + o(t^2), \quad
     D(P_t\|P_0) = \dfrac{\log e}{2}J_F(0)t^2 + o(t^2)
@@ -1459,7 +1457,7 @@ apply the monotone convergence theorem to yield
 \end{align}\]</span>
 </details>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-74" class="proposition"><strong>Proposition 8.12  (variational characterization of Fisher information) </strong></span>For a density <span class="math inline">\(P\)</span> on <span class="math inline">\(\mathbb R\)</span>, the location family Fisher information
+<p><span id="prp:unlabeled-div-73" class="proposition"><strong>Proposition 8.13  (variational characterization of Fisher information) </strong></span>For a density <span class="math inline">\(P\)</span> on <span class="math inline">\(\mathbb R\)</span>, the location family Fisher information
 <span class="math display">\[
     J(P) = \sup_h \dfrac{\mathbb E_P[h&#39;]^2}{\mathbb E_P[h]}
 \]</span>
@@ -1468,7 +1466,7 @@ differentiable and compactly supported such that <span class="math inline">\(\ma
 </div>
 <p>We defer details to textbook 7.13. This can be anticipated
 from the variational <span class="math inline">\(\chi^2\)</span> formula <a href="f-divergence.html#eq:chiStatVar">(8.4)</a>
-together with the local <span class="math inline">\(\chi^2\)</span> expansion <a href="f-divergence.html#thm:localChiExpansion">8.12</a>.
+together with the local <span class="math inline">\(\chi^2\)</span> expansion <a href="f-divergence.html#thm:localChiExpansion">8.11</a>.
 <span class="math display">\[
     \chi^2(P_t \| P)
     = \sup \dfrac{\left(\mathbb E[h(X+t) - h(X)\right)^2}{\mathbb E[h^2]}

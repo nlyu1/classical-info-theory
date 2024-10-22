@@ -132,8 +132,10 @@ Nontrivial results in this book include:
     $\Pr[A, B^c]$ through atypicality of $B^c$:
     soure coding distribution theorem \@ref(thm:varCompOptDistribution). 
 8. Break a single $\sup$ into nested ones. 
-    - Solve the inner $\sup$ analytically: 
-    useful characterization of $\chi^2$ \@ref(eq:chiStatVar). 
+    - Solve the inner $\sup$ analytically after introducing a redundant 
+    linear (in fact any parameterized) bijective transform: 
+    useful characterization of $\chi^2$ \@ref(eq:chiStatVar) and 
+    KL (proposition \@ref(prp:klDV)). 
     - Alternate inner and alter closed-form solution: EM algorithm. 
 
 

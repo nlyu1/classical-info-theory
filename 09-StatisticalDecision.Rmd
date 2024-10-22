@@ -117,8 +117,12 @@ For simplicity, let $\Theta$ be a finite set and $l$ be convex, then
     \Exp_\theta \, l(\theta, \hat \theta)
 \] 
 This is a convex optimization problem since 
-$P_{\hat \theta|X}\mapsto \Exp_\theta \, l(\theta, \hat \theta)$ 
-is convex and the supremum of affine functions is convex. 
+\[ 
+    P_{\hat \theta|X}\mapsto \Exp_\theta \, l(\theta, \hat \theta)
+    = \Exp_{X\sim P_\theta, \hat \theta\sim 
+    P_{\hat \theta|X}}[l(\theta, \hat \theta)]
+\] 
+is linear and the pointwise supremum of convex functions is convex. 
 Considering its dual, rewrite 
 \[ 
     R^* = \min_{P_{\hat \theta|X}, t} \, t\quad \text{s.t. } 
@@ -161,8 +165,8 @@ $\Theta$ is finite and $l$ is bounded from below (e.g. quadratic).
 :::
 <span style="color:green">
 Proof ideas: work in the vector space of risk vectors 
-with inner product given by average risk.  
-Separate the convex sets of (1) all risk vectors, and (2) 
+with inner product given by average risk. Next 
+separate the convex sets of (1) all risk vectors, and (2) 
 all vectors component-wise less than $R^*$.  
 </span>
 <details>
@@ -266,3 +270,12 @@ $\theta\in \Theta\subset \R^d$ satisfies
     }{\chi^2(P_{\theta'} \| P_\theta)}
 \] 
 :::
+
+## Example: Bernoulli estimation {-}
+
+This section solves exercise 6.7 in the textbook. 
+Given $X_j\sim \mrm{Ber}(\theta)$ i.i.d, we wish 
+to estimate $\theta$ w.r.t. the quadratic 
+loss function $l(\theta, \hat \theta) = (\theta - \hat \theta)^2$
+with $n$ observations. 
+

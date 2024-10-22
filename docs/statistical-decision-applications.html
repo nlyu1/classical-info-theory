@@ -144,6 +144,7 @@
 <ul>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#hcr-lower-bound"><i class="fa fa-check"></i>HCR lower bound</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#example-bernoulli-estimation"><i class="fa fa-check"></i>Example: Bernoulli estimation</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
@@ -261,7 +262,7 @@ it by consider <span class="math inline">\(\mathbb E[\hat T|X]\)</span>, then
   \]</span></li>
 </ul>
 <div class="definition">
-<p><span id="def:unlabeled-div-75" class="definition"><strong>Definition 9.1  (Bayes risk) </strong></span>Given a prior <span class="math inline">\(\pi\)</span>, the average risk w.r.t. <span class="math inline">\(\pi\)</span>
+<p><span id="def:unlabeled-div-74" class="definition"><strong>Definition 9.1  (Bayes risk) </strong></span>Given a prior <span class="math inline">\(\pi\)</span>, the average risk w.r.t. <span class="math inline">\(\pi\)</span>
 of an estimator is
 <span class="math display">\[
     R_\pi(\hat \theta)
@@ -273,7 +274,7 @@ The <strong>Bayes risk</strong> of a prior is its minimal average risk
 The optimal <span class="math inline">\(\hat \theta\)</span> is the Bayes estimator.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-76" class="definition"><strong>Definition 9.2  (minimax risk) </strong></span>Given a parameter family <span class="math inline">\(P_{\theta\in \Theta}\)</span> and
+<p><span id="def:unlabeled-div-75" class="definition"><strong>Definition 9.2  (minimax risk) </strong></span>Given a parameter family <span class="math inline">\(P_{\theta\in \Theta}\)</span> and
 loss function <span class="math inline">\(l\)</span>, the minimax risk is<br />
 <span class="math display">\[
     R^* = \inf_{\hat \theta} \sup_{\theta \in \Theta}
@@ -290,7 +291,7 @@ To prove minimax risk, one needs to establish for arbitrary <span class="math in
 </ol>
 </div>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-77" class="theorem"><strong>Theorem 9.1  (duality between minimax and Bayes risk) </strong></span>Let <span class="math inline">\(\mathcal P(\Theta)\)</span> denote the set of probability distributions
+<p><span id="thm:unlabeled-div-76" class="theorem"><strong>Theorem 9.1  (duality between minimax and Bayes risk) </strong></span>Let <span class="math inline">\(\mathcal P(\Theta)\)</span> denote the set of probability distributions
 on <span class="math inline">\(\Theta\)</span>, then
 <span class="math display">\[
     R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta)
@@ -299,9 +300,11 @@ on <span class="math inline">\(\Theta\)</span>, then
     R_\pi(\hat \theta)
 \]</span></p>
 </div>
-<p><em>Proof:</em> <span class="math inline">\(R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta) = \inf_{\hat \theta}\sup_{\pi \in \mathcal P(\Theta)} R_\pi(\hat \theta) \geq R^*_{\mathrm{Bayes}}\)</span> by <span class="math inline">\(\inf\sup \geq \sup\inf\)</span>.</p>
+<p><em>Proof:</em> <span class="math inline">\(R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta)
+= \inf_{\hat \theta}\sup_{\pi \in \mathcal P(\Theta)} R_\pi(\hat \theta)
+\geq R^*_{\mathrm{Bayes}}\)</span> by <span class="math inline">\(\inf\sup \geq \sup\inf\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-78" class="example"><strong>Example 9.1  (strict inequality) </strong></span>Let <span class="math inline">\(\theta, \hat \theta \in \{1, 2, \cdots\}\)</span> and
+<p><span id="exm:unlabeled-div-77" class="example"><strong>Example 9.1  (strict inequality) </strong></span>Let <span class="math inline">\(\theta, \hat \theta \in \{1, 2, \cdots\}\)</span> and
 <span class="math inline">\(l(\theta, \hat \theta) = 1_{\hat \theta &lt; \theta}\)</span>, then
 <span class="math inline">\(R^* = 1\)</span> while <span class="math inline">\(R^*_{\mathrm{Bayes}} = 0\)</span>.</p>
 </div>
@@ -314,8 +317,12 @@ on <span class="math inline">\(\Theta\)</span>, then
     \mathbb E_\theta \, l(\theta, \hat \theta)
 \]</span>
 This is a convex optimization problem since
-<span class="math inline">\(P_{\hat \theta|X}\mapsto \mathbb E_\theta \, l(\theta, \hat \theta)\)</span>
-is convex and the supremum of affine functions is convex.
+<span class="math display">\[
+    P_{\hat \theta|X}\mapsto \mathbb E_\theta \, l(\theta, \hat \theta)
+    = \mathbb E_{X\sim P_\theta, \hat \theta\sim
+    P_{\hat \theta|X}}[l(\theta, \hat \theta)]
+\]</span>
+is linear and the pointwise supremum of convex functions is convex.
 Considering its dual, rewrite
 <span class="math display">\[
     R^* = \min_{P_{\hat \theta|X}, t} \, t\quad \text{s.t. }
@@ -339,7 +346,7 @@ yielding the dual problem
     = \max_{\pi \in \mathcal P(\Theta)} R_\pi^*
 \]</span></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-79" class="theorem"><strong>Theorem 9.2  (general minimax equality) </strong></span><span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span> if the following conditions hold:</p>
+<p><span id="thm:unlabeled-div-78" class="theorem"><strong>Theorem 9.2  (general minimax equality) </strong></span><span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span> if the following conditions hold:</p>
 <ol style="list-style-type: decimal">
 <li>The experiment is dominated: <span class="math inline">\(P_{\forall \theta} \ll \nu\)</span> for some <span class="math inline">\(\nu\)</span>.</li>
 <li>The action space <span class="math inline">\(\hat \Theta\)</span> (codomain of the estimator)
@@ -356,8 +363,8 @@ is compact for each <span class="math inline">\(a\)</span>.</li>
 </div>
 <span style="color:green">
 Proof ideas: work in the vector space of risk vectors
-with inner product given by average risk.<br />
-Separate the convex sets of (1) all risk vectors, and (2)
+with inner product given by average risk. Next
+separate the convex sets of (1) all risk vectors, and (2)
 all vectors component-wise less than <span class="math inline">\(R^*\)</span>.<br />
 </span>
 <details>
@@ -451,7 +458,7 @@ Take supremum over all <span class="math inline">\(\pi_j\)</span> and sum over <
 <div id="hcr-lower-bound" class="section level3 unnumbered hasAnchor">
 <h3>HCR lower bound<a href="statistical-decision-applications.html#hcr-lower-bound" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-80" class="theorem"><strong>Theorem 9.4  (HCR lower bound) </strong></span>The quadratic loss of any estimator <span class="math inline">\(\hat \theta\)</span> at
+<p><span id="thm:hcrBound" class="theorem"><strong>Theorem 9.4  (HCR lower bound) </strong></span>The quadratic loss of any estimator <span class="math inline">\(\hat \theta\)</span> at
 <span class="math inline">\(\theta\in \Theta\subset \mathbb R^d\)</span> satisfies
 <span class="math display">\[
     R_\theta(\hat \theta) = \mathbb E_{
@@ -463,8 +470,16 @@ Take supremum over all <span class="math inline">\(\pi_j\)</span> and sum over <
     }{\chi^2(P_{\theta&#39;} \| P_\theta)}
 \]</span></p>
 </div>
-
 </div>
+</div>
+<div id="example-bernoulli-estimation" class="section level2 unnumbered hasAnchor">
+<h2>Example: Bernoulli estimation<a href="statistical-decision-applications.html#example-bernoulli-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section solves exercise 6.7 in the textbook.
+Given <span class="math inline">\(X_j\sim \mathrm{Ber}(\theta)\)</span> i.i.d, we wish
+to estimate <span class="math inline">\(\theta\)</span> w.r.t. the quadratic
+loss function <span class="math inline">\(l(\theta, \hat \theta) = (\theta - \hat \theta)^2\)</span>
+with <span class="math inline">\(n\)</span> observations.</p>
+
 </div>
 </div>
             </section>
