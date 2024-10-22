@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-21" />
+<meta name="date" content="2024-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,7 +138,8 @@
 </ul></li>
 <li class="chapter" data-level="9" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html"><i class="fa fa-check"></i><b>9</b> Statistical Decision Applications</a>
 <ul>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#definitions-risk"><i class="fa fa-check"></i>Definitions, risk</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimax-and-bayes-risks"><i class="fa fa-check"></i>Minimax and Bayes risks</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimaxDual"><i class="fa fa-check"></i>A duality perspective</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
@@ -193,8 +194,22 @@
             <section class="normal" id="section-">
 <div id="statistical-decision-applications" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">9</span> Statistical Decision Applications<a href="statistical-decision-applications.html#statistical-decision-applications" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="definitions-risk" class="section level2 unnumbered hasAnchor">
-<h2>Definitions, risk<a href="statistical-decision-applications.html#definitions-risk" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Key takeaways:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(R_\theta(\hat \theta)\)</span> is the expectation of loss over <span class="math inline">\(X\sim P_\theta\)</span>.</li>
+<li>There are two ways turn <span class="math inline">\(R_\theta(\hat\theta)\)</span> into a scalar:
+<ul>
+<li>Eliminating <span class="math inline">\(\theta\)</span> with <span class="math inline">\(\sup_\theta\)</span>, then taking <span class="math inline">\(\inf\)</span>
+over all estimators leads to the minimax risk <span class="math inline">\(R^*\)</span>.</li>
+<li>Replacing <span class="math inline">\(\theta\)</span> by averaging over a prior <span class="math inline">\(\pi\)</span>,
+taking <span class="math inline">\(\inf\)</span> over <span class="math inline">\(\hat \theta\)</span>, then taking <span class="math inline">\(\sup_\pi\)</span> adversarially
+over all priors <span class="math inline">\(\pi\)</span> leads to the Bayes risk.</li>
+</ul></li>
+<li>The minimax and Bayes risks are related by <a href="minimaxDual">duality</a>.</li>
+<li>Under mild assumptions, <span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span>.</li>
+</ol>
+<div id="minimax-and-bayes-risks" class="section level2 unnumbered hasAnchor">
+<h2>Minimax and Bayes risks<a href="statistical-decision-applications.html#minimax-and-bayes-risks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>A <strong>statistical model</strong> is a collection
 <span class="math inline">\(\mathcal P = \{P_\theta:\theta \in \Theta\}\)</span> of distributions
@@ -202,7 +217,7 @@ over some measurable space <span class="math inline">\((\mathcal X, \Sigma)\)</s
 Here <span class="math inline">\(\Theta\)</span> is the <strong>parameter space</strong>.</li>
 <li>An <strong>estimand</strong> <span class="math inline">\(T(\theta)\)</span> has signature <span class="math inline">\(T:\Theta\to \mathcal Y\)</span>;
 in the trivial case <span class="math inline">\(T\)</span> is just the identity.</li>
-<li>An <strong>estimator</strong> (decision rule) has type <span class="math inline">\(\hat T:\mathcal X\to \hat {\mathcal Y}\)</span>.
+<li>An <strong>estimator</strong> (decision rule) has type <span class="math inline">\(\hat T:\Omega\to \hat {\mathcal Y}\)</span>.
 The action space <span class="math inline">\(\hat {\mathcal Y}\)</span> does not have to be
 the estimand space <span class="math inline">\(\mathcal Y\)</span> (e.g. when we’re estimating a confidence interval).
 <ul>
@@ -219,6 +234,116 @@ and estimator <span class="math inline">\(\hat T\)</span> </span>:
   = \int P_\theta(dx) P_{\hat T|X}(\hat t|x) l(T(\theta), \hat t)
 \]</span></li>
 </ul>
+<p>Two comments in order:</p>
+<ul>
+<li>For the minimax risk, it is sometimes necessary to
+randomize. To minimize the average risk over a prior (Bayesian approach),
+though, it suffices to consider deterministic functions.</li>
+<li>The space of randomized estimators (as Markov kernels) is convex.
+This is necessary for minimax theorems.</li>
+<li>For <span class="math inline">\(\hat T\mapsto l(T, \hat T)\)</span> convex, we can derandomize
+it by consider <span class="math inline">\(\mathbb E[\hat T|X]\)</span>, then
+<span class="math display">\[
+      R_\theta(\hat T) = \mathbb E_\theta l(T, \hat T) \geq
+      \mathbb E_\theta l(T, \mathbb E[\hat T|X])
+  \]</span></li>
+</ul>
+<div class="definition">
+<p><span id="def:unlabeled-div-75" class="definition"><strong>Definition 9.1  (Bayes risk) </strong></span>Given a prior <span class="math inline">\(\pi\)</span>, the average risk w.r.t. <span class="math inline">\(\pi\)</span>
+of an estimator is
+<span class="math display">\[
+    R_\pi(\hat \theta)
+    = \mathbb E_{\theta \sim \pi} R_\theta(\hat \theta)
+    = \mathbb E_{\theta \sim \pi, X\sim P_\theta} l(\theta, \hat \theta(X))
+\]</span>
+The <strong>Bayes risk</strong> of a prior is its minimal average risk
+<span class="math inline">\(R_\pi^* = \inf_{\hat \theta} R_\pi(\hat \theta)\)</span>.
+The optimal <span class="math inline">\(\hat \theta\)</span> is the Bayes estimator.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-76" class="definition"><strong>Definition 9.2  (minimax risk) </strong></span>Given a parameter family <span class="math inline">\(P_{\theta\in \Theta}\)</span> and
+loss function <span class="math inline">\(l\)</span>, the minimax risk is<br />
+<span class="math display">\[
+    R^* = \inf_{\hat \theta} \sup_{\theta \in \Theta}
+    R_\theta(\hat \theta)
+    = \inf_{\hat \theta} \sup_{\theta \in \Theta}
+    \mathbb E_{X\sim P_\theta} l(\hat \theta(X), \theta)
+\]</span>
+To prove minimax risk, one needs to establish for arbitrary <span class="math inline">\(\epsilon\)</span></p>
+<ol style="list-style-type: decimal">
+<li>an estimator <span class="math inline">\(\hat \theta^*\)</span> satisfying
+<span class="math inline">\(R_\theta(\hat \theta^*)\leq R^*+\epsilon\)</span>.</li>
+<li>For arbitrary <span class="math inline">\(\hat \theta\)</span>,
+<span class="math inline">\(\sup_{\theta} R_\theta(\hat \theta)\geq R^*-\epsilon\)</span>.</li>
+</ol>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-77" class="theorem"><strong>Theorem 9.1  (duality between minimax and Bayes risk) </strong></span>Let <span class="math inline">\(\mathcal P(\Theta)\)</span> denote the set of probability distributions
+on <span class="math inline">\(\Theta\)</span>, then
+<span class="math display">\[
+    R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta)
+    \geq R^*_{\mathrm{Bayes}}
+    = \sup_{\pi \in \mathcal P(\theta)} \inf_{\hat \theta}
+    R_\pi(\hat \theta)
+\]</span></p>
+</div>
+<p><em>Proof:</em> <span class="math inline">\(R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta) = \inf_{\hat \theta}\sup_{\pi \in \mathcal P(\Theta)} R_\pi(\hat \theta) \geq R^*_{\mathrm{Bayes}}\)</span> by <span class="math inline">\(\inf\sup \geq \sup\inf\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-78" class="example"><strong>Example 9.1  (strict inequality) </strong></span>Let <span class="math inline">\(\theta, \hat \theta \in \{1, 2, \cdots\}\)</span> and
+<span class="math inline">\(l(\theta, \hat \theta) = 1_{\hat \theta &lt; \theta}\)</span>, then
+<span class="math inline">\(R^* = 1\)</span> while <span class="math inline">\(R^*_{\mathrm{Bayes}} = 0\)</span>.</p>
+</div>
+</div>
+<div id="minimaxDual" class="section level2 unnumbered hasAnchor">
+<h2>A duality perspective<a href="statistical-decision-applications.html#minimaxDual" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For simplicity, let <span class="math inline">\(\Theta\)</span> be a finite set and <span class="math inline">\(l\)</span> be convex, then
+<span class="math display">\[
+    R^* = \min_{P_{\hat \theta|X}} \max_{\theta \in \Theta}
+    \mathbb E_\theta \, l(\theta, \hat \theta)
+\]</span>
+This is a convex optimization problem since
+<span class="math inline">\(P_{\hat \theta|X}\mapsto \mathbb E_\theta \, l(\theta, \hat \theta)\)</span>
+is convex and the supremum of affine functions is convex.
+Considering its dual, rewrite
+<span class="math display">\[
+    R^* = \min_{P_{\hat \theta|X}, t} \, t\quad \text{s.t. }
+    \mathbb E_\theta\, l(\theta, \hat \theta) \leq t, \quad \forall \theta \in \Theta
+\]</span>
+Let <span class="math inline">\(\pi_\theta\geq 0\)</span> for each inequality constraint.
+The Lagrangian is
+<span class="math display">\[
+    \mathcal L(P_{\hat \theta|X}, t, \pi)
+    = t + \sum_{\theta \in \Theta} \pi_\theta\cdot \left(
+        \mathbb E_\theta\, l(\theta, \hat \theta) - t
+    \right) = \left(
+        1 - \sum_{\theta \in \Theta} \pi_\theta
+    \right)t + \sum_{\theta \in \Theta} \pi_\theta \mathbb E_\theta\, l(\theta, \hat \theta)
+\]</span>
+The first term implies that <span class="math inline">\(\pi\)</span> must be a probability measure,
+yielding the dual problem
+<span class="math display">\[
+    \max_\pi \min_{P_{\hat \theta|X}}
+    \sum_{\theta \in \Theta} \pi_\theta \mathbb E_\theta\, l(\theta, \hat \theta)
+    = \max_{\pi \in \mathcal P(\Theta)} R_\pi^*
+\]</span></p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-79" class="theorem"><strong>Theorem 9.2  (general minimax equality) </strong></span><span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span> if the following conditions hold:</p>
+<ol style="list-style-type: decimal">
+<li>The experiment is dominated: <span class="math inline">\(P_{\forall \theta} \ll \nu\)</span> for some <span class="math inline">\(\nu\)</span>.</li>
+<li>The action space <span class="math inline">\(\hat \Theta\)</span> (codomain of the estimator)
+is a locally compact topological space with a countable basis.</li>
+<li>The loss function is level compact: for each <span class="math inline">\(\theta\in \Theta, l(\theta, \cdot)\)</span>
+is bounded from below and <span class="math inline">\(\{\hat \theta:l(\theta, \hat \theta)\leq a\}\)</span>
+is compact for each <span class="math inline">\(a\)</span>.</li>
+</ol>
+</div>
+<p>We will prove the following special case for demonstration.</p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-80" class="proposition"><strong>Proposition 9.1  (special minimax equality) </strong></span><span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span> if
+<span class="math inline">\(\Theta\)</span> is finite and <span class="math inline">\(l\)</span> is bounded from below for all <span class="math inline">\(\theta, \hat \theta\)</span>.</p>
+</div>
+<p>First consider the edge case <span class="math inline">\(R^*=\infty \iff R^*_{\mathrm{Bayes}} = \infty\)</span>;
+this is established by considering the uniform prior <span class="math inline">\(\pi\)</span> on <span class="math inline">\(\Theta\)</span>.</p>
 
 </div>
 </div>
