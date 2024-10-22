@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-21" />
+<meta name="date" content="2024-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,7 +138,12 @@
 </ul></li>
 <li class="chapter" data-level="9" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html"><i class="fa fa-check"></i><b>9</b> Statistical Decision Applications</a>
 <ul>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#definitions-risk"><i class="fa fa-check"></i>Definitions, risk</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimax-and-bayes-risks"><i class="fa fa-check"></i>Minimax and Bayes risks</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimaxDual"><i class="fa fa-check"></i>A duality perspective</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#sample-complexity-tensor-products"><i class="fa fa-check"></i>Sample complexity, tensor products</a>
+<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#hcr-lower-bound"><i class="fa fa-check"></i>HCR lower bound</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
@@ -193,8 +198,30 @@
             <section class="normal" id="section-">
 <div id="statistical-decision-applications" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">9</span> Statistical Decision Applications<a href="statistical-decision-applications.html#statistical-decision-applications" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="definitions-risk" class="section level2 unnumbered hasAnchor">
-<h2>Definitions, risk<a href="statistical-decision-applications.html#definitions-risk" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Key takeaways:</p>
+<ol style="list-style-type: decimal">
+<li>A statistical model is a family <span class="math inline">\(\{P_\theta\}\)</span> of distributions indexed
+by parameter values <span class="math inline">\(\theta \in \Theta\)</span>.</li>
+<li><span class="math inline">\(R_\theta(\hat \theta)\)</span> is the expectation of loss over <span class="math inline">\(X\sim P_\theta\)</span>.</li>
+<li>There are two ways turn <span class="math inline">\(R_\theta(\hat\theta)\)</span> into a scalar:
+<ul>
+<li>Eliminating <span class="math inline">\(\theta\)</span> with <span class="math inline">\(\sup_\theta\)</span>, then taking <span class="math inline">\(\inf\)</span>
+over all estimators leads to the minimax risk <span class="math inline">\(R^*\)</span>.</li>
+<li>Replacing <span class="math inline">\(\theta\)</span> by averaging over a prior <span class="math inline">\(\pi\)</span>,
+taking <span class="math inline">\(\inf\)</span> over <span class="math inline">\(\hat \theta\)</span>, then taking <span class="math inline">\(\sup_\pi\)</span> adversarially
+over all priors <span class="math inline">\(\pi\)</span> leads to the Bayes risk.</li>
+</ul></li>
+<li>The minimax and Bayes risks are related by <a href="minimaxDual">duality</a>.</li>
+<li>Under mild assumptions, <span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span>
+(proposition <a href="statistical-decision-applications.html#prp:minimaxSeparation">9.1</a>).</li>
+<li>Sample complexity <a href="statistical-decision-applications.html#def:sampleComplexity">9.3</a> is the number of samples
+to achieve <span class="math inline">\(R^*_n&lt; \epsilon\)</span>.</li>
+<li>Tensor product experiments <a href="statistical-decision-applications.html#def:tpExperiment">9.4</a>
+have independent but not necessarily identically distributed observations;
+theoreom <a href="statistical-decision-applications.html#thm:tpMinimax">9.3</a> yields a bound on its minimax risk.</li>
+</ol>
+<div id="minimax-and-bayes-risks" class="section level2 unnumbered hasAnchor">
+<h2>Minimax and Bayes risks<a href="statistical-decision-applications.html#minimax-and-bayes-risks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>A <strong>statistical model</strong> is a collection
 <span class="math inline">\(\mathcal P = \{P_\theta:\theta \in \Theta\}\)</span> of distributions
@@ -202,7 +229,7 @@ over some measurable space <span class="math inline">\((\mathcal X, \Sigma)\)</s
 Here <span class="math inline">\(\Theta\)</span> is the <strong>parameter space</strong>.</li>
 <li>An <strong>estimand</strong> <span class="math inline">\(T(\theta)\)</span> has signature <span class="math inline">\(T:\Theta\to \mathcal Y\)</span>;
 in the trivial case <span class="math inline">\(T\)</span> is just the identity.</li>
-<li>An <strong>estimator</strong> (decision rule) has type <span class="math inline">\(\hat T:\mathcal X\to \hat {\mathcal Y}\)</span>.
+<li>An <strong>estimator</strong> (decision rule) has type <span class="math inline">\(\hat T:\Omega\to \hat {\mathcal Y}\)</span>.
 The action space <span class="math inline">\(\hat {\mathcal Y}\)</span> does not have to be
 the estimand space <span class="math inline">\(\mathcal Y\)</span> (e.g. when we’re estimating a confidence interval).
 <ul>
@@ -219,7 +246,225 @@ and estimator <span class="math inline">\(\hat T\)</span> </span>:
   = \int P_\theta(dx) P_{\hat T|X}(\hat t|x) l(T(\theta), \hat t)
 \]</span></li>
 </ul>
+<p>Two comments in order:</p>
+<ul>
+<li>For the minimax risk, it is sometimes necessary to
+randomize. To minimize the average risk over a prior (Bayesian approach),
+though, it suffices to consider deterministic functions.</li>
+<li>The space of randomized estimators (as Markov kernels) is convex.
+This is necessary for minimax theorems.</li>
+<li>For <span class="math inline">\(\hat T\mapsto l(T, \hat T)\)</span> convex, we can derandomize
+it by consider <span class="math inline">\(\mathbb E[\hat T|X]\)</span>, then
+<span class="math display">\[
+      R_\theta(\hat T) = \mathbb E_\theta l(T, \hat T) \geq
+      \mathbb E_\theta l(T, \mathbb E[\hat T|X])
+  \]</span></li>
+</ul>
+<div class="definition">
+<p><span id="def:unlabeled-div-75" class="definition"><strong>Definition 9.1  (Bayes risk) </strong></span>Given a prior <span class="math inline">\(\pi\)</span>, the average risk w.r.t. <span class="math inline">\(\pi\)</span>
+of an estimator is
+<span class="math display">\[
+    R_\pi(\hat \theta)
+    = \mathbb E_{\theta \sim \pi} R_\theta(\hat \theta)
+    = \mathbb E_{\theta \sim \pi, X\sim P_\theta} l(\theta, \hat \theta(X))
+\]</span>
+The <strong>Bayes risk</strong> of a prior is its minimal average risk
+<span class="math inline">\(R_\pi^* = \inf_{\hat \theta} R_\pi(\hat \theta)\)</span>.
+The optimal <span class="math inline">\(\hat \theta\)</span> is the Bayes estimator.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-76" class="definition"><strong>Definition 9.2  (minimax risk) </strong></span>Given a parameter family <span class="math inline">\(P_{\theta\in \Theta}\)</span> and
+loss function <span class="math inline">\(l\)</span>, the minimax risk is<br />
+<span class="math display">\[
+    R^* = \inf_{\hat \theta} \sup_{\theta \in \Theta}
+    R_\theta(\hat \theta)
+    = \inf_{\hat \theta} \sup_{\theta \in \Theta}
+    \mathbb E_{X\sim P_\theta} l(\hat \theta(X), \theta)
+\]</span>
+To prove minimax risk, one needs to establish for arbitrary <span class="math inline">\(\epsilon\)</span></p>
+<ol style="list-style-type: decimal">
+<li>an estimator <span class="math inline">\(\hat \theta^*\)</span> satisfying
+<span class="math inline">\(R_\theta(\hat \theta^*)\leq R^*+\epsilon\)</span>.</li>
+<li>For arbitrary <span class="math inline">\(\hat \theta\)</span>,
+<span class="math inline">\(\sup_{\theta} R_\theta(\hat \theta)\geq R^*-\epsilon\)</span>.</li>
+</ol>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-77" class="theorem"><strong>Theorem 9.1  (duality between minimax and Bayes risk) </strong></span>Let <span class="math inline">\(\mathcal P(\Theta)\)</span> denote the set of probability distributions
+on <span class="math inline">\(\Theta\)</span>, then
+<span class="math display">\[
+    R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta)
+    \geq R^*_{\mathrm{Bayes}}
+    = \sup_{\pi \in \mathcal P(\theta)} \inf_{\hat \theta}
+    R_\pi(\hat \theta)
+\]</span></p>
+</div>
+<p><em>Proof:</em> <span class="math inline">\(R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta) = \inf_{\hat \theta}\sup_{\pi \in \mathcal P(\Theta)} R_\pi(\hat \theta) \geq R^*_{\mathrm{Bayes}}\)</span> by <span class="math inline">\(\inf\sup \geq \sup\inf\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-78" class="example"><strong>Example 9.1  (strict inequality) </strong></span>Let <span class="math inline">\(\theta, \hat \theta \in \{1, 2, \cdots\}\)</span> and
+<span class="math inline">\(l(\theta, \hat \theta) = 1_{\hat \theta &lt; \theta}\)</span>, then
+<span class="math inline">\(R^* = 1\)</span> while <span class="math inline">\(R^*_{\mathrm{Bayes}} = 0\)</span>.</p>
+</div>
+</div>
+<div id="minimaxDual" class="section level2 unnumbered hasAnchor">
+<h2>A duality perspective<a href="statistical-decision-applications.html#minimaxDual" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For simplicity, let <span class="math inline">\(\Theta\)</span> be a finite set and <span class="math inline">\(l\)</span> be convex, then
+<span class="math display">\[
+    R^* = \min_{P_{\hat \theta|X}} \max_{\theta \in \Theta}
+    \mathbb E_\theta \, l(\theta, \hat \theta)
+\]</span>
+This is a convex optimization problem since
+<span class="math inline">\(P_{\hat \theta|X}\mapsto \mathbb E_\theta \, l(\theta, \hat \theta)\)</span>
+is convex and the supremum of affine functions is convex.
+Considering its dual, rewrite
+<span class="math display">\[
+    R^* = \min_{P_{\hat \theta|X}, t} \, t\quad \text{s.t. }
+    \mathbb E_\theta\, l(\theta, \hat \theta) \leq t, \quad \forall \theta \in \Theta
+\]</span>
+Let <span class="math inline">\(\pi_\theta\geq 0\)</span> for each inequality constraint.
+The Lagrangian is
+<span class="math display">\[
+    \mathcal L(P_{\hat \theta|X}, t, \pi)
+    = t + \sum_{\theta \in \Theta} \pi_\theta\cdot \left(
+        \mathbb E_\theta\, l(\theta, \hat \theta) - t
+    \right) = \left(
+        1 - \sum_{\theta \in \Theta} \pi_\theta
+    \right)t + \sum_{\theta \in \Theta} \pi_\theta \mathbb E_\theta\, l(\theta, \hat \theta)
+\]</span>
+The first term implies that <span class="math inline">\(\pi\)</span> must be a probability measure,
+yielding the dual problem
+<span class="math display">\[
+    \max_\pi \min_{P_{\hat \theta|X}}
+    \sum_{\theta \in \Theta} \pi_\theta \mathbb E_\theta\, l(\theta, \hat \theta)
+    = \max_{\pi \in \mathcal P(\Theta)} R_\pi^*
+\]</span></p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-79" class="theorem"><strong>Theorem 9.2  (general minimax equality) </strong></span><span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span> if the following conditions hold:</p>
+<ol style="list-style-type: decimal">
+<li>The experiment is dominated: <span class="math inline">\(P_{\forall \theta} \ll \nu\)</span> for some <span class="math inline">\(\nu\)</span>.</li>
+<li>The action space <span class="math inline">\(\hat \Theta\)</span> (codomain of the estimator)
+is a locally compact topological space with a countable basis.</li>
+<li>The loss function is level compact: for each <span class="math inline">\(\theta\in \Theta, l(\theta, \cdot)\)</span>
+is bounded from below and <span class="math inline">\(\{\hat \theta:l(\theta, \hat \theta)\leq a\}\)</span>
+is compact for each <span class="math inline">\(a\)</span>.</li>
+</ol>
+</div>
+<p>We will prove the following special case for demonstration.</p>
+<div class="proposition">
+<p><span id="prp:minimaxSeparation" class="proposition"><strong>Proposition 9.1  (special minimax equality) </strong></span><span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span> if
+<span class="math inline">\(\Theta\)</span> is finite and <span class="math inline">\(l\)</span> is bounded from below (e.g. quadratic).</p>
+</div>
+<span style="color:green">
+Proof ideas: work in the vector space of risk vectors
+with inner product given by average risk.<br />
+Separate the convex sets of (1) all risk vectors, and (2)
+all vectors component-wise less than <span class="math inline">\(R^*\)</span>.<br />
+</span>
+<details>
+<summary>
+Proof
+</summary>
+<ul>
+<li>First consider the edge case <span class="math inline">\(R^*=\infty \iff R^*_{\mathrm{Bayes}} = \infty\)</span>;
+this is established by considering the uniform prior <span class="math inline">\(\pi\)</span> on <span class="math inline">\(\Theta\)</span>.</li>
+<li>Next consider <span class="math inline">\(R^*&lt;\infty\)</span>. Given an estimator <span class="math inline">\(\hat \theta\)</span>, denote its
+risk vector <span class="math inline">\(R(\hat \theta)_\theta = \mathbb E_{X\sim P_\theta} l(\theta, \hat \theta)\)</span>
+with components in <span class="math inline">\(\theta\)</span>.</li>
+<li>The average risk is given by the inner product <span class="math inline">\(\langle R(\hat \theta), \pi\rangle\)</span>.</li>
+<li>Define the set <span class="math inline">\(S\)</span> of all possible risk vectors for randomized estimators;
+Note that <span class="math inline">\(S\)</span> is convex because linear interpolations of risk vectors
+are given by mixtures of their corresponding random estimators.</li>
+<li>The set <span class="math inline">\(T=\{t\in R^\Theta: t_{\forall \theta} &lt; R^*\}\)</span>
+is convex, and <span class="math inline">\(S\cap T=\emptyset\)</span> since for every valid estimator at
+least one component achieves <span class="math inline">\(R^*\)</span>.</li>
+<li>By the hyperplane separation theorem, there exists <span class="math inline">\(\pi \in R^\Theta\)</span>
+and <span class="math inline">\(c\in \mathbb R\)</span> such that <em>{sS}, sc</em>{tT}, t$.
+Now <span class="math inline">\(\pi\)</span> must be componentwise positive else <span class="math inline">\(\sup_{t\in T}\langle\pi, t\rangle= \infty\)</span>,
+so w.l.o.g. <span class="math inline">\(\pi\)</span> is a probability vector.</li>
+<li>Thus we have established <span class="math inline">\(R^*_{\mathrm{Bayes}} \geq R_\pi^* \geq R^*\)</span>.</li>
+</ul>
+</details>
+</div>
+<div id="sample-complexity-tensor-products" class="section level2 unnumbered hasAnchor">
+<h2>Sample complexity, tensor products<a href="statistical-decision-applications.html#sample-complexity-tensor-products" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Given an experiment <span class="math inline">\(P_{\theta\in \Theta}\)</span>, the <em>independent sampling model</em>
+refers to the experiment
+<span class="math display">\[
+    \mathcal P_n = \{P_{\theta \in \Theta}^{\otimes n}\}, \quad n\geq 1
+\]</span>
+Define <span class="math inline">\(R_n^*(\Theta) = \inf_\hat \theta \sup_{\theta \in \Theta} \mathbb E_\theta\, l(\theta, \hat \theta)\)</span>
+to be the minimax risk when <span class="math inline">\(\hat \theta\)</span> consumes
+<span class="math inline">\(X=(X_1, \cdots, X_n)\)</span> consisting of independent observations. Note that:</p>
+<ul>
+<li><span class="math inline">\(n\mapsto R_n^*(\Theta)\)</span> is non-increasing since we can always discard extra observations.</li>
+<li>We typically expect <span class="math inline">\(R_n^*(\Theta)\to 0\)</span> as <span class="math inline">\(n\to \infty\)</span>.</li>
+</ul>
+<div class="definition">
+<p><span id="def:sampleComplexity" class="definition"><strong>Definition 9.3  (sample complexity) </strong></span>The sample complexity is the minimum sample size required to obtain a prescribed
+error <span class="math inline">\(\epsilon\)</span> in the worst case (of actual parameter):
+<span class="math display">\[
+    n^*(\epsilon) = \min\{n\in \mathbb N: R^*_n(\Theta)\leq \epsilon\}
+\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:tpExperiment" class="definition"><strong>Definition 9.4  (tensor product experiment) </strong></span>Given statistical experiments <span class="math inline">\(\mathcal P_i = \{P_{\theta_i \in \Theta_i}\}\)</span>
+and loss <span class="math inline">\(l_i\)</span> for each <span class="math inline">\(i\in [d]\)</span>, the tensor product experiment
+<span class="math display">\[
+    \mathcal P = \left\{\prod P_{\theta_j}, \quad
+    (\theta_j)\in \Theta = \prod \Theta_j\right\}
+\]</span>
+the loss function is <span class="math inline">\(l(\theta, \hat \theta) = \sum_j l_j(\theta_j, \hat \theta_j)\)</span>.
+In this model, the observation <span class="math inline">\((X_1, \cdots, X_d)\)</span> are independent but not
+necessarily identically distributed.</p>
+</div>
+<div class="theorem">
+<p><span id="thm:tpMinimax" class="theorem"><strong>Theorem 9.3  (minimax risk of tensor product) </strong></span><span class="math display">\[
+    \sum_{j=1}^d R^*_{\mathrm{Bayes}}(\mathcal P_j) \leq R^*(\mathcal P)
+    \leq \sum_{j=1}^d R^*(\mathcal P_j)
+\]</span>
+If the minimax theorem <span class="math inline">\(R^*(\mathcal P_i) = R^*_{\mathrm{Bayes}}(\mathcal P_i)\)</span>,
+then it holds for the product experiment and the minimax risk additively
+decomposes.</p>
+</div>
+<span style="color:green">
+Proof idea: right inequality follows by unrolling definitions.
+For the left inequality, choose <span class="math inline">\(\theta_j\)</span>’s independent from a
+product prior and argue that each component of the estimator only
+obtain information from <span class="math inline">\(X_j\)</span> alone.
+</span>
+<details>
+<summary>
+Proof
+</summary>
+For the right inequality, choose <span class="math inline">\(\hat \theta^* = (\hat \theta_j^*)\)</span>
+to be the component minimax estimators without considering any other observations.
+For the left inequality, consider for each <span class="math inline">\((\pi_j)\)</span> a product prior
+<span class="math inline">\(\pi = \prod \pi_j\)</span>; under this prior, <em>both <span class="math inline">\(\theta_j\)</span>’s and <span class="math inline">\(X_j\)</span>’s are independent.</em>
+For any component <span class="math inline">\(\hat \theta_j = \hat \theta_j(X, U_j)\)</span> of any randomized
+estimator <span class="math inline">\(\hat \theta\)</span>, the non-<span class="math inline">\(X_j\)</span> components <span class="math inline">\((U_j, X_{\bar j})\)</span>
+by independence can be viewed as a randomized estimator based on <span class="math inline">\(X_i\)</span> alone
+(all other <span class="math inline">\(X_{\bar j}\)</span>’s do not yield any information about <span class="math inline">\(\theta_j\)</span> by independence
+of <span class="math inline">\(\theta\)</span>’s). Thus its average risk satisfies
+<span class="math inline">\(R_{\pi_j}(\hat \theta_j) \geq R^*_{\pi_j}\)</span>.
+Take supremum over all <span class="math inline">\(\pi_j\)</span> and sum over <span class="math inline">\(j\)</span> to obtain the left inequality.
+</details>
+<div id="hcr-lower-bound" class="section level3 unnumbered hasAnchor">
+<h3>HCR lower bound<a href="statistical-decision-applications.html#hcr-lower-bound" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-80" class="theorem"><strong>Theorem 9.4  (HCR lower bound) </strong></span>The quadratic loss of any estimator <span class="math inline">\(\hat \theta\)</span> at
+<span class="math inline">\(\theta\in \Theta\subset \mathbb R^d\)</span> satisfies
+<span class="math display">\[
+    R_\theta(\hat \theta) = \mathbb E_{
+        \theta, X\sim P_\theta
+    } [\hat \theta(X) - \theta]^2
+    \geq \var_\theta(\hat \theta) \geq
+    \sup_{\theta&#39;\neq \theta} \dfrac{
+        (\mathbb E_\theta \hat \theta - \mathbb E_{\theta&#39;} \hat \theta)^2
+    }{\chi^2(P_{\theta&#39;} \| P_\theta)}
+\]</span></p>
+</div>
 
+</div>
 </div>
 </div>
             </section>

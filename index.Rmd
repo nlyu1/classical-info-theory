@@ -94,6 +94,8 @@ Nontrivial results in this book include:
 6. <u>Kraft-McMillan</u> (theorem \@ref(thm:kraftMcMillan)): 
     constructive bijection between inequality-satisfying code 
     lengths and prefix-free codes.
+7. <u>Duality between Bayes and minimax risk</u> (proposition \@ref(prp:minimaxSeparation)): 
+    at the heart of every minimax theorem is the hyperplane separation theorem. 
 
 ## Insightful proof techniques {-}
 
