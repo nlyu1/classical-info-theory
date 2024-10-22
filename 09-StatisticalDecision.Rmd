@@ -2,15 +2,23 @@
 
 Key takeaways:
 
-1. $R_\theta(\hat \theta)$ is the expectation of loss over $X\sim P_\theta$. 
-2. There are two ways turn $R_\theta(\hat\theta)$ into a scalar: 
+1. A statistical model is a family $\{P_\theta\}$ of distributions indexed 
+    by parameter values $\theta \in \Theta$. 
+2. $R_\theta(\hat \theta)$ is the expectation of loss over $X\sim P_\theta$. 
+3. There are two ways turn $R_\theta(\hat\theta)$ into a scalar: 
     - Eliminating $\theta$ with $\sup_\theta$, then taking $\inf$ 
     over all estimators leads to the minimax risk $R^*$. 
     - Replacing $\theta$ by averaging over a prior $\pi$, 
     taking $\inf$ over $\hat \theta$, then taking $\sup_\pi$ adversarially 
     over all priors $\pi$ leads to the Bayes risk. 
-3. The minimax and Bayes risks are related by [duality](minimaxDual). 
-4. Under mild assumptions, $R^* = R^*_{\mrm{Bayes}}$. 
+4. The minimax and Bayes risks are related by [duality](minimaxDual). 
+5. Under mild assumptions, $R^* = R^*_{\mrm{Bayes}}$ 
+    (proposition \@ref(prp:minimaxSeparation)). 
+6. Sample complexity \@ref(def:sampleComplexity) is the number of samples 
+    to achieve $R^*_n< \epsilon$. 
+7. Tensor product experiments \@ref(def:tpExperiment) 
+    have independent but not necessarily identically distributed observations; 
+    theoreom \@ref(thm:tpMinimax) yields a bound on its minimax risk. 
     
 
 ## Minimax and Bayes risks {-}
@@ -147,10 +155,114 @@ $R^* = R^*_{\mrm{Bayes}}$ if the following conditions hold:
 
 We will prove the following special case for demonstration. 
 
-:::{.proposition name="special minimax equality"}
+:::{.proposition #minimaxSeparation name="special minimax equality"}
 $R^* = R^*_{\mrm{Bayes}}$ if 
-$\Theta$ is finite and $l$ is bounded from below for all $\theta, \hat \theta$. 
+$\Theta$ is finite and $l$ is bounded from below (e.g. quadratic). 
+:::
+<span style="color:green">
+Proof ideas: work in the vector space of risk vectors 
+with inner product given by average risk.  
+Separate the convex sets of (1) all risk vectors, and (2) 
+all vectors component-wise less than $R^*$.  
+</span>
+<details>
+<summary>Proof</summary>
+- First consider the edge case $R^*=\infty \iff R^*_{\mrm{Bayes}} = \infty$; 
+this is established by considering the uniform prior $\pi$ on $\Theta$. 
+- Next consider $R^*<\infty$. Given an estimator $\hat \theta$, denote its 
+risk vector $R(\hat \theta)_\theta = \Exp_{X\sim P_\theta} l(\theta, \hat \theta)$ 
+with components in $\theta$. 
+- The average risk is given by the inner product $\la R(\hat \theta), \pi\ra$. 
+- Define the set $S$ of all possible risk vectors for randomized estimators; 
+Note that $S$ is convex because linear interpolations of risk vectors 
+are given by mixtures of their corresponding random estimators. 
+- The set $T=\{t\in R^\Theta: t_{\forall \theta} < R^*\}$ 
+is convex, and $S\cap T=\emptyset$ since for every valid estimator at 
+least one component achieves $R^*$. 
+- By the hyperplane separation theorem, there exists $\pi \in R^\Theta$ 
+    and $c\in \R$ such that \inf_{s\in S}\la \pi, s\ra \geq c\geq \sup_{t\in T}\la \pi, t\ra$. 
+    Now $\pi$ must be componentwise positive else $\sup_{t\in T}\la \pi, t\ra = \infty$, 
+    so w.l.o.g. $\pi$ is a probability vector. 
+- Thus we have established $R^*_{\mrm{Bayes}} \geq R_\pi^* \geq R^*$. 
+</details>
+
+## Sample complexity, tensor products {-}
+
+Given an experiment $P_{\theta\in \Theta}$, the _independent sampling model_ 
+refers to the experiment 
+\[ 
+    \mca P_n = \{P_{\theta \in \Theta}^{\otimes n}\}, \quad n\geq 1 
+\] 
+Define $R_n^*(\Theta) = \inf_\hat \theta \sup_{\theta \in \Theta} \Exp_\theta\, l(\theta, \hat \theta)$
+to be the minimax risk when $\hat \theta$ consumes 
+$X=(X_1, \cdots, X_n)$ consisting of independent observations. Note that: 
+
+- $n\mapsto R_n^*(\Theta)$ is non-increasing since we can always discard extra observations. 
+- We typically expect $R_n^*(\Theta)\to 0$ as $n\to \infty$. 
+
+:::{.definition #sampleComplexity name="sample complexity"}
+The sample complexity is the minimum sample size required to obtain a prescribed 
+error $\epsilon$ in the worst case (of actual parameter): 
+\[ 
+    n^*(\epsilon) = \min\{n\in \mbb N: R^*_n(\Theta)\leq \epsilon\} 
+\] 
 :::
 
-First consider the edge case $R^*=\infty \iff R^*_{\mrm{Bayes}} = \infty$; 
-this is established by considering the uniform prior $\pi$ on $\Theta$. 
+:::{.definition #tpExperiment name="tensor product experiment"}
+Given statistical experiments $\mca P_i = \{P_{\theta_i \in \Theta_i}\}$ 
+and loss $l_i$ for each $i\in [d]$, the tensor product experiment 
+\[ 
+    \mca P = \left\{\prod P_{\theta_j}, \quad 
+    (\theta_j)\in \Theta = \prod \Theta_j\right\}
+\] 
+the loss function is $l(\theta, \hat \theta) = \sum_j l_j(\theta_j, \hat \theta_j)$. 
+In this model, the observation $(X_1, \cdots, X_d)$ are independent but not 
+necessarily identically distributed. 
+:::
+
+:::{.theorem #tpMinimax name="minimax risk of tensor product"}
+\[ 
+    \sum_{j=1}^d R^*_{\mrm{Bayes}}(\mca P_j) \leq R^*(\mca P) 
+    \leq \sum_{j=1}^d R^*(\mca P_j)
+\] 
+If the minimax theorem $R^*(\mca P_i) = R^*_{\mrm{Bayes}}(\mca P_i)$, 
+then it holds for the product experiment and the minimax risk additively 
+decomposes. 
+:::
+<span style="color:green">
+Proof idea: right inequality follows by unrolling definitions. 
+For the left inequality, choose $\theta_j$'s independent from a 
+product prior and argue that each component of the estimator only 
+obtain information from $X_j$ alone. 
+</span>
+<details>
+<summary>Proof</summary>
+For the right inequality, choose $\hat \theta^* = (\hat \theta_j^*)$ 
+to be the component minimax estimators without considering any other observations. 
+For the left inequality, consider for each $(\pi_j)$ a product prior 
+$\pi = \prod \pi_j$; under this prior, _both $\theta_j$'s and $X_j$'s are independent._
+For any component $\hat \theta_j = \hat \theta_j(X, U_j)$ of any randomized 
+estimator $\hat \theta$, the non-$X_j$ components $(U_j, X_{\bar j})$ 
+by independence can be viewed as a randomized estimator based on $X_i$ alone 
+(all other $X_{\bar j}$'s do not yield any information about $\theta_j$ by independence 
+of $\theta$'s). Thus its average risk satisfies 
+$R_{\pi_j}(\hat \theta_j) \geq R^*_{\pi_j}$. 
+Take supremum over all $\pi_j$ and sum over $j$ to obtain the left inequality. 
+</details>
+
+
+### HCR lower bound {-}
+
+:::{.theorem #hcrBound name="HCR lower bound"}
+The quadratic loss of any estimator $\hat \theta$ at 
+$\theta\in \Theta\subset \R^d$ satisfies 
+\[ 
+    R_\theta(\hat \theta) = \Exp_{
+        \theta, X\sim P_\theta 
+    } [\hat \theta(X) - \theta]^2 
+    \geq \var_\theta(\hat \theta) \geq 
+    \sup_{\theta'\neq \theta} \df{
+        (\Exp_\theta \hat \theta - \Exp_{\theta'} \hat \theta)^2
+    }{\chi^2(P_{\theta'} \| P_\theta)}
+\] 
+:::

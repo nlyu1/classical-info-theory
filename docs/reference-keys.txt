@@ -131,7 +131,11 @@ def:unlabeled-div-76
 thm:unlabeled-div-77
 exm:unlabeled-div-78
 thm:unlabeled-div-79
-prp:unlabeled-div-80
+prp:minimaxSeparation
+def:sampleComplexity
+def:tpExperiment
+thm:tpMinimax
+thm:unlabeled-div-80
 def:unlabeled-div-81
 def:unlabeled-div-82
 def:unlabeled-div-83
