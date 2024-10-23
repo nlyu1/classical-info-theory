@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-22" />
+<meta name="date" content="2024-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -142,12 +142,13 @@
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
-<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#variable-length-source-coding"><i class="fa fa-check"></i>Variable-length source coding</a></li>
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
+<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#fixed-length-source-coding"><i class="fa fa-check"></i>Fixed-length source coding</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="fixed-length-compression.html"><a href="fixed-length-compression.html"><i class="fa fa-check"></i><b>11</b> Fixed-length compression</a>
 <ul>
-<li class="chapter" data-level="" data-path="fixed-length-compression.html"><a href="fixed-length-compression.html#source-coding-theorems-1"><i class="fa fa-check"></i>Source coding theorems</a></li>
+<li class="chapter" data-level="" data-path="fixed-length-compression.html"><a href="fixed-length-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>12</b> Entropy of Ergodic Processes</a>
 <ul>
@@ -195,16 +196,16 @@
 <h1><span class="header-section-number">11</span> Fixed-length compression<a href="fixed-length-compression.html#fixed-length-compression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>To be precise, we consider
 <strong>fixed-length almost-lossless</strong> compression
-(definition <a href="fixed-length-compression.html#def:flal">11.1</a>).</p>
+(definition <a href="lossless-compression.html#def:flal">10.7</a>).</p>
 <p>Key takeaways:</p>
 <ol style="list-style-type: decimal">
 <li>By fixed-length, we mean that the source is compressed to
 <span class="math inline">\(\{0, 1\}^k\)</span> instead of <span class="math inline">\(\{0, 1\}^*\)</span>.</li>
 </ol>
-<div id="source-coding-theorems-1" class="section level2 unnumbered hasAnchor">
-<h2>Source coding theorems<a href="fixed-length-compression.html#source-coding-theorems-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="source-coding-theorems" class="section level2 unnumbered hasAnchor">
+<h2>Source coding theorems<a href="fixed-length-compression.html#source-coding-theorems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:flal" class="definition"><strong>Definition 11.1  (fixed-length almost-lossless compression) </strong></span>A compressor-decompressor pair
+<p><span id="def:flal" class="definition"><strong>Definition 10.7  (fixed-length almost-lossless compression) </strong></span>A compressor-decompressor pair
 <span class="math inline">\(f:\mathcal X\to \{0, 1\}^k, g:\{0, 1\}^k\to\mathcal X\cup \{e\}\)</span>
 is a fixed-length almost-lossless
 <span class="math inline">\((k, \epsilon)\)</span> source-code for <span class="math inline">\(X\)</span> if
@@ -221,7 +222,7 @@ Fixing <span class="math inline">\(X, k\)</span>, the fundamental limit of fixed
 <p>Recall the optimal single-shot (variable-length) lossless
 compressor length <span class="math inline">\(L\)</span> in definition <a href="lossless-compression.html#def:singleShotOpt">10.5</a>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-84" class="theorem"><strong>Theorem 11.1  (fundamental limit of fixed-length compression) </strong></span>Assuming sorted alphabet on <span class="math inline">\(\mathbb N\)</span>, then
+<p><span id="thm:unlabeled-div-85" class="theorem"><strong>Theorem 11.1  (fundamental limit of fixed-length compression) </strong></span>Assuming sorted alphabet on <span class="math inline">\(\mathbb N\)</span>, then
 <span class="math display">\[
     \epsilon^*(X, k) = \mathrm{Pr}[L(X) \geq k] = \sum_{x\geq 2^k} P_X(x)
 \]</span></p>

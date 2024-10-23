@@ -161,6 +161,9 @@ eq:optimalPrefix
 thm:optimalPrefixLength
 def:flal
 thm:unlabeled-div-84
+cor:shannonNoiselessCoding
+thm:finiteLengthBounds
+prp:aep
 def:unlabeled-div-85
 def:stationarity
 def:unlabeled-div-86
@@ -186,7 +189,7 @@ tensorization
 f-divergence
 statistical-decision-applications
 lossless-compression
-fixed-length-compression
+placeholder
 entropy-of-ergodic-processes
 universal-compression
 lecture-notes

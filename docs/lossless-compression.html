@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-22" />
+<meta name="date" content="2024-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="statistical-decision-applications.html"/>
-<link rel="next" href="fixed-length-compression.html"/>
+<link rel="next" href="placeholder.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -142,13 +142,11 @@
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
-<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#source-coding-theorems"><i class="fa fa-check"></i>Source coding theorems</a></li>
+<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#variable-length-source-coding"><i class="fa fa-check"></i>Variable-length source coding</a></li>
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
+<li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#fixed-length-source-coding"><i class="fa fa-check"></i>Fixed-length source coding</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="fixed-length-compression.html"><a href="fixed-length-compression.html"><i class="fa fa-check"></i><b>11</b> Fixed-length compression</a>
-<ul>
-<li class="chapter" data-level="" data-path="fixed-length-compression.html"><a href="fixed-length-compression.html#source-coding-theorems-1"><i class="fa fa-check"></i>Source coding theorems</a></li>
-</ul></li>
+<li class="chapter" data-level="11" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>11</b> Placeholder</a></li>
 <li class="chapter" data-level="12" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>12</b> Entropy of Ergodic Processes</a>
 <ul>
 <li class="chapter" data-level="" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html#stochasticProcessPrelim"><i class="fa fa-check"></i>Preliminaries</a></li>
@@ -231,9 +229,21 @@ bound on optimal prefix code.</li>
 <span class="math display">\[
 H(X) - \log_2[e(H(X)+1)] \leq \mathbb E[L_{\mathrm{single-shot}}^*(X)]
 \leq H(X) \leq \mathbb E[L_{\mathrm{prefix}}^*(X)] \leq H(X)+1
-\]</span></li>
+\]</span><br />
+</li>
+<li>In fixed-length almost-lossless compression (definition <a href="lossless-compression.html#def:flal">10.7</a>),
+a single emission of the source is compressed
+to <span class="math inline">\(\{0, 1\}^k\)</span> instead of <span class="math inline">\(\{0, 1\}^*\)</span>.</li>
+<li>Shannon’s noiseless coding theorem (corollary <a href="lossless-compression.html#cor:shannonNoiselessCoding">10.3</a>):
+holds in the limit of asymptotically large copies of
+the i.i.d. source <span class="math inline">\(R^n\)</span> v.s. the compression length <span class="math inline">\(nR\)</span>.</li>
+<li>Asymptotic equipartition property (proposition <a href="lossless-compression.html#prp:aep">10.3</a>):
+for asymptotically large copies of i.i.d. source, the dominant
+occurences have equiprobability.</li>
 </ol>
-<p>To motivate later studies, we note two limitations of Huffmann codes:</p>
+<p>:::{.definition #flal name=“fixed-length almost-lossless compression”}</p>
+<p>To motivate later studies, we note two limitations of Huffmann codes
+(optimal prefix-free variable-length code):</p>
 <ol style="list-style-type: decimal">
 <li>It requires knowing the source distribution. This is
 addressed by the study of universal compression.
@@ -251,8 +261,8 @@ in <span class="math inline">\(n\)</span>.
 while attaining <span class="math inline">\(H(S_1^n)\)</span> length.</li>
 </ul></li>
 </ol>
-<div id="source-coding-theorems" class="section level2 unnumbered hasAnchor">
-<h2>Source coding theorems<a href="lossless-compression.html#source-coding-theorems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="variable-length-source-coding" class="section level2 unnumbered hasAnchor">
+<h2>Variable-length source coding<a href="lossless-compression.html#variable-length-source-coding" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Fixing a source domain <span class="math inline">\(\mathcal X\)</span>, we can define:</p>
 <ul>
 <li>A <strong>compressor</strong> <span class="math inline">\(f:\mathcal X\to \{0, 1\}^*\)</span>.</li>
@@ -597,6 +607,82 @@ For each step, choose the two least probable symbols in the alphabet,
 merge into a super-symbol with combined probability, then
 update the tree representation with super-symbol at the node
 and merged symbols as leaves. Repeat for <span class="math inline">\(|\mathcal A| - 1\)</span> steps.</p>
+</div>
+<div id="fixed-length-source-coding" class="section level2 unnumbered hasAnchor">
+<h2>Fixed-length source coding<a href="lossless-compression.html#fixed-length-source-coding" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To be precise, we consider
+<strong>fixed-length almost-lossless</strong> compression.
+A single emission
+of the source is compressed to
+<span class="math inline">\(\{0, 1\}^k\)</span> instead of <span class="math inline">\(\{0, 1\}^*\)</span>.</p>
+<div class="definition">
+<p><span id="def:flal" class="definition"><strong>Definition 10.7  (fixed-length almost-lossless compression) </strong></span>A compressor-decompressor pair
+<span class="math inline">\(f:\mathcal X\to \{0, 1\}^k, g:\{0, 1\}^k\to\mathcal X\cup \{e\}\)</span>
+is a fixed-length almost-lossless
+<span class="math inline">\((k, \epsilon)\)</span> source-code for <span class="math inline">\(X\)</span> if
+<span class="math display">\[
+    (g\circ f)(\forall x) \in \{x, e\}
+    \text{ and } \mathrm{Pr}[g\circ f = e] \leq \epsilon
+\]</span>
+Fixing <span class="math inline">\(X, k\)</span>, the fundamental limit of fixed-length compression is
+<span class="math display">\[
+    \epsilon^*(X, k) = \inf\{\epsilon:
+    \exists (k, \epsilon)\text{-code for } X\}
+\]</span></p>
+</div>
+<p>Recall the optimal single-shot (variable-length) lossless
+compressor length <span class="math inline">\(L\)</span> in definition <a href="lossless-compression.html#def:singleShotOpt">10.5</a>.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-84" class="theorem"><strong>Theorem 10.5  (fundamental limit of fixed-length compression) </strong></span>Assuming pmf-sorted alphabet on <span class="math inline">\(\mathbb N\)</span>, then
+<span class="math display">\[
+    \epsilon^*(X, k) = \mathrm{Pr}[L(X) \geq k] = \sum_{x\geq 2^k} P_X(x)
+\]</span></p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+The compressor reserves <span class="math inline">\(1^k\)</span> for the error message.
+To suppress the error rate, we choose to encode the top <span class="math inline">\(2^k-1\)</span>
+symbols with the highest probabilities.
+</details>
+<div class="corollary">
+<p><span id="cor:shannonNoiselessCoding" class="corollary"><strong>Corollary 10.3  (Shannon's noiseless source coding theorem) </strong></span>Given i.i.d. discrete source <span class="math inline">\(S^n\)</span>, for any rate <span class="math inline">\(R&gt;0\)</span>
+and <span class="math inline">\(\gamma\in \mathbb R\)</span> we have
+<span class="math display">\[
+    \lim_{n\to \infty} \epsilon^*(S^n, nR) = \begin{cases}
+        0 &amp; R &gt; H(S) \\
+        1 &amp; R &lt; H(S)
+    \end{cases}
+\]</span>
+If varentropy <span class="math inline">\(V(S) &lt; \infty\)</span> then for <span class="math inline">\(Q\)</span> being one minus
+the CDF of <span class="math inline">\(\mathcal N(0, 1)\)</span>:
+<span class="math display">\[
+    \lim_{n\to \infty} \epsilon^*(S^n, nH(S)+ \sqrt{nV(S)}\gamma) = Q(\gamma)
+\]</span></p>
+</div>
+<p>The second distribution claim follows from the asymptotic
+normality of the optimal encoding length (corollary <a href="lossless-compression.html#cor:iidAsymp">10.2</a>).
+This implies that if we allow a non-vanishing error <span class="math inline">\(\epsilon\)</span>, then
+compression is possible down to
+<span class="math display">\[
+    k = nH(S) + \sqrt{nV(S)} Q^{-1}\epsilon
+\]</span></p>
+<div class="theorem">
+<p><span id="thm:finiteLengthBounds" class="theorem"><strong>Theorem 10.6  (finite block-length bounds) </strong></span>Placeholder.</p>
+</div>
+<div class="proposition">
+<p><span id="prp:aep" class="proposition"><strong>Proposition 10.3  (asymptotic equipartition (AEP)) </strong></span>Given i.i.d. <span class="math inline">\(S^n\)</span> and <span class="math inline">\(\delta&gt;0\)</span>, define
+the entropy <span class="math inline">\(\delta\)</span>-typical set
+<span class="math display">\[
+    T_n^\delta = \left\{
+        s^n : \left| \dfrac 1 n \log \dfrac 1 {P_{S^n}(s^n)}
+        - H(S) \right| \leq \delta  
+    \right\}
+\]</span>
+Then <span class="math inline">\(\lim_{n\to \infty} \mathrm{Pr}[S^n\in T_n^\delta]\to 1\)</span>
+and <span class="math inline">\(|T_n^\delta| \leq \exp[n(H(S)+\delta)]\)</span>.</p>
+</div>
 
 </div>
 </div>
@@ -606,7 +692,7 @@ and merged symbols as leaves. Repeat for <span class="math inline">\(|\mathcal A
         </div>
       </div>
 <a href="statistical-decision-applications.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fixed-length-compression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="placeholder.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
