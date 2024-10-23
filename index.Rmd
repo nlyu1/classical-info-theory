@@ -36,6 +36,7 @@ link-citations: true
 \newcommand{\poly}{\mrm{poly}}
 \newcommand{\Exp}{\mbb E}
 \newcommand{\Var}{\mrm{Var}}
+\newcommand{\Cov}{\mrm{Cov}}
 \newcommand{\indep}{\perp\!\!\!\perp}
 \newcommand{\Pr}{\mrm{Pr}}
 \newcommand{\TV}{\mrm{TV}}
@@ -96,6 +97,9 @@ Nontrivial results in this book include:
     lengths and prefix-free codes.
 7. <u>Duality between Bayes and minimax risk</u> (proposition \@ref(prp:minimaxSeparation)): 
     at the heart of every minimax theorem is the hyperplane separation theorem. 
+8. <u>van-Trees inequality</u> (theorem \@ref(thm:vanTrees)): 
+    using the variational $\chi^2$ formula, obtain information bound 
+    for general (not just unbiased) estimators. 
 
 ## Insightful proof techniques {-}
 
@@ -164,14 +168,3 @@ with fidelity $\epsilon$.
 
 Key concepts: entropy, KL-divergence, mutual information, 
 fisher information, mutual information. 
-
-### Todo list {-}
-
-Mandatory:
-
-1. Gaussian saddle-point. 
-
-Optional: 
-
-1. Entropy-power inequality
-2. Sufficient statistic. 

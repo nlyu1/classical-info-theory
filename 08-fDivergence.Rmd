@@ -10,6 +10,8 @@ Key takeaways:
 3. There is no chain rule for $f$-divergences other than 
     KL-divergence. Rényi divergence enjoys tensorization and chain rule (up to tilting); 
     it includes KL, $\chi^2$ and Hellinger as special cases. 
+    The Renyi chain rule does not imply the divergence chain rule, 
+    but $\chi^2$ has a special chain rule (proposition \@ref(prp:chiSqChain)). 
 4. TV as binary hypothesis testing: to reason about TV, break spaces 
     into $dP>dQ$ and $dP<dQ$. 
 5. Several divergences are metrics (JS, $H^2$); one fast way to 
@@ -81,6 +83,7 @@ so $\int d(P\wedge Q)$ is the overlap measure.
     \chi^2(P\|Q) = \Exp_Q \left(\df{dP}{dQ} - 1\right)^2 
     = \int \df{(dP - dQ)^2}{dQ} 
     = \int \df{dP^2}{dQ} + dQ - 2dP = \int \df{dP^2}{dQ} - 1
+    (\#eq:chiSq)
 \] 
 4. **Squared Hellinger distance**: $f(x) = \left(1 - \sqrt x\right)^2$. 
 \[ 
@@ -110,7 +113,7 @@ $\TV(P, Q) = \df 1 2 \int |dP - dQ| = 1 - \int d(P\wedge Q)$.
 :::
 <details>
 <summary>Proof</summary>
-_Proof:_ Let $E = \{x:dP > dQ\}$, then 
+Let $E = \{x:dP > dQ\}$, then 
 \begin{align}
     \int |dP - dQ| 
     &= \int_E dP - d(P\wedge Q) + \int_{E^c} dQ - d(P\wedge Q)
@@ -345,6 +348,27 @@ For $U\to X\to Y$, we have $I_f(U; Y) \leq I_f(U; X)$.
 Proof: $I_f(U; X) = D_f(P_{UX} \|P_UP_X) \geq 
 D_f(P_{UY} \| P_UP_Y) = I_f(U; Y)$. 
 
+:::{.proposition #chiSqChain name="χ² chain rule"}
+$\chi^2(P_{AB} \| Q_{AB}) = \chi^2(P_B \| Q_B) + \Exp_{Q_B} \left[
+    \chi^2(P_{A|b} \| Q_{A|b}) \df{P_B^2}{Q_B^2}
+\right]$
+:::
+<details>
+<summary>Proof</summary>
+Invoke equation \@ref(eq:chiSq): 
+\begin{align}
+    \chi^2 (P_{AB} \| Q_{AB}) 
+    &= \Exp_P \left[ \df{P_{AB}^2}{Q_{AB}^2} 
+    \right] - 1
+    = \Exp \df{P_B^2}{Q_B^2} - 1 + \Exp \left[
+        \df{P_B^2}{Q_B^2} \left(
+            \df{P_{A|B}^2}{Q_{A|B}^2} - 1 
+        \right)
+    \right] \\ 
+    &= \chi^2(P_B \| Q_B) + \Exp_{P_B} \left[\chi^2(P_{A|B} \| Q_{A|B}) 
+    \left(\df{P_B^2}{Q_B^2}\right)^2\right]
+\end{align}
+</details>
 
 ## TV and Hellinger, hypothesis testing {-}
 
@@ -907,7 +931,7 @@ Note that for this inequality we don't need $h$ to saturate the
 $\inf h>0$ condition: only a subset suffices. 
 :::
 
-:::{.example #chiVariation name="χ²-divergence"}
+:::{.proposition #chiVariation name="χ²-divergence"}
 Given $\chi^2$ and $f(x)=(x-1)^2$, the conjugate is 
 $f^*(y) = y + \frac{y^2}{4}$ and 
 \begin{align}
@@ -1232,12 +1256,11 @@ d. Condition (b) holds for $h_t(x) = \sqrt{p_t(x)}$, and $\{\dot h_t\}_{t\in [0,
 In particular, conditions (b, c) implies that $P_t\ll P_0$. 
 
 
-
 :::{.theorem #localFisherDiv name="local Fisher behavior of divergence"}
 Given a family $P_{t\in [0, \tau)}$ in definition \@ref(def:fisherRegularity), we have 
 \begin{align}
     \chi^2(P_t\|P_0) = J_F(0)t^2 + o(t^2), \quad 
-    D(P_t\|P_0) = \df{\log e}{2}J_F(0)t^2 + o(t^2)
+    D(P_t\|P_0) = \df{\log e}{2}\mca J_F(0)t^2 + o(t^2)
 \end{align}
 :::
 <details>
@@ -1262,7 +1285,7 @@ apply the monotone convergence theorem to yield
     \df 1 {t^2}\chi^2(P_t\|P_0)
     &= \int d\mu \int_0^1 du_1 \int_0^1 du_2 
     \lim_{t\to 0} \df{\dot p_{tu_1}(x) \dot p_{tu_2}(x)}{p_0(x)} \\ 
-    &= \int d\mu \df{\dot p_0(x)^2}{p_0(x)} = J_F(0)
+    &= \int d\mu \df{\dot p_0(x)^2}{p_0(x)} = \mca J_F(0)
 \end{align}
 </details>
 

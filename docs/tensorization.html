@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Tensorization | 6.7480 Notes</title>
   <meta name="description" content="7 Tensorization | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Tensorization | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -77,10 +77,7 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#recurring-themes"><i class="fa fa-check"></i>Recurring themes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#insightful-proof-techniques"><i class="fa fa-check"></i>Insightful proof techniques</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo-list"><i class="fa fa-check"></i>Todo list</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
 <ul>
@@ -102,10 +99,8 @@
 <li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
 <ul>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mi"><i class="fa fa-check"></i>Conditional MI</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="variational-characterizations.html"><a href="variational-characterizations.html"><i class="fa fa-check"></i><b>5</b> Variational Characterizations</a>
 <ul>
@@ -140,11 +135,10 @@
 <ul>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimax-and-bayes-risks"><i class="fa fa-check"></i>Minimax and Bayes risks</a></li>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimaxDual"><i class="fa fa-check"></i>A duality perspective</a></li>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#sample-complexity-tensor-products"><i class="fa fa-check"></i>Sample complexity, tensor products</a>
-<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#sample-complexity-tensor-products"><i class="fa fa-check"></i>Sample complexity, tensor products</a></li>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#hcr-lower-bound"><i class="fa fa-check"></i>HCR lower bound</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#example-bernoulli-estimation"><i class="fa fa-check"></i>Example: Bernoulli estimation</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#bayesian-perspective"><i class="fa fa-check"></i>Bayesian perspective</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#miscellany-mle"><i class="fa fa-check"></i>Miscellany: MLE</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
@@ -207,11 +201,10 @@ for product input is the product channel.</li>
 <li>Gaussian saddle point problem: solve a <span class="math inline">\(n=1\)</span> problem by going to
 <span class="math inline">\(n&gt;1\)</span> problem and use convexity / concavity of information measures
 and symmetry to obtain the optimal solution.</li>
+<li>Stationary processes have an uppder limit on entropy rate
+(theorem <a href="tensorization.html#thm:stationaryProperties">7.3</a>).</li>
+<li>Entropy rate of HMM has a sandwich limit (proposition <a href="tensorization.html#prp:hmmEntropyRate">7.1</a>).</li>
 </ol>
-<p><span style="color:red">
-5.25 and 5.26 in the textbook;
-MI tensorization properties.
-</span></p>
 <div id="mi-gaussian-saddle-point" class="section level2 unnumbered hasAnchor">
 <h2>MI, Gaussian saddle point<a href="tensorization.html#mi-gaussian-saddle-point" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
@@ -234,34 +227,38 @@ I(X^n; Y) \geq \sum_{j=1}^n I(X_j; Y)
 \]</span>
 with equality iff <span class="math inline">\(P_{X^n|Y} = \prod P_{X_j|Y}\)</span> almost-surely
 under <span class="math inline">\(P_Y\)</span>.</li>
-<li><span class="math inline">\(\min_{P_{Y^n|X^n}} I(X^n; Y^n) = \sum_j
-\min_{P_{Y_j|X_j}} I(X_j; Y_j)\)</span>.</li>
+<li><span class="math inline">\(\min_{P_{Y^n|X^n}} I(X^n; Y^n) = \sum_j  \min_{P_{Y_j|X_j}} I(X_j; Y_j)\)</span>.</li>
 </ol>
 </div>
 <details>
 <summary>
 Proof
 </summary>
-For (1), recall definition <a href="mutual-information.html#def:mutInfDef">4.1</a> for MI:
+For (1), recall definition <a href="mutual-information.html#def:mutInfDef">4.1</a> for MI,
+introduce an additional product and cross-identify the terms
 <span class="math display">\[\begin{align}
     I(X^n; Y^n)
     &amp;= D(P_{X^nY^n} \| P_{X^n} P_{Y^n})
     = D\left(\prod P_{Y_j|X_j}\| P_{Y^n} | P_{X^n}\right) \\
-    \sum_j I(X_j; Y_j)
-    &amp;= \sum_j D(P_{Y_j|X_j} \| P_{Y_j} | P_{X_j})
-    = D\left(\prod P_{Y_j|X_j} \| \prod P_{Y_j}
-    | \prod P_{X_j}\right)
+   &amp;= \mathbb E_{X^n} \left[
+        \log \dfrac{P_{Y^n|X^n}}{P_{Y^n}} \cdot \dfrac{\prod P_{Y_j}}{\prod P_{Y_j}}
+   \right] = \mathbb E
+    \log \prod \dfrac{P_{Y^j|X^j}}{P_{Y_j}}
+    - \mathbb E\log \dfrac{P_{Y^n}}{P_{Y_j}} \\
+    &amp;= \sum_{j=1}^n I(X_j; Y_j) - D\left(P_{Y^n} \| \prod P_{Y_j}\right)
 \end{align}\]</span>
-It remains to show that the following difference is positive
-<span class="math display">\[\begin{align}
-    D(P_{Y^n|X^n} \| P_{Y^n} | P_{X^n})
-    - D(P_{Y^n | X^n} \| \prod P_{Y_j} | \prod P_{X_j})
-\end{align}\]</span>
-(1) naturally implies (2). To show (3),
+(1) naturally implies (2). To show (3), again use the
+product condition and cross-identify terms
 <span class="math display">\[\begin{align}
     I(X^n; Y)
-    &amp;= D(P_{X^n|Y} \| P_{X^n} | P_Y)
+    &amp;= \mathbb E_{X^n, Y} \log \dfrac{P_{X^n|Y}}{P_{X^n}}
+    \cdot \prod \dfrac{P_{X_j|Y}}{P_{X_j|Y}} \\
+    &amp;= \mathbb E\log \prod \dfrac{P_{X_j|Y}}{P_{X_j}}
+    + \mathbb E\log \dfrac{P_{X^n|Y}}{\prod P_{X_j|Y}} \\
+    &amp;= \sum_{j=1}^n I(X_j; Y) + D\left(X^n \| \prod P_{X_j} | Y\right)
 \end{align}\]</span>
+Now (3) implies (4), since the saturation condition and
+memoryless source implies that the channel is memoryless.
 </details>
 <p>Several examples to the theorem above:</p>
 <ol style="list-style-type: decimal">
@@ -275,8 +272,7 @@ we have <span class="math inline">\(I(X_k; Y_k)=I(X^n; Y^n)=1\leq n\)</span>.</l
 Let <span class="math inline">\(X_1 \perp\!\!\!\perp X_2\sim \mathrm{Ber}(1/2)\)</span> and <span class="math inline">\(Y=X_1\oplus X_2\)</span>.</li>
 </ol>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-45" class="theorem"><strong>Theorem 7.2  (extremality of Gaussian channels) </strong></span>Let <span class="math inline">\(X_g\sim \mathcal N(0, \sigma_X^2),
-N_g\sim \mathcal N(0, \sigma_N^2)\perp\!\!\!\perp X_g\)</span>, then</p>
+<p><span id="thm:unlabeled-div-45" class="theorem"><strong>Theorem 7.2  (extremality of Gaussian channels) </strong></span>Let <span class="math inline">\(X_g\sim \mathcal N(0, \sigma_X^2), N_g\sim \mathcal N(0, \sigma_N^2)\perp\!\!\!\perp X_g\)</span>, then</p>
 <ol style="list-style-type: decimal">
 <li><em>Gaussian capacity:</em>
 <span class="math display">\[
@@ -385,13 +381,12 @@ random process <span class="math inline">\(\mathbb X=(X_1, X_2, \cdots)\)</span>
 \]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-46" class="theorem"><strong>Theorem 7.3  (properties of stationary processes) </strong></span>Given <span class="math inline">\(\mathbb X\)</span> stationary,</p>
+<p><span id="thm:stationaryProperties" class="theorem"><strong>Theorem 7.3  (properties of stationary processes) </strong></span>Given <span class="math inline">\(\mathbb X\)</span> stationary,</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(H(X_n|X^{n-1}) \leq H(X_{n-1}|X^{n-2})\)</span>.</li>
 <li><span class="math inline">\(H(X_n|X^{n-1}) \leq H(X^n)/n \leq H(X^{n-1})/(n-1)\)</span>.</li>
 <li>The entropy rate exists
-<span class="math inline">\(H(\mathbb X) = \lim_{n\to \infty} H(X^n)/n
-= \lim_{n\to \infty} H(X_n|X^{n-1})\)</span>
+<span class="math inline">\(H(\mathbb X) = \lim_{n\to \infty} H(X^n)/n  = \lim_{n\to \infty} H(X_n|X^{n-1})\)</span>
 by approximation from above.</li>
 <li>If <span class="math inline">\(\mathbb X\)</span> can be extended to a <span class="math inline">\(\mathbb Z\)</span>-indexed stationary process, then
 <span class="math inline">\(H(\mathbb X) = H(X_1|X^0_{-\infty})\)</span> provided <span class="math inline">\(H(X_1)&lt;\infty\)</span>.</li>
@@ -442,20 +437,50 @@ Then <span class="math inline">\(H(X_n|X^{n-1}) = H(X_n|X_{n-1}\)</span> and
 \]</span></li>
 </ol>
 <div class="definition">
-<p><span id="def:unlabeled-div-47" class="definition"><strong>Definition 7.2  (Hidden Markov Model (HMM)) </strong></span>Given a stationary Markov chain <span class="math inline">\(\cdots, S_{-1}, S_0, S_1, \cdots\)</span>
+<p><span id="def:unlabeled-div-46" class="definition"><strong>Definition 7.2  (Hidden Markov Model (HMM)) </strong></span>Given a stationary Markov chain <span class="math inline">\(\cdots, S_{-1}, S_0, S_1, \cdots\)</span>
 on state space <span class="math inline">\(\mathcal S\)</span> and a Markov kernel <span class="math inline">\(P_{X|S}:\mathcal S\to \mathcal X\)</span>,
 a HMM is a stationary process <span class="math inline">\(\cdots, X_{-1}, X_0, X_1, \cdots\)</span>
 which is an observation of <span class="math inline">\(\mathbb S\)</span> with a stationary
 memoryless channel (emission channel) <span class="math inline">\(P_{X_1|S_1}\)</span>.</p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-48" class="proposition"><strong>Proposition 7.1  (entropy rate of HMM) </strong></span>Given a HMM process <span class="math inline">\(\mathbb X\)</span> with state process <span class="math inline">\(\mathbb S\)</span>, we have
+<p><span id="prp:hmmEntropyRate" class="proposition"><strong>Proposition 7.1  (entropy rate of HMM) </strong></span>Given a HMM process <span class="math inline">\(\mathbb X\)</span> with state process <span class="math inline">\(\mathbb S\)</span>, we have
 <span class="math display">\[
     H(X_n|X_1^{n-1}, S_0) \leq H(\mathbb X)\leq H(X_n|X_1^{n-1})
 \]</span>
 Both sides converge monotonically as <span class="math inline">\(n\to \infty\)</span>.</p>
 </div>
-<p>The upper bound is already established.</p>
+<details>
+<summary>
+Proof
+</summary>
+The upper bound is established by theorem <a href="tensorization.html#thm:stationaryProperties">7.3</a>.
+To establish the lower bound, consider
+<span class="math display">\[\begin{align}
+    H(\mathbb X)
+    &amp;= H(X_n | X_{-\infty}^{n-1})
+    \geq H(X_n | X_{-\infty}^{n-1}, S_0)
+    = H(X_n|X_1^{n-1}, S_n)
+\end{align}\]</span>
+the last equality follows by the HMM assumption. To show that the sequence
+is increasing,
+<span class="math display">\[\begin{align}
+    H(X_{n+1} | X_1^n, S_0)
+    &amp;= H(X_n | X_0^{n-1}, S_{-1})
+    \geq H(X_n | X_0^{n-1}, S_{-1}, S_0) \\
+    &amp;= H(X^n | X_1^{n-1}, S_0)
+\end{align}\]</span>
+Finally, to show that this converges to the correct limit,
+use the mutual information chain rule
+(theorem <a href="mutual-information.html#thm:mutInfoMoreProperties">4.2</a>)
+to identify the two limits. The equation goes to zero by
+<span class="math inline">\(I(S_0; X_1^\infty) = I(S_0; X_1^{n\to \infty}) \leq H(S_0) = \infty\)</span>.
+<span class="math display">\[\begin{align}
+    I(S_0; X_1^n) - I(S_0; X_1^{n-1})
+    &amp;= I(X_n; S_0 | X_1^{n-1}) \\
+    &amp;= H(X_n|X_1^{n-1}) - H(X_n | X_1^{n-1}, S_0)\to 0
+\end{align}\]</span>
+</details>
 <div class="definition">
 <p><span id="def:miRate" class="definition"><strong>Definition 7.3  (mutual information rate) </strong></span>The mutual information rate between two processes
 <span class="math inline">\((\mathbb X, \mathbb Y)\)</span> is

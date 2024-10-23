@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Mutual Information | 6.7480 Notes</title>
   <meta name="description" content="4 Mutual Information | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Mutual Information | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -77,10 +77,7 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#recurring-themes"><i class="fa fa-check"></i>Recurring themes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#insightful-proof-techniques"><i class="fa fa-check"></i>Insightful proof techniques</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo-list"><i class="fa fa-check"></i>Todo list</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
 <ul>
@@ -102,10 +99,8 @@
 <li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
 <ul>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mi"><i class="fa fa-check"></i>Conditional MI</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="variational-characterizations.html"><a href="variational-characterizations.html"><i class="fa fa-check"></i><b>5</b> Variational Characterizations</a>
 <ul>
@@ -140,11 +135,10 @@
 <ul>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimax-and-bayes-risks"><i class="fa fa-check"></i>Minimax and Bayes risks</a></li>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimaxDual"><i class="fa fa-check"></i>A duality perspective</a></li>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#sample-complexity-tensor-products"><i class="fa fa-check"></i>Sample complexity, tensor products</a>
-<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#sample-complexity-tensor-products"><i class="fa fa-check"></i>Sample complexity, tensor products</a></li>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#hcr-lower-bound"><i class="fa fa-check"></i>HCR lower bound</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#example-bernoulli-estimation"><i class="fa fa-check"></i>Example: Bernoulli estimation</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#bayesian-perspective"><i class="fa fa-check"></i>Bayesian perspective</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#miscellany-mle"><i class="fa fa-check"></i>Miscellany: MLE</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
@@ -275,8 +269,7 @@ apply (4) to the projection transform <span class="math inline">\((X, Y)\mapsto 
 <div class="proposition">
 <p><span id="prp:unlabeled-div-27" class="proposition"><strong>Proposition 4.1  (Mutual information and entropy) </strong></span></p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\
-\infty \text{ otherwise.}\end{cases}\)</span></li>
+<li><span class="math inline">\(I(X; X) = \begin{cases} H(X) &amp; X \text{ discrete.} \\  \infty \text{ otherwise.}\end{cases}\)</span></li>
 <li>Given discrete <span class="math inline">\(X\)</span>, <span class="math inline">\(H(X) = I(X; Y) + H(X|Y)\)</span>.</li>
 <li>Given both <span class="math inline">\(X, Y\)</span> discrete, <span class="math inline">\(H(X)+H(Y) = I(X; Y) + H(X; Y)\)</span>.</li>
 </ol>
@@ -295,9 +288,11 @@ distribution then takes the first <span class="math inline">\(m\)</span> decimal
 \]</span>
 this holds for all <span class="math inline">\(m\)</span>.</p>
 </div>
-<div id="causal-graphs" class="section level2 unnumbered hasAnchor">
-<h2>Causal graphs<a href="mutual-information.html#causal-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Consider a Markov graph <span class="math inline">\(X\to Y\to Z\)</span>. This unrolls to
+<div id="conditional-mi" class="section level2 unnumbered hasAnchor">
+<h2>Conditional MI<a href="mutual-information.html#conditional-mi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We first briefly talk about
+causal graphs.
+Consider a Markov graph <span class="math inline">\(X\to Y\to Z\)</span>. This unrolls to
 <span class="math display">\[\begin{align}
     X\to Y\to Z
     &amp;\iff P_{X, Y, Z} = P_{Z|Y}P_{Y|X}P_X \\
@@ -319,9 +314,6 @@ from <span class="math inline">\(a\in A\to b\in B\)</span> such that:</p>
 </ol>
 <p><span class="math inline">\(A\perp\!\!\!\perp B|C\)</span> in <strong>every distribution</strong> satisfying
 the graphical model iff <span class="math inline">\(A, B\)</span> are <em>not</em> <span class="math inline">\(d\)</span>-connected by <span class="math inline">\(C\)</span>.</p>
-</div>
-<div id="conditional-mi" class="section level2 unnumbered hasAnchor">
-<h2>Conditional MI<a href="mutual-information.html#conditional-mi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
 <p><span id="def:unlabeled-div-28" class="definition"><strong>Definition 4.2  (conditional mutual information) </strong></span>Given standard Borel <span class="math inline">\(\mathcal X, \mathcal Y\)</span>, define
 <span class="math display">\[
@@ -362,8 +354,8 @@ against <span class="math inline">\(X, Z\)</span> to obtain
     &amp;= D(P_{XYZ} \| P_{XY}P_Z)
     = D(P_{XZ} \| P_XP_Z) +
     D(P_{XYZ} \| P_{Y|X} P_{XZ}) \\
-    &amp;= I(X; Z) + D(P_{XY|Z} P_Z \| P_{Y|X} P_{Z|X} P_X)
-    = I(X; Z) + I(X; Y |Z)
+    &amp;= I(X; Z) + D(P_{YZ|X} P_X \| P_{Y|X} P_{Z|X} P_X)
+    = I(X; Z) + I(Y; Z |X)
 \end{align}\]</span>
 where factoring against <span class="math inline">\(XZ\)</span> yields
 <span class="math inline">\(P_{XY}P_Z = P_{Y|X}(P_XP_Z)\)</span> and <span class="math inline">\(P_XP_Z\)</span> is replaced with the marginal
@@ -490,12 +482,6 @@ Furthermore, for <span class="math inline">\(p_0 = \max P_X(x)\)</span>, then re
 \]</span></p>
 </div>
 <p><em>Proof:</em> Apply the same proof as the previous theorem with <span class="math inline">\(U_X\)</span> uniform.</p>
-</div>
-<div id="entropy-power-inequality" class="section level2 unnumbered hasAnchor">
-<h2>Entropy-power Inequality<a href="mutual-information.html#entropy-power-inequality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span style="color:red">
-To finish.
-</span></p>
 
 </div>
 </div>

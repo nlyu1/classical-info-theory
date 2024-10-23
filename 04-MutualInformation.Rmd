@@ -96,9 +96,10 @@ distribution then takes the first $m$ decimals, then
 \] 
 this holds for all $m$. 
 
-## Causal graphs {-}
+## Conditional MI {-}
 
-
+We first briefly talk about 
+causal graphs. 
 Consider a Markov graph $X\to Y\to Z$. This unrolls to 
 \begin{align} 
     X\to Y\to Z
@@ -121,8 +122,6 @@ from $a\in A\to b\in B$ such that:
 
 $A\indep B|C$ in **every distribution** satisfying 
 the graphical model iff $A, B$ are _not_ $d$-connected by $C$. 
-
-## Conditional MI {-}
 
 :::{.definition name="conditional mutual information"}
 Given standard Borel $\mca X, \mca Y$, define 
@@ -164,8 +163,8 @@ against $X, Z$ to obtain
     &= D(P_{XYZ} \| P_{XY}P_Z) 
     = D(P_{XZ} \| P_XP_Z) + 
     D(P_{XYZ} \| P_{Y|X} P_{XZ}) \\ 
-    &= I(X; Z) + D(P_{XY|Z} P_Z \| P_{Y|X} P_{Z|X} P_X)
-    = I(X; Z) + I(X; Y |Z)
+    &= I(X; Z) + D(P_{YZ|X} P_X \| P_{Y|X} P_{Z|X} P_X)
+    = I(X; Z) + I(Y; Z |X)
 \end{align}
 where factoring against $XZ$ yields 
 $P_{XY}P_Z = P_{Y|X}(P_XP_Z)$ and $P_XP_Z$ is replaced with the marginal 
@@ -298,10 +297,3 @@ Furthermore, for $p_0 = \max P_X(x)$, then regardless of $M$ we have
 \] 
 :::
 _Proof:_ Apply the same proof as the previous theorem with $U_X$ uniform. 
-
-
-## Entropy-power Inequality {-}
-
-<span style="color:red">
-To finish. 
-</span>

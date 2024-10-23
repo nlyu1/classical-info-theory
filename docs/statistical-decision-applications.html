@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9 Statistical Decision Applications | 6.7480 Notes</title>
   <meta name="description" content="9 Statistical Decision Applications | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9 Statistical Decision Applications | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -77,10 +77,7 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#recurring-themes"><i class="fa fa-check"></i>Recurring themes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#insightful-proof-techniques"><i class="fa fa-check"></i>Insightful proof techniques</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo-list"><i class="fa fa-check"></i>Todo list</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
 <ul>
@@ -102,10 +99,8 @@
 <li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
 <ul>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mi"><i class="fa fa-check"></i>Conditional MI</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="variational-characterizations.html"><a href="variational-characterizations.html"><i class="fa fa-check"></i><b>5</b> Variational Characterizations</a>
 <ul>
@@ -140,11 +135,10 @@
 <ul>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimax-and-bayes-risks"><i class="fa fa-check"></i>Minimax and Bayes risks</a></li>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimaxDual"><i class="fa fa-check"></i>A duality perspective</a></li>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#sample-complexity-tensor-products"><i class="fa fa-check"></i>Sample complexity, tensor products</a>
-<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#sample-complexity-tensor-products"><i class="fa fa-check"></i>Sample complexity, tensor products</a></li>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#hcr-lower-bound"><i class="fa fa-check"></i>HCR lower bound</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#example-bernoulli-estimation"><i class="fa fa-check"></i>Example: Bernoulli estimation</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#bayesian-perspective"><i class="fa fa-check"></i>Bayesian perspective</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#miscellany-mle"><i class="fa fa-check"></i>Miscellany: MLE</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
@@ -220,6 +214,9 @@ to achieve <span class="math inline">\(R^*_n&lt; \epsilon\)</span>.</li>
 <li>Tensor product experiments <a href="statistical-decision-applications.html#def:tpExperiment">9.4</a>
 have independent but not necessarily identically distributed observations;
 theoreom <a href="statistical-decision-applications.html#thm:tpMinimax">9.3</a> yields a bound on its minimax risk.</li>
+<li>Given i.i.d. observations,
+an analogue of Cramer-Rao (theorem <a href="statistical-decision-applications.html#thm:minimaxLB">9.7</a>) still holds
+even for biased estimators.</li>
 </ol>
 <div id="minimax-and-bayes-risks" class="section level2 unnumbered hasAnchor">
 <h2>Minimax and Bayes risks<a href="statistical-decision-applications.html#minimax-and-bayes-risks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -262,7 +259,7 @@ it by consider <span class="math inline">\(\mathbb E[\hat T|X]\)</span>, then
   \]</span></li>
 </ul>
 <div class="definition">
-<p><span id="def:unlabeled-div-74" class="definition"><strong>Definition 9.1  (Bayes risk) </strong></span>Given a prior <span class="math inline">\(\pi\)</span>, the average risk w.r.t. <span class="math inline">\(\pi\)</span>
+<p><span id="def:unlabeled-div-72" class="definition"><strong>Definition 9.1  (Bayes risk) </strong></span>Given a prior <span class="math inline">\(\pi\)</span>, the average risk w.r.t. <span class="math inline">\(\pi\)</span>
 of an estimator is
 <span class="math display">\[
     R_\pi(\hat \theta)
@@ -274,7 +271,7 @@ The <strong>Bayes risk</strong> of a prior is its minimal average risk
 The optimal <span class="math inline">\(\hat \theta\)</span> is the Bayes estimator.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-75" class="definition"><strong>Definition 9.2  (minimax risk) </strong></span>Given a parameter family <span class="math inline">\(P_{\theta\in \Theta}\)</span> and
+<p><span id="def:unlabeled-div-73" class="definition"><strong>Definition 9.2  (minimax risk) </strong></span>Given a parameter family <span class="math inline">\(P_{\theta\in \Theta}\)</span> and
 loss function <span class="math inline">\(l\)</span>, the minimax risk is<br />
 <span class="math display">\[
     R^* = \inf_{\hat \theta} \sup_{\theta \in \Theta}
@@ -291,7 +288,7 @@ To prove minimax risk, one needs to establish for arbitrary <span class="math in
 </ol>
 </div>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-76" class="theorem"><strong>Theorem 9.1  (duality between minimax and Bayes risk) </strong></span>Let <span class="math inline">\(\mathcal P(\Theta)\)</span> denote the set of probability distributions
+<p><span id="thm:unlabeled-div-74" class="theorem"><strong>Theorem 9.1  (duality between minimax and Bayes risk) </strong></span>Let <span class="math inline">\(\mathcal P(\Theta)\)</span> denote the set of probability distributions
 on <span class="math inline">\(\Theta\)</span>, then
 <span class="math display">\[
     R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta)
@@ -300,11 +297,9 @@ on <span class="math inline">\(\Theta\)</span>, then
     R_\pi(\hat \theta)
 \]</span></p>
 </div>
-<p><em>Proof:</em> <span class="math inline">\(R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta)
-= \inf_{\hat \theta}\sup_{\pi \in \mathcal P(\Theta)} R_\pi(\hat \theta)
-\geq R^*_{\mathrm{Bayes}}\)</span> by <span class="math inline">\(\inf\sup \geq \sup\inf\)</span>.</p>
+<p><em>Proof:</em> <span class="math inline">\(R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta) = \inf_{\hat \theta}\sup_{\pi \in \mathcal P(\Theta)} R_\pi(\hat \theta) \geq R^*_{\mathrm{Bayes}}\)</span> by <span class="math inline">\(\inf\sup \geq \sup\inf\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-77" class="example"><strong>Example 9.1  (strict inequality) </strong></span>Let <span class="math inline">\(\theta, \hat \theta \in \{1, 2, \cdots\}\)</span> and
+<p><span id="exm:unlabeled-div-75" class="example"><strong>Example 9.1  (strict inequality) </strong></span>Let <span class="math inline">\(\theta, \hat \theta \in \{1, 2, \cdots\}\)</span> and
 <span class="math inline">\(l(\theta, \hat \theta) = 1_{\hat \theta &lt; \theta}\)</span>, then
 <span class="math inline">\(R^* = 1\)</span> while <span class="math inline">\(R^*_{\mathrm{Bayes}} = 0\)</span>.</p>
 </div>
@@ -346,7 +341,7 @@ yielding the dual problem
     = \max_{\pi \in \mathcal P(\Theta)} R_\pi^*
 \]</span></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-78" class="theorem"><strong>Theorem 9.2  (general minimax equality) </strong></span><span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span> if the following conditions hold:</p>
+<p><span id="thm:unlabeled-div-76" class="theorem"><strong>Theorem 9.2  (general minimax equality) </strong></span><span class="math inline">\(R^* = R^*_{\mathrm{Bayes}}\)</span> if the following conditions hold:</p>
 <ol style="list-style-type: decimal">
 <li>The experiment is dominated: <span class="math inline">\(P_{\forall \theta} \ll \nu\)</span> for some <span class="math inline">\(\nu\)</span>.</li>
 <li>The action space <span class="math inline">\(\hat \Theta\)</span> (codomain of the estimator)
@@ -455,8 +450,9 @@ of <span class="math inline">\(\theta\)</span>’s). Thus its average risk satis
 <span class="math inline">\(R_{\pi_j}(\hat \theta_j) \geq R^*_{\pi_j}\)</span>.
 Take supremum over all <span class="math inline">\(\pi_j\)</span> and sum over <span class="math inline">\(j\)</span> to obtain the left inequality.
 </details>
-<div id="hcr-lower-bound" class="section level3 unnumbered hasAnchor">
-<h3>HCR lower bound<a href="statistical-decision-applications.html#hcr-lower-bound" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="hcr-lower-bound" class="section level2 unnumbered hasAnchor">
+<h2>HCR lower bound<a href="statistical-decision-applications.html#hcr-lower-bound" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
 <p><span id="thm:hcrBound" class="theorem"><strong>Theorem 9.4  (HCR lower bound) </strong></span>The quadratic loss of any estimator <span class="math inline">\(\hat \theta\)</span> at
 <span class="math inline">\(\theta\in \Theta\subset \mathbb R^d\)</span> satisfies
@@ -464,21 +460,298 @@ Take supremum over all <span class="math inline">\(\pi_j\)</span> and sum over <
     R_\theta(\hat \theta) = \mathbb E_{
         \theta, X\sim P_\theta
     } [\hat \theta(X) - \theta]^2
-    \geq \var_\theta(\hat \theta) \geq
+    \geq \mathrm{Var}_\theta(\hat \theta) \geq
     \sup_{\theta&#39;\neq \theta} \dfrac{
         (\mathbb E_\theta \hat \theta - \mathbb E_{\theta&#39;} \hat \theta)^2
     }{\chi^2(P_{\theta&#39;} \| P_\theta)}
 \]</span></p>
 </div>
+<span style="color:green">
+<em>Proof idea</em>: fix <span class="math inline">\(\theta&#39; \neq \theta\)</span>
+and treat <span class="math inline">\(X\mapsto \hat \theta(X)\)</span> as a data-processor;
+apply the variational characterization of <span class="math inline">\(\chi^2\)</span>.
+</span>
+<details>
+<summary>
+Proof
+</summary>
+Recall the variational characterization of <span class="math inline">\(\chi^2\)</span>
+(proposition <a href="f-divergence.html#prp:chiVariation">8.11</a>): for all <span class="math inline">\(g:\mathcal X\to \mathbb R\)</span>
+<span class="math display">\[
+    \mathrm{Var}_Q[g^2] \geq \dfrac{(\mathbb E_P g - \mathbb E_Q g)^2}{\chi^2(P\|Q)}
+\]</span>
+Given two different underlying parameters <span class="math inline">\(\theta, \theta&#39;\)</span>,
+let <span class="math inline">\(P_X=P_\theta, Q_X=P_{\theta&#39;}\)</span>, then applying the
+data processor <span class="math inline">\(X\mapsto \hat \theta(X)\)</span>
+and the variational characterization
+<span class="math display">\[
+    \chi^2(P_X \| Q_X) \geq \chi^2(P_{\hat \theta} \| Q_{\hat \theta})
+    \geq \dfrac{(\mathbb E_\theta\hat \theta - \mathbb E_{\theta&#39;} \hat \theta)^2}
+    {\mathrm{Var}_\theta(\hat \theta)}
+\]</span>
+</details>
+<div class="corollary">
+<p><span id="cor:cramerRao" class="corollary"><strong>Corollary 9.1  (Cramer-Rau lower-bound) </strong></span>For an unbiased estimator <span class="math inline">\(\hat \theta\)</span> satisfying
+<span class="math inline">\(\mathbb E_{\forall \theta}[\hat \theta] = \theta\)</span>, we obtain
+<span class="math display">\[
+    \mathrm{Var}_\theta(\hat \theta) \geq \mathcal J_F(\theta)^{-1}
+\]</span></p>
 </div>
+<details>
+<summary>
+Proof
+</summary>
+Apply the unbiased condition to theorem <a href="statistical-decision-applications.html#thm:hcrBound">9.4</a>,
+take <span class="math inline">\(\theta = \theta + \xi_{\to 0}\)</span> and apply the local Fisher
+behavior of divergence theorem <a href="f-divergence.html#thm:localFisherDiv">8.12</a>
+<span class="math display">\[\begin{align}
+    \mathrm{Var}_\theta(\hat \theta)
+    &amp;\geq \dfrac{
+        \xi^2
+    }{\chi^2(P_{\theta + \xi} \| P_\theta)}
+    = \lim_{\xi\to 0} \xi\dfrac{
+        \xi^2
+    }{\mathcal J_F(0) \xi^2 + \cdots} = \mathcal J_F(\theta)^{-1}
+\end{align}\]</span>
+</details>
+<p>To generalize to <span class="math inline">\(\theta \in \Theta\subset \mathbb R^d\)</span>, assume
+<span class="math inline">\(\hat \theta\)</span> _is unbiased and
+<span class="math display">\[
+    \mathrm{Cov}_\theta(\hat \theta)
+    = \mathbb E_\theta[(\hat \theta - \theta)(\hat \theta - \theta)^T]
+\]</span>
+is positive-semidefinite,
+apply theorem <a href="statistical-decision-applications.html#thm:hcrBound">9.4</a>
+to each data-processor <span class="math inline">\(\langle a, \hat \theta(X)\rangle, a\in \mathbb R^d\)</span> to obtain
+<span class="math display">\[
+    \chi^2(P_\theta \| P_{\theta&#39;}) \geq
+    \dfrac{\langle a, \theta - \theta&#39;\rangle^2}{a^T \mathrm{Cov}_\theta(\hat \theta)a}
+\]</span>
+Optimizing over <span class="math inline">\(a\)</span> and apply, for <span class="math inline">\(0\preceq \Sigma\)</span>
+<span class="math display">\[
+    \sup_{x\neq 0} \dfrac{\langle x, y\rangle^2}{x^T\Sigma x} = y^T \Sigma^{-1} y, \quad
+    x = \Sigma^{-1} y
+\]</span>
+yields <span class="math inline">\(\chi^2(P_\theta \| P_{\theta&#39;}) \geq (\theta - \theta&#39;)^T \mathrm{Cov}_\theta(\hat \theta)^{-1} (\theta - \theta&#39;)\)</span>. Applying the multivariate local
+approximation again yields <span class="math inline">\(\mathcal J_F^{-1}(\theta) \preceq \mathrm{Cov}_\theta(\hat \theta)\)</span>.</p>
+<p>Further recall that the Fisher information is additive
+under i.i.d. tensorization; taking the trace on both
+sides, we obtain, for unbiased estimators,
+<span class="math display">\[
+    \mathbb E_\theta \|\hat \theta - \theta\|_2^2
+    \geq \dfrac 1 2 \mathrm{tr}\mathcal J_F^{-1}(\theta)
+\]</span></p>
 </div>
-<div id="example-bernoulli-estimation" class="section level2 unnumbered hasAnchor">
-<h2>Example: Bernoulli estimation<a href="statistical-decision-applications.html#example-bernoulli-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This section solves exercise 6.7 in the textbook.
-Given <span class="math inline">\(X_j\sim \mathrm{Ber}(\theta)\)</span> i.i.d, we wish
-to estimate <span class="math inline">\(\theta\)</span> w.r.t. the quadratic
-loss function <span class="math inline">\(l(\theta, \hat \theta) = (\theta - \hat \theta)^2\)</span>
-with <span class="math inline">\(n\)</span> observations.</p>
+<div id="bayesian-perspective" class="section level2 unnumbered hasAnchor">
+<h2>Bayesian perspective<a href="statistical-decision-applications.html#bayesian-perspective" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In minimax settings, it is often wise to
+trade bias with variance to achieve a smaller
+overall risk. Fixing a prior <span class="math inline">\(\pi \in \mathcal P(\Theta)\)</span>,<br />
+consider the following joint distributions for
+<span class="math inline">\(\theta, X)\)</span>:</p>
+<ul>
+<li>Under <span class="math inline">\(Q\)</span>, <span class="math inline">\(\theta\sim \pi\)</span> and <span class="math inline">\(X\sim P_\theta\)</span> after
+sampling <span class="math inline">\(\theta\)</span>.</li>
+<li>Under <span class="math inline">\(P, \theta\sim T_\delta\pi\)</span> where <span class="math inline">\(T_\delta\pi\)</span>
+is the displaced prior <span class="math inline">\(T_\delta \pi(A) = \pi(A - \delta)\)</span>, and
+<span class="math inline">\(X\sim P_{\theta - \delta}\)</span> conditioning on <span class="math inline">\(\theta\)</span>.</li>
+</ul>
+<div class="theorem">
+<p><span id="thm:vanTrees" class="theorem"><strong>Theorem 9.5  (van Trees inequality) </strong></span>Fixing a differentiable prior <span class="math inline">\(\pi\)</span>
+and using the setup for <span class="math inline">\(P_{X\theta}, Q_{X\theta}\)</span>
+above, under regularity conditions
+<span class="math display">\[
+    R^* \geq R^*_\pi = \inf_{\hat \theta} \mathbb E_\pi[(\hat \theta - \theta)^2]
+    \geq \dfrac 1 {J(\pi) + \mathbb E_{\theta\sim \pi} \mathcal J_F(\theta)}
+\]</span>
+Note that <span class="math inline">\(\mathbb E_\pi[(\hat \theta - \theta)^2]\)</span> is
+in fact expectation over <span class="math inline">\(\theta\sim \pi\)</span>, then <span class="math inline">\(X\sim P_\theta\)</span>,
+and <span class="math inline">\(J(\pi)\)</span> is the Fisher information
+of the location family <span class="math inline">\(\pi\)</span>. The regularity conditions are:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\pi\)</span> is differentiable, supported on <span class="math inline">\([\theta_0, \theta_1]\)</span> and
+<span class="math inline">\(\pi(\theta_0) = \pi(\theta_1) = 0\)</span>.</li>
+<li>The location-family Fisher information of the prior is finite
+<span class="math display">\[
+J(\pi) = \int_{\theta_0}^{\theta_1} \dfrac{\pi&#39;(\theta)^2}{\pi(\theta)}\, d\theta &lt; \infty
+\]</span></li>
+<li>The family has a dominating measure: <span class="math inline">\(P_\theta = P_\theta\mu\)</span>, and <span class="math inline">\(p_\theta(x)\)</span>
+is differentiable in <span class="math inline">\(\theta\)</span> a.e.</li>
+<li>For <span class="math inline">\(\pi\)</span>-almost every <span class="math inline">\(\theta\)</span>: <span class="math inline">\(\int \partial_{\theta }p_\theta(x)\, d\mu = 0\)</span>.<br />
+</li>
+</ol>
+</div>
+<details>
+<summary>
+Proof by data-processing
+</summary>
+<p>Fix any (possibly randomized) estimator <span class="math inline">\(\hat \theta\)</span>,
+the marginals (but not the joint!)
+<span class="math inline">\(P_X = Q_X\)</span> so <span class="math inline">\(\mathbb E_P\hat \theta = \mathbb E_Q\hat \theta\)</span>
+while <span class="math inline">\(\mathbb E_P \theta = \mathbb E_Q \theta + \delta\)</span>. Then
+<span class="math display">\[\begin{align}
+    \chi^2(P_{\theta X} \| Q_{\theta X})
+    &amp;\geq \chi^2(P_{\theta \hat \theta} \| Q_{\theta\hat \theta})
+    \geq \chi^2(P_{\theta - \hat \theta} \| Q_{\theta - \hat \theta})
+     \\
+     &amp;\geq \dfrac{(\mathbb E_P[\theta - \hat \theta] -
+    \mathbb E_Q[\theta - \hat \theta])^2}{\mathrm{Var}_Q(\hat \theta - \theta)}
+    = \dfrac{\delta^2}{\mathrm{Var}_Q(\hat \theta - \theta)} \geq
+    \dfrac{\delta^2}{\mathbb E_Q[\hat \theta - \theta]^2}
+\end{align}\]</span>
+To obtain the second inequality, first consider
+the local expansions:</p>
+<ul>
+<li><span class="math inline">\(\chi^2(P_\theta \| Q_\theta) = \chi^2(T_\delta \pi \| \pi)  \approx J(\pi) \delta^2\)</span>.</li>
+<li><span class="math inline">\(\chi^2(P_{X|\theta} \| Q_{X|\theta}) \approx \mathcal J_F(\theta) \delta^2\)</span>.
+Next, apply the <span class="math inline">\(\chi^2\)</span> chain rule (proposition <a href="f-divergence.html#prp:chiSqChain">8.6</a>)
+to obtain
+<span class="math display">\[\begin{align}
+  \chi^2(P_{X\theta} \| Q_{X\theta})
+  &amp;= \chi^2(P_\theta \| Q_{\theta}) + \mathbb E_Q \left[
+      \chi^2(P_{X|\theta} \| Q_{X|\theta})
+      \left(\dfrac{dP_\theta}{dQ_\theta}\right)^2
+  \right] \\
+  R_\pi^*
+  &amp;\geq \dfrac{\delta^2}{J(\pi) \delta^2 +
+  \mathbb E_Q \left[\mathcal J_F(\theta) \delta^2 (dP_\theta/dQ_\theta)^2\right]}\\
+  &amp;\geq \dfrac 1 {J(\pi) + \mathbb E_{\theta \sim \pi} \mathcal J_F(\theta)}
+\end{align}\]</span>
+In the last step, we can also take <span class="math inline">\(dP_\theta/dQ_\theta\to 1\)</span>
+by continuity of <span class="math inline">\(\pi\)</span>.</li>
+</ul>
+</details>
+<details>
+<summary>
+Direct proof
+</summary>
+For the Bayes setting, w.l.o.g. assume that the estimator is deterministic.
+For each <span class="math inline">\(x\)</span>, integrate by parts to obtain
+<span class="math display">\[
+    \int_{\theta_0}^{\theta_1} (\hat \theta - \theta)
+    \partial_{\theta}[p_\theta \pi(\theta)]
+    = \int_{\theta_0}^{\theta_1} p_\theta \pi(\theta)\, d\theta
+\]</span>
+Next integrate both sides over <span class="math inline">\(\mu(dx)\)</span> to obtain
+<span class="math display">\[
+    \mathbb E_{\theta, X}[(\hat \theta - \theta)V(\theta, X)] = 1, \quad
+    V(\theta, x) = \partial_{\theta }\log[p_\theta(x) \pi(\theta)]
+\]</span>
+Next apply Cauchy-Schwarz to obtain
+<span class="math inline">\(\mathbb E[(\hat \theta - \theta)^2]\mathbb E[V(\theta, X)^2]\geq 1\)</span> and
+<span class="math display">\[
+    \mathbb E[V(\theta, X)^2]
+    = \mathbb E[V(\theta, X)^2] = \mathbb E[(\partial_{\theta }\log P_\theta(X))^2]
+    + \mathbb E[(\partial_{\theta }\log \pi(\theta))^2] = \mathbb E_\theta \mathcal J_F(\theta)
+    + J(\pi)
+\]</span>
+</details>
+<ul>
+<li>We assume a prior density that vanishes at the boundary.
+A uniform prior yields the Chernoff-Rubin-Stein inequality.</li>
+<li>To obtain the tightest lower bound, one shouold use regular prior
+with minimum Fisher information, which is known to be
+<span class="math inline">\(g(u) = \cos^2(\pi u/2)\)</span> supported on <span class="math inline">\([-1, 1]\)</span> with Fisher information <span class="math inline">\(\pi^2\)</span>.</li>
+</ul>
+<p>We only state the multivariate version of the theorem above.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-77" class="theorem"><strong>Theorem 9.6  (multivariate BCR) </strong></span>Given a product prior density <span class="math inline">\(\pi(\theta) = \prod_{j=1}^d \pi_j(\theta_j)\)</span>
+such that each <span class="math inline">\(\pi_j\)</span> is compactly supported and vanishes
+on the boundary; suppose that for <span class="math inline">\(\pi\)</span>-almost every <span class="math inline">\(\theta\)</span>
+<span class="math display">\[
+    \int \mu(dx) \nabla_\theta p_\theta(x) = 0
+\]</span>
+Then, for <span class="math inline">\(J(\pi) = \mathrm{diag}(\{J(\pi_j)\})\)</span> we have (first inverse
+then trace)
+<span class="math display">\[
+    R_\pi^* = \inf_{\hat \theta} \mathbb E_\pi \|\theta - \hat \theta\|_2^2
+    \geq \mathrm{tr}\left(
+        \mathbb E_{\theta \sim \pi} \mathcal J_F(\theta) + J(\pi)
+    \right)^{-1}
+\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:minimaxLB" class="theorem"><strong>Theorem 9.7  (lower bound on asymptotic minimax risk) </strong></span>Assuming <span class="math inline">\(\theta \mapsto \mathcal J_F(\theta)\)</span> continuous;
+let <span class="math inline">\(X_1, \cdots X_n\sim P_\theta\)</span> i.i.d. and define
+the minimax risk <span class="math inline">\(R_n^* = \inf_{\hat \theta} \sup_{\theta \in \Theta} \mathbb E_\theta \|\hat \theta - \theta\|_2^2\)</span>, then
+<span class="math display">\[
+    R_n^* \geq \dfrac{1+o(1)}{n} \sup_{\theta \in \Theta} \mathrm{tr}\mathcal J_F^{-1}(\theta)
+\]</span></p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+Fix <span class="math inline">\(\theta\in \Theta\)</span> and choose a small <span class="math inline">\(\delta\)</span>
+such that <span class="math inline">\(\theta + [-\delta, \delta]^d \subset \Theta\)</span>
+and let <span class="math inline">\(\pi_j(\theta_j)\)</span> be the compact minimal-Fisher information
+cosine prior. Then
+<span class="math display">\[
+    J(\pi_j) = \dfrac 1 {\delta^2} J(g) = \dfrac{\pi^2}{\delta^2}\implies
+    J(\pi) = \dfrac{\pi^2}{\delta^2}I_d
+\]</span>
+Next, continuity <span class="math inline">\(\theta \mapsto \mathcal J_F(\theta)\)</span> guarantees
+the hypothesis of the HCR bound, then applying
+the additivity of Fisher information, we obtain
+<span class="math display">\[
+    R_n^* \geq \mathrm{tr}\left(
+        n \mathbb E_{\theta \sim \pi} \mathcal J_F(\theta) + J(\pi)
+    \right)^{-1}
+    = \dfrac 1 n \mathrm{tr}\left(
+        \mathbb E_{\theta \sim \pi} \mathcal J_F(\theta) + \dfrac{\pi^2}{n\delta^2}I_d
+    \right)^{-1}
+\]</span>
+Choose <span class="math inline">\(\delta = n^{-1/4}\)</span> and apply the continuity
+of <span class="math inline">\(\mathcal J_F(\theta)\)</span> in at <span class="math inline">\(\theta\)</span>.
+</details>
+</div>
+<div id="miscellany-mle" class="section level2 unnumbered hasAnchor">
+<h2>Miscellany: MLE<a href="statistical-decision-applications.html#miscellany-mle" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider <span class="math inline">\(X^n=(X_j)\sim P_{\theta_0}\)</span> i.i.d., the
+maximum likelihood estimator (MLE) is
+<span class="math display">\[
+    \hat \theta_{\mathrm{MLE}}
+    = \mathrm{arg}\max_{\theta\in \Theta} L_\theta(X^n), \quad
+    L_\theta(X^n) = \sum_{j=1}^n \log p_\theta(X_j)
+\]</span>
+For discrete distributions, we also have
+<span class="math inline">\(\hat \theta_{\mathrm{MLE}} \in \mathrm{arg}\min_{\theta \sin \Theta} D(\hat P_n \| P_\theta)\)</span>.
+This implies that the expected log-likelihood is maximized
+at the true parameter value <span class="math inline">\(\theta_0\)</span>.
+- Suppose <span class="math inline">\(\theta \mapsto P_\theta\)</span> is injective, then
+<span class="math display">\[
+    \mathbb E_{\theta_0}[L_\theta - L_{\theta_0}]
+    = \mathbb E_{\theta_0} \left[
+        -\sum \log \dfrac{p_{\theta_0}(X_j)}{p_\theta(X_j)}
+    \right] = -nD(P_{\theta_0} \| P_\theta) &lt; 0
+\]</span>
+Assuming regularity conditions and together
+with l.l.n, this ensures
+consistency <span class="math inline">\(\hat \theta_{n\to \infty}\to \theta_0\)</span>.</p>
+<ul>
+<li>Assuming more regularity conditions, we can approximate
+<span class="math display">\[
+  L_\theta = L_{\theta_0} +
+  (\theta - \theta_0)^T \sum_j V(\theta_0, X_j)
+  + \dfrac 1 2 (\theta - \theta_0^T \left(
+      \sum H(\theta_0, X_j)
+  \right)(\theta - \theta_0) + \cdots
+\]</span>
+Under regularity conditions, we have
+<span class="math inline">\(\sum H(\theta_0, X_j) \to -n \mathcal J_F(\theta_0)\)</span>
+and the linear term vanishing. This yields the stochastic
+approximation
+<span class="math display">\[
+  L_\theta \approx L_{\theta_0}
+  + \langle\sqrt{n\mathcal J_F(\theta_0)} Z, \theta - \theta_0\rangle
+  - \dfrac n 2 (\theta - \theta_0)^T \mathcal J_F(\theta_0) (\theta - \theta_0)
+\]</span>
+Maximizing the RHS yields the asymptotic normal expression
+<span class="math display">\[
+  \hat \theta_{\mathrm{MLE}} \approx \theta_0
+  + \dfrac 1 {\sqrt n} \mathcal J_F(\theta_0)^{-1/2} Z
+\]</span></li>
+</ul>
 
 </div>
 </div>

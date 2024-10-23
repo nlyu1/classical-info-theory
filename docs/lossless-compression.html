@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10 Lossless compression | 6.7480 Notes</title>
   <meta name="description" content="10 Lossless compression | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10 Lossless compression | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -77,10 +77,7 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#recurring-themes"><i class="fa fa-check"></i>Recurring themes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#insightful-proof-techniques"><i class="fa fa-check"></i>Insightful proof techniques</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo-list"><i class="fa fa-check"></i>Todo list</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
 <ul>
@@ -102,10 +99,8 @@
 <li class="chapter" data-level="4" data-path="mutual-information.html"><a href="mutual-information.html"><i class="fa fa-check"></i><b>4</b> Mutual Information</a>
 <ul>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#definition-properties"><i class="fa fa-check"></i>Definition, properties</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#causal-graphs"><i class="fa fa-check"></i>Causal graphs</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#conditional-mi"><i class="fa fa-check"></i>Conditional MI</a></li>
 <li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#probability-of-error-fanos-inequality"><i class="fa fa-check"></i>Probability of error, Fano’s inequality</a></li>
-<li class="chapter" data-level="" data-path="mutual-information.html"><a href="mutual-information.html#entropy-power-inequality"><i class="fa fa-check"></i>Entropy-power Inequality</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="variational-characterizations.html"><a href="variational-characterizations.html"><i class="fa fa-check"></i><b>5</b> Variational Characterizations</a>
 <ul>
@@ -140,11 +135,10 @@
 <ul>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimax-and-bayes-risks"><i class="fa fa-check"></i>Minimax and Bayes risks</a></li>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#minimaxDual"><i class="fa fa-check"></i>A duality perspective</a></li>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#sample-complexity-tensor-products"><i class="fa fa-check"></i>Sample complexity, tensor products</a>
-<ul>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#sample-complexity-tensor-products"><i class="fa fa-check"></i>Sample complexity, tensor products</a></li>
 <li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#hcr-lower-bound"><i class="fa fa-check"></i>HCR lower bound</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#example-bernoulli-estimation"><i class="fa fa-check"></i>Example: Bernoulli estimation</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#bayesian-perspective"><i class="fa fa-check"></i>Bayesian perspective</a></li>
+<li class="chapter" data-level="" data-path="statistical-decision-applications.html"><a href="statistical-decision-applications.html#miscellany-mle"><i class="fa fa-check"></i>Miscellany: MLE</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="lossless-compression.html"><a href="lossless-compression.html"><i class="fa fa-check"></i><b>10</b> Lossless compression</a>
 <ul>
@@ -270,7 +264,7 @@ compressing many then decompressing them; this we do not
 need to impose any constraints on <span class="math inline">\(f\)</span>, such as prefix-freeness or
 unique-decodability.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-79" class="definition"><strong>Definition 10.1  (variable-length single-shot lossless compression) </strong></span>A pair <span class="math inline">\((f, g)\)</span> is a variable-length single-shot lossless compressor if:</p>
+<p><span id="def:unlabeled-div-78" class="definition"><strong>Definition 10.1  (variable-length single-shot lossless compression) </strong></span>A pair <span class="math inline">\((f, g)\)</span> is a variable-length single-shot lossless compressor if:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(f\)</span> is of the type <span class="math inline">\(f:\mathcal X\to \{0, 1\}^*\)</span>. The image of <span class="math inline">\(f\)</span>
 is a codebook, and an element <span class="math inline">\(f(x)\)</span> in the image of <span class="math inline">\(f\)</span> is a codeword.</li>
@@ -286,21 +280,21 @@ so that <span class="math inline">\(P(0)\geq P(1)\geq \cdots\)</span>.</li>
 </ul>
 <p>We begin with several definitions.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-80" class="definition"><strong>Definition 10.2  (entropy density) </strong></span>Given a finite alphabet and fixing binary units,
+<p><span id="def:unlabeled-div-79" class="definition"><strong>Definition 10.2  (entropy density) </strong></span>Given a finite alphabet and fixing binary units,
 the entropy density function of a source <span class="math inline">\(X\)</span> is
 <span class="math display">\[
     i_X(a) = \log_2 \dfrac 1 {P_X(a)}\implies H(X) = \mathbb E[i_X(x)]
 \]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-81" class="definition"><strong>Definition 10.3  (varentropy) </strong></span>The varentropy <span class="math inline">\(V(S)\)</span> of a source <span class="math inline">\(S\)</span> is
+<p><span id="def:unlabeled-div-80" class="definition"><strong>Definition 10.3  (varentropy) </strong></span>The varentropy <span class="math inline">\(V(S)\)</span> of a source <span class="math inline">\(S\)</span> is
 <span class="math display">\[
     V(S) = \mathrm{Var}[i_S]
 \]</span>
 Note that <span class="math inline">\(H(S)^2 + V(S)^2 = \mathbb E[i_S^2]\)</span>.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-82" class="definition"><strong>Definition 10.4  (stochastic dominance) </strong></span>Given two real-valued stochastic variables <span class="math inline">\(X, Y\)</span>, we say that <span class="math inline">\(X\preceq Y\)</span>,
+<p><span id="def:unlabeled-div-81" class="definition"><strong>Definition 10.4  (stochastic dominance) </strong></span>Given two real-valued stochastic variables <span class="math inline">\(X, Y\)</span>, we say that <span class="math inline">\(X\preceq Y\)</span>,
 or <span class="math inline">\(Y\)</span> stochastically dominates <span class="math inline">\(X\)</span>, if the CDF of <span class="math inline">\(X\)</span> dominates that of <span class="math inline">\(Y\)</span>
 everywhere; this formalizes the notion that
 <span class="math inline">\(X\)</span> is concentrated on smaller values.</p>
@@ -355,7 +349,7 @@ based on
 intractable compression quantity (e.g. <span class="math inline">\(\mathbb E[L(X)]\)</span>)
 to an information measure (e.g. <span class="math inline">\(H(X)\)</span>).</p>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-83" class="lemma"><strong>Lemma 10.1  </strong></span><span class="math inline">\(H(X|L=k)\leq k\)</span>. This follows from that <span class="math inline">\(X|L=k\)</span> can
+<p><span id="lem:unlabeled-div-82" class="lemma"><strong>Lemma 10.1  </strong></span><span class="math inline">\(H(X|L=k)\leq k\)</span>. This follows from that <span class="math inline">\(X|L=k\)</span> can
 take at most <span class="math inline">\(2^k\)</span> values, the uniform distribution
 on which has entropy <span class="math inline">\(k\)</span>.</p>
 </div>
@@ -371,8 +365,7 @@ The inequality is saturated by the geometric distribution.</p>
 <summary>
 Proof
 </summary>
-Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1,
-\mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
+Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1, \mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
 <span class="math display">\[\begin{align}
     H(X) - \mathbb E[X] h(p)
     &amp;= \mathbb E\left[-\log p(x) - x[-p\log p - \bar p\log \bar p]\right] \\
@@ -442,7 +435,7 @@ there are at most <span class="math inline">\(2^{k+1}-1\)</span> atoms of mass a
 <p>We can consider the source as a random process <span class="math inline">\((S_1, S_2, \cdots)\)</span>,
 group the first <span class="math inline">\(n\)</span> (blocklength) symbols into a supersymbol <span class="math inline">\(S^n\)</span>.</p>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-84" class="corollary"><strong>Corollary 10.1  (asymptotic optimal-coding properties) </strong></span>Let <span class="math inline">\((S_1, S_2, \cdots)\)</span> be a random process (such that <span class="math inline">\(S^n\)</span> is sorted)
+<p><span id="cor:unlabeled-div-83" class="corollary"><strong>Corollary 10.1  (asymptotic optimal-coding properties) </strong></span>Let <span class="math inline">\((S_1, S_2, \cdots)\)</span> be a random process (such that <span class="math inline">\(S^n\)</span> is sorted)
 and <span class="math inline">\(U, V\)</span> real-valued r.vs, then
 <span class="math display">\[\begin{align}
     \dfrac 1 n i_{S^n(S^n)}\xrightarrow d U

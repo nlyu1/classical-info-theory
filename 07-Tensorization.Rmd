@@ -7,11 +7,9 @@
 2. Gaussian saddle point problem: solve a $n=1$ problem by going to 
     $n>1$ problem and use convexity / concavity of information measures 
     and symmetry to obtain the optimal solution. 
-
-<span style="color:red">
-5.25 and 5.26 in the textbook; 
-MI tensorization properties. 
-</span>
+3. Stationary processes have an uppder limit on entropy rate 
+    (theorem \@ref(thm:stationaryProperties)). 
+4. Entropy rate of HMM has a sandwich limit (proposition \@ref(prp:hmmEntropyRate)). 
 
 ## MI, Gaussian saddle point {-}
 
@@ -39,26 +37,31 @@ under $P_Y$.
 :::
 <details>
 <summary>Proof</summary>
-For (1), recall definition \@ref(def:mutInfDef) for MI: 
+For (1), recall definition \@ref(def:mutInfDef) for MI, 
+introduce an additional product and cross-identify the terms 
 \begin{align}
     I(X^n; Y^n) 
     &= D(P_{X^nY^n} \| P_{X^n} P_{Y^n}) 
     = D\left(\prod P_{Y_j|X_j}\| P_{Y^n} | P_{X^n}\right) \\ 
-    \sum_j I(X_j; Y_j) 
-    &= \sum_j D(P_{Y_j|X_j} \| P_{Y_j} | P_{X_j}) 
-    = D\left(\prod P_{Y_j|X_j} \| \prod P_{Y_j} 
-    | \prod P_{X_j}\right)
+   &= \Exp_{X^n} \left[
+        \log \df{P_{Y^n|X^n}}{P_{Y^n}} \cdot \df{\prod P_{Y_j}}{\prod P_{Y_j}} 
+   \right] = \Exp 
+    \log \prod \df{P_{Y^j|X^j}}{P_{Y_j}}
+    - \Exp \log \df{P_{Y^n}}{P_{Y_j}} \\ 
+    &= \sum_{j=1}^n I(X_j; Y_j) - D\left(P_{Y^n} \| \prod P_{Y_j}\right) 
 \end{align}
-It remains to show that the following difference is positive 
-\begin{align}
-    D(P_{Y^n|X^n} \| P_{Y^n} | P_{X^n}) 
-    - D(P_{Y^n | X^n} \| \prod P_{Y_j} | \prod P_{X_j})
-\end{align}
-(1) naturally implies (2). To show (3), 
+(1) naturally implies (2). To show (3), again use the 
+product condition and cross-identify terms 
 \begin{align}
     I(X^n; Y) 
-    &= D(P_{X^n|Y} \| P_{X^n} | P_Y)
+    &= \Exp_{X^n, Y} \log \df{P_{X^n|Y}}{P_{X^n}} 
+    \cdot \prod \df{P_{X_j|Y}}{P_{X_j|Y}} \\ 
+    &= \Exp \log \prod \df{P_{X_j|Y}}{P_{X_j}} 
+    + \Exp \log \df{P_{X^n|Y}}{\prod P_{X_j|Y}} \\ 
+    &= \sum_{j=1}^n I(X_j; Y) + D\left(X^n \| \prod P_{X_j} | Y\right)
 \end{align}
+Now (3) implies (4), since the saturation condition and 
+memoryless source implies that the channel is memoryless. 
 </details>
 
 Several examples to the theorem above: 
@@ -181,7 +184,7 @@ The entropy rate of a
  \] 
 :::
 
-:::{.theorem name="properties of stationary processes"} 
+:::{.theorem #stationaryProperties name="properties of stationary processes"} 
 Given $\mbb X$ stationary, 
 
 1. $H(X_n|X^{n-1}) \leq H(X_{n-1}|X^{n-2})$. 
@@ -244,14 +247,42 @@ which is an observation of $\mbb S$ with a stationary
 memoryless channel (emission channel) $P_{X_1|S_1}$. 
 :::
 
-:::{.proposition name="entropy rate of HMM"}
+:::{.proposition #hmmEntropyRate name="entropy rate of HMM"}
 Given a HMM process $\mbb X$ with state process $\mbb S$, we have 
 \[ 
     H(X_n|X_1^{n-1}, S_0) \leq H(\mbb X)\leq H(X_n|X_1^{n-1})
 \] 
 Both sides converge monotonically as $n\to \infty$. 
 :::
-The upper bound is already established. 
+<details>
+<summary>Proof</summary>
+The upper bound is established by theorem \@ref(thm:stationaryProperties). 
+To establish the lower bound, consider 
+\begin{align}
+    H(\mbb X) 
+    &= H(X_n | X_{-\infty}^{n-1}) 
+    \geq H(X_n | X_{-\infty}^{n-1}, S_0) 
+    = H(X_n|X_1^{n-1}, S_n)
+\end{align}
+the last equality follows by the HMM assumption. To show that the sequence 
+is increasing, 
+\begin{align}
+    H(X_{n+1} | X_1^n, S_0) 
+    &= H(X_n | X_0^{n-1}, S_{-1}) 
+    \geq H(X_n | X_0^{n-1}, S_{-1}, S_0) \\ 
+    &= H(X^n | X_1^{n-1}, S_0) 
+\end{align}
+Finally, to show that this converges to the correct limit, 
+use the mutual information chain rule 
+(theorem \@ref(thm:mutInfoMoreProperties)) 
+to identify the two limits. The equation goes to zero by 
+$I(S_0; X_1^\infty) = I(S_0; X_1^{n\to \infty}) \leq H(S_0) = \infty$. 
+\begin{align}
+    I(S_0; X_1^n) - I(S_0; X_1^{n-1})
+    &= I(X_n; S_0 | X_1^{n-1}) \\ 
+    &= H(X_n|X_1^{n-1}) - H(X_n | X_1^{n-1}, S_0)\to 0
+\end{align}
+</details>
 
 :::{.definition #miRate name="mutual information rate"}
 The mutual information rate between two processes 

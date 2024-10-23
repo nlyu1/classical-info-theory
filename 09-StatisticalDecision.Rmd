@@ -19,7 +19,10 @@ Key takeaways:
 7. Tensor product experiments \@ref(def:tpExperiment) 
     have independent but not necessarily identically distributed observations; 
     theoreom \@ref(thm:tpMinimax) yields a bound on its minimax risk. 
-    
+8. Given i.i.d. observations, 
+    an analogue of Cramer-Rao (theorem \@ref(thm:minimaxLB)) still holds 
+    even for biased estimators.  
+
 
 ## Minimax and Bayes risks {-}
 
@@ -255,7 +258,7 @@ Take supremum over all $\pi_j$ and sum over $j$ to obtain the left inequality.
 </details>
 
 
-### HCR lower bound {-}
+## HCR lower bound {-}
 
 :::{.theorem #hcrBound name="HCR lower bound"}
 The quadratic loss of any estimator $\hat \theta$ at 
@@ -264,18 +267,295 @@ $\theta\in \Theta\subset \R^d$ satisfies
     R_\theta(\hat \theta) = \Exp_{
         \theta, X\sim P_\theta 
     } [\hat \theta(X) - \theta]^2 
-    \geq \var_\theta(\hat \theta) \geq 
+    \geq \Var_\theta(\hat \theta) \geq 
     \sup_{\theta'\neq \theta} \df{
         (\Exp_\theta \hat \theta - \Exp_{\theta'} \hat \theta)^2
     }{\chi^2(P_{\theta'} \| P_\theta)}
 \] 
 :::
+<span style="color:green">
+_Proof idea_: fix $\theta' \neq \theta$ 
+and treat $X\mapsto \hat \theta(X)$ as a data-processor; 
+apply the variational characterization of $\chi^2$. 
+</span>
+<details>
+<summary>Proof</summary>
+Recall the variational characterization of $\chi^2$ 
+(proposition \@ref(prp:chiVariation)): for all $g:\mca X\to \R$ 
+\[ 
+    \Var_Q[g^2] \geq \df{(\Exp_P g - \Exp_Q g)^2}{\chi^2(P\|Q)}
+\] 
+Given two different underlying parameters $\theta, \theta'$, 
+let $P_X=P_\theta, Q_X=P_{\theta'}$, then applying the 
+data processor $X\mapsto \hat \theta(X)$ 
+and the variational characterization 
+\[ 
+    \chi^2(P_X \| Q_X) \geq \chi^2(P_{\hat \theta} \| Q_{\hat \theta}) 
+    \geq \df{(\Exp_\theta\hat \theta - \Exp_{\theta'} \hat \theta)^2}
+    {\Var_\theta(\hat \theta)}
+\]
+</details>
 
-## Example: Bernoulli estimation {-}
 
-This section solves exercise 6.7 in the textbook. 
-Given $X_j\sim \mrm{Ber}(\theta)$ i.i.d, we wish 
-to estimate $\theta$ w.r.t. the quadratic 
-loss function $l(\theta, \hat \theta) = (\theta - \hat \theta)^2$
-with $n$ observations. 
+:::{.corollary #cramerRao name="Cramer-Rau lower-bound"}
+For an unbiased estimator $\hat \theta$ satisfying 
+$\Exp_{\forall \theta}[\hat \theta] = \theta$, we obtain 
+\[ 
+    \Var_\theta(\hat \theta) \geq \mca J_F(\theta)^{-1}
+\]  
+:::
+<details>
+<summary>Proof</summary>
+Apply the unbiased condition to theorem \@ref(thm:hcrBound), 
+take $\theta = \theta + \xi_{\to 0}$ and apply the local Fisher 
+behavior of divergence theorem \@ref(thm:localFisherDiv) 
+\begin{align}
+    \Var_\theta(\hat \theta) 
+    &\geq \df{
+        \xi^2
+    }{\chi^2(P_{\theta + \xi} \| P_\theta)}
+    = \lim_{\xi\to 0} \xi\df{
+        \xi^2 
+    }{\mca J_F(0) \xi^2 + \cdots} = \mca J_F(\theta)^{-1}
+\end{align}
+</details>
 
+To generalize to $\theta \in \Theta\subset \R^d$, assume 
+$\hat \theta$ _is unbiased and 
+\[ 
+    \Cov_\theta(\hat \theta)
+    = \Exp_\theta[(\hat \theta - \theta)(\hat \theta - \theta)^T]
+\] 
+is positive-semidefinite, 
+apply theorem \@ref(thm:hcrBound) 
+to each data-processor $\la a, \hat \theta(X)\ra, 
+a\in \R^d$ to obtain 
+\[ 
+    \chi^2(P_\theta \| P_{\theta'}) \geq 
+    \df{\la a, \theta - \theta'\ra^2}{a^T \Cov_\theta(\hat \theta)a}
+\] 
+Optimizing over $a$ and apply, for $0\preceq \Sigma$ 
+\[ 
+    \sup_{x\neq 0} \df{\la x, y\ra^2}{x^T\Sigma x} = y^T \Sigma^{-1} y, \quad 
+    x = \Sigma^{-1} y 
+\] 
+yields $\chi^2(P_\theta \| P_{\theta'}) \geq 
+(\theta - \theta')^T \Cov_\theta(\hat \theta)^{-1}
+(\theta - \theta')$. Applying the multivariate local 
+approximation again yields $\mca J_F^{-1}(\theta) \preceq \Cov_\theta(\hat \theta)$. 
+
+Further recall that the Fisher information is additive 
+under i.i.d. tensorization; taking the trace on both 
+sides, we obtain, for unbiased estimators, 
+\[ 
+    \Exp_\theta \|\hat \theta - \theta\|_2^2 
+    \geq \df 1 2 \tr \mca J_F^{-1}(\theta)
+\] 
+
+## Bayesian perspective {-}
+
+In minimax settings, it is often wise to 
+trade bias with variance to achieve a smaller 
+overall risk. Fixing a prior $\pi \in \mca P(\Theta)$,  
+consider the following joint distributions for 
+$\theta, X)$: 
+
+- Under $Q$, $\theta\sim \pi$ and $X\sim P_\theta$ after 
+    sampling $\theta$. 
+- Under $P, \theta\sim T_\delta\pi$ where $T_\delta\pi$ 
+    is the displaced prior $T_\delta \pi(A) = \pi(A - \delta)$, and 
+    $X\sim P_{\theta - \delta}$ conditioning on $\theta$. 
+
+:::{.theorem #vanTrees name="van Trees inequality"}
+Fixing a differentiable prior $\pi$ 
+and using the setup for $P_{X\theta}, Q_{X\theta}$ 
+above, under regularity conditions 
+\[ 
+    R^* \geq R^*_\pi = \inf_{\hat \theta} \Exp_\pi[(\hat \theta - \theta)^2]
+    \geq \df 1 {J(\pi) + \Exp_{\theta\sim \pi} \mca J_F(\theta)}
+\] 
+Note that $\Exp_\pi[(\hat \theta - \theta)^2]$ is 
+in fact expectation over $\theta\sim \pi$, then $X\sim P_\theta$, 
+and $J(\pi)$ is the Fisher information 
+of the location family $\pi$. The regularity conditions are: 
+
+1. $\pi$ is differentiable, supported on $[\theta_0, \theta_1]$ and 
+    $\pi(\theta_0) = \pi(\theta_1) = 0$. 
+2. The location-family Fisher information of the prior is finite 
+\[ 
+    J(\pi) = \int_{\theta_0}^{\theta_1} \df{\pi'(\theta)^2}{\pi(\theta)}\, d\theta < \infty
+\] 
+3. The family has a dominating measure: $P_\theta = P_\theta\mu$, and $p_\theta(x)$ 
+    is differentiable in $\theta$ a.e. 
+4. For $\pi$-almost every $\theta$: $\int \pd \theta p_\theta(x)\, d\mu = 0$.  
+:::
+<details>
+<summary>Proof by data-processing</summary>
+Fix any (possibly randomized) estimator $\hat \theta$, 
+the marginals (but not the joint!) 
+$P_X = Q_X$ so $\Exp_P\hat \theta = \Exp_Q\hat \theta$ 
+while $\Exp_P \theta = \Exp_Q \theta + \delta$. Then 
+\begin{align}
+    \chi^2(P_{\theta X} \| Q_{\theta X}) 
+    &\geq \chi^2(P_{\theta \hat \theta} \| Q_{\theta\hat \theta}) 
+    \geq \chi^2(P_{\theta - \hat \theta} \| Q_{\theta - \hat \theta}) 
+     \\ 
+     &\geq \df{(\Exp_P[\theta - \hat \theta] - 
+    \Exp_Q[\theta - \hat \theta])^2}{\Var_Q(\hat \theta - \theta)}
+    = \df{\delta^2}{\Var_Q(\hat \theta - \theta)} \geq 
+    \df{\delta^2}{\Exp_Q[\hat \theta - \theta]^2}
+\end{align}
+To obtain the second inequality, first consider 
+the local expansions: 
+
+- $\chi^2(P_\theta \| Q_\theta) = \chi^2(T_\delta \pi \| \pi) 
+    \approx J(\pi) \delta^2$. 
+- $\chi^2(P_{X|\theta} \| Q_{X|\theta}) \approx \mca J_F(\theta) \delta^2$. 
+Next, apply the $\chi^2$ chain rule (proposition \@ref(prp:chiSqChain))
+to obtain 
+\begin{align}
+    \chi^2(P_{X\theta} \| Q_{X\theta}) 
+    &= \chi^2(P_\theta \| Q_{\theta}) + \Exp_Q \left[
+        \chi^2(P_{X|\theta} \| Q_{X|\theta}) 
+        \left(\df{dP_\theta}{dQ_\theta}\right)^2
+    \right] \\ 
+    R_\pi^* 
+    &\geq \df{\delta^2}{J(\pi) \delta^2 + 
+    \Exp_Q \left[\mca J_F(\theta) \delta^2 (dP_\theta/dQ_\theta)^2\right]}\\ 
+    &\geq \df 1 {J(\pi) + \Exp_{\theta \sim \pi} \mca J_F(\theta)}
+\end{align}
+In the last step, we can also take $dP_\theta/dQ_\theta\to 1$ 
+by continuity of $\pi$. 
+</details>
+
+<details>
+<summary>Direct proof</summary>
+For the Bayes setting, w.l.o.g. assume that the estimator is deterministic. 
+For each $x$, integrate by parts to obtain 
+\[ 
+    \int_{\theta_0}^{\theta_1} (\hat \theta - \theta) 
+    \pd \theta[p_\theta \pi(\theta)] 
+    = \int_{\theta_0}^{\theta_1} p_\theta \pi(\theta)\, d\theta 
+\] 
+Next integrate both sides over $\mu(dx)$ to obtain 
+\[ 
+    \Exp_{\theta, X}[(\hat \theta - \theta)V(\theta, X)] = 1, \quad 
+    V(\theta, x) = \pd \theta \log[p_\theta(x) \pi(\theta)]
+\] 
+Next apply Cauchy-Schwarz to obtain 
+$\Exp[(\hat \theta - \theta)^2]\Exp[V(\theta, X)^2]\geq 1$ and 
+\[ 
+    \Exp[V(\theta, X)^2] 
+    = \Exp[V(\theta, X)^2] = \Exp[(\pd \theta \log P_\theta(X))^2] 
+    + \Exp[(\pd \theta \log \pi(\theta))^2] = \Exp_\theta \mca J_F(\theta) 
+    + J(\pi)
+\] 
+</details>
+
+- We assume a prior density that vanishes at the boundary. 
+    A uniform prior yields the Chernoff-Rubin-Stein inequality. 
+- To obtain the tightest lower bound, one shouold use regular prior 
+    with minimum Fisher information, which is known to be 
+    $g(u) = \cos^2(\pi u/2)$ supported on $[-1, 1]$ with Fisher information $\pi^2$. 
+
+We only state the multivariate version of the theorem above. 
+
+:::{.theorem name="multivariate BCR"}
+Given a product prior density $\pi(\theta) = \prod_{j=1}^d \pi_j(\theta_j)$ 
+such that each $\pi_j$ is compactly supported and vanishes 
+on the boundary; suppose that for $\pi$-almost every $\theta$ 
+\[ 
+    \int \mu(dx) \nabla_\theta p_\theta(x) = 0
+\] 
+Then, for $J(\pi) = \mrm{diag}(\{J(\pi_j)\})$ we have (first inverse 
+then trace) 
+\[ 
+    R_\pi^* = \inf_{\hat \theta} \Exp_\pi \|\theta - \hat \theta\|_2^2 
+    \geq \tr \left(
+        \Exp_{\theta \sim \pi} \mca J_F(\theta) + J(\pi)
+    \right)^{-1}
+\] 
+:::
+
+:::{.theorem #minimaxLB name="lower bound on asymptotic minimax risk"}
+Assuming $\theta \mapsto \mca J_F(\theta)$ continuous; 
+let $X_1, \cdots X_n\sim P_\theta$ i.i.d. and define 
+the minimax risk $R_n^* = \inf_{\hat \theta} \sup_{\theta \in \Theta} 
+\Exp_\theta \|\hat \theta - \theta\|_2^2$, then 
+\[ 
+    R_n^* \geq \df{1+o(1)}{n} \sup_{\theta \in \Theta} \tr \mca J_F^{-1}(\theta)
+\] 
+:::
+<details>
+<summary>Proof</summary>
+Fix $\theta\in \Theta$ and choose a small $\delta$ 
+such that $\theta + [-\delta, \delta]^d \subset \Theta$ 
+and let $\pi_j(\theta_j)$ be the compact minimal-Fisher information 
+cosine prior. Then 
+\[ 
+    J(\pi_j) = \df 1 {\delta^2} J(g) = \df{\pi^2}{\delta^2}\implies 
+    J(\pi) = \df{\pi^2}{\delta^2}I_d 
+\] 
+Next, continuity $\theta \mapsto \mca J_F(\theta)$ guarantees 
+the hypothesis of the HCR bound, then applying 
+the additivity of Fisher information, we obtain 
+\[ 
+    R_n^* \geq \tr \left(
+        n \Exp_{\theta \sim \pi} \mca J_F(\theta) + J(\pi)
+    \right)^{-1} 
+    = \df 1 n \tr \left(
+        \Exp_{\theta \sim \pi} \mca J_F(\theta) + \df{\pi^2}{n\delta^2}I_d 
+    \right)^{-1}
+\] 
+Choose $\delta = n^{-1/4}$ and apply the continuity 
+of $\mca J_F(\theta)$ in at $\theta$. 
+</details>
+
+## Miscellany: MLE {-}
+
+Consider $X^n=(X_j)\sim P_{\theta_0}$ i.i.d., the 
+maximum likelihood estimator (MLE) is 
+\[ 
+    \hat \theta_{\mrm{MLE}} 
+    = \mrm{arg}\max_{\theta\in \Theta} L_\theta(X^n), \quad 
+    L_\theta(X^n) = \sum_{j=1}^n \log p_\theta(X_j)
+\] 
+For discrete distributions, we also have 
+$\hat \theta_{\mrm{MLE}} \in 
+\mrm{arg}\min_{\theta \sin \Theta} D(\hat P_n \| P_\theta)$. 
+This implies that the expected log-likelihood is maximized 
+at the true parameter value $\theta_0$. 
+- Suppose $\theta \mapsto P_\theta$ is injective, then 
+\[ 
+    \Exp_{\theta_0}[L_\theta - L_{\theta_0}] 
+    = \Exp_{\theta_0} \left[
+        -\sum \log \df{p_{\theta_0}(X_j)}{p_\theta(X_j)}
+    \right] = -nD(P_{\theta_0} \| P_\theta) < 0 
+\] 
+Assuming regularity conditions and together 
+with l.l.n, this ensures 
+consistency $\hat \theta_{n\to \infty}\to \theta_0$. 
+
+
+- Assuming more regularity conditions, we can approximate 
+\[ 
+    L_\theta = L_{\theta_0} + 
+    (\theta - \theta_0)^T \sum_j V(\theta_0, X_j) 
+    + \df 1 2 (\theta - \theta_0^T \left(
+        \sum H(\theta_0, X_j)
+    \right)(\theta - \theta_0) + \cdots 
+\] 
+Under regularity conditions, we have 
+$\sum H(\theta_0, X_j) \to -n \mca J_F(\theta_0)$ 
+and the linear term vanishing. This yields the stochastic 
+approximation 
+\[ 
+    L_\theta \approx L_{\theta_0} 
+    + \la \sqrt{n\mca J_F(\theta_0)} Z, \theta - \theta_0\ra 
+    - \df n 2 (\theta - \theta_0)^T \mca J_F(\theta_0) (\theta - \theta_0)
+\] 
+Maximizing the RHS yields the asymptotic normal expression 
+\[ 
+    \hat \theta_{\mrm{MLE}} \approx \theta_0 
+    + \df 1 {\sqrt n} \mca J_F(\theta_0)^{-1/2} Z
+\] 
