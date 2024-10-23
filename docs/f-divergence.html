@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 f-Divergence | 6.7480 Notes</title>
   <meta name="description" content="8 f-Divergence | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 f-Divergence | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -489,7 +489,8 @@ at 1, i.e. 
 \]</span>
 then <span class="math inline">\(D_f(P\|Q) = 0 \iff P=Q\)</span>.</li>
 <li><span style="color:blue">Conditional <span class="math inline">\(f\)</span>-divergence; conditioning increases divergence</span>:
-<span class="math inline">\(D_f(P_{Y|X} \circ P_X \| Q_{Y|X} \circ P_X) \leq D_f(P_{Y|X} \| Q_{Y|X} | Q_X)  = D_f(P_{Y|X} P_X \| Q_{Y|X} P_X)\)</span>.</li>
+<span class="math inline">\(D_f(P_{Y|X} \circ P_X \| Q_{Y|X} \circ P_X) \leq D_f(P_{Y|X} \| Q_{Y|X} | Q_X)
+     = D_f(P_{Y|X} P_X \| Q_{Y|X} P_X)\)</span>.</li>
 <li><span style="color:blue">Joint-convexity</span>: <span class="math inline">\((P, Q)\mapsto D_f(P\|Q)\)</span> is jointly convex;
 consequently, <span class="math inline">\(P\mapsto D_f(P\|Q)\)</span> and <span class="math inline">\(Q\mapsto D_f(P\|Q)\)</span>
 are also convex.</li>
@@ -540,9 +541,12 @@ where <span class="math inline">\(\sup\)</span> is over all finite <span class="
 <div class="definition">
 <p><span id="def:unlabeled-div-53" class="definition"><strong>Definition 8.4  (f-DPI) </strong></span>For <span class="math inline">\(U\to X\to Y\)</span>, we have <span class="math inline">\(I_f(U; Y) \leq I_f(U; X)\)</span>.</p>
 </div>
-<p>Proof: <span class="math inline">\(I_f(U; X) = D_f(P_{UX} \|P_UP_X) \geq D_f(P_{UY} \| P_UP_Y) = I_f(U; Y)\)</span>.</p>
+<p>Proof: <span class="math inline">\(I_f(U; X) = D_f(P_{UX} \|P_UP_X) \geq
+D_f(P_{UY} \| P_UP_Y) = I_f(U; Y)\)</span>.</p>
 <div class="proposition">
-<p><span id="prp:chiSqChain" class="proposition"><strong>Proposition 8.6  (χ² chain rule) </strong></span><span class="math inline">\(\chi^2(P_{AB} \| Q_{AB}) = \chi^2(P_B \| Q_B) + \mathbb E_{Q_B} \left[  \chi^2(P_{A|b} \| Q_{A|b}) \dfrac{P_B^2}{Q_B^2} \right]\)</span></p>
+<p><span id="prp:chiSqChain" class="proposition"><strong>Proposition 8.6  (χ² chain rule) </strong></span><span class="math inline">\(\chi^2(P_{AB} \| Q_{AB}) = \chi^2(P_B \| Q_B) + \mathbb E_{Q_B} \left[
+    \chi^2(P_{A|b} \| Q_{A|b}) \dfrac{P_B^2}{Q_B^2}
+\right]\)</span></p>
 </div>
 <details>
 <summary>
@@ -1216,7 +1220,8 @@ The <em>random variable</em> <span class="math inline">\(V\)</span> is known as 
 \mathbb E_\theta[\nabla_\theta \ln p_\theta(X)]
 = \int \nabla_\theta p_\theta(x) = \nabla_\theta \int p_\theta = 0
 \]</span></li>
-<li><span class="math inline">\(\mathcal J_F(\theta) = \mathrm{Cov}_\theta(V)  = -\mathbb E_\theta \left[\mathcal H_\theta \ln p_\theta(X)\right]\)</span>: differentiating (1)
+<li><span class="math inline">\(\mathcal J_F(\theta) = \mathrm{Cov}_\theta(V)
+= -\mathbb E_\theta \left[\mathcal H_\theta \ln p_\theta(X)\right]\)</span>: differentiating (1)
 <span class="math display" id="eq:fisherHessian">\[\begin{align}
 \partial_{jk}^2 \ln p_\theta = \partial_{j} \left(
      \dfrac 1 {p_\theta} \partial_{k} p_\theta
@@ -1225,7 +1230,8 @@ The <em>random variable</em> <span class="math inline">\(V\)</span> is known as 
 \tag{8.6}
 \end{align}\]</span>
 The second term vanishes when we take the expectation.</li>
-<li><span class="math inline">\(D(P_{\theta} \| P_{\theta + \xi})  = \dfrac{\log e}{2} \xi^T \mathcal J_F(\theta)\xi + o(\|\xi\|^2)\)</span>:
+<li><span class="math inline">\(D(P_{\theta} \| P_{\theta + \xi})
+= \dfrac{\log e}{2} \xi^T \mathcal J_F(\theta)\xi + o(\|\xi\|^2)\)</span>:
 this is obtained by integrating
 <span class="math display">\[
 \ln p_{\theta + \xi}(x) = \ln p_\theta(x) + \xi^T \nabla_\theta \ln p_\theta(x)

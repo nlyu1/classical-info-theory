@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10 Lossless compression | 6.7480 Notes</title>
   <meta name="description" content="10 Lossless compression | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10 Lossless compression | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -241,7 +241,6 @@ the i.i.d. source <span class="math inline">\(R^n\)</span> v.s. the compression 
 for asymptotically large copies of i.i.d. source, the dominant
 occurences have equiprobability.</li>
 </ol>
-<p>:::{.definition #flal name=“fixed-length almost-lossless compression”}</p>
 <p>To motivate later studies, we note two limitations of Huffmann codes
 (optimal prefix-free variable-length code):</p>
 <ol style="list-style-type: decimal">
@@ -375,7 +374,8 @@ The inequality is saturated by the geometric distribution.</p>
 <summary>
 Proof
 </summary>
-Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1, \mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
+Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1,
+\mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
 <span class="math display">\[\begin{align}
     H(X) - \mathbb E[X] h(p)
     &amp;= \mathbb E\left[-\log p(x) - x[-p\log p - \bar p\log \bar p]\right] \\
@@ -666,7 +666,7 @@ normality of the optimal encoding length (corollary <a href="lossless-compressio
 This implies that if we allow a non-vanishing error <span class="math inline">\(\epsilon\)</span>, then
 compression is possible down to
 <span class="math display">\[
-    k = nH(S) + \sqrt{nV(S)} Q^{-1}\epsilon
+    k = nH(S) + \sqrt{nV(S)} Q^{-1}(\epsilon)
 \]</span></p>
 <div class="theorem">
 <p><span id="thm:finiteLengthBounds" class="theorem"><strong>Theorem 10.6  (finite block-length bounds) </strong></span>Placeholder.</p>

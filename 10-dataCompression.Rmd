@@ -45,8 +45,6 @@ to $\{0, 1\}^k$ instead of $\{0, 1\}^*$.
     for asymptotically large copies of i.i.d. source, the dominant 
     occurences have equiprobability. 
 
-:::{.definition #flal name="fixed-length almost-lossless compression"}
-
 To motivate later studies, we note two limitations of Huffmann codes
 (optimal prefix-free variable-length code):
 
@@ -478,7 +476,7 @@ normality of the optimal encoding length (corollary \@ref(cor:iidAsymp)).
 This implies that if we allow a non-vanishing error $\epsilon$, then 
 compression is possible down to 
 \[ 
-    k = nH(S) + \sqrt{nV(S)} Q^{-1}\epsilon
+    k = nH(S) + \sqrt{nV(S)} Q^{-1}(\epsilon)
 \] 
 
 
