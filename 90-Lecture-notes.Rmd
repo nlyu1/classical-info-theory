@@ -461,3 +461,183 @@ by looking back.
 Do probability mixtures satisfy all of the local Fisher 
 regularity conditions?
 </span>
+
+## Oct 28: Binary hypothesis testing {-}
+
+Agenda: 
+
+1. Finish universal compression. 
+2. Define binary hypothesis testing; define $R(P, Q)$. 
+3. Stein's lemma. 
+
+### More on universal compression {-}
+
+Recall that universal compression wants to compress 
+$P_{X^n}$ to entropy, where $P_{X^n}$ is unknown 
+and drawn from a class $\Pi$. 
+
+The **fundamental limit** of compression is 
+_the redundancy of class $\Pi$_, defined by 
+\[ 
+    R_n^*(\Pi) = \inf_{Q_{X^n}} 
+    \sup_{P_{X^n}\in \Pi} \Exp_{X^n\sim P_{X^n}} 
+    \log \df 1 {Q_{X^n}(X^n)} - H(X^n)
+\] 
+Note the order of $\inf$ and $\sup$! Else 
+the "redundancy" would be trivial. 
+
+It turns out that for the uniform mixture of 
+all Bernoullis approximately, for all $\theta$. 
+\[ 
+    Q_{X^n} = \int_0^1 d\theta\, \mrm{Ber}(\theta)^{\otimes n} 
+\] 
+satisfies $D(\mrm{Ber}(\theta)^{\otimes n} \| Q_{X^n}) \leq \log n$ 
+To see this, for non-extremal $\theta, \theta'$ we have 
+\[ 
+    d(\theta \| \theta') \approx \df 1 2 (\theta - \theta')^2
+\] 
+The distribution $Q_{X^n}$ is the _universal probability assignment._
+(or maximally ignorant 
+
+**Universal data compression (probability assignment) $\approx$ 
+choosing the best prior.**
+
+The most important theorem: redundancy is equal to the following capacity: 
+\[ 
+    R_n^*(\Pi) = \sup_{\pi \in \mca P(\Pi)} I(\theta; X^n)
+\] 
+
+<u>Jeffrey's (objective) prior</u>: given smoothness conditions for a family $\Theta$, 
+we have 
+\begin{align}
+    R_n^*(\Theta) 
+    &= \df d 2 \log \df{n}{2\pi e} + \log \int_{\Theta} 
+    \sqrt{\det \mca J_F(\theta)}\, d\theta + o(1) \\ 
+    \pi_n^* &\to \pi_\infty^* \text{ weakly } 
+    = \df 1 Z \sqrt{\det \mca J_F(\theta)}\, d\theta 
+\end{align}
+The objective prior is invariant to 
+reparameterizations. Importantly, for Bernoullis the Jeffreys prior is 
+\begin{align}
+    \pi^*(\theta) = \df 1 {\theta(1 - \theta)}\quad k=2, \text{ else }
+    \mrm{Direchlet}(1/2, \dots, 1/2). 
+\end{align}
+The marginal estimator $Q_{X_t|X_1^{t-1}}$ turns out to correspond 
+to the add-half estimator (KT code). 
+
+_Connection between universal compression and sequential prediction_: 
+Recalling the setup of sequential prediction, for each step the predictor 
+is penalized by the negative log likelihood (with minimizer given by the true 
+distribution). From learning theory, the natural metric for this problem 
+(of a complexity of a class $\Pi$) is 
+\[ 
+    \sup_{P_X\in \Pi} \Exp \sum_{t=1}^n 
+    \log \df 1 {\tilde P_t(X_t; X_1^{t-1})}
+    - \log \df 1 {P_{X_t|X_1^{t-1}}}
+\] 
+If some estimator achieves $o(n)$ for the preceding quantity, 
+then the class is learnable since the estimator is asymptotically as 
+good as the oracle. It turns out that 
+\[ 
+    \inf_{\tilde P} \text{regret} = R_n^*(\Pi).
+\] 
+Relation to _in-context learning_: training phase allows for representation 
+for different generating procedures (e.g. Jeffreys prior), 
+and context chooses the posterior which specializes to the suitable 
+data-generating process. 
+
+**Every regret-minimizing estimator is an in-context learner.** 
+This is related to a theorem for density estimation (related to the 
+Young-Barron bound): 
+given $X_1, \cdots X_n\sim P\in \Pi$ i.i.d, we wish to find $\tilde P$ 
+which will estimate $P$ very well. 
+
+:::{.theorem}
+For every i.i.d. class $\Pi$ as above, there exists estimator such that 
+\[ 
+    \Exp \mrm{TV}^2 \leq \Exp D(P\|\tilde P_{\text{this is random}}) 
+    \leq \df{R_{n+1}^*(\Pi)}{n+1}
+\] 
+:::
+
+<div style="color:blue">
+This is a very insightful theorem since the right-hand side quantity 
+can be upper-bounded by the redundancy theorem. 
+Universal data compression (information)
+reduces to the problem of universal probability assignment, 
+which is simultaneously the core of density estimation (statistics)
+and sequential prediction (learning). 
+
+**Minimum description length principle**: the more likely 
+(class) of data-generating process is the one under whose universal 
+compressor compresses the data down to a smaller length; this 
+is equivalent to point-point hypothesis testing after collapsing 
+the classes down to their universal prior. 
+</div>
+
+### Binary hypothesis testing {-}
+We are interested in simple v. simple hypothesis testing i.e. 
+distinguishing beween $\theta_1\neq \theta_2\in \Theta$ (Neyman-Pearson); 
+equivalently, distinguishing between $P_{X^n}$ and $Q_{X^n}$. 
+Our goal is to design a binary estimator $Z=Z(X^n)\in \{0, 1\}$, with 
+$0$ denoting $X^n\sim P$ and $1$ denoting $X^n\sim Q$ 
+(the first serious treatment originated with radars detecting incoming planes). 
+Two associated quantities: 
+
+1. $\alpha = P[Z=0]$: probability of success under $P$. 
+2. $\beta = Q[Z=0]$: probability of failure under $Q$. 
+
+:::{.theorem name="Stein's lemma"}
+Among all tests with $\alpha \geq 1 - \epsilon$, the smallest possible 
+$\beta = e^{-nD(P\|Q) + o_\epsilon(n)}$ assuming $X_j^n\sim P$ or $Q$. 
+:::
+
+Several comments: 
+
+1. This theorem is not symmetric w.r.t. $P\leftrightarrow Q$. 
+2. The dependence upon $\epsilon$ is captured in $o_\epsilon(n)$. 
+
+To reason about binary hypothesis testing, define 
+\[ 
+    \mca R(P, Q) = \{(P[Z=0], Q[Z=0])\}
+\] 
+
+:::{.proposition}
+$\mca R\subset [0, 1]^2$ is closed, convex, symmetric 
+w.r.t. $(1/2, 1/2)$, and 
+\[ 
+    \mca R = \overline{\mrm{co}\, 
+        \mca R_{\mrm{det}}(P, Q)
+    }
+\] 
+where $\mca R_{\mrm{det}}$ denotes the set of deterministic 
+joint ranges. 
+:::
+
+As a corollary, the problem can be simplified by noting that 
+\[ 
+    \mca R_{\mrm{det}} = \{(P[E], Q[E]), \quad E\in \mca X\}
+\] 
+For the Bernoulli case, $E$ takes values in $\{\emptyset, 0, 1, \mca X\}$. 
+The first and last cases correspond to $(0, 0)$ and $(1, 1)$. 
+
+Perspective on the proof of the NP-lemma: 
+to understand $\mca R_{\mrm{det}}$, it suffices to understand 
+its extremal points, which corresponds to the problem 
+\[ 
+    \sup_Z P[Z=0]_{=\alpha} - e^\gamma Q[Z=0]_{=\beta}
+\] 
+The parameterization $e^\gamma$ simply assures positivity. 
+We "scan" over the supporting hyperplanes with a certain offset. 
+The upshot is that BHT boils down to computing $P[\log P/Q > \gamma]$ 
+and $Q[\log P/Q < \gamma]$ for a range of $\gamma$'s. 
+
+The "fatter" this joint range is, the more distinguishable the 
+two distributions are; identical distributions correspond to the 
+line $\alpha=\beta$ with zero measure. This motivates the 
+following results: 
+
+:::{.proposition}
+$d(\alpha \| \beta) \leq D(P\|Q)$ for $\alpha, \beta \in \mca R$. 
+This results from applying DPI to the estimator $Z$. 
+:::

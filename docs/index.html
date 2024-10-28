@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-23" />
+<meta name="date" content="2024-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,6 +170,11 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#arithmetic-encoder"><i class="fa fa-check"></i>Arithmetic encoder</a></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lempel-ziv"><i class="fa fa-check"></i>Lempel-Ziv</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-28-binary-hypothesis-testing"><i class="fa fa-check"></i>Oct 28: Binary hypothesis testing</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#more-on-universal-compression"><i class="fa fa-check"></i>More on universal compression</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#binary-hypothesis-testing"><i class="fa fa-check"></i>Binary hypothesis testing</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -192,7 +197,7 @@
 <div id="header">
 <h1 class="title">6.7480 Notes</h1>
 <p class="author"><em>Nicholas Lyu</em></p>
-<p class="date"><em>2024-10-23</em></p>
+<p class="date"><em>2024-10-28</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -234,6 +239,9 @@ using numerical optimization methods (e.g. VAE, GAN).</li>
 <li>Divergence measures are extremely useful for bounding events:
 bound the event for a tractable distribution, bound the divergence between the tractable
 and given distribution, and we can bound the event for the given distribution.</li>
+<li>Operationally, entropy <span class="math inline">\(H\)</span> is the answer to compression, mutual information
+<span class="math inline">\(I\)</span> is the answer to universal compression, and divergence <span class="math inline">\(D\)</span> is the
+answer to hypothesis testing.</li>
 </ol>
 <p>Nontrivial results in this book include:</p>
 <ol style="list-style-type: decimal">

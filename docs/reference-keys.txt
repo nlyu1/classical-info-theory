@@ -179,6 +179,10 @@ cor:unlabeled-div-95
 prp:unlabeled-div-96
 thm:unlabeled-div-97
 lem:unlabeled-div-98
+thm:unlabeled-div-99
+thm:unlabeled-div-100
+prp:unlabeled-div-101
+prp:unlabeled-div-102
 entropy
 entropy-method-in-combinatorics
 kullback-leibler-divergence
