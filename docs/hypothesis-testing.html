@@ -165,6 +165,11 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#arithmetic-encoder"><i class="fa fa-check"></i>Arithmetic encoder</a></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lempel-ziv"><i class="fa fa-check"></i>Lempel-Ziv</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-28-binary-hypothesis-testing"><i class="fa fa-check"></i>Oct 28: Binary hypothesis testing</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#more-on-universal-compression"><i class="fa fa-check"></i>More on universal compression</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#binary-hypothesis-testing"><i class="fa fa-check"></i>Binary hypothesis testing</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -191,6 +196,9 @@
 <li>The Neyman-Pearson region is reducible to the
 closure of convex hull of deterministic tests (thm:detReduction).
 Use the layer-cake representation to argue convexity.</li>
+<li>The Neyman-Pearson lemma fundamentally follows from convexity,
+and that the supporting
+lines of <span class="math inline">\(\mathcal R(P, Q)\)</span> are given by likelihood tests.</li>
 </ol>
 <div id="npFormulation" class="section level2 unnumbered hasAnchor">
 <h2>Neyman-Pearson formulation<a href="hypothesis-testing.html#npFormulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -203,7 +211,7 @@ the null, respectively.</p>
 <ul>
 <li>A <strong>test</strong> is a (possibly random) decision rule.
 <ul>
-<li>It is deterministic if of form <span class="math inline">\(f:\mathcal X1\to \{0, 1\}\)</span>;
+<li>It is deterministic if of form <span class="math inline">\(f:\mathcal X\to \{0, 1\}\)</span>;
 which partitions the event space.</li>
 <li>More generalized randomized test is specified by a
 kernel <span class="math inline">\(P_{Z|X}:\mathcal X\to \{0, 1\}\)</span> so that <span class="math inline">\(P_{Z|X}(1|x)\in [0, 1]\)</span>
@@ -287,35 +295,204 @@ the convex hull.
 </details>
 <p>We define the extended log-likelihood ratio (LLR) <span class="math inline">\(T(x)\)</span>
 by extending <span class="math inline">\(\log p(x)/q(x)\)</span> in the usual
-manner to <span class="math inline">\(\pm \infty\)</span> if <span class="math inline">\(q, p=0\)</span> respectively and <span class="math inline">\(0\)</span> if both are <span class="math inline">\(0\)</span>.
-Note the following equation:
-<span class="math display">\[\begin{align}
-    Q[T=t] &amp;= \sum Q(x) 1\left[\log \dfrac{P(x)}{Q(x)} = t\right]
-    = \sum Q(x) 1\left[e^t Q(x) = P(x)\right] \\
-    &amp;= e^{-t} \sum P(x) 1[e^t Q(x)=P(x)] = e^{-t}P[T=t]
-\end{align}\]</span></p>
+manner to <span class="math inline">\(\pm \infty\)</span> if <span class="math inline">\(q, p=0\)</span> respectively and <span class="math inline">\(0\)</span> if both are <span class="math inline">\(0\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-88" class="definition"><strong>Definition 11.3  (likelihood ratio test) </strong></span>The LRT with threshold <span class="math inline">\(\tau\in \mathbb R\cup {\pm \infty}\)</span> is defined by
-<span class="math inline">\(\mathrm{LRT}_\tau(x) = 1_{T(x)&gt;\tau}\)</span>.</p>
+<p><span id="def:unlabeled-div-88" class="definition"><strong>Definition 11.3  ((extended) log-likelihood ratio (LLR)) </strong></span>Given <span class="math inline">\(P, Q\)</span>, define LLR by
+<span class="math display">\[
+    T(x) = \begin{cases}
+        0 &amp; q(x) = p(x) = 0 \\
+        \infty &amp; q(x) = 0 \\
+        -\infty &amp; p(x) = 0 \\
+        \log \dfrac{p(x)}{q(x)}
+    \end{cases}
+\]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-89" class="theorem"><strong>Theorem 11.2  </strong></span></p>
+<p><span id="thm:llrProperties" class="theorem"><strong>Theorem 11.2  (properties of LLR, change of measures) </strong></span></p>
 <ol style="list-style-type: decimal">
-<li>For any <span class="math inline">\(h:\mathcal X\to \mathbb R\)</span> we obtain
+<li>Fixing <span class="math inline">\(t\in \mathbb R\)</span>, <span class="math inline">\(Q[T=t] = e^{-t} P[T=t]\)</span>. In other words,
+on the common support of <span class="math inline">\(P, Q\)</span> we obtain
+<span class="math inline">\(dQ = e^{-T} dP\)</span>.</li>
+<li>The expectation value of <span class="math inline">\(h:\mathcal X\to \mathbb R\)</span> on the common
+support of <span class="math inline">\(P, Q\)</span> under the two distributions are related by
 <span class="math display">\[\begin{align}
-\mathbb E_Q\left[h \cdot 1_{T\geq -\infty}\right]
-&amp;= \mathbb E_P[h\cdot e^{-T}] \\
-\mathbb E_P[h \cdot 1_{T&lt;+\infty}] &amp;= \mathbb E_Q[h e^T]
+\mathbb E_Q\left[h \cdot 1_{T&gt; -\infty}\right]
+= \mathbb E_P[h\cdot e^{-T}], \quad
+\mathbb E_P[h \cdot 1_{T&lt;+\infty}] = \mathbb E_Q[h \cdot e^T]
 \end{align}\]</span></li>
 <li>For any <span class="math inline">\(f\geq 0\)</span> and <span class="math inline">\(\tau\in \mathbb R\)</span> we have
 <span class="math display">\[\begin{align}
 \mathbb E_Q[f \cdot 1_{T\geq \tau}] \leq
-e^{-\tau} \mathbb E_P[f\cdot 1_{T\geq \tau}]
-\leq
-e^{-\tau} \mathbb E_P[f\cdot 1_{T\geq \tau}]
+e^{-\tau} \mathbb E_P[f\cdot 1_{T\geq \tau}], \quad
+e^{-\tau} \mathbb E_P[f\cdot 1_{T\leq  \tau}] \leq
+\mathbb E_Q[f\cdot 1_{T\leq \tau}]
 \end{align}\]</span></li>
 </ol>
 </div>
+<details>
+<summary>
+Proof
+</summary>
+To prove (1), compute
+<span class="math display">\[\begin{align}
+    Q[T=t] &amp;= \sum Q(x) 1\left[\log \dfrac{P(x)}{Q(x)} = t\right]
+    = \sum Q(x) 1\left[e^t Q(x) = P(x)\right] \\
+    &amp;= e^{-t} \sum P(x) 1[e^t Q(x)=P(x)] = e^{-t}P[T=t]
+\end{align}\]</span>
+From the definition, note that <span class="math inline">\(Q[T=\infty]=P[T=-\infty]=0\)</span>.
+Then we can w.l.o.g. operate on the common support <span class="math inline">\(R\)</span> of
+<span class="math inline">\(P, Q\)</span>, on which <span class="math inline">\(dQ = e^{-T}\, dP\)</span>
+<span class="math display">\[
+    \mathbb E_Q[h\cdot 1_{T&gt;-\infty}]
+    = \int_R h\, dQ = \int_R e^{-T} h\, dP = \mathbb E_P [h\cdot e^{-T}]
+\]</span>
+The second equation is proved similarly.
+Onto (3), for the first inequality,
+substitute <span class="math inline">\(h\mapsto f\cdot 1_{T\geq \tau}\)</span>
+and <span class="math inline">\(h\mapsto f\cdot 1_{T\leq \tau}\)</span>
+to part (2) to obtain
+<span class="math display">\[\begin{align}
+    \mathbb E_Q[f\cdot 1_{T\geq \tau}]
+    &amp;= \mathbb E_P[f\cdot 1_{T\geq \tau} e^{-T}]
+    \leq e^{-\tau} \, \mathbb E_P[f\cdot 1_{T\geq \tau}] \\
+    \mathbb E_P[f\cdot 1_{T\leq \tau}]
+    &amp;= \mathbb E_Q[f\cdot 1_{T\leq \tau} e^T]
+    \leq e^\tau \mathbb E_Q[f\cdot 1_{T\leq \tau}]
+\end{align}\]</span>
+</details>
+<div class="definition">
+<p><span id="def:unlabeled-div-89" class="definition"><strong>Definition 11.4  (likelihood ratio test) </strong></span>The LRT with threshold <span class="math inline">\(\tau\in \mathbb R\cup {\pm \infty}\)</span> is defined by
+<span class="math inline">\(\mathrm{LRT}_\tau(x) = 1_{T(x)&gt;\tau}\)</span>.</p>
+</div>
+<div class="corollary">
+<p><span id="cor:unlabeled-div-90" class="corollary"><strong>Corollary 11.1  (sufficiency) </strong></span><span class="math inline">\(T\)</span> is sufficient statistic for testing <span class="math inline">\(P\)</span> versus <span class="math inline">\(Q\)</span>.</p>
+</div>
+<p>It suffices to prove that <span class="math inline">\(P_{X|T}=Q_{X|T}\)</span>.
+Note that <span class="math inline">\(P_{T|X}=Q_{T|X}\)</span>, in which case
+<span class="math display">\[\begin{align}
+    P_{X|T}(x|t)
+    &amp;= \dfrac{P_X(x) P_{T|X}(t|x)}{P_T(t)}
+    = \dfrac{P_X(x) 1[dP/dQ = e^t]}{P_T(t)} \\
+    &amp;= \dfrac{e^t Q(x) 1[dP/dQ = e^t]}{P_T(t)}
+    = \dfrac{Q_{XT}(x, t)}{e^{-t}P_T(t)} = Q_{X|T}(x|t)
+\end{align}\]</span></p>
+<p>We proceed to providing two bounds on <span class="math inline">\(\mathcal R(P, Q)\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Converse (outer) bounds: any point in <span class="math inline">\(\mathcal R(P, Q)\)</span>
+must satisfy certain constraints.</li>
+<li>Achievability (innder) bounds: points satisfying certain
+constraints belong to <span class="math inline">\(\mathcal R(P, Q)\)</span>.</li>
+</ol>
+<p>The following result provides an “envelope” for <span class="math inline">\(\mathcal R(P, Q)\)</span>
+and, in fact, applies to any <span class="math inline">\(f\)</span>-divergence. It follows
+from simply applying data-processor <span class="math inline">\(P_{Z|X}\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-91" class="theorem"><strong>Theorem 11.3  (weak converse) </strong></span><span class="math inline">\(\forall (\alpha, \beta)\in \mathcal R(P, Q)\)</span>, we obtain
+<span class="math display">\[
+    d(\alpha \| \beta) \leq D(P\|Q), \quad
+    d(\beta \| \alpha) \leq D(Q\|P)
+\]</span></p>
+</div>
+<div class="lemma">
+<p><span id="lem:unlabeled-div-92" class="lemma"><strong>Lemma 11.1  </strong></span>Given any test <span class="math inline">\(Z\)</span> and <span class="math inline">\(\gamma&gt;0\)</span>, we obtain
+<span class="math display">\[
+    P[Z=0] - \gamma Q[Z=0] \leq P[T&gt;\log \gamma]
+    \iff \alpha - \gamma \beta \leq P[T&gt;\log \gamma]
+\]</span></p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+Let <span class="math inline">\(\tau = \log \gamma\)</span>, apply theorem <a href="hypothesis-testing.html#thm:llrProperties">11.2</a>
+to obtain
+<span class="math display">\[
+    P[Z=0, T\leq \tau] \leq \gamma Q[Z=0, T\leq \tau]
+\]</span>
+Decomposing the marginal <span class="math inline">\(P[Z=0]=P[Z=0, T\leq \tau] + P[Z=0, T&gt;\tau]\)</span> yields
+<span class="math display">\[
+    P[Z=0] - \gamma Q[Z=0]
+    \leq P[Z=0, T&gt;\tau] - Q[Z=0, T&gt;\tau]  \leq P[T&gt;\tau]
+\]</span>
+</details>
+<p>Applying this lemma to <span class="math inline">\((P, Q, \gamma)\)</span> and <span class="math inline">\((P, Q, 1/\gamma)\)</span> yields
+the strong converse. It effectively states that <span class="math inline">\(\mathcal R(P, Q)\)</span>
+is contained in the intersection of an infinite collection of
+halfplanes indexed by <span class="math inline">\(\gamma\)</span>.
+Compared to the weak converse, we need to know the CDF of <span class="math inline">\(T\)</span>
+compared to just the expectation (given by the divergence).</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-93" class="theorem"><strong>Theorem 11.4  (strong converse) </strong></span><span class="math inline">\(\gamma&gt;0, \alpha - \gamma \beta \leq P[T&gt;\log \gamma]\)</span> and
+<span class="math inline">\(\beta - \alpha/\gamma \leq Q[T&lt;\log \gamma]\)</span>.</p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+Proceeding to achievability, a convex set can be efficiently
+dscribed by its supporting hyperplanes. Characterizing <span class="math inline">\(\mathcal R(P, Q)\)</span>
+is thus equivalent to solving, for each <span class="math inline">\(t&gt;0\)</span>,
+<span class="math display">\[
+    \min_{(\alpha, \beta)\in \mathcal R(P, Q)} t\beta - \alpha.
+\]</span>
+To see this, this is looking for the minimal <span class="math inline">\(y\)</span>-intercept <span class="math inline">\(c\)</span>
+of <span class="math inline">\((1, -t)\)</span> such that <span class="math inline">\(t\beta = \alpha + c\)</span> for
+some <span class="math inline">\((\alpha, \beta) \in \mathcal R(P, Q)\)</span>. This is equivalent to
+minimizing weighted probability of error with <span class="math inline">\((1-\alpha, \beta)\)</span>
+weighted by <span class="math inline">\((1, t)\)</span>. To solve this,
+<span class="math display">\[\begin{align}
+    \alpha^* - t\beta^*
+    = \max_{P_{Z|X}} \sum_{x\in \mathcal X} \left[
+        P(x) - t Q(x)
+    \right] P_{Z|X}(0|X)
+    = \sum_{x\in \mathcal X} \max[0, P(X) - tQ(X)]
+\end{align}\]</span>
+The last equality follows from the obvious choice
+<span class="math display">\[
+    P_{Z|X}^*(0|x) = 1\left\{
+        P(x) \geq tQ(x)
+    \right\} = 1_{T\geq \log t}.
+\]</span>
+</details>
+<div class="theorem">
+<p><span id="thm:npLemma" class="theorem"><strong>Theorem 11.5  (Neyman-Pearson lemma) </strong></span>For each <span class="math inline">\(\alpha, \beta_\alpha\)</span> is attained by the test
+<span class="math display">\[
+    P_{Z|X}(0|x) = \begin{cases}
+        1 &amp; T&gt;\tau \\
+        \lambda &amp; T=\tau \\
+        0 &amp; T &lt; \tau
+    \end{cases}, \quad \alpha = P[T&gt;\tau] + \lambda P[T=\tau].
+\]</span></p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+Fixing <span class="math inline">\(\tau\in \mathbb R\)</span>, let <span class="math inline">\(t=e^\tau\)</span>. Given any
+test <span class="math inline">\(P_{Z|X}\)</span>, write <span class="math inline">\(g(x) = P_{Z|X}(0|x)\)</span> be the claimed
+probability of the null. We wish to show that
+<span class="math display">\[
+    \alpha = E_P[g] = P[T&gt;\tau] + \lambda P[T=\tau]
+    \implies \beta = \mathbb E_Q[g] \geq Q[T&gt;\tau] + \lambda Q[T=\tau].
+\]</span>
+Apply theorem <a href="hypothesis-testing.html#thm:llrProperties">11.2</a> twice yields
+<span class="math display">\[\begin{align}
+    \beta
+    &amp;= \mathbb E_Q[g\cdot 1_{T&gt;\tau}] + \mathbb E_Q[g\cdot 1_{T\leq \tau}]
+    \geq \mathbb E_Q[g\cdot 1_{T&gt;\tau}] +
+    \dfrac 1 t \mathbb E_P[g\cdot 1_{T\leq \tau}] \\
+    &amp;= \mathbb E_Q[g\cdot 1_{T&gt;\tau}] + \dfrac 1 t \left(
+        \mathbb E_P\left[(1-g) 1_{T&gt;\tau}\right]
+        + \lambda P[T=\tau]
+    \right) \\
+    &amp;\geq
+    \mathbb E_Q[g\cdot 1_{T&gt;\tau}] + \mathbb E_Q[(1-g) 1_{T&gt;\tau}]
+    + \lambda Q[T=\tau]  \\
+    &amp;= Q[T&gt;\tau] + \lambda Q[T=\tau]
+\end{align}\]</span>
+Inspecting the saturation conditions yield the LLR
+test as claimed.
+</details>
 
 </div>
 </div>

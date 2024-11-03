@@ -165,6 +165,11 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#arithmetic-encoder"><i class="fa fa-check"></i>Arithmetic encoder</a></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lempel-ziv"><i class="fa fa-check"></i>Lempel-Ziv</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-28-binary-hypothesis-testing"><i class="fa fa-check"></i>Oct 28: Binary hypothesis testing</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#more-on-universal-compression"><i class="fa fa-check"></i>More on universal compression</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#binary-hypothesis-testing"><i class="fa fa-check"></i>Binary hypothesis testing</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -222,7 +227,7 @@ Recall that Donsker-varadhan is not linear in <span class="math inline">\(\mathb
 but there is a standard trick to rewrite the expectation.</p>
 <p>We now apply the variational characterization to <span class="math inline">\(\chi^2\)</span>;</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-90" class="proposition"><strong>Proposition 12.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
+<p><span id="prp:unlabeled-div-94" class="proposition"><strong>Proposition 12.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
 </div>
 <p>Expanding this out, the first term is very useful;
 but the second is not. The first step is to break a single
@@ -310,7 +315,7 @@ towards it.</p>
 <div id="hcr-inequality-fisher-information" class="section level3 unnumbered hasAnchor">
 <h3>HCR inequality; Fisher information<a href="lecture-notes.html#hcr-inequality-fisher-information" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-91" class="proposition"><strong>Proposition 12.2  </strong></span><span class="math inline">\(\forall \hat \theta\)</span> and <span class="math inline">\(\theta, \theta_0\)</span> we have
+<p><span id="prp:unlabeled-div-95" class="proposition"><strong>Proposition 12.2  </strong></span><span class="math inline">\(\forall \hat \theta\)</span> and <span class="math inline">\(\theta, \theta_0\)</span> we have
 <span class="math display">\[
     R_n^* \geq \mathrm{Var}_{P^\theta} \geq \dfrac{
         \left(\mathbb E_{P^\theta} \hat \theta
@@ -376,7 +381,7 @@ more assumptions.</p>
 <div id="oct-7-data-compression" class="section level2 unnumbered hasAnchor">
 <h2>Oct 7: Data compression<a href="lecture-notes.html#oct-7-data-compression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-92" class="theorem"><strong>Theorem 12.1  (local expansion of χ) </strong></span>For <span class="math inline">\(\theta_0 = 0\)</span>, when the following conditions hold:</p>
+<p><span id="thm:unlabeled-div-96" class="theorem"><strong>Theorem 12.1  (local expansion of χ) </strong></span>For <span class="math inline">\(\theta_0 = 0\)</span>, when the following conditions hold:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\theta \in [0, \tau)\)</span>.</li>
 <li>There exists <span class="math inline">\(\dot p^\theta(x)\)</span> satisfying
@@ -415,7 +420,7 @@ a one-parameter family; with the notation <span class="math inline">\(\mathcal J
 we’re assuming the one-parameter family to be the location family
 of the given density.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-93" class="theorem"><strong>Theorem 12.2  (van Trees inequality) </strong></span>Under regularity assumptions on <span class="math inline">\(P^\theta\)</span>,
+<p><span id="thm:unlabeled-div-97" class="theorem"><strong>Theorem 12.2  (van Trees inequality) </strong></span>Under regularity assumptions on <span class="math inline">\(P^\theta\)</span>,
 for every estimator <span class="math inline">\(\hat \theta(X)\)</span> and prior
 <span class="math inline">\(\pi\)</span>
 <span class="math display">\[
@@ -426,7 +431,7 @@ for every estimator <span class="math inline">\(\hat \theta(X)\)</span> and prio
 \]</span></p>
 </div>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-94" class="corollary"><strong>Corollary 12.1  </strong></span>For <span class="math inline">\(n\)</span> i.i.d. observations, for every <span class="math inline">\(\pi\)</span>
+<p><span id="cor:unlabeled-div-98" class="corollary"><strong>Corollary 12.1  </strong></span>For <span class="math inline">\(n\)</span> i.i.d. observations, for every <span class="math inline">\(\pi\)</span>
 <span class="math display">\[
     R_n^* \geq \dfrac 1 {\mathcal J(\pi) +
     n\mathbb E_{\theta \sim \pi} \mathcal J_F(\theta)}
@@ -492,7 +497,7 @@ law of large numbers (in log-space).</li>
 <p>Distribution of compression length is distributed (up to constants)
 as the entropy density. This is great because entropy density tensorizes.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-95" class="proposition"><strong>Proposition 12.3  (distribution of compression length) </strong></span>Define random variable <span class="math inline">\(L^* = l(f^*(X))\)</span>.
+<p><span id="prp:unlabeled-div-99" class="proposition"><strong>Proposition 12.3  (distribution of compression length) </strong></span>Define random variable <span class="math inline">\(L^* = l(f^*(X))\)</span>.
 Denote the entropy density <span class="math inline">\(i_X(a) = -\log P_X(a)\)</span>;
 the optimal compressor should compress symbol <span class="math inline">\(a\)</span> to roughly
 this length:
@@ -571,7 +576,7 @@ then we can close-to-optimal compress a non-i.i.d. distribution
 by combining this with the arithmetic encoder.
 </u></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-96" class="theorem"><strong>Theorem 12.3  (Shannon-McMillan-Breimen) </strong></span>A.e.p. holds w.r.t. the entropy rate
+<p><span id="thm:unlabeled-div-100" class="theorem"><strong>Theorem 12.3  (Shannon-McMillan-Breimen) </strong></span>A.e.p. holds w.r.t. the entropy rate
 if <span class="math inline">\(\{X_j\}\)</span> is a stationary (ensures
 existence of the entropy rate) ergodic process.</p>
 </div>
@@ -583,7 +588,7 @@ approximated by a <span class="math inline">\(m\to \infty\)</span>-order Markov 
 <h3>Lempel-Ziv<a href="lecture-notes.html#lempel-ziv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Central question: how to compress well without <span class="math inline">\(P_{X^n}\)</span>?</p>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-97" class="lemma"><strong>Lemma 12.1  (Katz's lemma) </strong></span>Given a stationary ergodic process <span class="math inline">\((X_{j\in \mathbb Z})\)</span>.
+<p><span id="lem:unlabeled-div-101" class="lemma"><strong>Lemma 12.1  (Katz's lemma) </strong></span>Given a stationary ergodic process <span class="math inline">\((X_{j\in \mathbb Z})\)</span>.
 Define <span class="math inline">\(L = \inf\{t&gt;0: X_{-t}=X_0\}\)</span>, then
 <span class="math display">\[
     \mathbb E[L | X_0=u] = \mathrm{Pr}[X_0=u]^{-1}
@@ -605,6 +610,172 @@ by looking back.</p>
 Do probability mixtures satisfy all of the local Fisher
 regularity conditions?
 </span></p>
+</div>
+</div>
+<div id="oct-28-binary-hypothesis-testing" class="section level2 unnumbered hasAnchor">
+<h2>Oct 28: Binary hypothesis testing<a href="lecture-notes.html#oct-28-binary-hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Agenda:</p>
+<ol style="list-style-type: decimal">
+<li>Finish universal compression.</li>
+<li>Define binary hypothesis testing; define <span class="math inline">\(R(P, Q)\)</span>.</li>
+<li>Stein’s lemma.</li>
+</ol>
+<div id="more-on-universal-compression" class="section level3 unnumbered hasAnchor">
+<h3>More on universal compression<a href="lecture-notes.html#more-on-universal-compression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall that universal compression wants to compress
+<span class="math inline">\(P_{X^n}\)</span> to entropy, where <span class="math inline">\(P_{X^n}\)</span> is unknown
+and drawn from a class <span class="math inline">\(\Pi\)</span>.</p>
+<p>The <strong>fundamental limit</strong> of compression is
+<em>the redundancy of class <span class="math inline">\(\Pi\)</span></em>, defined by
+<span class="math display">\[
+    R_n^*(\Pi) = \inf_{Q_{X^n}}
+    \sup_{P_{X^n}\in \Pi} \mathbb E_{X^n\sim P_{X^n}}
+    \log \dfrac 1 {Q_{X^n}(X^n)} - H(X^n)
+\]</span>
+Note the order of <span class="math inline">\(\inf\)</span> and <span class="math inline">\(\sup\)</span>! Else
+the “redundancy” would be trivial.</p>
+<p>It turns out that for the uniform mixture of
+all Bernoullis approximately, for all <span class="math inline">\(\theta\)</span>.
+<span class="math display">\[
+    Q_{X^n} = \int_0^1 d\theta\, \mathrm{Ber}(\theta)^{\otimes n}
+\]</span>
+satisfies <span class="math inline">\(D(\mathrm{Ber}(\theta)^{\otimes n} \| Q_{X^n}) \leq \log n\)</span>
+To see this, for non-extremal <span class="math inline">\(\theta, \theta&#39;\)</span> we have
+<span class="math display">\[
+    d(\theta \| \theta&#39;) \approx \dfrac 1 2 (\theta - \theta&#39;)^2
+\]</span>
+The distribution <span class="math inline">\(Q_{X^n}\)</span> is the <em>universal probability assignment.</em>
+(or maximally ignorant</p>
+<p><strong>Universal data compression (probability assignment) <span class="math inline">\(\approx\)</span>
+choosing the best prior.</strong></p>
+<p>The most important theorem: redundancy is equal to the following capacity:
+<span class="math display">\[
+    R_n^*(\Pi) = \sup_{\pi \in \mathcal P(\Pi)} I(\theta; X^n)
+\]</span></p>
+<p><u>Jeffrey’s (objective) prior</u>: given smoothness conditions for a family <span class="math inline">\(\Theta\)</span>,
+we have
+<span class="math display">\[\begin{align}
+    R_n^*(\Theta)
+    &amp;= \dfrac d 2 \log \dfrac{n}{2\pi e} + \log \int_{\Theta}
+    \sqrt{\det \mathcal J_F(\theta)}\, d\theta + o(1) \\
+    \pi_n^* &amp;\to \pi_\infty^* \text{ weakly }
+    = \dfrac 1 Z \sqrt{\det \mathcal J_F(\theta)}\, d\theta
+\end{align}\]</span>
+The objective prior is invariant to
+reparameterizations. Importantly, for Bernoullis the Jeffreys prior is
+<span class="math display">\[\begin{align}
+    \pi^*(\theta) = \dfrac 1 {\theta(1 - \theta)}\quad k=2, \text{ else }
+    \mathrm{Direchlet}(1/2, \dots, 1/2).
+\end{align}\]</span>
+The marginal estimator <span class="math inline">\(Q_{X_t|X_1^{t-1}}\)</span> turns out to correspond
+to the add-half estimator (KT code).</p>
+<p><em>Connection between universal compression and sequential prediction</em>:
+Recalling the setup of sequential prediction, for each step the predictor
+is penalized by the negative log likelihood (with minimizer given by the true
+distribution). From learning theory, the natural metric for this problem
+(of a complexity of a class <span class="math inline">\(\Pi\)</span>) is
+<span class="math display">\[
+    \sup_{P_X\in \Pi} \mathbb E\sum_{t=1}^n
+    \log \dfrac 1 {\tilde P_t(X_t; X_1^{t-1})}
+    - \log \dfrac 1 {P_{X_t|X_1^{t-1}}}
+\]</span>
+If some estimator achieves <span class="math inline">\(o(n)\)</span> for the preceding quantity,
+then the class is learnable since the estimator is asymptotically as
+good as the oracle. It turns out that
+<span class="math display">\[
+    \inf_{\tilde P} \text{regret} = R_n^*(\Pi).
+\]</span>
+Relation to <em>in-context learning</em>: training phase allows for representation
+for different generating procedures (e.g. Jeffreys prior),
+and context chooses the posterior which specializes to the suitable
+data-generating process.</p>
+<p><strong>Every regret-minimizing estimator is an in-context learner.</strong>
+This is related to a theorem for density estimation (related to the
+Young-Barron bound):
+given <span class="math inline">\(X_1, \cdots X_n\sim P\in \Pi\)</span> i.i.d, we wish to find <span class="math inline">\(\tilde P\)</span>
+which will estimate <span class="math inline">\(P\)</span> very well.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-102" class="theorem"><strong>Theorem 12.4  </strong></span>For every i.i.d. class <span class="math inline">\(\Pi\)</span> as above, there exists estimator such that
+<span class="math display">\[
+    \mathbb E\mathrm{TV}^2 \leq \mathbb ED(P\|\tilde P_{\text{this is random}})
+    \leq \dfrac{R_{n+1}^*(\Pi)}{n+1}
+\]</span></p>
+</div>
+<div style="color:blue">
+<p>This is a very insightful theorem since the right-hand side quantity
+can be upper-bounded by the redundancy theorem.
+Universal data compression (information)
+reduces to the problem of universal probability assignment,
+which is simultaneously the core of density estimation (statistics)
+and sequential prediction (learning).</p>
+<p><strong>Minimum description length principle</strong>: the more likely
+(class) of data-generating process is the one under whose universal
+compressor compresses the data down to a smaller length; this
+is equivalent to point-point hypothesis testing after collapsing
+the classes down to their universal prior.</p>
+</div>
+</div>
+<div id="binary-hypothesis-testing" class="section level3 unnumbered hasAnchor">
+<h3>Binary hypothesis testing<a href="lecture-notes.html#binary-hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We are interested in simple v. simple hypothesis testing i.e. 
+distinguishing beween <span class="math inline">\(\theta_1\neq \theta_2\in \Theta\)</span> (Neyman-Pearson);
+equivalently, distinguishing between <span class="math inline">\(P_{X^n}\)</span> and <span class="math inline">\(Q_{X^n}\)</span>.
+Our goal is to design a binary estimator <span class="math inline">\(Z=Z(X^n)\in \{0, 1\}\)</span>, with
+<span class="math inline">\(0\)</span> denoting <span class="math inline">\(X^n\sim P\)</span> and <span class="math inline">\(1\)</span> denoting <span class="math inline">\(X^n\sim Q\)</span>
+(the first serious treatment originated with radars detecting incoming planes).
+Two associated quantities:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\alpha = P[Z=0]\)</span>: probability of success under <span class="math inline">\(P\)</span>.</li>
+<li><span class="math inline">\(\beta = Q[Z=0]\)</span>: probability of failure under <span class="math inline">\(Q\)</span>.</li>
+</ol>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-103" class="theorem"><strong>Theorem 12.5  (Stein's lemma) </strong></span>Among all tests with <span class="math inline">\(\alpha \geq 1 - \epsilon\)</span>, the smallest possible
+<span class="math inline">\(\beta = e^{-nD(P\|Q) + o_\epsilon(n)}\)</span> assuming <span class="math inline">\(X_j^n\sim P\)</span> or <span class="math inline">\(Q\)</span>.</p>
+</div>
+<p>Several comments:</p>
+<ol style="list-style-type: decimal">
+<li>This theorem is not symmetric w.r.t. <span class="math inline">\(P\leftrightarrow Q\)</span>.</li>
+<li>The dependence upon <span class="math inline">\(\epsilon\)</span> is captured in <span class="math inline">\(o_\epsilon(n)\)</span>.</li>
+</ol>
+<p>To reason about binary hypothesis testing, define
+<span class="math display">\[
+    \mathcal R(P, Q) = \{(P[Z=0], Q[Z=0])\}
+\]</span></p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-104" class="proposition"><strong>Proposition 12.4  </strong></span><span class="math inline">\(\mathcal R\subset [0, 1]^2\)</span> is closed, convex, symmetric
+w.r.t. <span class="math inline">\((1/2, 1/2)\)</span>, and
+<span class="math display">\[
+    \mathcal R = \overline{\mathrm{co}\,
+        \mathcal R_{\mathrm{det}}(P, Q)
+    }
+\]</span>
+where <span class="math inline">\(\mathcal R_{\mathrm{det}}\)</span> denotes the set of deterministic
+joint ranges.</p>
+</div>
+<p>As a corollary, the problem can be simplified by noting that
+<span class="math display">\[
+    \mathcal R_{\mathrm{det}} = \{(P[E], Q[E]), \quad E\in \mathcal X\}
+\]</span>
+For the Bernoulli case, <span class="math inline">\(E\)</span> takes values in <span class="math inline">\(\{\emptyset, 0, 1, \mathcal X\}\)</span>.
+The first and last cases correspond to <span class="math inline">\((0, 0)\)</span> and <span class="math inline">\((1, 1)\)</span>.</p>
+<p>Perspective on the proof of the NP-lemma:
+to understand <span class="math inline">\(\mathcal R_{\mathrm{det}}\)</span>, it suffices to understand
+its extremal points, which corresponds to the problem
+<span class="math display">\[
+    \sup_Z P[Z=0]_{=\alpha} - e^\gamma Q[Z=0]_{=\beta}
+\]</span>
+The parameterization <span class="math inline">\(e^\gamma\)</span> simply assures positivity.
+We “scan” over the supporting hyperplanes with a certain offset.
+The upshot is that BHT boils down to computing <span class="math inline">\(P[\log P/Q &gt; \gamma]\)</span>
+and <span class="math inline">\(Q[\log P/Q &lt; \gamma]\)</span> for a range of <span class="math inline">\(\gamma\)</span>’s.</p>
+<p>The “fatter” this joint range is, the more distinguishable the
+two distributions are; identical distributions correspond to the
+line <span class="math inline">\(\alpha=\beta\)</span> with zero measure. This motivates the
+following results:</p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-105" class="proposition"><strong>Proposition 12.5  </strong></span><span class="math inline">\(d(\alpha \| \beta) \leq D(P\|Q)\)</span> for <span class="math inline">\(\alpha, \beta \in \mathcal R\)</span>.
+This results from applying DPI to the estimator <span class="math inline">\(Z\)</span>.</p>
+</div>
 
 </div>
 </div>
