@@ -1,0 +1,123 @@
+# Hypothesis Testing
+
+Key takeaways:
+
+1. The Neyman-Pearson region is reducible to the 
+    closure of convex hull of deterministic tests \ref(thm:detReduction). 
+    Use the layer-cake representation to argue convexity. 
+
+## Neyman-Pearson formulation {#npFormulation -}
+
+:::{.definition name="NP formulation of BHT"}
+Consider two distributions $P, Q$ on $\Omega$, one 
+of which generated our observation $X$. 
+The two hypotheses are $H_0:X\sim P$ and $H_1:X\sim Q$. 
+Let $Z=\{0, 1\}$ denote accepting and rejecting 
+the null, respectively. 
+
+- A **test** is a (possibly random) decision rule. 
+    - It is deterministic if of form $f:\mca X1\to \{0, 1\}$; 
+    which partitions the event space. 
+    - More generalized randomized test is specified by a 
+    kernel $P_{Z|X}:\mca X\to \{0, 1\}$ so that $P_{Z|X}(1|x)\in [0, 1]$ 
+    is the probability of rejecting the null upon observing $X=x$. 
+- $\alpha = \pi_{0|0} = P[Z=0]$: probability of success given $H_0$ is true. 
+    - $1 - \alpha$ is the false positive rate. 
+- $\beta = \pi_{0|1} = Q[Z=0]$: probability of error given $H_1$ is true. 
+    - $1-\beta$ is the power. 
+:::
+
+:::{.definition name="Neyman-Pearson region"}
+Given $(P, Q)$, the Neyman-Pearson region consists of achievable 
+points for all randomized tests 
+\[ 
+    \mca R(P, Q) = \{(P[Z=0], Q[Z=0]):\forall P_{Z|X}:
+    \mca X\to \{0, 1\}\}\subset [0, 1]^2. 
+\] 
+Fixing $\alpha$, we wish to obtain the lowest $\beta$, so the 
+lower boundary is defined by 
+\[ 
+    \beta_\alpha(P, Q) = \inf_{P[Z=0]\geq \alpha} Q[Z=0]
+\] 
+Each deterministic test corresponds to a measurable subset $E$, 
+so the deterministic Neyman-Pearson region is specified by 
+\[ 
+    \mca R_{\mrm{det}}(P, Q) = \{(P[E], Q[E]): E\text{ measurable}\}. 
+\] 
+:::
+Note that $\mca R(P, Q)=[0, 1]^2$ if $P\perp Q$, while it's the 
+zero-measure diagonal if $P=Q$. 
+
+:::{.proposition name="properties of the NP region"}
+
+1. $\mca R(P, Q)$ is closed and convex. 
+2. $\mca R(P, Q)$ contains the diagonal. 
+3. $\mca R(P, Q)$ is symmetric about $\alpha=\beta$. 
+:::
+<details>
+<summary>Proof</summary>
+Given $(\alpha_0, \beta_0), (\alpha_1, \beta_1)\in \mca R(P, Q)$ 
+corresponding to tests $P_{Z_0|X}, P_{Z_1|X}$, and randomizing between 
+the two tests yield the desired convexity. Closeness is established later. 
+Testing by random guessing $Z\sim \mrm{Ber}(1-\alpha)\perp X$ achieves 
+$(\alpha, \alpha)$. To establish symmetry, $P_{1-Z|X}$ 
+achieves $(1-\alpha, 1-\beta)$. 
+</details>
+
+:::{.theorem #detReduction name="reduction to deterministic tests"}
+$\mca R(P, Q) = \overline{\mrm{co}(\mca R_{\mrm{det}}(P, Q))}$. 
+Consequently, if $P, Q$ are on a finite alphabet $\mca X$, then 
+$\mca R(P, Q)$ is a polygon of at most $2^{|X|}$ vertices. 
+:::
+<details>
+<summary>Proof</summary>
+To prove the nontrivial direction $\subset$, given any 
+randomized $P_{Z|X}$, define $g:\mca X\to [0, 1]$ 
+by $g(x) = P_{Z|X}(0|X)$, the 
+\begin{align}
+    P[Z=0] &= \sum_x g(x)P(x) = \Exp_P[g] = \int_0^1 P[g\geq t ]\, dt \\ 
+    Q[Z=0] &= \Exp_Q[g] = \int_0^1 Q[g\geq t]\, dt 
+\end{align}
+The last inequality holds because for any nonnegative r.v, 
+it has an integral representation in terms of indicator r.v's $1_{U\geq t}$ 
+by $U = \int_0^\infty 1_{U\geq t}\, dt$ so 
+\begin{align}
+    \Exp[U] = \Exp\left[\int_0^\infty 1_{U\geq t}\, dt\right] 
+    = \int_0^\infty \Exp[1_{U\geq t}]\, dt 
+\end{align}
+Thus $(P[Z=0], Q[Z=0])$ is a mixture of points 
+$(P[g\geq t], Q[g\geq t])\in \mca R_{\mrm{det}}$ thus in the closure of 
+the convex hull. 
+</details> 
+
+We define the extended log-likelihood ratio (LLR) $T(x)$ 
+by extending $\log p(x)/q(x)$ in the usual 
+manner to $\pm \infty$ if $q, p=0$ respectively and $0$ if both are $0$. 
+Note the following equation: 
+\begin{align}
+    Q[T=t] &= \sum Q(x) 1\left[\log \df{P(x)}{Q(x)} = t\right] 
+    = \sum Q(x) 1\left[e^t Q(x) = P(x)\right] \\ 
+    &= e^{-t} \sum P(x) 1[e^t Q(x)=P(x)] = e^{-t}P[T=t]
+\end{align}
+
+:::{.definition name="likelihood ratio test"}
+The LRT with threshold $\tau\in \R\cup {\pm \infty}$ is defined by 
+$\mrm{LRT}_\tau(x) = 1_{T(x)>\tau}$. 
+:::
+
+:::{.theorem}
+
+1. For any $h:\mca X\to \R$ we obtain 
+\begin{align}
+    \Exp_Q\left[h \cdot 1_{T\geq -\infty}\right] 
+    &= \Exp_P[h\cdot e^{-T}] \\ 
+    \Exp_P[h \cdot 1_{T<+\infty}] &= \Exp_Q[h e^T]
+\end{align}
+2. For any $f\geq 0$ and $\tau\in \R$ we have 
+\begin{align}
+    \Exp_Q[f \cdot 1_{T\geq \tau}] \leq 
+    e^{-\tau} \Exp_P[f\cdot 1_{T\geq \tau}] 
+    \leq 
+    e^{-\tau} \Exp_P[f\cdot 1_{T\geq \tau}]
+\end{align}
+:::
