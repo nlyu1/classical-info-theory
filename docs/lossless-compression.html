@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10 Lossless compression | 6.7480 Notes</title>
   <meta name="description" content="10 Lossless compression | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10 Lossless compression | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-10-28" />
+<meta name="date" content="2024-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="statistical-decision-applications.html"/>
-<link rel="next" href="placeholder.html"/>
+<link rel="next" href="hypothesis-testing.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -146,16 +146,11 @@
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#fixed-length-source-coding"><i class="fa fa-check"></i>Fixed-length source coding</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>11</b> Placeholder</a></li>
-<li class="chapter" data-level="12" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html"><i class="fa fa-check"></i><b>12</b> Entropy of Ergodic Processes</a>
+<li class="chapter" data-level="11" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>11</b> Hypothesis Testing</a>
 <ul>
-<li class="chapter" data-level="" data-path="entropy-of-ergodic-processes.html"><a href="entropy-of-ergodic-processes.html#stochasticProcessPrelim"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#npFormulation"><i class="fa fa-check"></i>Neyman-Pearson formulation</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="universal-compression.html"><a href="universal-compression.html"><i class="fa fa-check"></i><b>13</b> Universal compression</a>
-<ul>
-<li class="chapter" data-level="" data-path="universal-compression.html"><a href="universal-compression.html#arithmetic-encoding"><i class="fa fa-check"></i>Arithmetic encoding</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>14</b> Lecture notes</a>
+<li class="chapter" data-level="12" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>12</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -379,8 +374,7 @@ The inequality is saturated by the geometric distribution.</p>
 <summary>
 Proof
 </summary>
-Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1,
-\mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
+Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1, \mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
 <span class="math display">\[\begin{align}
     H(X) - \mathbb E[X] h(p)
     &amp;= \mathbb E\left[-\log p(x) - x[-p\log p - \bar p\log \bar p]\right] \\
@@ -697,7 +691,7 @@ and <span class="math inline">\(|T_n^\delta| \leq \exp[n(H(S)+\delta)]\)</span>.
         </div>
       </div>
 <a href="statistical-decision-applications.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="placeholder.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="hypothesis-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

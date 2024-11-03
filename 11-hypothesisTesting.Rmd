@@ -1,0 +1,295 @@
+# Hypothesis Testing
+
+Key takeaways:
+
+1. The Neyman-Pearson region is reducible to the 
+    closure of convex hull of deterministic tests \ref(thm:detReduction). 
+    Use the layer-cake representation to argue convexity. 
+2. The Neyman-Pearson lemma fundamentally follows from convexity, 
+    and that the supporting 
+    lines of $\mca R(P, Q)$ are given by likelihood tests. 
+
+## Neyman-Pearson formulation {#npFormulation -}
+
+:::{.definition name="NP formulation of BHT"}
+Consider two distributions $P, Q$ on $\Omega$, one 
+of which generated our observation $X$. 
+The two hypotheses are $H_0:X\sim P$ and $H_1:X\sim Q$. 
+Let $Z=\{0, 1\}$ denote accepting and rejecting 
+the null, respectively. 
+
+- A **test** is a (possibly random) decision rule. 
+    - It is deterministic if of form $f:\mca X\to \{0, 1\}$; 
+    which partitions the event space. 
+    - More generalized randomized test is specified by a 
+    kernel $P_{Z|X}:\mca X\to \{0, 1\}$ so that $P_{Z|X}(1|x)\in [0, 1]$ 
+    is the probability of rejecting the null upon observing $X=x$. 
+- $\alpha = \pi_{0|0} = P[Z=0]$: probability of success given $H_0$ is true. 
+    - $1 - \alpha$ is the false positive rate. 
+- $\beta = \pi_{0|1} = Q[Z=0]$: probability of error given $H_1$ is true. 
+    - $1-\beta$ is the power. 
+:::
+
+:::{.definition name="Neyman-Pearson region"}
+Given $(P, Q)$, the Neyman-Pearson region consists of achievable 
+points for all randomized tests 
+\[ 
+    \mca R(P, Q) = \{(P[Z=0], Q[Z=0]):\forall P_{Z|X}:
+    \mca X\to \{0, 1\}\}\subset [0, 1]^2. 
+\] 
+Fixing $\alpha$, we wish to obtain the lowest $\beta$, so the 
+lower boundary is defined by 
+\[ 
+    \beta_\alpha(P, Q) = \inf_{P[Z=0]\geq \alpha} Q[Z=0]
+\] 
+Each deterministic test corresponds to a measurable subset $E$, 
+so the deterministic Neyman-Pearson region is specified by 
+\[ 
+    \mca R_{\mrm{det}}(P, Q) = \{(P[E], Q[E]): E\text{ measurable}\}. 
+\] 
+:::
+Note that $\mca R(P, Q)=[0, 1]^2$ if $P\perp Q$, while it's the 
+zero-measure diagonal if $P=Q$. 
+
+:::{.proposition name="properties of the NP region"}
+
+1. $\mca R(P, Q)$ is closed and convex. 
+2. $\mca R(P, Q)$ contains the diagonal. 
+3. $\mca R(P, Q)$ is symmetric about $\alpha=\beta$. 
+:::
+<details>
+<summary>Proof</summary>
+Given $(\alpha_0, \beta_0), (\alpha_1, \beta_1)\in \mca R(P, Q)$ 
+corresponding to tests $P_{Z_0|X}, P_{Z_1|X}$, and randomizing between 
+the two tests yield the desired convexity. Closeness is established later. 
+Testing by random guessing $Z\sim \mrm{Ber}(1-\alpha)\perp X$ achieves 
+$(\alpha, \alpha)$. To establish symmetry, $P_{1-Z|X}$ 
+achieves $(1-\alpha, 1-\beta)$. 
+</details>
+
+:::{.theorem #detReduction name="reduction to deterministic tests"}
+$\mca R(P, Q) = \overline{\mrm{co}(\mca R_{\mrm{det}}(P, Q))}$. 
+Consequently, if $P, Q$ are on a finite alphabet $\mca X$, then 
+$\mca R(P, Q)$ is a polygon of at most $2^{|X|}$ vertices. 
+:::
+<details>
+<summary>Proof</summary>
+To prove the nontrivial direction $\subset$, given any 
+randomized $P_{Z|X}$, define $g:\mca X\to [0, 1]$ 
+by $g(x) = P_{Z|X}(0|X)$, the 
+\begin{align}
+    P[Z=0] &= \sum_x g(x)P(x) = \Exp_P[g] = \int_0^1 P[g\geq t ]\, dt \\ 
+    Q[Z=0] &= \Exp_Q[g] = \int_0^1 Q[g\geq t]\, dt 
+\end{align}
+The last inequality holds because for any nonnegative r.v, 
+it has an integral representation in terms of indicator r.v's $1_{U\geq t}$ 
+by $U = \int_0^\infty 1_{U\geq t}\, dt$ so 
+\begin{align}
+    \Exp[U] = \Exp\left[\int_0^\infty 1_{U\geq t}\, dt\right] 
+    = \int_0^\infty \Exp[1_{U\geq t}]\, dt 
+\end{align}
+Thus $(P[Z=0], Q[Z=0])$ is a mixture of points 
+$(P[g\geq t], Q[g\geq t])\in \mca R_{\mrm{det}}$ thus in the closure of 
+the convex hull. 
+</details> 
+
+We define the extended log-likelihood ratio (LLR) $T(x)$ 
+by extending $\log p(x)/q(x)$ in the usual 
+manner to $\pm \infty$ if $q, p=0$ respectively and $0$ if both are $0$. 
+
+:::{.definition name="(extended) log-likelihood ratio (LLR)"}
+Given $P, Q$, define LLR by 
+\[ 
+    T(x) = \begin{cases}
+        0 & q(x) = p(x) = 0 \\ 
+        \infty & q(x) = 0 \\
+        -\infty & p(x) = 0 \\
+        \log \df{p(x)}{q(x)} 
+    \end{cases}
+\] 
+:::
+
+:::{.theorem #llrProperties name="properties of LLR, change of measures"}
+
+1. Fixing $t\in \R$, $Q[T=t] = e^{-t} P[T=t]$. In other words, 
+    on the common support of $P, Q$ we obtain 
+    $dQ = e^{-T} dP$. 
+2. The expectation value of $h:\mca X\to \R$ on the common 
+    support of $P, Q$ under the two distributions are related by 
+\begin{align}
+    \Exp_Q\left[h \cdot 1_{T> -\infty}\right] 
+    = \Exp_P[h\cdot e^{-T}], \quad 
+    \Exp_P[h \cdot 1_{T<+\infty}] = \Exp_Q[h \cdot e^T]
+\end{align}
+3. For any $f\geq 0$ and $\tau\in \R$ we have 
+\begin{align}
+    \Exp_Q[f \cdot 1_{T\geq \tau}] \leq 
+    e^{-\tau} \Exp_P[f\cdot 1_{T\geq \tau}], \quad 
+    e^{-\tau} \Exp_P[f\cdot 1_{T\leq  \tau}] \leq 
+    \Exp_Q[f\cdot 1_{T\leq \tau}]
+\end{align}
+:::
+<details>
+<summary>Proof</summary>
+To prove (1), compute 
+\begin{align}
+    Q[T=t] &= \sum Q(x) 1\left[\log \df{P(x)}{Q(x)} = t\right] 
+    = \sum Q(x) 1\left[e^t Q(x) = P(x)\right] \\ 
+    &= e^{-t} \sum P(x) 1[e^t Q(x)=P(x)] = e^{-t}P[T=t]
+\end{align}
+From the definition, note that $Q[T=\infty]=P[T=-\infty]=0$. 
+Then we can w.l.o.g. operate on the common support $R$ of 
+$P, Q$, on which $dQ = e^{-T}\, dP$ 
+\[ 
+    \Exp_Q[h\cdot 1_{T>-\infty}] 
+    = \int_R h\, dQ = \int_R e^{-T} h\, dP = \Exp_P [h\cdot e^{-T}]
+\] 
+The second equation is proved similarly. 
+Onto (3), for the first inequality, 
+substitute $h\mapsto f\cdot 1_{T\geq \tau}$ 
+and $h\mapsto f\cdot 1_{T\leq \tau}$ 
+to part (2) to obtain 
+\begin{align}
+    \Exp_Q[f\cdot 1_{T\geq \tau}] 
+    &= \Exp_P[f\cdot 1_{T\geq \tau} e^{-T}] 
+    \leq e^{-\tau} \, \Exp_P[f\cdot 1_{T\geq \tau}] \\ 
+    \Exp_P[f\cdot 1_{T\leq \tau}] 
+    &= \Exp_Q[f\cdot 1_{T\leq \tau} e^T] 
+    \leq e^\tau \Exp_Q[f\cdot 1_{T\leq \tau}]
+\end{align}
+</details> 
+
+:::{.definition name="likelihood ratio test"}
+The LRT with threshold $\tau\in \R\cup {\pm \infty}$ is defined by 
+$\mrm{LRT}_\tau(x) = 1_{T(x)>\tau}$. 
+:::
+
+:::{.corollary name="sufficiency"}
+$T$ is sufficient statistic for testing $P$ versus $Q$. 
+:::
+It suffices to prove that $P_{X|T}=Q_{X|T}$. 
+Note that $P_{T|X}=Q_{T|X}$, in which case 
+\begin{align}
+    P_{X|T}(x|t) 
+    &= \df{P_X(x) P_{T|X}(t|x)}{P_T(t)} 
+    = \df{P_X(x) 1[dP/dQ = e^t]}{P_T(t)} \\ 
+    &= \df{e^t Q(x) 1[dP/dQ = e^t]}{P_T(t)} 
+    = \df{Q_{XT}(x, t)}{e^{-t}P_T(t)} = Q_{X|T}(x|t)
+\end{align}
+
+We proceed to providing two bounds on $\mca R(P, Q)$: 
+
+1. Converse (outer) bounds: any point in $\mca R(P, Q)$ 
+    must satisfy certain constraints. 
+2. Achievability (innder) bounds: points satisfying certain 
+    constraints belong to $\mca R(P, Q)$. 
+
+The following result provides an "envelope" for $\mca R(P, Q)$ 
+and, in fact, applies to any $f$-divergence. It follows 
+from simply applying data-processor $P_{Z|X}$. 
+
+:::{.theorem name="weak converse"}
+$\forall (\alpha, \beta)\in \mca R(P, Q)$, we obtain 
+\[ 
+    d(\alpha \| \beta) \leq D(P\|Q), \quad 
+    d(\beta \| \alpha) \leq D(Q\|P) 
+\] 
+:::
+
+:::{.lemma}
+Given any test $Z$ and $\gamma>0$, we obtain 
+\[ 
+    P[Z=0] - \gamma Q[Z=0] \leq P[T>\log \gamma] 
+    \iff \alpha - \gamma \beta \leq P[T>\log \gamma]
+\] 
+:::
+<details>
+<summary>Proof</summary>
+Let $\tau = \log \gamma$, apply theorem \@ref(thm:llrProperties) 
+to obtain 
+\[ 
+    P[Z=0, T\leq \tau] \leq \gamma Q[Z=0, T\leq \tau]
+\] 
+Decomposing the marginal $P[Z=0]=P[Z=0, T\leq \tau] + P[Z=0, T>\tau]$ yields 
+\[ 
+    P[Z=0] - \gamma Q[Z=0] 
+    \leq P[Z=0, T>\tau] - Q[Z=0, T>\tau]  \leq P[T>\tau]
+\] 
+</details>
+
+Applying this lemma to $(P, Q, \gamma)$ and $(P, Q, 1/\gamma)$ yields 
+the strong converse. It effectively states that $\mca R(P, Q)$ 
+is contained in the intersection of an infinite collection of 
+halfplanes indexed by $\gamma$. 
+Compared to the weak converse, we need to know the CDF of $T$ 
+compared to just the expectation (given by the divergence). 
+
+:::{.theorem name="strong converse"}
+$\gamma>0, \alpha - \gamma \beta \leq P[T>\log \gamma]$ and 
+$\beta - \alpha/\gamma \leq Q[T<\log \gamma]$. 
+:::
+<details>
+<summary>Proof</summary>
+Proceeding to achievability, a convex set can be efficiently 
+dscribed by its supporting hyperplanes. Characterizing $\mca R(P, Q)$ 
+is thus equivalent to solving, for each $t>0$, 
+\[ 
+    \min_{(\alpha, \beta)\in \mca R(P, Q)} t\beta - \alpha. 
+\] 
+To see this, this is looking for the minimal $y$-intercept $c$ 
+of $(1, -t)$ such that $t\beta = \alpha + c$ for 
+some $(\alpha, \beta) \in \mca R(P, Q)$. This is equivalent to 
+minimizing weighted probability of error with $(1-\alpha, \beta)$ 
+weighted by $(1, t)$. To solve this, 
+\begin{align}
+    \alpha^* - t\beta^* 
+    = \max_{P_{Z|X}} \sum_{x\in \mca X} \left[
+        P(x) - t Q(x)
+    \right] P_{Z|X}(0|X)
+    = \sum_{x\in \mca X} \max[0, P(X) - tQ(X)]
+\end{align}
+The last equality follows from the obvious choice 
+\[ 
+    P_{Z|X}^*(0|x) = 1\left\{
+        P(x) \geq tQ(x) 
+    \right\} = 1_{T\geq \log t}. 
+\] 
+</details>
+
+:::{.theorem #npLemma name="Neyman-Pearson lemma"}
+For each $\alpha, \beta_\alpha$ is attained by the test 
+\[ 
+    P_{Z|X}(0|x) = \begin{cases}
+        1 & T>\tau \\ 
+        \lambda & T=\tau \\ 
+        0 & T < \tau 
+    \end{cases}, \quad \alpha = P[T>\tau] + \lambda P[T=\tau]. 
+\] 
+:::
+<details>
+<summary>Proof</summary>
+Fixing $\tau\in \R$, let $t=e^\tau$. Given any 
+test $P_{Z|X}$, write $g(x) = P_{Z|X}(0|x)$ be the claimed 
+probability of the null. We wish to show that 
+\[ 
+    \alpha = E_P[g] = P[T>\tau] + \lambda P[T=\tau] 
+    \implies \beta = \Exp_Q[g] \geq Q[T>\tau] + \lambda Q[T=\tau]. 
+\] 
+Apply theorem \@ref(thm:llrProperties) twice yields 
+\begin{align}
+    \beta 
+    &= \Exp_Q[g\cdot 1_{T>\tau}] + \Exp_Q[g\cdot 1_{T\leq \tau}]
+    \geq \Exp_Q[g\cdot 1_{T>\tau}] + 
+    \df 1 t \Exp_P[g\cdot 1_{T\leq \tau}] \\ 
+    &= \Exp_Q[g\cdot 1_{T>\tau}] + \df 1 t \left(
+        \Exp_P\left[(1-g) 1_{T>\tau}\right] 
+        + \lambda P[T=\tau]
+    \right) \\ 
+    &\geq 
+    \Exp_Q[g\cdot 1_{T>\tau}] + \Exp_Q[(1-g) 1_{T>\tau}] 
+    + \lambda Q[T=\tau]  \\ 
+    &= Q[T>\tau] + \lambda Q[T=\tau]
+\end{align}
+Inspecting the saturation conditions yield the LLR 
+test as claimed. 
+</details>
