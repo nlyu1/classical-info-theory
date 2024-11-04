@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-11-03" />
+<meta name="date" content="2024-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -146,9 +146,10 @@
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#fixed-length-source-coding"><i class="fa fa-check"></i>Fixed-length source coding</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>11</b> Hypothesis Testing</a>
+<li class="chapter" data-level="11" data-path="hypothesis-testing-large-deviations.html"><a href="hypothesis-testing-large-deviations.html"><i class="fa fa-check"></i><b>11</b> Hypothesis Testing, Large Deviations</a>
 <ul>
-<li class="chapter" data-level="" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#npFormulation"><i class="fa fa-check"></i>Neyman-Pearson formulation</a></li>
+<li class="chapter" data-level="" data-path="hypothesis-testing-large-deviations.html"><a href="hypothesis-testing-large-deviations.html#npFormulation"><i class="fa fa-check"></i>Neyman-Pearson</a></li>
+<li class="chapter" data-level="" data-path="hypothesis-testing-large-deviations.html"><a href="hypothesis-testing-large-deviations.html#large-deviations-theory"><i class="fa fa-check"></i>Large deviations theory</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>12</b> Lecture notes</a>
 <ul>
@@ -192,7 +193,7 @@
 <div id="header">
 <h1 class="title">6.7480 Notes</h1>
 <p class="author"><em>Nicholas Lyu</em></p>
-<p class="date"><em>2024-11-03</em></p>
+<p class="date"><em>2024-11-04</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -229,11 +230,16 @@ which are extremely useful because:
 <li>They provide bounds: choose the varied quantity to be our friend!</li>
 <li>Provide tractable variational approximations
 using numerical optimization methods (e.g. VAE, GAN).</li>
+<li>Combined with tensorization and convexity properties, such
+results yield powerful asymptotics for high-dimensional problems.</li>
 </ol></li>
 <li>Mutual information as information radius, or center of gravity; capacity as a minimax saddle point.</li>
 <li>Divergence measures are extremely useful for bounding events:
 bound the event for a tractable distribution, bound the divergence between the tractable
 and given distribution, and we can bound the event for the given distribution.</li>
+<li>Operationally, entropy <span class="math inline">\(H\)</span> is the answer to compression, mutual information
+<span class="math inline">\(I\)</span> is the answer to universal compression, and divergence <span class="math inline">\(D\)</span> is the
+answer to hypothesis testing.</li>
 </ol>
 <p>Nontrivial results in this book include:</p>
 <ol style="list-style-type: decimal">
@@ -255,6 +261,8 @@ at the heart of every minimax theorem is the hyperplane separation theorem.</li>
 <li><u>van-Trees inequality</u> (theorem <a href="statistical-decision-applications.html#thm:vanTrees">9.5</a>):
 using the variational <span class="math inline">\(\chi^2\)</span> formula, obtain information bound
 for general (not just unbiased) estimators.</li>
+<li><u>Large-sample mean deviation reduces to information projection</u>
+(theorem <a href="hypothesis-testing-large-deviations.html#thm:ldeInfoProj">11.9</a>).</li>
 </ol>
 </div>
 <div id="insightful-proof-techniques" class="section level2 unnumbered hasAnchor">
@@ -312,6 +320,9 @@ useful characterization of <span class="math inline">\(\chi^2\)</span> <a href="
 KL (proposition <a href="f-divergence.html#prp:klDV">8.12</a>).</li>
 <li>Alternate inner and alter closed-form solution: EM algorithm.</li>
 </ul></li>
+<li>Large-sample asymptotic proofs: relate to an information measure,
+use their tensorization property and convexity to reduce to the
+single-letter case (theorem <a href="hypothesis-testing-large-deviations.html#thm:ldeInfoProj">11.9</a>).</li>
 </ol>
 </div>
 <div id="administrative-trivia" class="section level2 unnumbered hasAnchor">

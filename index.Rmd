@@ -75,6 +75,8 @@ observations. Some recurring themes in the book are:
     a. They provide bounds: choose the varied quantity to be our friend! 
     b. Provide tractable variational approximations 
     using numerical optimization methods (e.g. VAE, GAN). 
+    c. Combined with tensorization and convexity properties, such 
+    results yield powerful asymptotics for high-dimensional problems. 
 5. Mutual information as information radius, or center of gravity; capacity as a minimax saddle point. 
 6. Divergence measures are extremely useful for bounding events: 
     bound the event for a tractable distribution, bound the divergence between the tractable 
@@ -103,6 +105,8 @@ Nontrivial results in this book include:
 8. <u>van-Trees inequality</u> (theorem \@ref(thm:vanTrees)): 
     using the variational $\chi^2$ formula, obtain information bound 
     for general (not just unbiased) estimators. 
+9. <u>Large-sample mean deviation reduces to information projection</u>
+    (theorem \@ref(thm:ldeInfoProj)). 
 
 ## Insightful proof techniques {-}
 
@@ -144,6 +148,9 @@ Nontrivial results in this book include:
     useful characterization of $\chi^2$ \@ref(eq:chiStatVar) and 
     KL (proposition \@ref(prp:klDV)). 
     - Alternate inner and alter closed-form solution: EM algorithm. 
+9. Large-sample asymptotic proofs: relate to an information measure, 
+    use their tensorization property and convexity to reduce to the 
+    single-letter case (theorem \@ref(thm:ldeInfoProj)). 
 
 
 ## Administrative trivia {-}

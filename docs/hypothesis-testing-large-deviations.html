@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11 Hypothesis Testing | 6.7480 Notes</title>
-  <meta name="description" content="11 Hypothesis Testing | 6.7480 Notes" />
+  <title>11 Hypothesis Testing, Large Deviations | 6.7480 Notes</title>
+  <meta name="description" content="11 Hypothesis Testing, Large Deviations | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11 Hypothesis Testing | 6.7480 Notes" />
+  <meta property="og:title" content="11 Hypothesis Testing, Large Deviations | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11 Hypothesis Testing | 6.7480 Notes" />
+  <meta name="twitter:title" content="11 Hypothesis Testing, Large Deviations | 6.7480 Notes" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-11-03" />
+<meta name="date" content="2024-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -146,10 +146,10 @@
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#uniquely-decodable-codes"><i class="fa fa-check"></i>Uniquely decodable codes</a></li>
 <li class="chapter" data-level="" data-path="lossless-compression.html"><a href="lossless-compression.html#fixed-length-source-coding"><i class="fa fa-check"></i>Fixed-length source coding</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>11</b> Hypothesis Testing</a>
+<li class="chapter" data-level="11" data-path="hypothesis-testing-large-deviations.html"><a href="hypothesis-testing-large-deviations.html"><i class="fa fa-check"></i><b>11</b> Hypothesis Testing, Large Deviations</a>
 <ul>
-<li class="chapter" data-level="" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#npFormulation"><i class="fa fa-check"></i>Neyman-Pearson</a></li>
-<li class="chapter" data-level="" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#information-projection-large-deviations"><i class="fa fa-check"></i>Information projection, large deviations</a></li>
+<li class="chapter" data-level="" data-path="hypothesis-testing-large-deviations.html"><a href="hypothesis-testing-large-deviations.html#npFormulation"><i class="fa fa-check"></i>Neyman-Pearson</a></li>
+<li class="chapter" data-level="" data-path="hypothesis-testing-large-deviations.html"><a href="hypothesis-testing-large-deviations.html#large-deviations-theory"><i class="fa fa-check"></i>Large deviations theory</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>12</b> Lecture notes</a>
 <ul>
@@ -190,8 +190,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="hypothesis-testing" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">11</span> Hypothesis Testing<a href="hypothesis-testing.html#hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="hypothesis-testing-large-deviations" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">11</span> Hypothesis Testing, Large Deviations<a href="hypothesis-testing-large-deviations.html#hypothesis-testing-large-deviations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Key takeaways:</p>
 <ol style="list-style-type: decimal">
 <li>The Neyman-Pearson region is reducible to the
@@ -201,18 +201,31 @@ Use the layer-cake representation to argue convexity.</li>
 convexity of <span class="math inline">\(\mathcal R(P, Q)\)</span> and that the supporting
 lines of are given by likelihood tests.</li>
 <li>Stein’s and Chernoff’s asymptotic regimes.</li>
+<li>The cumulant-generating function shows up naturally as the
+normalization factor in tilting, and extremizing the tilting
+formula leads naturally to the rate function (Legendre
+conjugate of the CGF).
+<ul>
+<li>The one-parameter family of tilted families form the natural
+exponential families.</li>
+</ul></li>
 <li>A sharper version of Chernoff’s bound for mean
-deviations (equation <a href="hypothesis-testing.html#eq:largeSamplePrecChernoff">(11.1)</a>):
-the Legendre transform of the cumulant-generating function
-shows up naturally.</li>
+deviations (equation <a href="hypothesis-testing-large-deviations.html#eq:largeSamplePrecChernoff">(11.1)</a>).</li>
+<li>Crucial bridge between large-deviation estimate and
+information projection (theorem <a href="hypothesis-testing-large-deviations.html#thm:ldeInfoProj">11.9</a>).</li>
+<li>For any event <span class="math inline">\(E\)</span> with <span class="math inline">\(P_X[E]&gt;0\)</span>, we have
+<span class="math inline">\(\log \frac 1 {P_X(E)} = D(P_{X|X\in E} \| P_X)\)</span></li>
 </ol>
+<p><span style="color:red">
+Justification of the infimum in 15.13
+</span></p>
 <div id="npFormulation" class="section level2 unnumbered hasAnchor">
-<h2>Neyman-Pearson<a href="hypothesis-testing.html#npFormulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Neyman-Pearson<a href="hypothesis-testing-large-deviations.html#npFormulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This part corresponds to chapter 14 of the textbook.</p>
 <div class="definition">
 <p><span id="def:unlabeled-div-85" class="definition"><strong>Definition 11.1  (NP formulation of BHT) </strong></span>Consider two distributions <span class="math inline">\(P, Q\)</span> on <span class="math inline">\(\Omega\)</span>, one
 of which generated our observation <span class="math inline">\(X\)</span>.
-The two hypotheses are <span class="math inline">\(H_0:X\sim P\)</span> and <span class="math inline">\(H_1:X\sim Q\)</span>.
+The two hypotheses are <span class="math inline">\(H_0:X\sim P\)</span> and <span class="math inline">\(H&gt;_1:X\sim Q\)</span>.
 Let <span class="math inline">\(Z=\{0, 1\}\)</span> denote accepting and rejecting
 the null, respectively.</p>
 <ul>
@@ -411,7 +424,7 @@ from simply applying data-processor <span class="math inline">\(P_{Z|X}\)</span>
 <summary>
 Proof
 </summary>
-Let <span class="math inline">\(\tau = \log \gamma\)</span>, apply theorem <a href="hypothesis-testing.html#thm:llrProperties">11.2</a>
+Let <span class="math inline">\(\tau = \log \gamma\)</span>, apply theorem <a href="hypothesis-testing-large-deviations.html#thm:llrProperties">11.2</a>
 to obtain
 <span class="math display">\[
     P[Z=0, T\leq \tau] \leq \gamma Q[Z=0, T\leq \tau]
@@ -437,7 +450,7 @@ compared to just the expectation (given by the divergence).</p>
 Proof
 </summary>
 Proceeding to achievability, a convex set can be efficiently
-dscribed by its supporting hyperplanes. Characterizing <span class="math inline">\(\mathcal R(P, Q)\)</span>
+dscribed by its supporting hyperplanes. Characte&gt;rizing <span class="math inline">\(\mathcal R(P, Q)\)</span>
 is thus equivalent to solving, for each <span class="math inline">\(t&gt;0\)</span>,
 <span class="math display">\[
     \min_{(\alpha, \beta)\in \mathcal R(P, Q)} t\beta - \alpha.
@@ -482,7 +495,7 @@ probability of the null. We wish to show that
     \alpha = E_P[g] = P[T&gt;\tau] + \lambda P[T=\tau]
     \implies \beta = \mathbb E_Q[g] \geq Q[T&gt;\tau] + \lambda Q[T=\tau].
 \]</span>
-Apply theorem <a href="hypothesis-testing.html#thm:llrProperties">11.2</a> twice yields
+Apply theorem <a href="hypothesis-testing-large-deviations.html#thm:llrProperties">11.2</a> twice yields
 <span class="math display">\[\begin{align}
     \beta
     &amp;= \mathbb E_Q[g\cdot 1_{T&gt;\tau}] + \mathbb E_Q[g\cdot 1_{T\leq \tau}]
@@ -519,7 +532,7 @@ their exponents?</li>
         P_{Z|X^n} \text{ such that } \alpha &gt; 1 - \epsilon,
         \beta &lt; e^{-nE}
     ]
-\]</span>
+\]</span> &gt;
 Stein’s exponent is <span class="math inline">\(V=\lim_{\epsilon\to 0}V_\epsilon\)</span>.</p>
 </div>
 <div class="proposition">
@@ -533,8 +546,8 @@ Stein’s exponent is <span class="math inline">\(V=\lim_{\epsilon\to 0}V_\epsil
 <p><span id="thm:unlabeled-div-97" class="theorem"><strong>Theorem 11.6  (Stein's lemma) </strong></span><span class="math inline">\(V_\epsilon = D(P\|Q)\)</span> for all <span class="math inline">\(\epsilon \in (0, 1)\)</span>.</p>
 </div>
 </div>
-<div id="information-projection-large-deviations" class="section level2 unnumbered hasAnchor">
-<h2>Information projection, large deviations<a href="hypothesis-testing.html#information-projection-large-deviations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="large-deviations-theory" class="section level2 unnumbered hasAnchor">
+<h2>Large deviations theory<a href="hypothesis-testing-large-deviations.html#large-deviations-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This part corresponds to chapter 15 of the textbook.</p>
 <p>Consider an i.i.d sequence <span class="math inline">\(X_1, \dots, X_n\sim P\)</span> and
 <span class="math inline">\(\hat P_n\)</span> their empirical distribution.
@@ -545,7 +558,7 @@ We define the <strong>cumulant-generating function</strong>
 The Legendre transform <span class="math inline">\(\psi_X^*=E\)</span> is also known as
 the <strong>rate function</strong>:
 <span class="math display">\[
-    E_\lambda = \psi_X^*(\lambda) = \sup_\lambda \lambda \gamma - \psi_X(\lambda)
+    \psi_X^*(\lambda) = \sup_\lambda \lambda \gamma - \psi_X(\lambda)
 \]</span>
 We assume for regularity that <span class="math inline">\(\psi_X\)</span> is finite everywhere.
 This is known as <strong>Cramer’s condition</strong>.</p>
@@ -553,16 +566,57 @@ This is known as <strong>Cramer’s condition</strong>.</p>
 <p><span id="def:unlabeled-div-98" class="definition"><strong>Definition 11.7  (CGF properties) </strong></span>Under Cramer’s condition, we obtain</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\psi_X\)</span> is convex.</li>
-<li><span class="math inline">\(\psi_X\)</span> continuous</li>
+<li><span class="math inline">\(\psi_X\)</span> continuous.</li>
 <li><span class="math inline">\(\psi_X\)</span> smooth (infinitely differentiable) and
 <span class="math display">\[
 \psi&#39;_X(\lambda) = \dfrac{\mathbb E[X e^{\lambda X}]}{\mathbb E[\exp(\lambda X)]}
-= e^{-\psi_X(\lambda)]\mathbb E[X e^{\lambda X}]
-\]</span></li>
+= e^{-\psi_X(\lambda)}\mathbb E[X e^{\lambda X}]
+\]</span>
+In particular, <span class="math inline">\(\psi&#39;_X(0) = \mathbb E[X]\)</span>.</li>
+<li>If <span class="math inline">\(a\leq X\leq b\)</span> a.s. then <span class="math inline">\(a\leq \psi&#39;_X\leq b\)</span>.
+Conversely, <span class="math inline">\(\inf \psi&#39;_X \leq X\leq \sup \psi&#39;_X\)</span> a.s.</li>
+<li>If <span class="math inline">\(X\)</span> is not a constant, then <span class="math inline">\(\psi_X\)</span> is strictly convex.</li>
 </ol>
 </div>
+<details>
+<summary>
+Proof (partial)
+</summary>
+<ol style="list-style-type: decimal">
+<li>Fix <span class="math inline">\(\theta\in (0, 1)\)</span>, define the <span class="math inline">\(L_p\)</span> norm of a r.v. by
+<span class="math inline">\(\|U\|_p = \left(\mathbb E|U|^p\right)^{1/p}\)</span>. Apply Holder’s
+inequality <span class="math inline">\(\mathbb E|UV| \leq \|U\|_p\|V\|_q\)</span> with
+<span class="math inline">\((p, q) = (1/\theta, 1/\bar \theta)\)</span> yields
+<span class="math display">\[\begin{align}
+\mathbb E|e^{\lambda_1/p + \lambda_2/q}|
+\leq \| e^{\lambda_1 X/p}\|_p \| e^{\lambda_2 X/q}\|_q
+= \mathbb E[e^{\lambda_1 X}]^\theta \mathbb E[e^{\lambda_x X}]^{\bar \theta}
+\end{align}\]</span>
+Take the logarithm on both sides to obtain complexity.</li>
+<li>A convex function must be continuous on the interior of its domain.</li>
+<li>To first demonstrate that <span class="math inline">\(\mathbb E|X e^{\lambda X}|\)</span> exists,
+note that <span class="math inline">\(e^{|X|} \leq e^X + e^{-X}\)</span>, then
+<span class="math display">\[
+     |X e^{\lambda X}| \leq e^{(\lambda+1)X} \leq e^{(\lambda+1)X}
+     + e^{-(\lambda + 1)X}
+\]</span>
+both quantities are absolutely integrable.
+Next, <span class="math inline">\(u\mapsto \mathbb E|X e^{uX}|\)</span> is integrable on <span class="math inline">\([0, \lambda]\)</span>,
+then applying Fubini yields
+<span class="math display">\[\begin{align}
+     e^{\psi_X(\lambda)}
+     &amp;= \mathbb E[e^{\lambda X}] = \mathbb E\left[
+         1 + \int_0^\lambda X e^{uX}\, du
+     \right] = 1 + \int_0^\lambda \mathbb E[X e^{uX}]\, du \\
+     \psi&#39;_X(\lambda) e^{\psi_X(\lambda)}
+     &amp;= \mathbb E[X e^{\lambda X}]
+\end{align}\]</span></li>
+<li><span class="math inline">\(A\leq X\leq B\implies \psi&#39;_X(\lambda) \in [A, B]\)</span> by applying part (3).</li>
+<li>The converse of (4) and (5) omitted.</li>
+</ol>
+</details>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-99" class="lemma"><strong>Lemma 11.2  (Chernoff bound) </strong></span>Given i.i.d <span class="math inline">\(X^n\)</span> and <span class="math inline">\(\lambda \geq 0\)</span> and let <span class="math inline">\(\bar X\)</span> denote
+<p><span id="lem:chernoff" class="lemma"><strong>Lemma 11.2  (Chernoff bound) </strong></span>Given i.i.d <span class="math inline">\(X^n\)</span> and <span class="math inline">\(\lambda \geq 0\)</span> and let <span class="math inline">\(\bar X\)</span> denote
 the empirical mean. Let <span class="math inline">\(\mathbb E[X]&lt;\gamma&lt;\mathrm{esssup}[X]\)</span>, then
 <span class="math display">\[
     \mathrm{Pr}\left[
@@ -581,28 +635,138 @@ note that <span class="math inline">\(\log \mathbb E[\exp(n\lambda \bar X)] = \l
     \mathrm{Pr}[n\bar X\geq n\gamma]
     &amp;= \mathrm{Pr}[\exp(n\lambda \bar X) \geq \exp(n\lambda \gamma)] \\
     &amp;\leq \exp(-n\lambda \gamma) \mathbb E[\exp(n\lambda \bar X)] \\
-    &amp;= \exp \left(n\lambda \gamma - n\psi_X(\lambda)\right)
+    &amp;= \exp \left(-n\lambda \gamma + n\psi_X(\lambda)\right)
 \end{align}\]</span>
 </details>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-100" class="theorem"><strong>Theorem 11.7  (large-sample mean deviations) </strong></span>Given a r.v <span class="math inline">\(X\)</span> whose log-MGF <span class="math inline">\(\psi_X\)</span>
+<p><span id="thm:unlabeled-div-99" class="theorem"><strong>Theorem 11.7  (large-sample mean deviations) </strong></span>Given a r.v <span class="math inline">\(X\)</span> whose log-MGF <span class="math inline">\(\psi_X\)</span>
 is finite everywhere. Let <span class="math inline">\(B=\mathrm{esssup}\, X\)</span> and <span class="math inline">\(\mathbb E[X]&lt;\gamma&lt;B\)</span>, then
 <span class="math display">\[
     \mathrm{Pr}\left[\dfrac 1 n \sum_{j=1}^n X_j \geq \gamma\right]
     = \exp \left[-nE(\gamma) + o(n)\right]
 \]</span>
-where <span class="math inline">\(E(\gamma) = \lambda_X^*(\gamma) = \sup_{\lambda \geq 0} \lambda \gamma - \psi_X(\lambda)\)</span> is the <em>rate function.</em></p>
+where <span class="math inline">\(\lambda_X^*(\gamma) = \sup_{\lambda \geq 0} \lambda \gamma - \psi_X(\lambda)\)</span> is the <em>rate function.</em></p>
 </div>
 <details>
 <summary>
 Proof (non-asymptotic upper-bound)
 </summary>
-Recalling Chernoff’s bound, we obtain <span class="math inline">\(\mathrm{Pr}[\bar X\geq \gamma] \leq \exp[-n\lambda \gamma + n\psi_X(\lambda)]\)</span>. Optimize
+Recalling the Chernoff bound (lemma <a href="hypothesis-testing-large-deviations.html#lem:chernoff">11.2</a>),
+we obtain <span class="math inline">\(\mathrm{Pr}[\bar X\geq \gamma] \leq \exp[-n\lambda \gamma + n\psi_X(\lambda)]\)</span>. Optimize
 over <span class="math inline">\(\lambda\)</span> naturally yields the Legendre transform <span class="math inline">\(\psi_X^*\)</span>
 which is <em>non-asymptotic</em>:
 <span class="math display" id="eq:largeSamplePrecChernoff">\[
     \mathrm{Pr}[\bar X\geq \gamma] \leq \exp[-n \psi_X^*(\gamma)]
     \tag{11.1}
+\]</span>
+</details>
+<div class="definition">
+<p><span id="def:unlabeled-div-100" class="definition"><strong>Definition 11.8  (tilting) </strong></span>Given <span class="math inline">\(X\sim P\)</span> and <span class="math inline">\(\lambda \in \mathbb R\)</span>, the tilted measure
+<span class="math inline">\(P_\lambda\)</span> is defined by
+<span class="math display">\[
+    P_\lambda(dx)
+    = \dfrac{e^{\lambda x}}{\mathbb E[e^{\lambda x}]} P(dx)
+    = e^{\lambda x - \psi_X(\lambda)} P(dx)
+\]</span></p>
+</div>
+<p>Fixing <span class="math inline">\(P\)</span>, the one-parameter family of tilted distributions <span class="math inline">\(P_\lambda\)</span>
+are exactly the natural exponential families. In particular, the
+follow results follow from straightforward calculation:</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-101" class="theorem"><strong>Theorem 11.8  (properties of NEF) </strong></span></p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\psi_{P_\lambda}(u) = \psi_X(\lambda + u) - \psi_X(\lambda)\)</span>.</li>
+<li>Tilting trades mean for divergence:
+<span class="math display">\[
+\lambda&gt;0\implies \mathbb E_{P_\lambda}[X] = \psi&#39;_X(\lambda) \geq \mathbb E_P[X]
+\]</span>
+The same is true with <span class="math inline">\(&gt;\)</span> replaced by <span class="math inline">\(&lt;\)</span>. In terms of divergence,
+<span class="math display">\[
+D(P_\lambda \|P) = (\psi_X^*\circ \psi_X&#39;)(\lambda)
+= \psi_X^*(\mathbb E_{P_\lambda}[X])
+\]</span></li>
+<li><span class="math inline">\(\mathrm{Var}_{P_\lambda}(X) = \psi_X&#39;&#39;(\lambda)\log e\)</span>.</li>
+</ol>
+</div>
+<div class="theorem">
+<p><span id="thm:ldeInfoProj" class="theorem"><strong>Theorem 11.9  (large-deviation estimate is related to information projection) </strong></span>Given <span class="math inline">\(X_1, \dots\sim P\)</span> i.i.d, then for any <span class="math inline">\(\gamma\in \mathbb R\)</span>:
+<span class="math display">\[
+    \lim_{n\to \infty} \dfrac 1 n \log \dfrac 1 {P[\bar X &gt; \gamma]}
+    = \inf_{Q:\mathbb E_Q[X]&gt;\gamma} D(Q\|P)
+\]</span>
+The same holds for <span class="math inline">\(&gt;\mapsto \geq\)</span>. For every <span class="math inline">\(n\)</span> we obtain the firm upper bound
+<span class="math display">\[
+    P[\bar X_n \geq \gamma] \leq \exp \left[-n \inf_{\mathbb E_Q[X]\geq \gamma} D(Q\|P)\right].
+\]</span></p>
+</div>
+<details>
+<summary>
+Proof (strict deviation case)
+</summary>
+<p>The inequalities hold trivially if events have zero probability.
+Let <span class="math inline">\(P[E_n]\)</span> be the probability that the empirical mean with <span class="math inline">\(n\)</span>
+samples is greater than <span class="math inline">\(\gamma\)</span>.</p>
+To prove the power bound, fix <span class="math inline">\(Q\)</span> such that <span class="math inline">\(\mathbb E_Q[X]&gt;\gamma\)</span>.
+Start by applying DPI
+<span class="math display">\[\begin{align}
+    -\log 2 + Q[E_n] \log \dfrac 1 {P[E_n]}
+    &amp;\leq d(Q[E_n]\|P[E_n]) \leq D(Q_{X^n}\| P_{X^n}) = nD(Q\|P) \\
+    \log P[E_n]
+    &amp;\leq \dfrac{-nD(Q\|P) - \log 2}{Q[E_n]}
+\end{align}\]</span>
+Also note that by WLLN, <span class="math inline">\(Q[E_n] = 1 - o(1)\)</span>.
+Optimize over <span class="math inline">\(Q\)</span> to obtain (here <span class="math inline">\(\limsup\)</span> creeps in
+in order to combat the <span class="math inline">\(-\log2\)</span> and <span class="math inline">\(Q[E_n]\approx 1\)</span> factors.
+<span class="math display">\[
+    \limsup_{n\to \infty}
+    \dfrac 1 n \log \dfrac 1 {P[E_n]}
+    \leq \inf_{\mathbb E_Q[X]&gt;\gamma} D(Q\|P)
+\]</span>
+To prove the upper bound, crucially note that for any event <span class="math inline">\(E\)</span>
+with <span class="math inline">\(P_X[E]&gt;0\)</span>, we have
+<span class="math inline">\(\log \frac 1 {P_X(E)} = D(P_{X|X\in E} \| P_X)\)</span>.
+Define <span class="math inline">\(\tilde P_{X^n} = P_{X^n|\bar X&gt;\gamma}\)</span>, then
+<span class="math display">\[
+    \log \dfrac 1 {P[E_n]} = D(\tilde P_{X^n} \| P_{X^n})
+    = \inf_{\mathbb E_{Q^n}[\bar X]&gt;\gamma} D(Q_{X^n} \| P_{X^n})
+\]</span>
+The last infimum problem tensorizes by the tensorization
+property of products in the second argument and convexity
+in the first (here we do require
+<span class="math display">\[
+    D(Q_{X^n} \| P_{X^n})
+    \geq \sum_{j=1}^n D(Q_{X_j} \| P) \geq nD(\bar Q \| P)
+\]</span>
+This yields the desired inequality
+<span class="math display">\[
+    \log \dfrac 1 {P[E_n]}
+    = \inf_{\mathbb E_{Q^n}[\bar X]&gt;\gamma} D(Q_{X^n} \| P_{X^n})
+    = n\inf_{\mathbb E_Q[X]\geq \gamma} D(Q\|P)
+\]</span>
+</details>
+<p>The previous part motivates the study of the problem
+<span class="math inline">\(\inf_{Q\in \mathcal E} D(Q\|P)\)</span> where <span class="math inline">\(\mathcal E\subset \Omega\)</span>
+is a convex subset of distributions.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-102" class="theorem"><strong>Theorem 11.10  (orthogonality of information projection) </strong></span>Given a convex set <span class="math inline">\(\mathcal E\)</span> of distributions.
+If there exists <span class="math inline">\(Q^*\in \mathcal E\)</span> such that
+<span class="math inline">\(D(Q^* \| P) = \min_{Q\in \mathcal E} D(Q\|P)&lt;\infty\)</span>,
+then <span class="math inline">\(\forall Q\in \mathcal E\)</span>, we obtain
+<span class="math display">\[
+    D(Q\|P) \geq D(Q\|Q^*) + D(Q^* \| P)
+\]</span></p>
+</div>
+<details>
+<summary>
+Proof
+</summary>
+Consider the nontrivial case <span class="math inline">\(D(Q^* \| P) \leq D(Q\|P)&lt;\infty\)</span>.
+For <span class="math inline">\(\lambda\in [0, 1]\)</span>, consider the convex combination
+<span class="math inline">\(Q^{(\lambda)} = \bar \lambda Q^* + \lambda Q\)</span>. By <span class="math inline">\(Q^*\)</span>
+being the minimizer of <span class="math inline">\(D(Q\|P)\)</span>, we obtain
+<span class="math display">\[
+    0 \leq \dfrac d {d\lambda}\bigg|_{\lambda=0} D(Q^{(\lambda)} \| P)
+    = D(Q\|P) - D(Q\|Q^*) - D(Q^* \| P)
 \]</span>
 </details>
 

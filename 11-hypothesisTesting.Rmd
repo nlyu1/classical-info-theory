@@ -1,27 +1,46 @@
-# Hypothesis Testing
+# Hypothesis Testing, Large Deviations
 
 Key takeaways:
 
 1. The Neyman-Pearson region is reducible to the 
     closure of convex hull of deterministic tests \ref(thm:detReduction). 
     Use the layer-cake representation to argue convexity. 
-2. The Neyman-Pearson lemma fundamentally follows from convexity, 
-    and that the supporting 
-    lines of $\mca R(P, Q)$ are given by likelihood tests. 
+2. The Neyman-Pearson lemma fundamentally follows from the 
+    convexity of $\mca R(P, Q)$ and that the supporting 
+    lines of are given by likelihood tests.
+3. Stein's and Chernoff's asymptotic regimes. 
+4. The cumulant-generating function shows up naturally as the 
+    normalization factor in tilting, and extremizing the tilting 
+    formula leads naturally to the rate function (Legendre 
+    conjugate of the CGF). 
+    - The one-parameter family of tilted families form the natural 
+    exponential families. 
+5. A sharper version of Chernoff's bound for mean 
+    deviations (equation \@ref(eq:largeSamplePrecChernoff)). 
+6. Crucial bridge between large-deviation estimate and 
+    information projection (theorem \@ref(thm:ldeInfoProj)). 
+7. For any event $E$ with $P_X[E]>0$, we have 
+    $\log \frac 1 {P_X(E)} = D(P_{X|X\in E} \| P_X)$
 
-## Neyman-Pearson formulation {#npFormulation -}
+<span style="color:red">
+Justification of the infimum in 15.13
+</span>
+
+## Neyman-Pearson {#npFormulation -}
+
+This part corresponds to chapter 14 of the textbook. 
 
 :::{.definition name="NP formulation of BHT"}
 Consider two distributions $P, Q$ on $\Omega$, one 
 of which generated our observation $X$. 
-The two hypotheses are $H_0:X\sim P$ and $H_1:X\sim Q$. 
+The two hypotheses are $H_0:X\sim P$ and $H>_1:X\sim Q$. 
 Let $Z=\{0, 1\}$ denote accepting and rejecting 
 the null, respectively. 
 
 - A **test** is a (possibly random) decision rule. 
     - It is deterministic if of form $f:\mca X\to \{0, 1\}$; 
     which partitions the event space. 
-    - More generalized randomized test is specified by a 
+    - A randomized test is specified by a 
     kernel $P_{Z|X}:\mca X\to \{0, 1\}$ so that $P_{Z|X}(1|x)\in [0, 1]$ 
     is the probability of rejecting the null upon observing $X=x$. 
 - $\alpha = \pi_{0|0} = P[Z=0]$: probability of success given $H_0$ is true. 
@@ -231,7 +250,7 @@ $\beta - \alpha/\gamma \leq Q[T<\log \gamma]$.
 <details>
 <summary>Proof</summary>
 Proceeding to achievability, a convex set can be efficiently 
-dscribed by its supporting hyperplanes. Characterizing $\mca R(P, Q)$ 
+dscribed by its supporting hyperplanes. Characte>rizing $\mca R(P, Q)$ 
 is thus equivalent to solving, for each $t>0$, 
 \[ 
     \min_{(\alpha, \beta)\in \mca R(P, Q)} t\beta - \alpha. 
@@ -292,4 +311,260 @@ Apply theorem \@ref(thm:llrProperties) twice yields
 \end{align}
 Inspecting the saturation conditions yield the LLR 
 test as claimed. 
+</details>
+
+:::{.definition name="asymptotic regimes"}
+For large-sample i.i.d asymptotics, we are interested 
+in the following two questions: 
+
+1. _Stein's regime:_ conditioning on $\pi_{1|0}\leq \epsilon$, 
+    what is the best decay rate for $\pi_{0|1}$?
+2. _Chernoff's regime:_ when $\pi_{1|0}, \pi_{0|1}$ both 
+    vanish exponentially, what is the optimal tradeoff between 
+    their exponents?
+:::
+
+:::{.definition name="Stein's exponent"}
+The $\epsilon$-optimal exponent in Stein's regime is 
+\[ 
+    V_\epsilon = \sup[
+        E: \exists n_0:\forall n\geq n_0, \exists 
+        P_{Z|X^n} \text{ such that } \alpha > 1 - \epsilon, 
+        \beta < e^{-nE}
+    ]
+\] >
+Stein's exponent is $V=\lim_{\epsilon\to 0}V_\epsilon$. 
+:::
+
+:::{.proposition name="equivalent definition of Stein's exponent"}
+\[ 
+    V_\epsilon = \liminf_{n\to \infty} \df 1 n \log \df 1 {
+        \beta_{1-\epsilon}(P_{X^n}, Q_{X^n})
+    }
+\] 
+:::
+
+:::{.theorem name="Stein's lemma"}
+$V_\epsilon = D(P\|Q)$ for all $\epsilon \in (0, 1)$. 
+:::
+
+## Large deviations theory {-}
+This part corresponds to chapter 15 of the textbook. 
+
+Consider an i.i.d sequence $X_1, \dots, X_n\sim P$ and 
+$\hat P_n$ their empirical distribution. 
+We define the **cumulant-generating function** 
+\[ 
+    \psi_X(\lambda) = \log \Exp[e^{\lambda X}]
+\] 
+The Legendre transform $\psi_X^*=E$ is also known as 
+the **rate function**: 
+\[ 
+    \psi_X^*(\lambda) = \sup_\lambda \lambda \gamma - \psi_X(\lambda) 
+\] 
+We assume for regularity that $\psi_X$ is finite everywhere. 
+This is known as **Cramer's condition**. 
+
+:::{.definition name="CGF properties"}
+Under Cramer's condition, we obtain 
+
+1. $\psi_X$ is convex. 
+2. $\psi_X$ continuous. 
+3. $\psi_X$ smooth (infinitely differentiable) and 
+\[ 
+    \psi'_X(\lambda) = \df{\Exp[X e^{\lambda X}]}{\Exp[\exp(\lambda X)]} 
+    = e^{-\psi_X(\lambda)}\Exp[X e^{\lambda X}]
+\] 
+    In particular, $\psi'_X(0) = \Exp[X]$. 
+4. If $a\leq X\leq b$ a.s. then $a\leq \psi'_X\leq b$. 
+    Conversely, $\inf \psi'_X \leq X\leq \sup \psi'_X$ a.s. 
+5. If $X$ is not a constant, then $\psi_X$ is strictly convex. 
+:::
+<details>
+<summary>Proof (partial)</summary>
+1. Fix $\theta\in (0, 1)$, define the $L_p$ norm of a r.v. by 
+$\|U\|_p = \left(\Exp |U|^p\right)^{1/p}$. Apply Holder's 
+inequality $\Exp|UV| \leq \|U\|_p\|V\|_q$ with 
+$(p, q) = (1/\theta, 1/\bar \theta)$ yields 
+\begin{align}
+    \Exp|e^{\lambda_1/p + \lambda_2/q}|
+    \leq \| e^{\lambda_1 X/p}\|_p \| e^{\lambda_2 X/q}\|_q 
+    = \Exp[e^{\lambda_1 X}]^\theta \Exp[e^{\lambda_x X}]^{\bar \theta}
+\end{align}
+Take the logarithm on both sides to obtain complexity. 
+2. A convex function must be continuous on the interior of its domain. 
+3. To first demonstrate that $\Exp|X e^{\lambda X}|$ exists, 
+    note that $e^{|X|} \leq e^X + e^{-X}$, then 
+    \[ 
+        |X e^{\lambda X}| \leq e^{(\lambda+1)X} \leq e^{(\lambda+1)X} 
+        + e^{-(\lambda + 1)X}
+    \] 
+    both quantities are absolutely integrable. 
+    Next, $u\mapsto \Exp|X e^{uX}|$ is integrable on $[0, \lambda]$, 
+    then applying Fubini yields 
+    \begin{align}
+        e^{\psi_X(\lambda)} 
+        &= \Exp[e^{\lambda X}] = \Exp \left[
+            1 + \int_0^\lambda X e^{uX}\, du 
+        \right] = 1 + \int_0^\lambda \Exp[X e^{uX}]\, du \\ 
+        \psi'_X(\lambda) e^{\psi_X(\lambda)} 
+        &= \Exp[X e^{\lambda X}]
+    \end{align}
+4. $A\leq X\leq B\implies \psi'_X(\lambda) \in [A, B]$ by applying part (3). 
+5. The converse of (4) and (5) omitted. 
+</details>
+
+:::{.lemma #chernoff name="Chernoff bound"}
+Given i.i.d $X^n$ and $\lambda \geq 0$ and let $\bar X$ denote 
+the empirical mean. Let $\Exp[X]<\gamma<\mrm{esssup}[X]$, then 
+\[ 
+    \Pr \left[
+        \bar X \geq \gamma 
+    \right] \leq \exp \left[-n\lambda \gamma + n \psi_X(\lambda)\right]
+\] 
+:::
+<details>
+<summary>Proof</summary>
+Apply Morkov's inequality $\Pr[X\geq a]\leq \df 1 a \Exp[X]$ 
+after exponentiating the inequality; 
+note that $\log \Exp[\exp(n\lambda \bar X)] 
+= \log \phi_{X^n}(\lambda) = n\psi_X(\lambda)$. 
+\begin{align}
+    \Pr[n\bar X\geq n\gamma] 
+    &= \Pr[\exp(n\lambda \bar X) \geq \exp(n\lambda \gamma)] \\ 
+    &\leq \exp(-n\lambda \gamma) \Exp[\exp(n\lambda \bar X)] \\ 
+    &= \exp \left(-n\lambda \gamma + n\psi_X(\lambda)\right)
+\end{align}
+</details>
+
+:::{.theorem name="large-sample mean deviations"}
+Given a r.v $X$ whose log-MGF $\psi_X$ 
+is finite everywhere. Let $B=\mrm{esssup}\, X$ and $\Exp[X]<\gamma<B$, then 
+\[ 
+    \Pr\left[\df 1 n \sum_{j=1}^n X_j \geq \gamma\right]
+    = \exp \left[-nE(\gamma) + o(n)\right]
+\] 
+where $\lambda_X^*(\gamma) = \sup_{\lambda \geq 0} 
+\lambda \gamma - \psi_X(\lambda)$ is the _rate function._
+:::
+<details>
+<summary>Proof (non-asymptotic upper-bound) </summary>
+Recalling the Chernoff bound (lemma \@ref(lem:chernoff)), 
+we obtain $\Pr[\bar X\geq \gamma]
+\leq \exp[-n\lambda \gamma + n\psi_X(\lambda)]$. Optimize 
+over $\lambda$ naturally yields the Legendre transform $\psi_X^*$ 
+which is _non-asymptotic_: 
+\[ 
+    \Pr[\bar X\geq \gamma] \leq \exp[-n \psi_X^*(\gamma)]
+    (\#eq:largeSamplePrecChernoff)
+\] 
+</details>
+
+:::{.definition name="tilting"}
+Given $X\sim P$ and $\lambda \in \R$, the tilted measure 
+$P_\lambda$ is defined by 
+\[ 
+    P_\lambda(dx) 
+    = \df{e^{\lambda x}}{\Exp[e^{\lambda x}]} P(dx) 
+    = e^{\lambda x - \psi_X(\lambda)} P(dx)
+\] 
+:::
+
+Fixing $P$, the one-parameter family of tilted distributions $P_\lambda$ 
+are exactly the natural exponential families. In particular, the 
+follow results follow from straightforward calculation: 
+
+:::{.theorem name="properties of NEF"}
+a. $\psi_{P_\lambda}(u) = \psi_X(\lambda + u) - \psi_X(\lambda)$. 
+b. Tilting trades mean for divergence: 
+\[ 
+    \lambda>0\implies \Exp_{P_\lambda}[X] = \psi'_X(\lambda) \geq \Exp_P[X]
+\] 
+The same is true with $>$ replaced by $<$. In terms of divergence, 
+\[ 
+    D(P_\lambda \|P) = (\psi_X^*\circ \psi_X')(\lambda) 
+    = \psi_X^*(\Exp_{P_\lambda}[X])
+\] 
+c. $\Var_{P_\lambda}(X) = \psi_X''(\lambda)\log e$. 
+:::
+
+:::{.theorem #ldeInfoProj name="large-deviation estimate is related to information projection"}
+Given $X_1, \dots\sim P$ i.i.d, then for any $\gamma\in \R$: 
+\[ 
+    \lim_{n\to \infty} \df 1 n \log \df 1 {P[\bar X > \gamma]} 
+    = \inf_{Q:\Exp_Q[X]>\gamma} D(Q\|P) 
+\] 
+The same holds for $>\mapsto \geq$. For every $n$ we obtain the firm upper bound 
+\[ 
+    P[\bar X_n \geq \gamma] \leq \exp \left[-n \inf_{\Exp_Q[X]\geq \gamma} D(Q\|P)\right]. 
+\] 
+:::
+<details>
+<summary>Proof (strict deviation case)</summary>
+The inequalities hold trivially if events have zero probability. 
+Let $P[E_n]$ be the probability that the empirical mean with $n$ 
+samples is greater than $\gamma$. 
+
+To prove the power bound, fix $Q$ such that $\Exp_Q[X]>\gamma$. 
+Start by applying DPI 
+\begin{align}
+    -\log 2 + Q[E_n] \log \df 1 {P[E_n]} 
+    &\leq d(Q[E_n]\|P[E_n]) \leq D(Q_{X^n}\| P_{X^n}) = nD(Q\|P) \\ 
+    \log P[E_n] 
+    &\leq \df{-nD(Q\|P) - \log 2}{Q[E_n]}
+\end{align}
+Also note that by WLLN, $Q[E_n] = 1 - o(1)$. 
+Optimize over $Q$ to obtain (here $\limsup$ creeps in 
+in order to combat the $-\log2$ and $Q[E_n]\approx 1$ factors. 
+\[
+    \limsup_{n\to \infty} 
+    \df 1 n \log \df 1 {P[E_n]} 
+    \leq \inf_{\Exp_Q[X]>\gamma} D(Q\|P)
+\] 
+To prove the upper bound, crucially note that for any event $E$ 
+with $P_X[E]>0$, we have 
+$\log \frac 1 {P_X(E)} = D(P_{X|X\in E} \| P_X)$. 
+Define $\tilde P_{X^n} = P_{X^n|\bar X>\gamma}$, then 
+\[ 
+    \log \df 1 {P[E_n]} = D(\tilde P_{X^n} \| P_{X^n}) 
+    = \inf_{\Exp_{Q^n}[\bar X]>\gamma} D(Q_{X^n} \| P_{X^n}) 
+\] 
+The last infimum problem tensorizes by the tensorization 
+property of products in the second argument and convexity 
+in the first (here we do require 
+\[ 
+    D(Q_{X^n} \| P_{X^n}) 
+    \geq \sum_{j=1}^n D(Q_{X_j} \| P) \geq nD(\bar Q \| P)
+\] 
+This yields the desired inequality 
+\[ 
+    \log \df 1 {P[E_n]} 
+    = \inf_{\Exp_{Q^n}[\bar X]>\gamma} D(Q_{X^n} \| P_{X^n})
+    = n\inf_{\Exp_Q[X]\geq \gamma} D(Q\|P) 
+\] 
+</details>
+
+The previous part motivates the study of the problem 
+$\inf_{Q\in \mca E} D(Q\|P)$ where $\mca E\subset \Omega$ 
+is a convex subset of distributions. 
+
+:::{.theorem name="orthogonality of information projection"}
+Given a convex set $\mca E$ of distributions. 
+If there exists $Q^*\in \mca E$ such that 
+$D(Q^* \| P) = \min_{Q\in \mca E} D(Q\|P)<\infty$, 
+then $\forall Q\in \mca E$, we obtain 
+\[ 
+    D(Q\|P) \geq D(Q\|Q^*) + D(Q^* \| P)
+\] 
+:::
+<details>
+<summary>Proof</summary>
+Consider the nontrivial case $D(Q^* \| P) \leq D(Q\|P)<\infty$. 
+For $\lambda\in [0, 1]$, consider the convex combination 
+$Q^{(\lambda)} = \bar \lambda Q^* + \lambda Q$. By $Q^*$ 
+being the minimizer of $D(Q\|P)$, we obtain 
+\[ 
+    0 \leq \df d {d\lambda}\bigg|_{\lambda=0} D(Q^{(\lambda)} \| P)
+    = D(Q\|P) - D(Q\|Q^*) - D(Q^* \| P)
+\] 
 </details>
