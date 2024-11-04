@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11 Hypothesis Testing, Large Deviations | 6.7480 Notes</title>
   <meta name="description" content="11 Hypothesis Testing, Large Deviations | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11 Hypothesis Testing, Large Deviations | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -170,6 +170,12 @@
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#more-on-universal-compression"><i class="fa fa-check"></i>More on universal compression</a></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#binary-hypothesis-testing"><i class="fa fa-check"></i>Binary hypothesis testing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-4.-channel-coding"><i class="fa fa-check"></i>Nov 4. Channel coding</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#bht-large-deviations-theory"><i class="fa fa-check"></i>BHT, large deviations theory</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#i-projections"><i class="fa fa-check"></i>I-projections</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#channel-coding"><i class="fa fa-check"></i>Channel coding</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
@@ -630,7 +636,8 @@ Proof
 </summary>
 Apply Morkov’s inequality <span class="math inline">\(\mathrm{Pr}[X\geq a]\leq \dfrac 1 a \mathbb E[X]\)</span>
 after exponentiating the inequality;
-note that <span class="math inline">\(\log \mathbb E[\exp(n\lambda \bar X)] = \log \phi_{X^n}(\lambda) = n\psi_X(\lambda)\)</span>.
+note that <span class="math inline">\(\log \mathbb E[\exp(n\lambda \bar X)]
+= \log \phi_{X^n}(\lambda) = n\psi_X(\lambda)\)</span>.
 <span class="math display">\[\begin{align}
     \mathrm{Pr}[n\bar X\geq n\gamma]
     &amp;= \mathrm{Pr}[\exp(n\lambda \bar X) \geq \exp(n\lambda \gamma)] \\
@@ -645,14 +652,16 @@ is finite everywhere. Let <span class="math inline">\(B=\mathrm{esssup}\, X\)</s
     \mathrm{Pr}\left[\dfrac 1 n \sum_{j=1}^n X_j \geq \gamma\right]
     = \exp \left[-nE(\gamma) + o(n)\right]
 \]</span>
-where <span class="math inline">\(\lambda_X^*(\gamma) = \sup_{\lambda \geq 0} \lambda \gamma - \psi_X(\lambda)\)</span> is the <em>rate function.</em></p>
+where <span class="math inline">\(\lambda_X^*(\gamma) = \sup_{\lambda \geq 0}
+\lambda \gamma - \psi_X(\lambda)\)</span> is the <em>rate function.</em></p>
 </div>
 <details>
 <summary>
 Proof (non-asymptotic upper-bound)
 </summary>
 Recalling the Chernoff bound (lemma <a href="hypothesis-testing-large-deviations.html#lem:chernoff">11.2</a>),
-we obtain <span class="math inline">\(\mathrm{Pr}[\bar X\geq \gamma] \leq \exp[-n\lambda \gamma + n\psi_X(\lambda)]\)</span>. Optimize
+we obtain <span class="math inline">\(\mathrm{Pr}[\bar X\geq \gamma]
+\leq \exp[-n\lambda \gamma + n\psi_X(\lambda)]\)</span>. Optimize
 over <span class="math inline">\(\lambda\)</span> naturally yields the Legendre transform <span class="math inline">\(\psi_X^*\)</span>
 which is <em>non-asymptotic</em>:
 <span class="math display" id="eq:largeSamplePrecChernoff">\[
@@ -706,7 +715,7 @@ Proof (strict deviation case)
 <p>The inequalities hold trivially if events have zero probability.
 Let <span class="math inline">\(P[E_n]\)</span> be the probability that the empirical mean with <span class="math inline">\(n\)</span>
 samples is greater than <span class="math inline">\(\gamma\)</span>.</p>
-To prove the power bound, fix <span class="math inline">\(Q\)</span> such that <span class="math inline">\(\mathbb E_Q[X]&gt;\gamma\)</span>.
+To prove the lower bound, fix <span class="math inline">\(Q\)</span> such that <span class="math inline">\(\mathbb E_Q[X]&gt;\gamma\)</span>.
 Start by applying DPI
 <span class="math display">\[\begin{align}
     -\log 2 + Q[E_n] \log \dfrac 1 {P[E_n]}
@@ -732,7 +741,7 @@ Define <span class="math inline">\(\tilde P_{X^n} = P_{X^n|\bar X&gt;\gamma}\)</
 \]</span>
 The last infimum problem tensorizes by the tensorization
 property of products in the second argument and convexity
-in the first (here we do require
+in the first argument in the KL-divergence:
 <span class="math display">\[
     D(Q_{X^n} \| P_{X^n})
     \geq \sum_{j=1}^n D(Q_{X_j} \| P) \geq nD(\bar Q \| P)

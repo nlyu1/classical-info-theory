@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9 Statistical Decision Applications | 6.7480 Notes</title>
   <meta name="description" content="9 Statistical Decision Applications | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9 Statistical Decision Applications | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -171,6 +171,12 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#more-on-universal-compression"><i class="fa fa-check"></i>More on universal compression</a></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#binary-hypothesis-testing"><i class="fa fa-check"></i>Binary hypothesis testing</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-4.-channel-coding"><i class="fa fa-check"></i>Nov 4. Channel coding</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#bht-large-deviations-theory"><i class="fa fa-check"></i>BHT, large deviations theory</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#i-projections"><i class="fa fa-check"></i>I-projections</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#channel-coding"><i class="fa fa-check"></i>Channel coding</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -296,7 +302,9 @@ on <span class="math inline">\(\Theta\)</span>, then
     R_\pi(\hat \theta)
 \]</span></p>
 </div>
-<p><em>Proof:</em> <span class="math inline">\(R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta) = \inf_{\hat \theta}\sup_{\pi \in \mathcal P(\Theta)} R_\pi(\hat \theta) \geq R^*_{\mathrm{Bayes}}\)</span> by <span class="math inline">\(\inf\sup \geq \sup\inf\)</span>.</p>
+<p><em>Proof:</em> <span class="math inline">\(R^* = \inf_{\hat \theta}\sup_{\theta \in \Theta} R_\theta(\hat \theta)
+= \inf_{\hat \theta}\sup_{\pi \in \mathcal P(\Theta)} R_\pi(\hat \theta)
+\geq R^*_{\mathrm{Bayes}}\)</span> by <span class="math inline">\(\inf\sup \geq \sup\inf\)</span>.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-75" class="example"><strong>Example 9.1  (strict inequality) </strong></span>Let <span class="math inline">\(\theta, \hat \theta \in \{1, 2, \cdots\}\)</span> and
 <span class="math inline">\(l(\theta, \hat \theta) = 1_{\hat \theta &lt; \theta}\)</span>, then
@@ -521,7 +529,8 @@ behavior of divergence theorem <a href="f-divergence.html#thm:localFisherDiv">8.
 \]</span>
 is positive-semidefinite,
 apply theorem <a href="statistical-decision-applications.html#thm:hcrBound">9.4</a>
-to each data-processor <span class="math inline">\(\langle a, \hat \theta(X)\rangle, a\in \mathbb R^d\)</span> to obtain
+to each data-processor <span class="math inline">\(\langle a, \hat \theta(X)\rangle,
+a\in \mathbb R^d\)</span> to obtain
 <span class="math display">\[
     \chi^2(P_\theta \| P_{\theta&#39;}) \geq
     \dfrac{\langle a, \theta - \theta&#39;\rangle^2}{a^T \mathrm{Cov}_\theta(\hat \theta)a}
@@ -531,7 +540,9 @@ Optimizing over <span class="math inline">\(a\)</span> and apply, for <span clas
     \sup_{x\neq 0} \dfrac{\langle x, y\rangle^2}{x^T\Sigma x} = y^T \Sigma^{-1} y, \quad
     x = \Sigma^{-1} y
 \]</span>
-yields <span class="math inline">\(\chi^2(P_\theta \| P_{\theta&#39;}) \geq (\theta - \theta&#39;)^T \mathrm{Cov}_\theta(\hat \theta)^{-1} (\theta - \theta&#39;)\)</span>. Applying the multivariate local
+yields <span class="math inline">\(\chi^2(P_\theta \| P_{\theta&#39;}) \geq
+(\theta - \theta&#39;)^T \mathrm{Cov}_\theta(\hat \theta)^{-1}
+(\theta - \theta&#39;)\)</span>. Applying the multivariate local
 approximation again yields <span class="math inline">\(\mathcal J_F^{-1}(\theta) \preceq \mathrm{Cov}_\theta(\hat \theta)\)</span>.</p>
 <p>Further recall that the Fisher information is additive
 under i.i.d. tensorization; taking the trace on both
@@ -601,7 +612,8 @@ while <span class="math inline">\(\mathbb E_P \theta = \mathbb E_Q \theta + \del
 To obtain the second inequality, first consider
 the local expansions:</p>
 <ul>
-<li><span class="math inline">\(\chi^2(P_\theta \| Q_\theta) = \chi^2(T_\delta \pi \| \pi)  \approx J(\pi) \delta^2\)</span>.</li>
+<li><span class="math inline">\(\chi^2(P_\theta \| Q_\theta) = \chi^2(T_\delta \pi \| \pi)
+  \approx J(\pi) \delta^2\)</span>.</li>
 <li><span class="math inline">\(\chi^2(P_{X|\theta} \| Q_{X|\theta}) \approx \mathcal J_F(\theta) \delta^2\)</span>.
 Next, apply the <span class="math inline">\(\chi^2\)</span> chain rule (proposition <a href="f-divergence.html#prp:chiSqChain">8.6</a>)
 to obtain
@@ -672,7 +684,8 @@ then trace)
 <div class="theorem">
 <p><span id="thm:minimaxLB" class="theorem"><strong>Theorem 9.7  (lower bound on asymptotic minimax risk) </strong></span>Assuming <span class="math inline">\(\theta \mapsto \mathcal J_F(\theta)\)</span> continuous;
 let <span class="math inline">\(X_1, \cdots X_n\sim P_\theta\)</span> i.i.d. and define
-the minimax risk <span class="math inline">\(R_n^* = \inf_{\hat \theta} \sup_{\theta \in \Theta} \mathbb E_\theta \|\hat \theta - \theta\|_2^2\)</span>, then
+the minimax risk <span class="math inline">\(R_n^* = \inf_{\hat \theta} \sup_{\theta \in \Theta}
+\mathbb E_\theta \|\hat \theta - \theta\|_2^2\)</span>, then
 <span class="math display">\[
     R_n^* \geq \dfrac{1+o(1)}{n} \sup_{\theta \in \Theta} \mathrm{tr}\mathcal J_F^{-1}(\theta)
 \]</span></p>
@@ -714,7 +727,8 @@ maximum likelihood estimator (MLE) is
     L_\theta(X^n) = \sum_{j=1}^n \log p_\theta(X_j)
 \]</span>
 For discrete distributions, we also have
-<span class="math inline">\(\hat \theta_{\mathrm{MLE}} \in \mathrm{arg}\min_{\theta \sin \Theta} D(\hat P_n \| P_\theta)\)</span>.
+<span class="math inline">\(\hat \theta_{\mathrm{MLE}} \in
+\mathrm{arg}\min_{\theta \sin \Theta} D(\hat P_n \| P_\theta)\)</span>.
 This implies that the expected log-likelihood is maximized
 at the true parameter value <span class="math inline">\(\theta_0\)</span>.
 - Suppose <span class="math inline">\(\theta \mapsto P_\theta\)</span> is injective, then

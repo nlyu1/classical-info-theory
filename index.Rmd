@@ -84,6 +84,8 @@ observations. Some recurring themes in the book are:
 7. Operationally, entropy $H$ is the answer to compression, mutual information 
     $I$ is the answer to universal compression, and divergence $D$ is the 
     answer to hypothesis testing. 
+8. The Sanov principle establishes a fundamental bridge between probability 
+    and divergence. 
 
 Nontrivial results in this book include:
 

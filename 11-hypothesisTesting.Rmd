@@ -505,7 +505,7 @@ The inequalities hold trivially if events have zero probability.
 Let $P[E_n]$ be the probability that the empirical mean with $n$ 
 samples is greater than $\gamma$. 
 
-To prove the power bound, fix $Q$ such that $\Exp_Q[X]>\gamma$. 
+To prove the lower bound, fix $Q$ such that $\Exp_Q[X]>\gamma$. 
 Start by applying DPI 
 \begin{align}
     -\log 2 + Q[E_n] \log \df 1 {P[E_n]} 
@@ -531,7 +531,7 @@ Define $\tilde P_{X^n} = P_{X^n|\bar X>\gamma}$, then
 \] 
 The last infimum problem tensorizes by the tensorization 
 property of products in the second argument and convexity 
-in the first (here we do require 
+in the first argument in the KL-divergence: 
 \[ 
     D(Q_{X^n} \| P_{X^n}) 
     \geq \sum_{j=1}^n D(Q_{X_j} \| P) \geq nD(\bar Q \| P)

@@ -641,3 +641,130 @@ following results:
 $d(\alpha \| \beta) \leq D(P\|Q)$ for $\alpha, \beta \in \mca R$. 
 This results from applying DPI to the estimator $Z$. 
 :::
+
+## Nov 4. Channel coding {-}
+
+Agenda: 
+
+1. Finish Sanov's theorem, large deviation theory, and I-projection. 
+2. Define error-correction codes; example using BSC. 
+3. Weak converse bound. 
+
+### BHT, large deviations theory {-}
+
+To properly understand hypothesis testing, we need to 
+understand the large-deviations question: 
+to compute $E_0, E_1$, we need to compute $E$ in 
+\[ 
+    \Pr[\bar T < \gamma] \sim e^{-nE(\gamma)}
+\] 
+
+:::{.theorem name="Sanov principle"}
+under regularity conditions on $\mca E$, we have 
+$\Pr[\hat P_n\in \mca E] = e^{-nE + o(n)}$, where 
+\[ 
+    E = \inf_{R\in \mca E} D(R\|P)
+\] 
+:::
+
+<span style="color:green">
+Extremely important proof below!
+</span>
+
+:::{.lemma}
+If $\mca X$ is finite and $\mca E$ is _convex_ with 
+nonempty interior, then Sanov holds. 
+:::
+
+First consider an upper bound: $\Pr[\hat P_n\in \mca E] \leq e^{-nE}$. 
+By $P_{X^n} = P^{\otimes n}$, define $\tilde P_{X^n} = P_{X^n | E_n}$. 
+Note that the KL divergence 
+\[ 
+    D(\tilde P_{X^n} \| P_{X^n}) 
+    = \Exp_{P_{X^n}} \log \df{P_{X^n|E_n}(x)}{P_{X^n}(x)}
+    = \log \df 1 {P_{X^n}(E_n)}
+\] 
+This is the extension of Theorem 11.9. This implies a lot of bounds! 
+Chernoff, Berstein, Benett, Okamota, etc. In particular, 
+\[ 
+    \forall k, \quad  \Pr[\mrm{Bin}(n, p)\geq k] \leq \exp \left[-n d(d/n\|p)\right]
+\] 
+
+<span style="color:green">
+Idea to proving lower bounds: prove for the easy case, 
+then lift to the general case using information measures. 
+</span>
+
+To prove the lower bound, if $P\in \mrm{int}(E)$,
+then using the law of large numbers yield $\Pr[\hat P_n\in \mca E]\to 1$. 
+Otherwise, take $R\in \mrm{int}(\mca E)$, then 
+$R^{\otimes n}[\hat P_n\in \mca E]\to 1$. Apply DPI on the indicator $1_{E_n}$. 
+
+### I-projections {-}
+
+Take $X\in \R^d$ samples from $X\sim P$; define the information projection by 
+\[ 
+    I(\gamma) = \inf D(R\|P)
+\] 
+where infimum is over $\Exp_P[X]=\gamma$. 
+
+:::{.proposition name="tilting is optimal if exists"}
+Suppose there exists $\lambda \in \R^d$ such that 
+$\Exp_{X\sim P_\lambda}[X]=\gamma$, then 
+for every $R$ satisfying $\Exp_R[X]=\gamma$, we have 
+\[ 
+    D(R\|P) = D(R\|P_\lambda) + D(P_\lambda \| P) \geq D(P_\lambda \| P). 
+\] 
+:::
+_Proof:_ $D(R\|P) = \Exp_R \log \df{dR}{dP} \df{dR}{dP_\lambda}$ and regroup 
+by cross-terms. Recognize $\Exp_R \log dP_\lambda/dP = \Exp_R[\lambda^T X - \psi(\lambda)]$. 
+
+:::{.theorem name="I-projection on a hyperplane"} 
+
+1. If $\exists R: \Exp_R[X]=\gamma$ and $D(R\|P)<\infty$, 
+then $\gamma\in \mrm{csupp}(P)$. 
+2. $\exists P_\lambda$ with $\Exp_R[X]=\gamma \iff \gamma\in \mrm{int}(\mrm{csupp}\, P)$. 
+:::
+
+Here the convex support of $P$ is the intersection of all sets $S$ 
+such that $P[S]=1$ and $S$ is closed and convex; to visualize this, imagine 
+the mixture of two disjointly supported distributions. 
+
+In other words, information projection is solvable iff $\gamma$ is in 
+csupp, and it is solvable by tilting if it $\gamma$ is in the interior. 
+
+:::{.theorem name="tradeoff in error exponents"}
+$E_1(E_0) = \inf_{D(R\|P)<E_0} D(R\|Q)$. 
+:::
+
+Relation to Wald's SPRT principle by slightly 
+modifying the problem formulation: commit to an expected 
+instead of exact number of samples. For composite v.s. 
+composite tests, Hellinger computation becomes important. 
+
+Hypothesis testing is still a thriving topic! 
+Instead of specifying the exact generating distributions 
+$P, Q$, only samples are provided (**likelihood-free inference**).
+
+### Channel coding {-}
+
+We started with information measures, next found 
+in compression that _compression_ is described by entropy; 
+consequently, the optical error decay in _hypothesis testing_
+is provided by divergence. The problem of _channel coding_
+is solved by mutual information. 
+
+Given a channel $P_{Y|X}:\mca X\to \mca Y$, we wish to 
+construct $f:[M]\to \mca X$ and $g:\mca Y\to [M]\cup \{e\}$ 
+such that the maximal error rate (across all $j$) $\leq \epsilon$. 
+For generality, allow randomized $f, g$. 
+\[ 
+    W\xrightarrow f X\xrightarrow{P_{Y|X}} Y\xrightarrow g \hat W
+\] 
+This is a maximal probability of error code, in comparison to 
+average probability of error codes. 
+
+1. If $f$ is given, the design of $g$ is essentially $M$-ary H. T. 
+    For $M>2$ there is no uniquely optimal criteria. 
+    However, if we postulate $j\sim [M]$ uniformly, then 
+    the optimal solution is given by maximum-likelihood decoder. 
