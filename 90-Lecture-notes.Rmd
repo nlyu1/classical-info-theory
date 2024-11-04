@@ -768,3 +768,8 @@ average probability of error codes.
     For $M>2$ there is no uniquely optimal criteria. 
     However, if we postulate $j\sim [M]$ uniformly, then 
     the optimal solution is given by maximum-likelihood decoder. 
+
+Note that the maximum-likelihood decoder tesselates the 
+decoder-input space according to 1-nearest neighbor. 
+
+_In information theory, almost all of the work is designing a great distribution._
