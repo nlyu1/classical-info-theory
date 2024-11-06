@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-11-04" />
+<meta name="date" content="2024-11-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -177,6 +177,7 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#i-projections"><i class="fa fa-check"></i>I-projections</a></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#channel-coding"><i class="fa fa-check"></i>Channel coding</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-6-channel-coding-ii"><i class="fa fa-check"></i>Nov 6, Channel coding II</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -907,8 +908,208 @@ the optimal solution is given by maximum-likelihood decoder.</li>
 <p>Note that the maximum-likelihood decoder tesselates the
 decoder-input space according to 1-nearest neighbor.</p>
 <p><em>In information theory, almost all of the work is designing a great distribution.</em></p>
-
 </div>
+</div>
+<div id="nov-6-channel-coding-ii" class="section level2 unnumbered hasAnchor">
+<h2>Nov 6, Channel coding II<a href="lecture-notes.html#nov-6-channel-coding-ii" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(M^*(\epsilon)\)</span>.</li>
+<li>Define a channel (again); fundamental limit of
+finite-blocklength coding, and capacity.</li>
+<li>Weak converse.</li>
+</ol>
+<p>Recall our definition of a channel last time:</p>
+<ol style="list-style-type: decimal">
+<li>Channel <span class="math inline">\(P_{Y|X}: \mathcal X\to \mathcal Y\)</span>.</li>
+<li>Encoder <span class="math inline">\([M]\to \mathcal X\)</span>, decoder <span class="math inline">\(\mathcal Y\to [M]\cup \{e\}\)</span>.</li>
+</ol>
+<p>Graphically, this can be represented as
+<span class="math display">\[
+    W\xrightarrow f X
+    \xrightarrow {P_{Y|X}}
+    Y\xrightarrow g \hat W
+\]</span></p>
+<p>We need to put some assumptions on <span class="math inline">\(W\)</span>,
+so let’s take <span class="math inline">\(W\sim \mathrm{Unif}[M]\)</span>.
+Overwhelmingly, the encoder
+<span class="math inline">\(P_{X|W}\)</span> will be deterministic, and
+most of the times <span class="math inline">\(P_{\hat W|Y}\)</span> is deterministic;
+one does sometime need to randomize when minimizing the
+minimax risk, however.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-120" class="definition"><strong>Definition 12.1  (error criteria) </strong></span>Consider two types of the probability of error reminiscent
+of the case for risk in statistical estimation:</p>
+<ol style="list-style-type: decimal">
+<li>Average probability of error: <span class="math inline">\(P_{e, \mathrm{avg}} = \mathrm{Pr}[\hat W\neq W]\)</span>.</li>
+<li>Maximum probability of error:
+<span class="math inline">\(P_{e, \mathrm{max}} = \max_{j\in [M]} \mathrm{Pr}[\hat W\neq j|W=j]\)</span>.</li>
+</ol>
+</div>
+<p>We say that <span class="math inline">\((f, g)\)</span> is an <span class="math inline">\((M, \epsilon)\)</span>-code if
+if <span class="math inline">\(P_{e, \mathrm{avg}}\leq \epsilon\)</span>. It is an
+<span class="math inline">\((M, \epsilon)_{\mathrm{max}}\)</span> code if <span class="math inline">\(P_{e, \mathrm{max}}\leq \epsilon\)</span>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-121" class="definition"><strong>Definition 12.2  (single-shot fundamental limit) </strong></span>Fixing a channel, <span class="math inline">\(M^*(\epsilon)\)</span> is the maximum alphabet size
+such that there exists a <span class="math inline">\((M, \epsilon)\)</span>-code.
+The max-error limit <span class="math inline">\(M^*_{\mathrm{max}}\)</span> is defined similarly.</p>
+</div>
+<p>Here <span class="math inline">\(M^*(\epsilon)\)</span> is related the number of messages one can
+reliably separate. In general, this is a <em>computationally
+intractable quantity</em>, but we will be able to bound it quite tightly.</p>
+<p>Recall from last time that, given <span class="math inline">\(f\)</span>, the optimal <span class="math inline">\(g\)</span>
+which minimizes <span class="math inline">\(P_{e, \mathrm{avg}}\)</span> is the MLE. This follows
+from the MLE coinciding with MAP under the uniform prior.</p>
+<ol style="list-style-type: decimal">
+<li>If <span class="math inline">\(f, g\)</span> are deterministic, then <span class="math inline">\(f(j)=c_j\in \mathcal X\)</span>
+is a <strong>codeword</strong>. An encoder can be equivalently be viewed
+as a collection of codewords.</li>
+<li>The pre-images <span class="math inline">\(g^{-1}(j)=D_j\subset \mathcal Y\)</span> are
+the <strong>decoding regions</strong>.</li>
+</ol>
+<p>When <span class="math inline">\(\mathcal X=\mathcal Y\)</span>, one should think of codewords as
+little singleton “points” in space, while the decoding
+regions are partitions of the space which attempts to best
+separate the codewords in such a way as to be robust to
+noise perturbations.</p>
+<p>Putting two codewords in space is equivalent to binary
+hypothesis testing; if we require <span class="math inline">\(\epsilon\to 0\)</span>,
+then <span class="math inline">\(M^*(\epsilon)\to 0\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-122" class="theorem"><strong>Theorem 12.9  (Fano's bound) </strong></span><span class="math inline">\(\log M^*_{\mathrm{max}}(\epsilon) \leq \log M^*(\epsilon)
+\leq \dfrac{\sup_X I(X; Y) + \log 2}{1-\epsilon}\)</span>.</p>
+</div>
+<p><em>Proof:</em> Again, to prove impossibility bounds
+begin with the easy case.
+Recall <span class="math inline">\(W\to X\to Y\to \hat W\)</span>, consider
+<span class="math inline">\(Q_{Y|X}=Q_Y\)</span> which does not look at its input, then
+<span class="math display">\[
+    Q[W=\hat W] = \dfrac 1 M \sum_j Q[\hat W = j] = \dfrac 1 M
+\]</span>
+Under the <span class="math inline">\(Q\)</span>-channel, then <span class="math inline">\(1-\epsilon_Q = \dfrac 1 M\)</span>.
+Apply DPI to lift the statement about <span class="math inline">\(Q\)</span>-channel to
+<span class="math inline">\(P\)</span>-channel, process <span class="math inline">\((W, X, T, \hat W)\)</span> with <span class="math inline">\(1_{W=\hat W}\)</span>
+to obtain <span class="math inline">\(\mathrm{Ber}(1/M)\)</span> and <span class="math inline">\(\mathrm{Ber}(1-\epsilon)\)</span>. Then
+<span class="math display">\[
+    D(P_{WXY\hat W} \| Q_{WXY\hat W})
+    \geq d(1-\epsilon \| 1/M)
+\]</span>
+Noting the Markov structure, apply the chain rule to obtain
+<span class="math display">\[\begin{align}
+    D(P_{WXY\hat W} \| Q_{WXY\hat W})
+    &amp;= D(P_W\|Q_W)_{=0} + D(P_{X|W} \| Q_{X|W} \| P_W)_{=0}
+    + D(P_{Y|X} \| Q_Y | P_X) + D(P_{\hat W|Y} \| Q_{\hat W|Y} | P_Y)_{=0}
+\end{align}\]</span>
+The zeroed terms are due to us only replacing the <span class="math inline">\(X\to Y\)</span> part
+of the Markov chain, then <span class="math inline">\(\forall Q\)</span>, we obtain
+<span class="math display">\[
+    (1-\epsilon)\log M \leq D(P_{Y|X} \| Q_Y | P_X) + \log 2
+\]</span>
+Take <span class="math inline">\(\inf\)</span> over <span class="math inline">\(Q_Y\)</span> and apply the golden formula to
+obtain mutual information. Note that <span class="math inline">\(P_X=f\circ U_{[M]}\)</span>
+is usually hard to compute, so take <span class="math inline">\(\sup_X\)</span> to obtain the
+desired inequality.</p>
+<p><span style="color:green">
+In information theory, a second definition of a
+<strong>channel</strong> is a triplet consisting of
+(1) (single-letter) alphabet <span class="math inline">\(\mathcal A\)</span>,
+(2) output alphabet <span class="math inline">\(\mathcal B\)</span>, with (3)
+a family of Markov kernels <span class="math inline">\(P_{B^n|A^n}\)</span> for each <span class="math inline">\(n\geq 1\)</span>.
+In this sense a channel is interpreted as
+<strong>a sequence of Markov kernels</strong>, and <span class="math inline">\(n\)</span>
+is the <strong>block length</strong>.
+</span></p>
+<p>Two examples of additive channels:
+1. Gaussian channel: <span class="math inline">\(\mathcal A=\mathcal B=\mathbb R\)</span>, and
+<span class="math inline">\(P_{B^n|A^n} = \mathcal N(0, \sigma^2 I_n)\)</span>.
+2. Binary symmetric channel <span class="math inline">\(\mathrm{BSC}_\delta\)</span>:
+<span class="math inline">\(\mathcal A=\mathcal B=\{0, 1\}\)</span>, and
+<span class="math inline">\(P_{B^n | A^n}(b^n|a^n) = \delta^d(1-\delta)^{n-d}\)</span>,
+where <span class="math inline">\(d=d_M(a^n, b^n)\)</span> is the Hamming distance between
+the two strings.
+- Equivalently, <span class="math inline">\(B^n = A^n + Z^n\mod 2, \quad
+    Z_j\sim \mathrm{Ber}(\delta)\)</span> i.i.d.</p>
+<p>More generally, a discrete stationary memoryless channel (DMC)
+is just a tensorized channel which acts i.i.d on the input components.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-123" class="definition"><strong>Definition 12.3  (fundamental limit of channel coding, capacity) </strong></span>For any channel, an <span class="math inline">\((M, \epsilon)\)</span> code
+for <span class="math inline">\(P_{B^n|A^n}\)</span> is called a <span class="math inline">\((M, n, \epsilon)\)</span> code.
+The capacity <span class="math inline">\(C\)</span> of the channel is defined as
+<span class="math display">\[\begin{align}
+    C_\epsilon &amp;= \liminf_{n\to \infty} \dfrac 1 n \log M^*(n, \epsilon), \quad
+    C = \lim_{\epsilon \to 0^+} C_\epsilon.
+\end{align}\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-124" class="proposition"><strong>Proposition 12.7  (almost no difference between max v.s. average) </strong></span><span class="math inline">\(\forall \tau \in (0, 1)\)</span> we have
+<span class="math display">\[
+    (1-\tau)M^*(n, \tau \epsilon) \leq M^*_{\mathrm{max}}(n, \epsilon)
+    \leq M^*(n, \epsilon)
+\]</span></p>
+</div>
+<p><em>Proof:</em> The second inequality is trivial. For the first,
+take an <span class="math inline">\((n, M, \tilde \epsilon)\)</span> code and define
+<span class="math inline">\(\lambda_j = \mathrm{Pr}[\hat W\neq j|W=j]\)</span>, then
+<span class="math display">\[
+    \dfrac 1 M \sum_j \lambda_j \leq \tilde \epsilon \implies
+    \text{ number of $j$ s.t. } \lambda&gt;\tilde \epsilon/\tau
+    \text{ is less than } \tau M
+\]</span>
+For every average-prob error code, we can apply the same idea
+behind Markov’s inequality to select a max-probability sub-code.</p>
+<div class="corollary">
+<p><span id="cor:unlabeled-div-125" class="corollary"><strong>Corollary 12.2  </strong></span><span class="math inline">\(C_\epsilon \geq C_\epsilon^{\mathrm{max}}
+\geq \lim_{\delta \to 0^-} C_{\epsilon - \delta} \implies C^{\mathrm{max}} = C\)</span>.</p>
+</div>
+<p>One perspective on <span class="math inline">\(C\)</span> is that it is the maximal rate of
+asymptotically reliable communication. In other words,
+it is the supremum over all rates <span class="math inline">\(R\)</span> such that there exists a
+sequence of <span class="math inline">\(\delta_n, \epsilon_n\to 0\)</span>,
+<span class="math inline">\((n, e^{n(R-\delta_n)}, \epsilon_n)\)</span>-codes.</p>
+<p><span style="color:green">
+Proof: exercise??!
+</span></p>
+<div class="definition">
+<p><span id="def:unlabeled-div-126" class="definition"><strong>Definition 12.4  (information capacity) </strong></span>The information capacity <span class="math inline">\(C^{(i)}\)</span> of a channel is
+<span class="math display">\[
+    C^{(i)} = \liminf_{n\to \infty} \dfrac 1 n
+    \sup_{P_{A^n}} I(A^n; B^n)
+\]</span>
+Compared to the actual capacity
+(integer programming problem), this is easy!</p>
+</div>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-127" class="proposition"><strong>Proposition 12.8  (capacity of BSC) </strong></span>For <span class="math inline">\(\mathrm{BSC}_\delta\)</span>, we obtain <span class="math inline">\(C^{(i)} = \log_2 - h(\delta)\)</span>.</p>
+</div>
+<p><em>Proof:</em> upper-bound by tensorization of mutual information.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-128" class="theorem"><strong>Theorem 12.10  (relation between information and actual capacity) </strong></span>Fano’s bound implies<br />
+<span class="math inline">\(C_\epsilon \leq \dfrac{C^{(i)}}{1-\epsilon} \implies C\leq C^{(i)}\)</span>.</p>
+</div>
+<p>For the BSC channel, the optimal decoder <span class="math inline">\(g_{\mathrm{MLE}}\)</span>
+just looks for the
+codeword which is the fewest number of flips away from the input.
+Approaching this from a different perspective, the average
+number of flips for transmitting <span class="math inline">\(c_1\in \{0, 1\}^n\)</span> is <span class="math inline">\(n\delta\)</span>;
+concentration becomes sharp as <span class="math inline">\(n\to \infty\)</span>. This motivates
+the construction of the <strong>bounded distance encoder</strong>
+<span class="math display">\[
+    g_{\mathrm{BD}}(y) = \begin{cases}
+        1 &amp; \text{if $c_j$ is a unique codeword in $B_r(y)$} \\
+        e &amp; \text{otherwise}
+    \end{cases}
+\]</span>
+Shannon had the idea to construct random codewords
+<span class="math inline">\(c_1, \dots, c_M\)</span> uniformly from the Hamming cube. Then
+<span class="math display">\[\begin{align}
+    \mathbb E\epsilon_2(c_1, \dots, c_M)
+    &amp;\leq \sum_{j=2}^M \mathrm{Pr}[d_M(c_j, Y) \leq r | X=c_1]
+    = (M-1) \mathrm{Pr}[d_M(c_1, Y) \leq r] \\
+    &amp;= \dfrac{M-1}{2^n} | B_r(0)|
+\end{align}\]</span>
+Note crucially that <span class="math inline">\(C_j \perp\!\!\!\perp Y\)</span>. The second
+error rate <span class="math inline">\(\epsilon_2\)</span> vanishes if <span class="math inline">\(M\ll 2^{nC^{(i)}}\)</span>.
+This implies, for BSC, <span class="math inline">\(C = C^{(i)} = \log 2 - h(\delta)\)</span>.</p>
+
 </div>
 </div>
             </section>

@@ -205,6 +205,15 @@ lem:unlabeled-div-116
 prp:unlabeled-div-117
 thm:unlabeled-div-118
 thm:unlabeled-div-119
+def:unlabeled-div-120
+def:unlabeled-div-121
+thm:unlabeled-div-122
+def:unlabeled-div-123
+prp:unlabeled-div-124
+cor:unlabeled-div-125
+def:unlabeled-div-126
+prp:unlabeled-div-127
+thm:unlabeled-div-128
 entropy
 entropy-method-in-combinatorics
 kullback-leibler-divergence

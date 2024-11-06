@@ -773,3 +773,220 @@ Note that the maximum-likelihood decoder tesselates the
 decoder-input space according to 1-nearest neighbor. 
 
 _In information theory, almost all of the work is designing a great distribution._
+
+## Nov 6, Channel coding II {-}
+
+1. $M^*(\epsilon)$. 
+2. Define a channel (again); fundamental limit of 
+    finite-blocklength coding, and capacity. 
+3. Weak converse. 
+
+Recall our definition of a channel last time: 
+
+1. Channel $P_{Y|X}: \mca X\to \mca Y$. 
+2. Encoder $[M]\to \mca X$, decoder $\mca Y\to [M]\cup \{e\}$. 
+
+Graphically, this can be represented as 
+\[ 
+    W\xrightarrow f X 
+    \xrightarrow {P_{Y|X}} 
+    Y\xrightarrow g \hat W 
+\] 
+
+We need to put some assumptions on $W$, 
+so let's take $W\sim \mrm{Unif}[M]$. 
+Overwhelmingly, the encoder 
+$P_{X|W}$ will be deterministic, and 
+most of the times $P_{\hat W|Y}$ is deterministic; 
+one does sometime need to randomize when minimizing the 
+minimax risk, however. 
+
+:::{.definition name="error criteria"}
+Consider two types of the probability of error reminiscent 
+of the case for risk in statistical estimation: 
+
+1. Average probability of error: $P_{e, \mrm{avg}} = \Pr[\hat W\neq W]$. 
+2. Maximum probability of error: 
+    $P_{e, \mrm{max}} = \max_{j\in [M]} \Pr[\hat W\neq j|W=j]$. 
+:::
+
+We say that $(f, g)$ is an $(M, \epsilon)$-code if 
+if $P_{e, \mrm{avg}}\leq \epsilon$. It is an 
+$(M, \epsilon)_{\mrm{max}}$ code if $P_{e, \mrm{max}}\leq \epsilon$. 
+
+:::{.definition name="single-shot fundamental limit"}
+Fixing a channel, $M^*(\epsilon)$ is the maximum alphabet size 
+such that there exists a $(M, \epsilon)$-code. 
+The max-error limit $M^*_{\mrm{max}}$ is defined similarly. 
+:::
+Here $M^*(\epsilon)$ is related the number of messages one can 
+reliably separate. In general, this is a _computationally 
+intractable quantity_, but we will be able to bound it quite tightly. 
+
+Recall from last time that, given $f$, the optimal $g$ 
+which minimizes $P_{e, \mrm{avg}}$ is the MLE. This follows 
+from the MLE coinciding with MAP under the uniform prior. 
+
+1. If $f, g$ are deterministic, then $f(j)=c_j\in \mca X$ 
+    is a **codeword**. An encoder can be equivalently be viewed 
+    as a collection of codewords. 
+2. The pre-images $g^{-1}(j)=D_j\subset \mca Y$ are 
+    the **decoding regions**. 
+
+When $\mca X=\mca Y$, one should think of codewords as 
+little singleton "points" in space, while the decoding 
+regions are partitions of the space which attempts to best 
+separate the codewords in such a way as to be robust to 
+noise perturbations. 
+
+Putting two codewords in space is equivalent to binary 
+hypothesis testing; if we require $\epsilon\to 0$, 
+then $M^*(\epsilon)\to 0$. 
+
+:::{.theorem name="Fano's bound"}
+$\log M^*_{\mrm{max}}(\epsilon) \leq \log M^*(\epsilon) 
+\leq \df{\sup_X I(X; Y) + \log 2}{1-\epsilon}$. 
+:::
+_Proof:_ Again, to prove impossibility bounds 
+begin with the easy case. 
+Recall $W\to X\to Y\to \hat W$, consider 
+$Q_{Y|X}=Q_Y$ which does not look at its input, then 
+\[
+    Q[W=\hat W] = \df 1 M \sum_j Q[\hat W = j] = \df 1 M 
+\]
+Under the $Q$-channel, then $1-\epsilon_Q = \df 1 M$. 
+Apply DPI to lift the statement about $Q$-channel to 
+$P$-channel, process $(W, X, T, \hat W)$ with $1_{W=\hat W}$ 
+to obtain  $\mrm{Ber}(1/M)$ and $\mrm{Ber}(1-\epsilon)$. Then 
+\[ 
+    D(P_{WXY\hat W} \| Q_{WXY\hat W}) 
+    \geq d(1-\epsilon \| 1/M)
+\] 
+Noting the Markov structure, apply the chain rule to obtain 
+\begin{align}
+    D(P_{WXY\hat W} \| Q_{WXY\hat W}) 
+    &= D(P_W\|Q_W)_{=0} + D(P_{X|W} \| Q_{X|W} \| P_W)_{=0} 
+    + D(P_{Y|X} \| Q_Y | P_X) + D(P_{\hat W|Y} \| Q_{\hat W|Y} | P_Y)_{=0}
+\end{align}
+The zeroed terms are due to us only replacing the $X\to Y$ part 
+of the Markov chain, then $\forall Q$, we obtain 
+\[
+    (1-\epsilon)\log M \leq D(P_{Y|X} \| Q_Y | P_X) + \log 2 
+\]
+Take $\inf$ over $Q_Y$ and apply the golden formula to 
+obtain mutual information. Note that $P_X=f\circ U_{[M]}$ 
+is usually hard to compute, so take $\sup_X$ to obtain the 
+desired inequality. 
+
+<span style="color:green">
+In information theory, a second definition of a 
+**channel** is a triplet consisting of 
+(1) (single-letter) alphabet $\mca A$, 
+(2) output alphabet $\mca B$, with (3) 
+a family of Markov kernels $P_{B^n|A^n}$ for each $n\geq 1$. 
+In this sense a channel is interpreted as 
+**a sequence of Markov kernels**, and $n$ 
+is the **block length**. 
+</span>
+
+Two examples of additive channels: 
+1. Gaussian channel: $\mca A=\mca B=\R$, and 
+    $P_{B^n|A^n} = \mca N(0, \sigma^2 I_n)$. 
+2. Binary symmetric channel $\mrm{BSC}_\delta$: 
+    $\mca A=\mca B=\{0, 1\}$, and 
+    $P_{B^n | A^n}(b^n|a^n) = \delta^d(1-\delta)^{n-d}$, 
+    where $d=d_M(a^n, b^n)$ is the Hamming distance between 
+    the two strings. 
+    - Equivalently, $B^n = A^n + Z^n\mod 2, \quad 
+    Z_j\sim \mrm{Ber}(\delta)$ i.i.d. 
+
+More generally, a discrete stationary memoryless channel (DMC) 
+is just a tensorized channel which acts i.i.d on the input components. 
+
+:::{.definition name="fundamental limit of channel coding, capacity"}
+For any channel, an $(M, \epsilon)$ code 
+for $P_{B^n|A^n}$ is called a $(M, n, \epsilon)$ code. 
+The capacity $C$ of the channel is defined as 
+\begin{align}
+    C_\epsilon &= \liminf_{n\to \infty} \df 1 n \log M^*(n, \epsilon), \quad 
+    C = \lim_{\epsilon \to 0^+} C_\epsilon. 
+\end{align}
+:::
+
+:::{.proposition name="almost no difference between max v.s. average"}
+$\forall \tau \in (0, 1)$ we have 
+\[ 
+    (1-\tau)M^*(n, \tau \epsilon) \leq M^*_{\mrm{max}}(n, \epsilon) 
+    \leq M^*(n, \epsilon)
+\] 
+:::
+_Proof:_ The second inequality is trivial. For the first, 
+take an $(n, M, \tilde \epsilon)$ code and define 
+$\lambda_j = \Pr[\hat W\neq j|W=j]$, then 
+\[ 
+    \df 1 M \sum_j \lambda_j \leq \tilde \epsilon \implies 
+    \text{ number of $j$ s.t. } \lambda>\tilde \epsilon/\tau 
+    \text{ is less than } \tau M
+\] 
+For every average-prob error code, we can apply the same idea 
+behind Markov's inequality to select a max-probability sub-code. 
+
+:::{.corollary}
+$C_\epsilon \geq C_\epsilon^{\mrm{max}} 
+\geq \lim_{\delta \to 0^-} C_{\epsilon - \delta} \implies C^{\mrm{max}} = C$. 
+:::
+
+One perspective on $C$ is that it is the maximal rate of 
+asymptotically reliable communication. In other words, 
+it is the supremum over all rates $R$ such that there exists a 
+sequence of $\delta_n, \epsilon_n\to 0$, 
+$(n, e^{n(R-\delta_n)}, \epsilon_n)$-codes. 
+
+<span style="color:green">
+Proof: exercise??!
+</span>
+
+:::{.definition name="information capacity"}
+The information capacity $C^{(i)}$ of a channel is 
+\[ 
+    C^{(i)} = \liminf_{n\to \infty} \df 1 n 
+    \sup_{P_{A^n}} I(A^n; B^n)
+\] 
+Compared to the actual capacity 
+(integer programming problem), this is easy! 
+:::
+
+:::{.proposition name="capacity of BSC"}
+For $\mrm{BSC}_\delta$, we obtain $C^{(i)} = \log_2 - h(\delta)$. 
+:::
+_Proof:_ upper-bound by tensorization of mutual information. 
+
+:::{.theorem name="relation between information and actual capacity"}
+Fano's bound implies  
+$C_\epsilon \leq \df{C^{(i)}}{1-\epsilon} \implies C\leq C^{(i)}$. 
+:::
+
+For the BSC channel, the optimal decoder $g_{\mrm{MLE}}$ 
+just looks for the 
+codeword which is the fewest number of flips away from the input. 
+Approaching this from a different perspective, the average 
+number of flips for transmitting $c_1\in \{0, 1\}^n$ is $n\delta$; 
+concentration becomes sharp as $n\to \infty$. This motivates 
+the construction of the **bounded distance encoder** 
+\[ 
+    g_{\mrm{BD}}(y) = \begin{cases}
+        1 & \text{if $c_j$ is a unique codeword in $B_r(y)$} \\ 
+        e & \text{otherwise}
+    \end{cases}
+\] 
+Shannon had the idea to construct random codewords 
+$c_1, \dots, c_M$ uniformly from the Hamming cube. Then 
+\begin{align}
+    \Exp \epsilon_2(c_1, \dots, c_M) 
+    &\leq \sum_{j=2}^M \Pr[d_M(c_j, Y) \leq r | X=c_1] 
+    = (M-1) \Pr[d_M(c_1, Y) \leq r] \\ 
+    &= \df{M-1}{2^n} | B_r(0)| 
+\end{align}
+Note crucially that $C_j \indep Y$. The second 
+error rate $\epsilon_2$ vanishes if $M\ll 2^{nC^{(i)}}$. 
+This implies, for BSC, $C = C^{(i)} = \log 2 - h(\delta)$. 
