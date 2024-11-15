@@ -45,6 +45,8 @@ link-citations: true
 \newcommand{\ot}{\otimes}
 
 \newcommand{\xra}{\xrightarrow}
+\newcommand{\argmax}{\mathop{\mathrm{argmax}}}
+
 
 
 

@@ -1,0 +1,118 @@
+# Noisy Channel Coding 
+
+Main takeaways:
+
+1. Weak converse (theorem \@ref(thm:weakConverse)): 
+    number of reliably transmittable bits (intractable, 
+    combinatorial operational quantity) is upper-bounded 
+    by mutual information (an information quantity). 
+2. 
+
+## Optimal decoder, weak converse {-}
+
+:::{.definition}
+Given a kernel $P_{Y|X}:\mca X\to \mca Y$: 
+
+- Given natural number $M$, a $M$-code 
+    is a pair of kernels $f, g$ (encoder, decoder) 
+    with chain 
+\[ 
+    W\xrightarrow f X\xrightarrow {P_{Y|X}} Y 
+    \xrightarrow g \hat W
+\] 
+Here $f:[M]\to \mca X$ and $g:\mca Y\to \mca M\cup \{e\}$. 
+- The image $f([M])$ are codewords. 
+- $\{D_{j\in [M]}=g^{-1}(i)\}$ are the decoding regions. 
+:::
+
+In the chain of random variables $W\to X\to Y\to \hat W$, 
+they're called original message, channel input, channel output, 
+and decoded message. We assume a uniform distribution on $W$. 
+
+:::{.definition name="performance metrics"}
+The _maximum error probability_ $P_{e, \mrm{max}}(f, g)
+=\max_{m\in [M]} \Pr[\hat w\neq m|W=m]$. 
+The _average error probability_ $P_e(f, g)=\Pr[W\neq \hat W]$. 
+:::
+
+:::{.definition name="code definitions"}
+A code $(f, g)$ is a $(M, \epsilon)$ code for $P_{Y|X}$ 
+if $P_e(f, g)\leq \epsilon$. Similar definition 
+for $(M, \epsilon)_{\mrm{max}}$ code. 
+:::
+
+- $M^*(\epsilon; P_{Y|X})$ is the maximum $M$ such that 
+    there exists $(M, \epsilon)$-code. 
+- $\epsilon^*(M, P_{Y|X})$ is the minimim $\epsilon$ 
+    such that there exists a $(M, \epsilon)$ code; 
+    then $\log_2M^*(\epsilon)$ is the maximum number of 
+    transmittable bits. 
+
+Since the codewords are equiprobable, the decoder that 
+minimizes $P_e$ is the MAP decoder, this is since 
+\begin{align}
+    P_e = \sum_{y\in \mca Y} \Pr[Y=y]\Pr[\hat W\neq W|Y=y], \quad 
+    \Pr[\hat W\neq W|Y=y] = 1 - \Pr[g(y)= W|Y=y]
+\end{align}
+and MAP maximizes $\Pr[g(y)= W|Y=y]$. 
+Since codewords are equiprobable, 
+the MAP decoder is equivalent to the ML decoder. 
+\[ 
+    g^*(y) = \argmax_{m\in [M]} \Pr[W=m|Y=y] 
+    = \argmax_{m\in [M]} \Pr[Y=y|W=m]
+\]  
+As in the case of Bayesian risk, w.l.o.g. 
+we can restrict ourselves to deterministic encoder and 
+decoders: representing additional randomness using $U\indep W$, 
+we have $\Pr[W\neq \hat W] = \Exp[\Pr[W\neq \hat W|U]]$. 
+
+Negative (non-existence) results are called converse, since 
+they usually follow an existence result by "Conversely, ..."
+
+:::{.theorem #weakConverse name="weak converse"}
+For every $(M, \epsilon)$-code for $P_{Y|X}$, 
+recall the binary entropy function $h(x)=H(\mrm{Ber}(x))$, 
+we obtain 
+\[ 
+    \log M \leq \df{\sup_{P_X} I(X; Y) + h(\epsilon)}{1-\epsilon}
+\] 
+:::
+Given a $M$-code, compute $P_Y=P_{Y|X}\circ P_X$, where $P_X$ 
+is uniform on the codewords. We can hypothesis-test 
+$P_{XY}$ versus $P_XP_Y$ using $Z=1_{W\neq \hat W}$. Note 
+\[ 
+    W\indep \hat W\implies P_XP_Y[Z=0] = \df 1 M, \quad 
+    P_{XY}[Z=0] = 1 - \epsilon 
+\] 
+Next apply DPI with the data-processor $1_{W\neq \hat W}$ to obtain 
+\[ 
+    D(P_{XY}\|P_XP_Y) \geq d(1-\epsilon\| 1 /M) 
+    \geq -h(\epsilon) - (1-\epsilon)\log M 
+\] 
+The proof concludes by $I(X, Y)\leq \sup_{P_X} I(X; Y)$ and 
+monotonicity of $p\mapsto h(p)/(1-p)$. 
+
+## Random and maximal coding {-}
+
+Fixing the encoder, choosing the decoder is equivalent 
+to solving a $M$-ary HT problem. The problem of choosing the 
+encoder is then equivalent to choosing the best condition 
+with optimal $M$-ary HT solutions. 
+
+New notation: consider independent pairs $(X, Y)\indep (\bar X, \bar Y)$ 
+with joint distribution 
+\[ 
+    P_{XY\bar X\bar Y}(a, b, \bar a, \bar b) = P_X(a)P_{Y|X}(b|a)
+    P_X(\bar a)P_{Y|X}(\bar b|a)
+\] 
+Here $X$ is the codeword while $\bar X$ is the unsent codeword. 
+
+:::{.definition name="information density"}
+Let $P_{XY}, P_XP_Y\ll \mu$ with densities $f(x, y)$ and $\bar f(x, y)$ 
+respectively, define the information density 
+\[ 
+    i_{P_{XY}}(x; y) = \mrm{Log}\df{f(x, y)}{\bar f(x, y)} 
+\] 
+For $P_{XY}\ll P_XP_Y$ we have $i(x; y) = \log \df{P_{XY}(x, y)}{P_X(x)P_Y(y)}$ and 
+$I(X; Y) = \Exp[i(x; y)]$. 
+:::

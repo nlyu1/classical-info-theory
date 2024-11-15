@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10 Lossless compression | 6.7480 Notes</title>
   <meta name="description" content="10 Lossless compression | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10 Lossless compression | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-11-06" />
+<meta name="date" content="2024-11-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -151,7 +151,12 @@
 <li class="chapter" data-level="" data-path="hypothesis-testing-large-deviations.html"><a href="hypothesis-testing-large-deviations.html#npFormulation"><i class="fa fa-check"></i>Neyman-Pearson</a></li>
 <li class="chapter" data-level="" data-path="hypothesis-testing-large-deviations.html"><a href="hypothesis-testing-large-deviations.html#large-deviations-theory"><i class="fa fa-check"></i>Large deviations theory</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>12</b> Lecture notes</a>
+<li class="chapter" data-level="12" data-path="noisy-channel-coding.html"><a href="noisy-channel-coding.html"><i class="fa fa-check"></i><b>12</b> Noisy Channel Coding</a>
+<ul>
+<li class="chapter" data-level="" data-path="noisy-channel-coding.html"><a href="noisy-channel-coding.html#optimal-decoder-weak-converse"><i class="fa fa-check"></i>Optimal decoder, weak converse</a></li>
+<li class="chapter" data-level="" data-path="noisy-channel-coding.html"><a href="noisy-channel-coding.html#random-and-maximal-coding"><i class="fa fa-check"></i>Random and maximal coding</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>13</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -382,8 +387,7 @@ The inequality is saturated by the geometric distribution.</p>
 <summary>
 Proof
 </summary>
-Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1,
-\mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
+Let <span class="math inline">\(p = 1 / \mathbb E[X]\)</span> and note that <span class="math inline">\(\mathbb E[xp] = 1, \mathbb E[x\bar p] = \mathbb E[x(1-p)] = \mathbb E[x - 1]\)</span>, then
 <span class="math display">\[\begin{align}
     H(X) - \mathbb E[X] h(p)
     &amp;= \mathbb E\left[-\log p(x) - x[-p\log p - \bar p\log \bar p]\right] \\
