@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Entropy method in combinatorics | 6.7480 Notes</title>
-  <meta name="description" content="2 Entropy method in combinatorics | 6.7480 Notes" />
+  <title>13 Channel Capacity | 6.7480 Notes</title>
+  <meta name="description" content="13 Channel Capacity | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Entropy method in combinatorics | 6.7480 Notes" />
+  <meta property="og:title" content="13 Channel Capacity | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Entropy method in combinatorics | 6.7480 Notes" />
+  <meta name="twitter:title" content="13 Channel Capacity | 6.7480 Notes" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="entropy.html"/>
-<link rel="next" href="kullback-leibler-divergence.html"/>
+<link rel="prev" href="noisy-channel-coding.html"/>
+<link rel="next" href="lecture-notes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -203,142 +203,33 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="entropy-method-in-combinatorics" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Entropy method in combinatorics<a href="entropy-method-in-combinatorics.html#entropy-method-in-combinatorics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>To bound the cardinality of a set <span class="math inline">\(\mathcal C\)</span>, consider drawing
-an element uniformly at random from <span class="math inline">\(\mathcal C\)</span>, whose entropy
-is <span class="math inline">\(\log |\mathcal C|\)</span>. To bound <span class="math inline">\(|\mathcal C|\)</span> from above, we can
-describe this random object by a random vector <span class="math inline">\(X=(X_j)_{1\leq j\leq n}\)</span>
-and compute or upper-bound the joint-entropy by one of the following methods:</p>
+<div id="channel-capacity" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">13</span> Channel Capacity<a href="channel-capacity.html#channel-capacity" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="definition">
+<p><span id="def:unlabeled-div-107" class="definition"><strong>Definition 13.1  (channel) </strong></span>Fixing input alphabet <span class="math inline">\(\mathcal A\)</span> and output alphabet <span class="math inline">\(\mathcal B\)</span>,
+a channel is a sequence of kernels <span class="math inline">\(P_{Y^n|X^n}:\mathcal A^n\to \mathcal B^n\)</span>,
+where the index is called the <em>blocklength</em>.</p>
 <ul>
-<li><em>Marginal bound:</em> <span class="math inline">\(H(X) \leq \sum H(X_j)\)</span>.</li>
-<li><em>Pairwise bound</em>: <span class="math inline">\(H(X) \leq \dfrac 1 {n-1}\sum_{i&lt;j} H(X_i, X_j)\)</span></li>
-<li><em>Exact calculation</em>: <span class="math inline">\(H(X) = \sum_j H(X_j|X_1\leq k &lt;j)\)</span></li>
+<li>A channel is <u>non-anticipatory</u> if, fixing <span class="math inline">\(n\)</span>,
+<span class="math inline">\(P_{Y^{\forall k\leq n}|X^k} = P_{Y^k|X^n}\)</span> and
+coincides with <span class="math inline">\(P_{Y^k|X^k}\)</span> in the sequence. This formalizes
+the notion that the channel only depends causally upon the input.</li>
+<li>It is discrete if <span class="math inline">\(\mathcal A, \mathcal B\)</span> are finite.</li>
+<li>It is additive-noise if <span class="math inline">\(\mathcal A=\mathcal B\)</span> are abelian groups and
+<span class="math inline">\(Y^n=X^n+Z^n\)</span> and <span class="math inline">\(Z^n\perp\!\!\!\perp X^n\)</span>.</li>
+<li>A channel is <em>memoryless</em> if it is a product channel.</li>
+<li>It is stationary memoryless if it is the product of the same single-letter channel.</li>
 </ul>
-<div id="binary-vectors-of-average-weights" class="section level2 unnumbered hasAnchor">
-<h2>Binary vectors of average weights<a href="entropy-method-in-combinatorics.html#binary-vectors-of-average-weights" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let <span class="math inline">\(\mathcal C\)</span> denote a set of <span class="math inline">\(n\)</span>-bitstrings. If the average number
-of <span class="math inline">\(1\)</span>’s in <span class="math inline">\(\mathcal C\)</span> is close to <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>, then <span class="math inline">\(\mathcal C\)</span> cannot
-contain too many elements.</p>
-<div class="lemma">
-<p><span id="lem:unlabeled-div-11" class="lemma"><strong>Lemma 2.1  </strong></span>Let <span class="math inline">\(\mathcal C\subset \{0, 1\}^n\)</span> and <span class="math inline">\(p\)</span> be the
-average fraction of <span class="math inline">\(1\)</span>’s in <span class="math inline">\(\mathcal C\)</span>, then
-<span class="math display">\[
-    |\mathcal C|\leq e^{nh(p)}, \quad h(p) = -p\log p - (1-p)\log(1-p)
-\]</span></p>
 </div>
-<p><em>Proof:</em> Let <span class="math inline">\((X_j)_{1\leq j\leq n}\)</span> be drawn uniformly random
-from <span class="math inline">\(\mathcal C\)</span>, then
-<span class="math display">\[
-    \log |C| = H(X_1, \cdots, X_n) \leq \sum_j H(X_j) = \sum h(p_j)
-\]</span>
-Note that <span class="math inline">\((X_j)\)</span> are not independent. Uniform distribution over <span class="math inline">\(\mathcal C\)</span>
-does not imply independence of the individual components. Now, by concavity
-<span class="math display">\[
-    \sum h(p_j) \leq n h\left(\dfrac 1 n \sum p_j\right) = nh(p)
-\]</span></p>
-<p>The volume of a Hamming ball of radius <span class="math inline">\(k\)</span> centered at a binary vector
-<span class="math inline">\(x\)</span> is the number of binary vectors which lie within that ball. Since
-the space <span class="math inline">\(\{0, 1\}^n\)</span> is symmetric, the volume of the Hamming ball of radius
-<span class="math inline">\(k\)</span> is the same for any center <span class="math inline">\(x\)</span> and bounded by the following theorem</p>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-12" class="theorem"><strong>Theorem 2.1  (binomial bound) </strong></span><span class="math display">\[
-    \sum_{j=0}^k \binom{n}{j} \leq e^{nh(k/n)}, \quad k\leq n/2
-\]</span></p>
-</div>
-<p><em>Proof:</em> Let <span class="math inline">\(w_H(x)\)</span> denote the Hamming weight and take <span class="math inline">\(\mathcal C = \{x|w_H(X)\leq k\}\)</span>,
-then the previous lemma gives, for <span class="math inline">\(x\mapsto h(x)\)</span> increasing for <span class="math inline">\(x\leq 1/2\)</span>
-<span class="math display">\[
-    |\mathcal C| = \sum_{j=0}^k \binom{n}{j} \leq \sum_{j=0}^k e^{n h(j/n)}
-    \leq e^{nh(k/n)}, \quad k\leq n/2
-\]</span></p>
-</div>
-<div id="counting-subgraphs" class="section level2 unnumbered hasAnchor">
-<h2>Counting subgraphs<a href="entropy-method-in-combinatorics.html#counting-subgraphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For graphs <span class="math inline">\(H, G\)</span>, let <span class="math inline">\(N(H, G)\)</span> be the number of subgraphs
-(subset of edges) of <span class="math inline">\(G\)</span> which are isomorphic to <span class="math inline">\(H\)</span>.
-Let <span class="math inline">\(G\)</span> have <span class="math inline">\(m\)</span> edges, consider the maximal number of <span class="math inline">\(H\)</span>
-which are contained in <span class="math inline">\(G\)</span>. Define
-<span class="math display">\[
-    N(H, m) = \max_{G:|E(G)|\leq m|} N(H, G)
-\]</span>
-This is the maximum number of <span class="math inline">\(H\)</span> which can be contained in
-a graph with <span class="math inline">\(m\)</span> edges.</p>
-<div class="proposition">
-<p><span id="prp:unlabeled-div-13" class="proposition"><strong>Proposition 2.1  (triangle in graphs) </strong></span><span class="math inline">\(N(K_3, m) \asymp m^{3/2}\)</span>.</p>
-</div>
-<p><em>Proof:</em> To show the lower-bound, <span class="math inline">\(G=K_n\)</span> has <span class="math inline">\(\Theta(n^2)\)</span> edges and <span class="math inline">\(\Theta(n^3)\)</span>
-triangles. To show the upper bound, fix <span class="math inline">\(G=(V, E)\)</span> with <span class="math inline">\(m\)</span> edges and
-draw a labeled triangle at random with vertices <span class="math inline">\((X_1, X_2, X_3)\)</span>, then by
-Shearer’s lemma
-<span class="math display">\[
-    \log(3!N(K_3, G)) = H(X_1, X_2, X_3)
-    \leq \dfrac 1 2 [H(X_1, X_2)+H(X_1, X_3)+H(X_2, X_3)]
-    \leq \dfrac 3 2 \log(2m)
-\]</span></p>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-14" class="theorem"><strong>Theorem 2.2  (linear programming dual) </strong></span>Given a linear program <span class="math inline">\(\max c^Tx: Ax\leq b, x\geq 0\)</span>, its dual is
-<span class="math display">\[
-    \min b^Ty, \quad A^Ty\geq c, y\geq 0
-\]</span>
-This can be viewed as looking for a vector of coefficients <span class="math inline">\(y\)</span>
-to combine the constraints such that the resulting RHS
-constraint <span class="math inline">\(b^Ty\)</span> upper-bounds <span class="math inline">\(c^Tx\)</span> (which happens when <span class="math inline">\(A^Ty\geq c\)</span>).</p>
-</div>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-15" class="theorem"><strong>Theorem 2.3  (Friedgut and Kahn) </strong></span>The fractional covering number of a graph <span class="math inline">\(G=(V, E)\)</span> is the value of the linear program
-<span class="math display">\[
-    \rho^*(H) = \min_w \left[
-        \sum_{e\in E}w(e): \sum_{v\in e\in E} w(e)\geq 1, \forall v\in V, w(e)\in [0, 1]
-    \right]
-\]</span>
-Then <span class="math inline">\(c_0(H) m^{\rho^*(H)} \leq N(H, m) \leq c_1(H)m^{\rho^*(H)}\)</span>.</p>
-</div>
-<p><em>Proof:</em> Consider the upper bound first. Label <span class="math inline">\(V(H)=[n]\)</span>
-and let <span class="math inline">\(w^*(e)\)</span> be the solution for <span class="math inline">\(\rho^*(H)\)</span>. For any <span class="math inline">\(G\)</span> with <span class="math inline">\(m\)</span> edges,
-draw a subgraph of <span class="math inline">\(G\)</span> uniformly at random from all those isomorphic to <span class="math inline">\(H\)</span>.
-Let <span class="math inline">\(X_i\in V(G)\)</span> be the vertex corresponding to the <span class="math inline">\(i\)</span>-th vertex of <span class="math inline">\(H\)</span>.
-Define a random <span class="math inline">\(2\)</span>-subset of <span class="math inline">\([n]\)</span> by sampling <span class="math inline">\(e\in E(H)\)</span> with probability
-<span class="math inline">\(w^*(e)/\rho^*(H)\)</span>, then by definition of <span class="math inline">\(\rho^*(H)\)</span>
-<span class="math display">\[
-    \mathrm{Pr}(i\in S) \geq \dfrac 1 {\rho^*(H)}
-\]</span>
-since the minimal probability of selecting any edge (and its associated vertices)
-is <span class="math inline">\(1/\max w(e) \leq 1/\sum w(e) = \rho^*(H)\)</span>. Then applying Shearer’s lemma <a href="entropy.html#thm:shearer">1.5</a>
-<span class="math display">\[
-    \log N(H, G) = H(X) \leq H(X_S|S)\rho^*(H) \leq \log(2m)\rho^*(H)
-    \implies N(H, G)\leq (2m)^{\rho^*(H)}
-\]</span>
-For the other bound, the idea is to explode the graph <span class="math inline">\(H\)</span>.
-Consider the dual LP corresponding to the fractional packing number
-<span class="math display">\[
-    \alpha^*(H) = \max_\psi \left[\sum_{v\in V(H)} \psi(v):
-        \psi(v)\in [0, 1] \text{ and }
-        \forall (vw)\in E: \psi(v)+\psi(w)\leq 1
-    \right]
-\]</span>
-Construct the graph <span class="math inline">\(G\)</span> as follows: for each <span class="math inline">\(v\in H\)</span>, replicate it <span class="math inline">\(m(v)\)</span> times
-(here <span class="math inline">\(m\)</span> stands for multiplicity, to be defined later). Each edge <span class="math inline">\(e=(vw)\)</span> of <span class="math inline">\(H\)</span>
-is then replaced by <span class="math inline">\(K_{m(v), m(w)}\)</span> so that
-<span class="math display">\[
-    |E(G)| = \sum_{(vw)\in E(H)} m(v)m(w)
-\]</span>
-We also have <span class="math inline">\(N(G, H)\prod_{v\in V(H)} m(v)\)</span>. Fix a large number <span class="math inline">\(M\)</span> and
-let <span class="math inline">\(m(v) = \lceil M^{\psi(v)}\rceil\)</span>, then
-<span class="math display">\[\begin{align}
-    |E(G)| &amp;\leq \sum_{(vw)\in E(H)} 4M^{\psi(v)+\psi(w)} \leq 4M|E(H)| \\
-    N(G, H) &amp;\geq \prod_{v\in V(H)} M^{\psi(v)} = M^{\alpha^*(H)}
-\end{align}\]</span></p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="entropy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="kullback-leibler-divergence.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="noisy-channel-coding.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lecture-notes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

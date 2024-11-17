@@ -6,7 +6,9 @@ Main takeaways:
     number of reliably transmittable bits (intractable, 
     combinatorial operational quantity) is upper-bounded 
     by mutual information (an information quantity). 
-2. 
+2. The probabilistic method: if some expected attribute of random selections 
+    is bounded by a certain value, then there exists an object whose attribute 
+    is bounded. 
 
 ## Optimal decoder, weak converse {-}
 
@@ -115,4 +117,22 @@ respectively, define the information density
 \] 
 For $P_{XY}\ll P_XP_Y$ we have $i(x; y) = \log \df{P_{XY}(x, y)}{P_X(x)P_Y(y)}$ and 
 $I(X; Y) = \Exp[i(x; y)]$. 
+:::
+
+# Channel Capacity 
+
+:::{.definition name="channel"}
+Fixing input alphabet $\mca A$ and output alphabet $\mca B$, 
+a channel is a sequence of kernels $P_{Y^n|X^n}:\mca A^n\to \mca B^n$, 
+where the index is called the _blocklength_.
+
+- A channel is <u>non-anticipatory</u> if, fixing $n$, 
+    $P_{Y^{\forall k\leq n}|X^k} = P_{Y^k|X^n}$ and 
+    coincides with $P_{Y^k|X^k}$ in the sequence. This formalizes 
+    the notion that the channel only depends causally upon the input. 
+- It is discrete if $\mca A, \mca B$ are finite. 
+- It is additive-noise if $\mca A=\mca B$ are abelian groups and 
+    $Y^n=X^n+Z^n$ and $Z^n\indep X^n$. 
+- A channel is _memoryless_ if it is a product channel. 
+- It is stationary memoryless if it is the product of the same single-letter channel. 
 :::

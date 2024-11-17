@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>13 Lecture notes | 6.7480 Notes</title>
-  <meta name="description" content="13 Lecture notes | 6.7480 Notes" />
+  <title>14 Lecture notes | 6.7480 Notes</title>
+  <meta name="description" content="14 Lecture notes | 6.7480 Notes" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="13 Lecture notes | 6.7480 Notes" />
+  <meta property="og:title" content="14 Lecture notes | 6.7480 Notes" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="13 Lecture notes | 6.7480 Notes" />
+  <meta name="twitter:title" content="14 Lecture notes | 6.7480 Notes" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="noisy-channel-coding.html"/>
+<link rel="prev" href="channel-capacity.html"/>
 <link rel="next" href="bibliography.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -156,7 +156,8 @@
 <li class="chapter" data-level="" data-path="noisy-channel-coding.html"><a href="noisy-channel-coding.html#optimal-decoder-weak-converse"><i class="fa fa-check"></i>Optimal decoder, weak converse</a></li>
 <li class="chapter" data-level="" data-path="noisy-channel-coding.html"><a href="noisy-channel-coding.html#random-and-maximal-coding"><i class="fa fa-check"></i>Random and maximal coding</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>13</b> Lecture notes</a>
+<li class="chapter" data-level="13" data-path="channel-capacity.html"><a href="channel-capacity.html"><i class="fa fa-check"></i><b>13</b> Channel Capacity</a></li>
+<li class="chapter" data-level="14" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>14</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -202,8 +203,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="lecture-notes" class="section level1 hasAnchor" number="13">
-<h1><span class="header-section-number">13</span> Lecture notes<a href="lecture-notes.html#lecture-notes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="lecture-notes" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">14</span> Lecture notes<a href="lecture-notes.html#lecture-notes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="oct-2-fisher-information-classical-minimax-estimation" class="section level2 unnumbered hasAnchor">
 <h2>Oct 2: Fisher information, classical minimax estimation<a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Agenda:</p>
@@ -240,7 +241,7 @@ Recall that Donsker-varadhan is not linear in <span class="math inline">\(\mathb
 but there is a standard trick to rewrite the expectation.</p>
 <p>We now apply the variational characterization to <span class="math inline">\(\chi^2\)</span>;</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-107" class="proposition"><strong>Proposition 13.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
+<p><span id="prp:unlabeled-div-108" class="proposition"><strong>Proposition 14.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
 </div>
 <p>Expanding this out, the first term is very useful;
 but the second is not. The first step is to break a single
@@ -328,7 +329,7 @@ towards it.</p>
 <div id="hcr-inequality-fisher-information" class="section level3 unnumbered hasAnchor">
 <h3>HCR inequality; Fisher information<a href="lecture-notes.html#hcr-inequality-fisher-information" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-108" class="proposition"><strong>Proposition 13.2  </strong></span><span class="math inline">\(\forall \hat \theta\)</span> and <span class="math inline">\(\theta, \theta_0\)</span> we have
+<p><span id="prp:unlabeled-div-109" class="proposition"><strong>Proposition 14.2  </strong></span><span class="math inline">\(\forall \hat \theta\)</span> and <span class="math inline">\(\theta, \theta_0\)</span> we have
 <span class="math display">\[
     R_n^* \geq \mathrm{Var}_{P^\theta} \geq \dfrac{
         \left(\mathbb E_{P^\theta} \hat \theta
@@ -394,7 +395,7 @@ more assumptions.</p>
 <div id="oct-7-data-compression" class="section level2 unnumbered hasAnchor">
 <h2>Oct 7: Data compression<a href="lecture-notes.html#oct-7-data-compression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-109" class="theorem"><strong>Theorem 13.1  (local expansion of χ) </strong></span>For <span class="math inline">\(\theta_0 = 0\)</span>, when the following conditions hold:</p>
+<p><span id="thm:unlabeled-div-110" class="theorem"><strong>Theorem 14.1  (local expansion of χ) </strong></span>For <span class="math inline">\(\theta_0 = 0\)</span>, when the following conditions hold:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\theta \in [0, \tau)\)</span>.</li>
 <li>There exists <span class="math inline">\(\dot p^\theta(x)\)</span> satisfying
@@ -433,7 +434,7 @@ a one-parameter family; with the notation <span class="math inline">\(\mathcal J
 we’re assuming the one-parameter family to be the location family
 of the given density.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-110" class="theorem"><strong>Theorem 13.2  (van Trees inequality) </strong></span>Under regularity assumptions on <span class="math inline">\(P^\theta\)</span>,
+<p><span id="thm:unlabeled-div-111" class="theorem"><strong>Theorem 14.2  (van Trees inequality) </strong></span>Under regularity assumptions on <span class="math inline">\(P^\theta\)</span>,
 for every estimator <span class="math inline">\(\hat \theta(X)\)</span> and prior
 <span class="math inline">\(\pi\)</span>
 <span class="math display">\[
@@ -444,7 +445,7 @@ for every estimator <span class="math inline">\(\hat \theta(X)\)</span> and prio
 \]</span></p>
 </div>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-111" class="corollary"><strong>Corollary 13.1  </strong></span>For <span class="math inline">\(n\)</span> i.i.d. observations, for every <span class="math inline">\(\pi\)</span>
+<p><span id="cor:unlabeled-div-112" class="corollary"><strong>Corollary 14.1  </strong></span>For <span class="math inline">\(n\)</span> i.i.d. observations, for every <span class="math inline">\(\pi\)</span>
 <span class="math display">\[
     R_n^* \geq \dfrac 1 {\mathcal J(\pi) +
     n\mathbb E_{\theta \sim \pi} \mathcal J_F(\theta)}
@@ -510,7 +511,7 @@ law of large numbers (in log-space).</li>
 <p>Distribution of compression length is distributed (up to constants)
 as the entropy density. This is great because entropy density tensorizes.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-112" class="proposition"><strong>Proposition 13.3  (distribution of compression length) </strong></span>Define random variable <span class="math inline">\(L^* = l(f^*(X))\)</span>.
+<p><span id="prp:unlabeled-div-113" class="proposition"><strong>Proposition 14.3  (distribution of compression length) </strong></span>Define random variable <span class="math inline">\(L^* = l(f^*(X))\)</span>.
 Denote the entropy density <span class="math inline">\(i_X(a) = -\log P_X(a)\)</span>;
 the optimal compressor should compress symbol <span class="math inline">\(a\)</span> to roughly
 this length:
@@ -589,7 +590,7 @@ then we can close-to-optimal compress a non-i.i.d. distribution
 by combining this with the arithmetic encoder.
 </u></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-113" class="theorem"><strong>Theorem 13.3  (Shannon-McMillan-Breimen) </strong></span>A.e.p. holds w.r.t. the entropy rate
+<p><span id="thm:unlabeled-div-114" class="theorem"><strong>Theorem 14.3  (Shannon-McMillan-Breimen) </strong></span>A.e.p. holds w.r.t. the entropy rate
 if <span class="math inline">\(\{X_j\}\)</span> is a stationary (ensures
 existence of the entropy rate) ergodic process.</p>
 </div>
@@ -601,7 +602,7 @@ approximated by a <span class="math inline">\(m\to \infty\)</span>-order Markov 
 <h3>Lempel-Ziv<a href="lecture-notes.html#lempel-ziv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Central question: how to compress well without <span class="math inline">\(P_{X^n}\)</span>?</p>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-114" class="lemma"><strong>Lemma 13.1  (Katz's lemma) </strong></span>Given a stationary ergodic process <span class="math inline">\((X_{j\in \mathbb Z})\)</span>.
+<p><span id="lem:unlabeled-div-115" class="lemma"><strong>Lemma 14.1  (Katz's lemma) </strong></span>Given a stationary ergodic process <span class="math inline">\((X_{j\in \mathbb Z})\)</span>.
 Define <span class="math inline">\(L = \inf\{t&gt;0: X_{-t}=X_0\}\)</span>, then
 <span class="math display">\[
     \mathbb E[L | X_0=u] = \mathrm{Pr}[X_0=u]^{-1}
@@ -708,7 +709,7 @@ Young-Barron bound):
 given <span class="math inline">\(X_1, \cdots X_n\sim P\in \Pi\)</span> i.i.d, we wish to find <span class="math inline">\(\tilde P\)</span>
 which will estimate <span class="math inline">\(P\)</span> very well.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-115" class="theorem"><strong>Theorem 13.4  </strong></span>For every i.i.d. class <span class="math inline">\(\Pi\)</span> as above, there exists estimator such that
+<p><span id="thm:unlabeled-div-116" class="theorem"><strong>Theorem 14.4  </strong></span>For every i.i.d. class <span class="math inline">\(\Pi\)</span> as above, there exists estimator such that
 <span class="math display">\[
     \mathbb E\mathrm{TV}^2 \leq \mathbb ED(P\|\tilde P_{\text{this is random}})
     \leq \dfrac{R_{n+1}^*(\Pi)}{n+1}
@@ -742,7 +743,7 @@ Two associated quantities:</p>
 <li><span class="math inline">\(\beta = Q[Z=0]\)</span>: probability of failure under <span class="math inline">\(Q\)</span>.</li>
 </ol>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-116" class="theorem"><strong>Theorem 13.5  (Stein's lemma) </strong></span>Among all tests with <span class="math inline">\(\alpha \geq 1 - \epsilon\)</span>, the smallest possible
+<p><span id="thm:unlabeled-div-117" class="theorem"><strong>Theorem 14.5  (Stein's lemma) </strong></span>Among all tests with <span class="math inline">\(\alpha \geq 1 - \epsilon\)</span>, the smallest possible
 <span class="math inline">\(\beta = e^{-nD(P\|Q) + o_\epsilon(n)}\)</span> assuming <span class="math inline">\(X_j^n\sim P\)</span> or <span class="math inline">\(Q\)</span>.</p>
 </div>
 <p>Several comments:</p>
@@ -755,7 +756,7 @@ Two associated quantities:</p>
     \mathcal R(P, Q) = \{(P[Z=0], Q[Z=0])\}
 \]</span></p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-117" class="proposition"><strong>Proposition 13.4  </strong></span><span class="math inline">\(\mathcal R\subset [0, 1]^2\)</span> is closed, convex, symmetric
+<p><span id="prp:unlabeled-div-118" class="proposition"><strong>Proposition 14.4  </strong></span><span class="math inline">\(\mathcal R\subset [0, 1]^2\)</span> is closed, convex, symmetric
 w.r.t. <span class="math inline">\((1/2, 1/2)\)</span>, and
 <span class="math display">\[
     \mathcal R = \overline{\mathrm{co}\,
@@ -786,7 +787,7 @@ two distributions are; identical distributions correspond to the
 line <span class="math inline">\(\alpha=\beta\)</span> with zero measure. This motivates the
 following results:</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-118" class="proposition"><strong>Proposition 13.5  </strong></span><span class="math inline">\(d(\alpha \| \beta) \leq D(P\|Q)\)</span> for <span class="math inline">\(\alpha, \beta \in \mathcal R\)</span>.
+<p><span id="prp:unlabeled-div-119" class="proposition"><strong>Proposition 14.5  </strong></span><span class="math inline">\(d(\alpha \| \beta) \leq D(P\|Q)\)</span> for <span class="math inline">\(\alpha, \beta \in \mathcal R\)</span>.
 This results from applying DPI to the estimator <span class="math inline">\(Z\)</span>.</p>
 </div>
 </div>
@@ -808,7 +809,7 @@ to compute <span class="math inline">\(E_0, E_1\)</span>, we need to compute <sp
     \mathrm{Pr}[\bar T &lt; \gamma] \sim e^{-nE(\gamma)}
 \]</span></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-119" class="theorem"><strong>Theorem 13.6  (Sanov principle) </strong></span>under regularity conditions on <span class="math inline">\(\mathcal E\)</span>, we have
+<p><span id="thm:unlabeled-div-120" class="theorem"><strong>Theorem 14.6  (Sanov principle) </strong></span>under regularity conditions on <span class="math inline">\(\mathcal E\)</span>, we have
 <span class="math inline">\(\mathrm{Pr}[\hat P_n\in \mathcal E] = e^{-nE + o(n)}\)</span>, where
 <span class="math display">\[
     E = \inf_{R\in \mathcal E} D(R\|P)
@@ -818,7 +819,7 @@ to compute <span class="math inline">\(E_0, E_1\)</span>, we need to compute <sp
 Extremely important proof below!
 </span></p>
 <div class="lemma">
-<p><span id="lem:unlabeled-div-120" class="lemma"><strong>Lemma 13.2  </strong></span>If <span class="math inline">\(\mathcal X\)</span> is finite and <span class="math inline">\(\mathcal E\)</span> is <em>convex</em> with
+<p><span id="lem:unlabeled-div-121" class="lemma"><strong>Lemma 14.2  </strong></span>If <span class="math inline">\(\mathcal X\)</span> is finite and <span class="math inline">\(\mathcal E\)</span> is <em>convex</em> with
 nonempty interior, then Sanov holds.</p>
 </div>
 <p>First consider an upper bound: <span class="math inline">\(\mathrm{Pr}[\hat P_n\in \mathcal E] \leq e^{-nE}\)</span>.
@@ -851,7 +852,7 @@ Otherwise, take <span class="math inline">\(R\in \mathrm{int}(\mathcal E)\)</spa
 \]</span>
 where infimum is over <span class="math inline">\(\mathbb E_P[X]=\gamma\)</span>.</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-121" class="proposition"><strong>Proposition 13.6  (tilting is optimal if exists) </strong></span>Suppose there exists <span class="math inline">\(\lambda \in \mathbb R^d\)</span> such that
+<p><span id="prp:unlabeled-div-122" class="proposition"><strong>Proposition 14.6  (tilting is optimal if exists) </strong></span>Suppose there exists <span class="math inline">\(\lambda \in \mathbb R^d\)</span> such that
 <span class="math inline">\(\mathbb E_{X\sim P_\lambda}[X]=\gamma\)</span>, then
 for every <span class="math inline">\(R\)</span> satisfying <span class="math inline">\(\mathbb E_R[X]=\gamma\)</span>, we have
 <span class="math display">\[
@@ -861,7 +862,7 @@ for every <span class="math inline">\(R\)</span> satisfying <span class="math in
 <p><em>Proof:</em> <span class="math inline">\(D(R\|P) = \mathbb E_R \log \dfrac{dR}{dP} \dfrac{dR}{dP_\lambda}\)</span> and regroup
 by cross-terms. Recognize <span class="math inline">\(\mathbb E_R \log dP_\lambda/dP = \mathbb E_R[\lambda^T X - \psi(\lambda)]\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-122" class="theorem"><strong>Theorem 13.7  (I-projection on a hyperplane) </strong></span></p>
+<p><span id="thm:unlabeled-div-123" class="theorem"><strong>Theorem 14.7  (I-projection on a hyperplane) </strong></span></p>
 <ol style="list-style-type: decimal">
 <li>If <span class="math inline">\(\exists R: \mathbb E_R[X]=\gamma\)</span> and <span class="math inline">\(D(R\|P)&lt;\infty\)</span>,
 then <span class="math inline">\(\gamma\in \mathrm{csupp}(P)\)</span>.</li>
@@ -874,7 +875,7 @@ the mixture of two disjointly supported distributions.</p>
 <p>In other words, information projection is solvable iff <span class="math inline">\(\gamma\)</span> is in
 csupp, and it is solvable by tilting if it <span class="math inline">\(\gamma\)</span> is in the interior.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-123" class="theorem"><strong>Theorem 13.8  (tradeoff in error exponents) </strong></span><span class="math inline">\(E_1(E_0) = \inf_{D(R\|P)&lt;E_0} D(R\|Q)\)</span>.</p>
+<p><span id="thm:unlabeled-div-124" class="theorem"><strong>Theorem 14.8  (tradeoff in error exponents) </strong></span><span class="math inline">\(E_1(E_0) = \inf_{D(R\|P)&lt;E_0} D(R\|Q)\)</span>.</p>
 </div>
 <p>Relation to Wald’s SPRT principle by slightly
 modifying the problem formulation: commit to an expected
@@ -938,7 +939,7 @@ most of the times <span class="math inline">\(P_{\hat W|Y}\)</span> is determini
 one does sometime need to randomize when minimizing the
 minimax risk, however.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-124" class="definition"><strong>Definition 13.1  (error criteria) </strong></span>Consider two types of the probability of error reminiscent
+<p><span id="def:unlabeled-div-125" class="definition"><strong>Definition 14.1  (error criteria) </strong></span>Consider two types of the probability of error reminiscent
 of the case for risk in statistical estimation:</p>
 <ol style="list-style-type: decimal">
 <li>Average probability of error: <span class="math inline">\(P_{e, \mathrm{avg}} = \mathrm{Pr}[\hat W\neq W]\)</span>.</li>
@@ -950,7 +951,7 @@ of the case for risk in statistical estimation:</p>
 if <span class="math inline">\(P_{e, \mathrm{avg}}\leq \epsilon\)</span>. It is an
 <span class="math inline">\((M, \epsilon)_{\mathrm{max}}\)</span> code if <span class="math inline">\(P_{e, \mathrm{max}}\leq \epsilon\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-125" class="definition"><strong>Definition 13.2  (single-shot fundamental limit) </strong></span>Fixing a channel, <span class="math inline">\(M^*(\epsilon)\)</span> is the maximum alphabet size
+<p><span id="def:unlabeled-div-126" class="definition"><strong>Definition 14.2  (single-shot fundamental limit) </strong></span>Fixing a channel, <span class="math inline">\(M^*(\epsilon)\)</span> is the maximum alphabet size
 such that there exists a <span class="math inline">\((M, \epsilon)\)</span>-code.
 The max-error limit <span class="math inline">\(M^*_{\mathrm{max}}\)</span> is defined similarly.</p>
 </div>
@@ -976,7 +977,7 @@ noise perturbations.</p>
 hypothesis testing; if we require <span class="math inline">\(\epsilon\to 0\)</span>,
 then <span class="math inline">\(M^*(\epsilon)\to 0\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-126" class="theorem"><strong>Theorem 13.9  (Fano's bound) </strong></span><span class="math inline">\(\log M^*_{\mathrm{max}}(\epsilon) \leq \log M^*(\epsilon) \leq \dfrac{\sup_X I(X; Y) + \log 2}{1-\epsilon}\)</span>.</p>
+<p><span id="thm:unlabeled-div-127" class="theorem"><strong>Theorem 14.9  (Fano's bound) </strong></span><span class="math inline">\(\log M^*_{\mathrm{max}}(\epsilon) \leq \log M^*(\epsilon) \leq \dfrac{\sup_X I(X; Y) + \log 2}{1-\epsilon}\)</span>.</p>
 </div>
 <p><em>Proof:</em> Again, to prove impossibility bounds
 begin with the easy case.
@@ -1030,7 +1031,7 @@ the two strings.
 <p>More generally, a discrete stationary memoryless channel (DMC)
 is just a tensorized channel which acts i.i.d on the input components.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-127" class="definition"><strong>Definition 13.3  (fundamental limit of channel coding, capacity) </strong></span>For any channel, an <span class="math inline">\((M, \epsilon)\)</span> code
+<p><span id="def:unlabeled-div-128" class="definition"><strong>Definition 14.3  (fundamental limit of channel coding, capacity) </strong></span>For any channel, an <span class="math inline">\((M, \epsilon)\)</span> code
 for <span class="math inline">\(P_{B^n|A^n}\)</span> is called a <span class="math inline">\((M, n, \epsilon)\)</span> code.
 The capacity <span class="math inline">\(C\)</span> of the channel is defined as
 <span class="math display">\[\begin{align}
@@ -1039,7 +1040,7 @@ The capacity <span class="math inline">\(C\)</span> of the channel is defined as
 \end{align}\]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-128" class="proposition"><strong>Proposition 13.7  (almost no difference between max v.s. average) </strong></span><span class="math inline">\(\forall \tau \in (0, 1)\)</span> we have
+<p><span id="prp:unlabeled-div-129" class="proposition"><strong>Proposition 14.7  (almost no difference between max v.s. average) </strong></span><span class="math inline">\(\forall \tau \in (0, 1)\)</span> we have
 <span class="math display">\[
     (1-\tau)M^*(n, \tau \epsilon) \leq M^*_{\mathrm{max}}(n, \epsilon)
     \leq M^*(n, \epsilon)
@@ -1056,7 +1057,7 @@ take an <span class="math inline">\((n, M, \tilde \epsilon)\)</span> code and de
 For every average-prob error code, we can apply the same idea
 behind Markov’s inequality to select a max-probability sub-code.</p>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-129" class="corollary"><strong>Corollary 13.2  </strong></span><span class="math inline">\(C_\epsilon \geq C_\epsilon^{\mathrm{max}} \geq \lim_{\delta \to 0^-} C_{\epsilon - \delta} \implies C^{\mathrm{max}} = C\)</span>.</p>
+<p><span id="cor:unlabeled-div-130" class="corollary"><strong>Corollary 14.2  </strong></span><span class="math inline">\(C_\epsilon \geq C_\epsilon^{\mathrm{max}} \geq \lim_{\delta \to 0^-} C_{\epsilon - \delta} \implies C^{\mathrm{max}} = C\)</span>.</p>
 </div>
 <p>One perspective on <span class="math inline">\(C\)</span> is that it is the maximal rate of
 asymptotically reliable communication. In other words,
@@ -1067,7 +1068,7 @@ sequence of <span class="math inline">\(\delta_n, \epsilon_n\to 0\)</span>,
 Proof: exercise??!
 </span></p>
 <div class="definition">
-<p><span id="def:unlabeled-div-130" class="definition"><strong>Definition 13.4  (information capacity) </strong></span>The information capacity <span class="math inline">\(C^{(i)}\)</span> of a channel is
+<p><span id="def:unlabeled-div-131" class="definition"><strong>Definition 14.4  (information capacity) </strong></span>The information capacity <span class="math inline">\(C^{(i)}\)</span> of a channel is
 <span class="math display">\[
     C^{(i)} = \liminf_{n\to \infty} \dfrac 1 n
     \sup_{P_{A^n}} I(A^n; B^n)
@@ -1076,11 +1077,11 @@ Compared to the actual capacity
 (integer programming problem), this is easy!</p>
 </div>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-131" class="proposition"><strong>Proposition 13.8  (capacity of BSC) </strong></span>For <span class="math inline">\(\mathrm{BSC}_\delta\)</span>, we obtain <span class="math inline">\(C^{(i)} = \log_2 - h(\delta)\)</span>.</p>
+<p><span id="prp:unlabeled-div-132" class="proposition"><strong>Proposition 14.8  (capacity of BSC) </strong></span>For <span class="math inline">\(\mathrm{BSC}_\delta\)</span>, we obtain <span class="math inline">\(C^{(i)} = \log_2 - h(\delta)\)</span>.</p>
 </div>
 <p><em>Proof:</em> upper-bound by tensorization of mutual information.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-132" class="theorem"><strong>Theorem 13.10  (relation between information and actual capacity) </strong></span>Fano’s bound implies<br />
+<p><span id="thm:unlabeled-div-133" class="theorem"><strong>Theorem 14.10  (relation between information and actual capacity) </strong></span>Fano’s bound implies<br />
 <span class="math inline">\(C_\epsilon \leq \dfrac{C^{(i)}}{1-\epsilon} \implies C\leq C^{(i)}\)</span>.</p>
 </div>
 <p>For the BSC channel, the optimal decoder <span class="math inline">\(g_{\mathrm{MLE}}\)</span>
@@ -1115,7 +1116,7 @@ This implies, for BSC, <span class="math inline">\(C = C^{(i)} = \log 2 - h(\del
           </div>
         </div>
       </div>
-<a href="noisy-channel-coding.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="channel-capacity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="bibliography.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
