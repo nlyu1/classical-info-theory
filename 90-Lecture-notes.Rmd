@@ -990,3 +990,383 @@ $c_1, \dots, c_M$ uniformly from the Hamming cube. Then
 Note crucially that $C_j \indep Y$. The second 
 error rate $\epsilon_2$ vanishes if $M\ll 2^{nC^{(i)}}$. 
 This implies, for BSC, $C = C^{(i)} = \log 2 - h(\delta)$. 
+
+## Nov 18, Channel Coding III {-}
+
+Agenda: 
+
+1. Finish DT bound. 
+2. DT bound with input constraints. 
+3. General channels with input constraints. 
+4. Capacity of Gaussian channels. 
+
+TODO for notes:
+
+1. Equivalence between maximum and average error. 
+2. DT bound. 
+
+Other questions:
+
+1. More intuition for the strong v.s. weak converse. 
+2. Explain $\liminf$, also why is $C_0$ a combinatorial problem, 
+    different from $C_{\to 0}$. 
+3. Wasserstein distance. 
+
+Pset questions:
+
+1. Pointwise maximization.
+2. Existence of the extension.
+3. Idea for applying the meta-converse. 
+
+Recall the information density:
+given a joint distribution $P_{XY}$, the information 
+density is the joint. 
+
+For the BSC, the channel only gives half the required 
+quantitites for computing information density (i.e. the channel). 
+We still need the input distribution. Take $P_{X^n}$ to uniform 
+on the Hamming cube, then 
+\[ 
+    i(X^n; ^n) = \log \df{P_{Y^n|X^n}}{P_{Y^n}} 
+    = \log \df{\delta^{d_M} \bar \delta^{-n-d_M}}{2^{-n}} 
+    = n\log (2\bar \delta) - d_M \log \df{\bar \delta}{\delta}
+\] 
+This makes explicit the connection that ML decoder is equivalent 
+to minimizing the Hamming distance $d_M$. 
+
+- For memoryless channels, the information density tensorizes. 
+- This allows us to apply LLN (or large-deviations theory). 
+
+We can generalize the notion from stationary memoryless channels, 
+since information stability (tensorization and concentration about average) 
+is sufficient to prove capacity. 
+
+:::{.theorem name="random coding DT bound"}
+$\forall P_{Y|X}$ and $P_X, M\geq 1$, there exists $(M, \epsilon)$-code 
+such that 
+\[ 
+    \epsilon \leq \Exp \exp -\max\left[0, i(X; Y) - \log \df{M-1}{2}\right]
+\] 
+:::
+_Proof:_ Treating the codebook as a random variable, a decoding error of message $j$ 
+    can happen if: 
+
+1. $i(C_j; Y) \leq \gamma$: the info density of the true codeword is not enough. 
+    In BSC, this is probability that Hamming distance between true message and 
+    received message is larger than the threshold. 
+2. There exists another codeword which exceeds $\gamma$ prior to $j$. **Since we 
+are taking the average over random codebooks, this terms becomes tractable.**
+In BSC, this corresponds to some other codewords existing in the thresholded ball. 
+
+Proceeding to bound the first term, 
+\[ 
+    P_e = \sum_{x, y} P_{XY}(x, y) 1 \left\{ 
+        P_{XY} \leq e^\gamma P_{\bar X Y}
+    \right\} + \df{M-1}{2} P_{\bar XY}(x, y) 1\left\{
+        P_{XY} > e^\gamma P_{\bar XY}
+    \right\}
+\] 
+To minimize this, the optimal selection is $\gamma = \log \df{M-1}{2}$; 
+this construction of events selects the minimum of the two contributions. 
+
+Perspective on information theory: when proving results, complexity do not 
+matter. When results are significant, someone will find a computationally feasible way : ) 
+
+### Decoding with constraint {-}
+The capacity of the AWGN without any constraint is $\infty$, 
+since we can space inputs out significantly large enough so that 
+the added noise cause negligible overlap. 
+
+The constraint $\|C\|^2 \leq nP$ yields finite capacity $C=\df 1 2 \log(1+P)$. 
+
+We wish to find a codebook $c_1, \dots, c_M$ such that $P_e(C) \leq \epsilon$, 
+and that $\|C_j\|^2 \leq nP$. In short, we have to place our codeword 
+in a sphere of radius $\sqrt{nP}$. Each codeword will be roughly 
+spent to a sphere of radius $\|\mca N(0, I_n)\| \approx \sqrt n$. 
+The output will land with high probability within the sphere with radius 
+\[ 
+    \Exp \|C + \mca N(0, I_n)\|^2 \approx n(1+p)
+\] 
+How many spheres $\sqrt n B^{n-1}$ can we pack inside $\sqrt{n(1+p)}B$?
+An upper bound is $(1+p)^{n/2}$. 
+
+
+:::{.definition name="channel with constraints"}
+Given a channel and a cost $c:\mca X\to \mbb R_+$, 
+an encoder-decoder $(f, g)$ is an $(n, M, \epsilon, P)$ code if 
+\[ 
+    \df 1 n \sum_j \Pr[g(y)\neq j|X=f(j)] \leq \epsilon, \quad 
+    \forall j, c_n(f(j)) \leq nP 
+\] 
+<span style="color:green">
+Note that we are amortizing w.r.t. blocklength and randomness of the encoder, 
+but the constraint should be uniformly obeyed by all elements of the alphabet. 
+</span>
+:::
+For AWGN, $c(x)=x^2$. Further, for memoryless channels, the constrained 
+capacity is 
+\[ 
+    C^{(I)}(P) = \sup_{\Exp c(X_1)\leq P} I(X_1; Y_1)
+\] 
+
+:::{.proposition name="properties of capacity-cost function"}
+
+1. $P\mapsto C^{(I)}(P)$ is concave, increasing, and continuous on interior. 
+2. $C(P)\leq C^{(I)}(P)$. 
+:::
+_Proof:_ Concavity follows by averaging the capacity-achieving distributions. 
+The second part follows from applying the weak converse. 
+Take a $(n, M, \epsilon, P)$-code, \dots. 
+
+## Nov 20. Quantization {-}
+
+Agenda: 
+
+1. Finish capacity of Gaussian cahannel with cost 
+2. Quantization: scalar case 
+3. Definition of vector case 
+
+Channel coding with constraint: 
+
+\[ 
+    C^{(I)}(P) = \liminf_{n\to \infty} \df 1 n \sup_{
+        \Exp\left[\frac 1 n \sum c(X_t)\right]
+    } I(X^n; Y^n)
+\] 
+By (1) the concavity of the capacity-cost function, and 
+(2) tensorization of MI, we can tensorize both the extremized 
+quantity as well as the condition. 
+
+Due to the concavity of the capacity-cost function, 
+maximum communication per unit cost is achieved by having vanishing rate 
+since $C^{(I)}(P) / P$ is maximized $P\to 0$. 
+
+:::{.theorem name="Fano's inequality under constraint"}
+$C(P) \leq C^{(I)}(P)$. 
+:::
+
+The information stability criterion 
+\[ 
+    \df 1 n i(X^n; Y^n)\xrightarrow{\mbb P} C^{(I)}(P)
+\] 
+is equivalent to demanding the equivalent analogue of 
+law of large numbers holding for non-stationary channels. 
+
+
+For AWGN, we have $C^{(I)}(P) = \df 1 2 \log(1+P)$, 
+and recalling our previous discussion, 
+\[ 
+    \sup_P \df{\frac 1 2 \log(1+P)}{P} = \df{\log e}{2} 
+    = -1.6\mrm{dB} \df{\mrm{bit}}{\mrm{Joule}} 
+\] 
+is the a fundamental limit in deep-space communication. 
+
+### Water-filling {-}
+
+Consider a non-stationary memoryless Gaussian channel 
+\[ 
+    Y_t = X_t + Z_t, \quad Z_t \sim \mca N(0, \sigma_t^2)
+\] 
+Using tensorization, we obtain 
+\[ 
+    I(X^n; Y^n) \leq \sum_t I(X_t; X_t + Z_t) 
+\] 
+with inequality saturated by independent Gaussians. 
+Fixing the power allocation $P_t$ for each letter, we obtain 
+\[ 
+    I(X^n; Y^n) \leq \df 1 2 \sum_{t=1}^n \log \left(
+        1 + \df{P_t}{\sigma_t^2}
+    \right) \text{ subject to } \sum P_t \leq n P 
+\] 
+This is a convex problem. Using Lagrange multipliers, 
+we obtain 
+\malign{
+    \sup(X^n; Y^n) 
+    = \df 1 2 \sum_t \log_+ \df{T}{\sigma_t^2}, \quad 
+    \sum |T - \sigma_t^2|_+ = nP 
+}
+
+Consider a non-white Gaussian noise channel 
+$Y_t = X_t + Z_t$, where $Z_1, \dots, X_n, \dots$ is a 
+zero-mean stationary Gaussian process, which means: 
+
+1. $\Exp Z_t^2 = \sigma^2, \forall t$. 
+2. $\Exp[Z_t Z_{t+k}] = \psi(k)$ is a function of $k$ only. 
+The auto-correlation can be represented as a Fourier transform 
+\[ 
+    \psi(k) = \df 1 {2\pi} \int_{-\pi}^\pi \cos(k\omega) f_z(\omega)\, d\omega 
+\] 
+In this case $f_z$ is the power spectral density (PSD) of noise. 
+
+To compute the capacity, note that we cannot apply tensorization 
+anymore since the channel is not memoryless. The main idea is to 
+diagonalize the covariance matrix by rotating the input. Effectively, 
+we whiten the channel noise by jointly transforming the input and channel. 
+
+It turns out that the eigenvalues of the covariance matrix 
+$(\Sigma_n)_{kl} = \psi_n(k, l)$ has very nice structure, since 
+the covariance matrix is a Toeplitz matrix. 
+
+In short, we obtain 
+\[ 
+    C(P) = \df 1 2 \int{-\pi}^\pi \log_+ \df{T}{f_z(w)}\, dw, \quad 
+    \int |T - f_Z(\omega)|_+\, d\omega = P 
+\] 
+
+### Metric-entropy {-}
+
+Consider a Hamming game: 
+
+1. Player A writs down 100 bits distributed i.i.d. 
+2. Player B looks at the 100 bits, then writes down 50 bits. 
+    The original 100 bits are erased. 
+3. Player C looks at the written 50 bits, then tries to reconstruct the 100 bits. 
+
+Approaches to solving this problem: 
+
+1. Record 50 bits, this yields 50% error. 
+2. Compress the 100 bits. 
+3. The optimal answer is 11% error. 
+
+The key idea is that, due to asymptotic equipartition property, we can 
+stare at typical sequences. The main idea is to try covering the 
+Hamming cube $\{0, 1\}^{100}$ using $2^{50}$ Hamming balls with 
+radius as small as possible. The decoding then looks at the indexed sphere 
+and outputs its center. 
+
+## Nov 25: Rate-distortion theorem {-}
+
+Agenda:
+
+1. Scalar quantization. 
+2. Define $R(D)$. 
+3. Random coding bound. 
+4. (Next time): asymptotics. 
+
+## Scalar quantization {-}
+
+Two change of perspectives in transmitting continuous signals: 
+
+1. PCM (A. Reeves): Binning of continuous numbers. 
+2. Sampling (Nyquist): without loss of generality 
+    we can consider discrete signals, i.e. discretizing the 
+    time axis. 
+
+Quantization is the replacement of $\mbb R$-valued things with discrete things. 
+Given a signal $X_1^n = [X_1, \dots, X_n]\in \R^n$, map to 
+$f_S(X_1^n)=\hat X_1^n \in [M]^n\subset \R^n$. We wish to minimize 
+\[ 
+    \Exp |X - \hat X|^2
+\] 
+
+1. First idea: split into quantiles, this maximizes the entropy of the codeword. 
+    However, this turns out not to be the best idea: why?
+2. Second idea: uniform quantization, just split the compact domain 
+    into equi-measure components. 
+
+For uniform quantization, the limit $M\to \infty$ makes the conditional 
+distribution of $X\in \Delta_j$ roughly uniform. Let $|\Delta_j| = \df{2A}{M}, 
+M=2^R$, we obtain 
+\begin{align}
+    \Exp|X - \hat X|^2 
+    &= \sum_j \Pr[X\in \Delta_j] \Exp_{|X\in \Delta_j} |X - \hat X|^2 \\ 
+    &= \sum_{j=1}^M \Pr[X\in \Delta_j] \df {A^2} {3M^2}
+    = \df{A^2}{3M^2} = \df{A^2}{3} 2^{-2R}
+\end{align}
+The improvement of 1 bit in quantization leads to 4-fold drop (6dB) in rmse. 
+
+Panter-Dite '51 asked the question: what is the best possible 
+way to arrange $c_j$'s? Again, the discrete combinatorial problem is hard: 
+even for $M=4$ and Gaussian the solution is unknown. 
+
+- Fixing a partition $c_j$, the decision rule is easy: just pick the nearest point! 
+- Fixing $\Delta_j$'s, the optimal $c_j$ are the centroids i.e. conditional means 
+    $c_j$ 
+    - Note that, fixing $\Delta_j$'s and computed $c_j$'s, the quantization 
+    intervals $\Delta_j$'s are not optimal anymore. This leads to Lloyd-Max: 
+    start with $c_j$'s, compute $\Delta_j$'s, then compute $c_j$'s, and 
+    repeat by computing $\Delta_j$'s again such that they're equidistant 
+    from the $c_j$'s. 
+    - Lloyd-Max yields the **CVT** (Centroidal Voronoi Tesselation), and 
+    the optimal quantization is always a CVT. 
+    Lloyd-Max yields a (not-necessarily optima) CVT. 
+- One key idea is to consider the point density $\lambda\geq 0$ with 
+    $\int \lambda = 1$. 
+
+In the continuum limit of the entropy-maximizing method and fixing $\lambda(x)$, 
+let's parameterize $c_j$ in terms of a free parameter $\lambda_j$ by the following equation: 
+\begin{align}
+    c_j 
+    &= \int_{-\infty}^{c_j} = \df j m \\ 
+    |\Delta_j| \cdot \lambda(c_j) 
+    &\approx \df 1 M \implies |\Delta_j| = \df 1 {M \lambda(c_j)} \\ 
+    \Exp|X - \hat X|^2 
+    &=\sum \Pr[X\in \Delta_j] \Exp_{|X\in \Delta_j} |X - c_j|^2 \\ 
+    &\approx \sum \Pr[\lambda \in \Delta_j] \df{|\Delta_j|^2}{12} 
+    = \sum \Pr[X \in \Delta_j] \df 1 {12M^2} \df 1 {\lambda^2(c_j)} \\ 
+    &\approx \df 1 {12M^2} \int p_X(x) \df 1 {\lambda^2(x)}\, dx 
+\end{align}
+This variational problem can be solved to yield $\lambda^*(x) = c \cdot p(x)^{1/3}$. 
+**This generalizes to non-quadratic losses**! 
+In other words, to extremize the rmse, we should maximize the entropy 
+(i.e. have uniform distribution) of $f_X^{1/3}$. It turns out that 
+\[ 
+    D_{\mrm{scalar}}(R) = \df{\pi \sqrt 3}{2} \sigma^2 2^{-2R}, \quad R\gg 1
+\] 
+**Quantization for quantum systems?**
+
+### Vector quantization {-}
+By **vector quantization**, we mean i.i.d $X_j$. For i.i.d Gaussians, 
+we obtain $1.65$ better in RMSE, or 0.72 bit / sample 
+better (i.e. $R\mapsto R+0.72$ kills the constant factor). 
+\[ 
+    D(R) = \sigma^2 2^{-2R}, \quad \forall R>0 
+\] 
+Given $X^n\sim P_X$ i.i.d on $\mca A$ with reconstruction alphabet $\hat A$, 
+the distortion metric $d(x, \hat x):\mca A\times \hat {\mca A}\to \bar{\R}$. 
+I.i.d. assumption is not as important, but the separability of distortion metric is: 
+\[ 
+    d(x^n, \hat x^n) = \df 1 n \sum_{t=1}^n d(x_t, \hat x_t)
+\] 
+Define an $(n, M, D)$-code (or vector quantizer) to be the pair $(f, g)$ with 
+\[ 
+    X^n\xrightarrow f W\in [M] \xrightarrow g \hat X^n\in \hat{\mca A}
+\] 
+such that $\Exp[d(X^n, \hat X^n)] \leq D$. Every scalar quantizer can be tensorized 
+into a vector quantizer. Similarly, define the fundamental limit 
+\[ 
+    M^*(n, D) = \inf_{\exists(N, M, D)-\mrm{code}} M
+\] 
+Note that this is subadditive, since 
+\[ 
+    \log M^*(n_1+n_2, D)\leq \log M^*(n_1, D) + \log M^*(n_2, D)
+\] 
+The rate distortion function is defined as the normalized 
+limit of this function 
+\[ 
+    R(D) = \lim_{n\to \infty} \df 1 n \log M^*(n, D)
+\] 
+For the non-separable metric $d_n(X^n, \hat X^n) = 1_{X^n=\hat X^n}$ 
+we obtain lossless compression. The information version of the distortion rate is 
+\begin{align}
+    R^{(I)}(D) 
+    &= \lim_{n\to \infty} \df 1 n 
+    \inf_{P_{\hat X^n|X^n} | \Exp d_n(X^n, \hat X^n) \leq D} 
+    I(X^n; \hat X^n)
+\end{align}
+For i.i.d. source and separable distortion, applying tensorization yields 
+\[ 
+    R^{(I)}(D) = \inf_{\Exp d(X_1, \hat X_1)\leq D} I(X_1; \hat X_1) 
+\] 
+Moreover, the map $D\mapsto R^{(I)}(D)$ is convex (follows by mixing the 
+rate-achieving channels and applying convexity of MI). 
+
+:::{.theorem}
+For every $(n, M, D)$-code, $\log M \geq n R^{(I)}(D)$. 
+:::
+By definition, $I(X^n; \hat X^n) \geq R^{(I)}(D)$; 
+on the other hand, the MI is upper-bounded by the 
+maximal entropy of the bottleneck $\log M$. 
+
+The converse bound (analogous to shannon's noisy coding theorem) 
+is obtained by a similar random coding technique. 

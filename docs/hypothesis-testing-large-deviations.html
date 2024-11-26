@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11 Hypothesis Testing, Large Deviations | 6.7480 Notes</title>
   <meta name="description" content="11 Hypothesis Testing, Large Deviations | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11 Hypothesis Testing, Large Deviations | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-11-15" />
+<meta name="date" content="2024-11-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,6 +184,20 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#channel-coding"><i class="fa fa-check"></i>Channel coding</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-6-channel-coding-ii"><i class="fa fa-check"></i>Nov 6, Channel coding II</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-18-channel-coding-iii"><i class="fa fa-check"></i>Nov 18, Channel Coding III</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#decoding-with-constraint"><i class="fa fa-check"></i>Decoding with constraint</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-20.-quantization"><i class="fa fa-check"></i>Nov 20. Quantization</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#water-filling"><i class="fa fa-check"></i>Water-filling</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#metric-entropy"><i class="fa fa-check"></i>Metric-entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-25-rate-distortion-theorem"><i class="fa fa-check"></i>Nov 25: Rate-distortion theorem</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#scalar-quantization"><i class="fa fa-check"></i>Scalar quantization</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#vector-quantization"><i class="fa fa-check"></i>Vector quantization</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -643,7 +657,8 @@ Proof
 </summary>
 Apply Morkov’s inequality <span class="math inline">\(\mathrm{Pr}[X\geq a]\leq \dfrac 1 a \mathbb E[X]\)</span>
 after exponentiating the inequality;
-note that <span class="math inline">\(\log \mathbb E[\exp(n\lambda \bar X)] = \log \phi_{X^n}(\lambda) = n\psi_X(\lambda)\)</span>.
+note that <span class="math inline">\(\log \mathbb E[\exp(n\lambda \bar X)]
+= \log \phi_{X^n}(\lambda) = n\psi_X(\lambda)\)</span>.
 <span class="math display">\[\begin{align}
     \mathrm{Pr}[n\bar X\geq n\gamma]
     &amp;= \mathrm{Pr}[\exp(n\lambda \bar X) \geq \exp(n\lambda \gamma)] \\
@@ -658,14 +673,16 @@ is finite everywhere. Let <span class="math inline">\(B=\mathrm{esssup}\, X\)</s
     \mathrm{Pr}\left[\dfrac 1 n \sum_{j=1}^n X_j \geq \gamma\right]
     = \exp \left[-nE(\gamma) + o(n)\right]
 \]</span>
-where <span class="math inline">\(\lambda_X^*(\gamma) = \sup_{\lambda \geq 0} \lambda \gamma - \psi_X(\lambda)\)</span> is the <em>rate function.</em></p>
+where <span class="math inline">\(\lambda_X^*(\gamma) = \sup_{\lambda \geq 0}
+\lambda \gamma - \psi_X(\lambda)\)</span> is the <em>rate function.</em></p>
 </div>
 <details>
 <summary>
 Proof (non-asymptotic upper-bound)
 </summary>
 Recalling the Chernoff bound (lemma <a href="hypothesis-testing-large-deviations.html#lem:chernoff">11.2</a>),
-we obtain <span class="math inline">\(\mathrm{Pr}[\bar X\geq \gamma] \leq \exp[-n\lambda \gamma + n\psi_X(\lambda)]\)</span>. Optimize
+we obtain <span class="math inline">\(\mathrm{Pr}[\bar X\geq \gamma]
+\leq \exp[-n\lambda \gamma + n\psi_X(\lambda)]\)</span>. Optimize
 over <span class="math inline">\(\lambda\)</span> naturally yields the Legendre transform <span class="math inline">\(\psi_X^*\)</span>
 which is <em>non-asymptotic</em>:
 <span class="math display" id="eq:largeSamplePrecChernoff">\[

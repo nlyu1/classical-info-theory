@@ -88,6 +88,14 @@ observations. Some recurring themes in the book are:
     answer to hypothesis testing. 
 8. The Sanov principle establishes a fundamental bridge between probability 
     and divergence. 
+9. When ths noise is not i.i.d, without loss of generality we can whiten by 
+    compressing it. 
+10. The nontrivial results in info theory provide asymptotic solutions to 
+    integer programming questions (e.g. channel coding, rate distortion) using 
+    information quantities, where convexity yield tensorization and tractable solutions. 
+    - Information problems are not amortizable by going from scalars to vectors, but 
+    by undoing the operation-information bridge, we obtain amortizable operational 
+    results which take advantage of vectorization. 
 
 Nontrivial results in this book include:
 
@@ -155,6 +163,8 @@ Nontrivial results in this book include:
 9. Large-sample asymptotic proofs: relate to an information measure, 
     use their tensorization property and convexity to reduce to the 
     single-letter case (theorem \@ref(thm:ldeInfoProj)). 
+10. The frameworks for understanding channel coding (lossy and lossless) 
+    as well as rate distortion are very similar. 
 
 
 ## Administrative trivia {-}

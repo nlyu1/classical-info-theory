@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Noisy Channel Coding | 6.7480 Notes</title>
   <meta name="description" content="12 Noisy Channel Coding | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Noisy Channel Coding | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-11-15" />
+<meta name="date" content="2024-11-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,6 +184,20 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#channel-coding"><i class="fa fa-check"></i>Channel coding</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-6-channel-coding-ii"><i class="fa fa-check"></i>Nov 6, Channel coding II</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-18-channel-coding-iii"><i class="fa fa-check"></i>Nov 18, Channel Coding III</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#decoding-with-constraint"><i class="fa fa-check"></i>Decoding with constraint</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-20.-quantization"><i class="fa fa-check"></i>Nov 20. Quantization</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#water-filling"><i class="fa fa-check"></i>Water-filling</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#metric-entropy"><i class="fa fa-check"></i>Metric-entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-25-rate-distortion-theorem"><i class="fa fa-check"></i>Nov 25: Rate-distortion theorem</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#scalar-quantization"><i class="fa fa-check"></i>Scalar quantization</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#vector-quantization"><i class="fa fa-check"></i>Vector quantization</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -236,7 +250,8 @@ Here <span class="math inline">\(f:[M]\to \mathcal X\)</span> and <span class="m
 they’re called original message, channel input, channel output,
 and decoded message. We assume a uniform distribution on <span class="math inline">\(W\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-104" class="definition"><strong>Definition 12.2  (performance metrics) </strong></span>The <em>maximum error probability</em> <span class="math inline">\(P_{e, \mathrm{max}}(f, g) =\max_{m\in [M]} \mathrm{Pr}[\hat w\neq m|W=m]\)</span>.
+<p><span id="def:unlabeled-div-104" class="definition"><strong>Definition 12.2  (performance metrics) </strong></span>The <em>maximum error probability</em> <span class="math inline">\(P_{e, \mathrm{max}}(f, g)
+=\max_{m\in [M]} \mathrm{Pr}[\hat w\neq m|W=m]\)</span>.
 The <em>average error probability</em> <span class="math inline">\(P_e(f, g)=\mathrm{Pr}[W\neq \hat W]\)</span>.</p>
 </div>
 <div class="definition">

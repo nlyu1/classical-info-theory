@@ -220,6 +220,11 @@ cor:unlabeled-div-130
 def:unlabeled-div-131
 prp:unlabeled-div-132
 thm:unlabeled-div-133
+thm:unlabeled-div-134
+def:unlabeled-div-135
+prp:unlabeled-div-136
+thm:unlabeled-div-137
+thm:unlabeled-div-138
 entropy
 entropy-method-in-combinatorics
 kullback-leibler-divergence

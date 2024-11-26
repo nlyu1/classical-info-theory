@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.7480 Notes</title>
   <meta name="description" content="6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-11-15" />
+<meta name="date" content="2024-11-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,6 +184,20 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#channel-coding"><i class="fa fa-check"></i>Channel coding</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-6-channel-coding-ii"><i class="fa fa-check"></i>Nov 6, Channel coding II</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-18-channel-coding-iii"><i class="fa fa-check"></i>Nov 18, Channel Coding III</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#decoding-with-constraint"><i class="fa fa-check"></i>Decoding with constraint</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-20.-quantization"><i class="fa fa-check"></i>Nov 20. Quantization</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#water-filling"><i class="fa fa-check"></i>Water-filling</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#metric-entropy"><i class="fa fa-check"></i>Metric-entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-25-rate-distortion-theorem"><i class="fa fa-check"></i>Nov 25: Rate-distortion theorem</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#scalar-quantization"><i class="fa fa-check"></i>Scalar quantization</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#vector-quantization"><i class="fa fa-check"></i>Vector quantization</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -206,7 +220,7 @@
 <div id="header">
 <h1 class="title">6.7480 Notes</h1>
 <p class="author"><em>Nicholas Lyu</em></p>
-<p class="date"><em>2024-11-15</em></p>
+<p class="date"><em>2024-11-25</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -255,6 +269,16 @@ and given distribution, and we can bound the event for the given distribution.</
 answer to hypothesis testing.</li>
 <li>The Sanov principle establishes a fundamental bridge between probability
 and divergence.</li>
+<li>When ths noise is not i.i.d, without loss of generality we can whiten by
+compressing it.</li>
+<li>The nontrivial results in info theory provide asymptotic solutions to
+integer programming questions (e.g. channel coding, rate distortion) using
+information quantities, where convexity yield tensorization and tractable solutions.
+<ul>
+<li>Information problems are not amortizable by going from scalars to vectors, but
+by undoing the operation-information bridge, we obtain amortizable operational
+results which take advantage of vectorization.</li>
+</ul></li>
 </ol>
 <p>Nontrivial results in this book include:</p>
 <ol style="list-style-type: decimal">
@@ -338,6 +362,8 @@ KL (proposition <a href="f-divergence.html#prp:klDV">8.12</a>).</li>
 <li>Large-sample asymptotic proofs: relate to an information measure,
 use their tensorization property and convexity to reduce to the
 single-letter case (theorem <a href="hypothesis-testing-large-deviations.html#thm:ldeInfoProj">11.9</a>).</li>
+<li>The frameworks for understanding channel coding (lossy and lossless)
+as well as rate distortion are very similar.</li>
 </ol>
 </div>
 <div id="administrative-trivia" class="section level2 unnumbered hasAnchor">

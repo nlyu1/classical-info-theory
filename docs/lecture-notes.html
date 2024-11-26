@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14 Lecture notes | 6.7480 Notes</title>
   <meta name="description" content="14 Lecture notes | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14 Lecture notes | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-11-15" />
+<meta name="date" content="2024-11-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,6 +184,20 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#channel-coding"><i class="fa fa-check"></i>Channel coding</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-6-channel-coding-ii"><i class="fa fa-check"></i>Nov 6, Channel coding II</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-18-channel-coding-iii"><i class="fa fa-check"></i>Nov 18, Channel Coding III</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#decoding-with-constraint"><i class="fa fa-check"></i>Decoding with constraint</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-20.-quantization"><i class="fa fa-check"></i>Nov 20. Quantization</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#water-filling"><i class="fa fa-check"></i>Water-filling</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#metric-entropy"><i class="fa fa-check"></i>Metric-entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-25-rate-distortion-theorem"><i class="fa fa-check"></i>Nov 25: Rate-distortion theorem</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#scalar-quantization"><i class="fa fa-check"></i>Scalar quantization</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#vector-quantization"><i class="fa fa-check"></i>Vector quantization</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
 </ul>
@@ -241,7 +255,10 @@ Recall that Donsker-varadhan is not linear in <span class="math inline">\(\mathb
 but there is a standard trick to rewrite the expectation.</p>
 <p>We now apply the variational characterization to <span class="math inline">\(\chi^2\)</span>;</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-108" class="proposition"><strong>Proposition 14.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
+<p><span id="prp:unlabeled-div-108" class="proposition"><strong>Proposition 14.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q)
+= \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[
+    h(X) + \dfrac{h(X)^2}{4}
+\right]\)</span></p>
 </div>
 <p>Expanding this out, the first term is very useful;
 but the second is not. The first step is to break a single
@@ -409,7 +426,8 @@ in a connected interval open interval about <span class="math inline">\(\theta_0
 \dfrac{\dot p^t(x)^2}{p^0(x)} &lt; \infty
 \]</span></li>
 </ol>
-<p>Then <span class="math inline">\(\chi^2(P^{\theta_0 + \delta} \| P^{\theta_0})  + \delta^2 \mathcal J_F(\theta_0) + o(\delta^2)\)</span>.</p>
+<p>Then <span class="math inline">\(\chi^2(P^{\theta_0 + \delta} \| P^{\theta_0})
+    + \delta^2 \mathcal J_F(\theta_0) + o(\delta^2)\)</span>.</p>
 </div>
 <p>The quadratic local behavior of <span class="math inline">\(\chi^2\)</span> requires
 not only finite Fisher information at <span class="math inline">\(\theta_0\)</span>;
@@ -977,7 +995,8 @@ noise perturbations.</p>
 hypothesis testing; if we require <span class="math inline">\(\epsilon\to 0\)</span>,
 then <span class="math inline">\(M^*(\epsilon)\to 0\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-127" class="theorem"><strong>Theorem 14.9  (Fano's bound) </strong></span><span class="math inline">\(\log M^*_{\mathrm{max}}(\epsilon) \leq \log M^*(\epsilon) \leq \dfrac{\sup_X I(X; Y) + \log 2}{1-\epsilon}\)</span>.</p>
+<p><span id="thm:unlabeled-div-127" class="theorem"><strong>Theorem 14.9  (Fano's bound) </strong></span><span class="math inline">\(\log M^*_{\mathrm{max}}(\epsilon) \leq \log M^*(\epsilon)
+\leq \dfrac{\sup_X I(X; Y) + \log 2}{1-\epsilon}\)</span>.</p>
 </div>
 <p><em>Proof:</em> Again, to prove impossibility bounds
 begin with the easy case.
@@ -1027,7 +1046,8 @@ is the <strong>block length</strong>.
 <span class="math inline">\(P_{B^n | A^n}(b^n|a^n) = \delta^d(1-\delta)^{n-d}\)</span>,
 where <span class="math inline">\(d=d_M(a^n, b^n)\)</span> is the Hamming distance between
 the two strings.
-- Equivalently, <span class="math inline">\(B^n = A^n + Z^n\mod 2, \quad  Z_j\sim \mathrm{Ber}(\delta)\)</span> i.i.d.</p>
+- Equivalently, <span class="math inline">\(B^n = A^n + Z^n\mod 2, \quad
+    Z_j\sim \mathrm{Ber}(\delta)\)</span> i.i.d.</p>
 <p>More generally, a discrete stationary memoryless channel (DMC)
 is just a tensorized channel which acts i.i.d on the input components.</p>
 <div class="definition">
@@ -1057,7 +1077,8 @@ take an <span class="math inline">\((n, M, \tilde \epsilon)\)</span> code and de
 For every average-prob error code, we can apply the same idea
 behind Markov’s inequality to select a max-probability sub-code.</p>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-130" class="corollary"><strong>Corollary 14.2  </strong></span><span class="math inline">\(C_\epsilon \geq C_\epsilon^{\mathrm{max}} \geq \lim_{\delta \to 0^-} C_{\epsilon - \delta} \implies C^{\mathrm{max}} = C\)</span>.</p>
+<p><span id="cor:unlabeled-div-130" class="corollary"><strong>Corollary 14.2  </strong></span><span class="math inline">\(C_\epsilon \geq C_\epsilon^{\mathrm{max}}
+\geq \lim_{\delta \to 0^-} C_{\epsilon - \delta} \implies C^{\mathrm{max}} = C\)</span>.</p>
 </div>
 <p>One perspective on <span class="math inline">\(C\)</span> is that it is the maximal rate of
 asymptotically reliable communication. In other words,
@@ -1108,7 +1129,368 @@ Shannon had the idea to construct random codewords
 Note crucially that <span class="math inline">\(C_j \perp\!\!\!\perp Y\)</span>. The second
 error rate <span class="math inline">\(\epsilon_2\)</span> vanishes if <span class="math inline">\(M\ll 2^{nC^{(i)}}\)</span>.
 This implies, for BSC, <span class="math inline">\(C = C^{(i)} = \log 2 - h(\delta)\)</span>.</p>
+</div>
+<div id="nov-18-channel-coding-iii" class="section level2 unnumbered hasAnchor">
+<h2>Nov 18, Channel Coding III<a href="lecture-notes.html#nov-18-channel-coding-iii" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Agenda:</p>
+<ol style="list-style-type: decimal">
+<li>Finish DT bound.</li>
+<li>DT bound with input constraints.</li>
+<li>General channels with input constraints.</li>
+<li>Capacity of Gaussian channels.</li>
+</ol>
+<p>TODO for notes:</p>
+<ol style="list-style-type: decimal">
+<li>Equivalence between maximum and average error.</li>
+<li>DT bound.</li>
+</ol>
+<p>Other questions:</p>
+<ol style="list-style-type: decimal">
+<li>More intuition for the strong v.s. weak converse.</li>
+<li>Explain <span class="math inline">\(\liminf\)</span>, also why is <span class="math inline">\(C_0\)</span> a combinatorial problem,
+different from <span class="math inline">\(C_{\to 0}\)</span>.</li>
+<li>Wasserstein distance.</li>
+</ol>
+<p>Pset questions:</p>
+<ol style="list-style-type: decimal">
+<li>Pointwise maximization.</li>
+<li>Existence of the extension.</li>
+<li>Idea for applying the meta-converse.</li>
+</ol>
+<p>Recall the information density:
+given a joint distribution <span class="math inline">\(P_{XY}\)</span>, the information
+density is the joint.</p>
+<p>For the BSC, the channel only gives half the required
+quantitites for computing information density (i.e. the channel).
+We still need the input distribution. Take <span class="math inline">\(P_{X^n}\)</span> to uniform
+on the Hamming cube, then
+<span class="math display">\[
+    i(X^n; ^n) = \log \dfrac{P_{Y^n|X^n}}{P_{Y^n}}
+    = \log \dfrac{\delta^{d_M} \bar \delta^{-n-d_M}}{2^{-n}}
+    = n\log (2\bar \delta) - d_M \log \dfrac{\bar \delta}{\delta}
+\]</span>
+This makes explicit the connection that ML decoder is equivalent
+to minimizing the Hamming distance <span class="math inline">\(d_M\)</span>.</p>
+<ul>
+<li>For memoryless channels, the information density tensorizes.</li>
+<li>This allows us to apply LLN (or large-deviations theory).</li>
+</ul>
+<p>We can generalize the notion from stationary memoryless channels,
+since information stability (tensorization and concentration about average)
+is sufficient to prove capacity.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-134" class="theorem"><strong>Theorem 14.11  (random coding DT bound) </strong></span><span class="math inline">\(\forall P_{Y|X}\)</span> and <span class="math inline">\(P_X, M\geq 1\)</span>, there exists <span class="math inline">\((M, \epsilon)\)</span>-code
+such that
+<span class="math display">\[
+    \epsilon \leq \mathbb E\exp -\max\left[0, i(X; Y) - \log \dfrac{M-1}{2}\right]
+\]</span></p>
+</div>
+<p><em>Proof:</em> Treating the codebook as a random variable, a decoding error of message <span class="math inline">\(j\)</span>
+can happen if:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(i(C_j; Y) \leq \gamma\)</span>: the info density of the true codeword is not enough.
+In BSC, this is probability that Hamming distance between true message and
+received message is larger than the threshold.</li>
+<li>There exists another codeword which exceeds <span class="math inline">\(\gamma\)</span> prior to <span class="math inline">\(j\)</span>. <strong>Since we
+are taking the average over random codebooks, this terms becomes tractable.</strong>
+In BSC, this corresponds to some other codewords existing in the thresholded ball.</li>
+</ol>
+<p>Proceeding to bound the first term,
+<span class="math display">\[
+    P_e = \sum_{x, y} P_{XY}(x, y) 1 \left\{
+        P_{XY} \leq e^\gamma P_{\bar X Y}
+    \right\} + \dfrac{M-1}{2} P_{\bar XY}(x, y) 1\left\{
+        P_{XY} &gt; e^\gamma P_{\bar XY}
+    \right\}
+\]</span>
+To minimize this, the optimal selection is <span class="math inline">\(\gamma = \log \dfrac{M-1}{2}\)</span>;
+this construction of events selects the minimum of the two contributions.</p>
+<p>Perspective on information theory: when proving results, complexity do not
+matter. When results are significant, someone will find a computationally feasible way : )</p>
+<div id="decoding-with-constraint" class="section level3 unnumbered hasAnchor">
+<h3>Decoding with constraint<a href="lecture-notes.html#decoding-with-constraint" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The capacity of the AWGN without any constraint is <span class="math inline">\(\infty\)</span>,
+since we can space inputs out significantly large enough so that
+the added noise cause negligible overlap.</p>
+<p>The constraint <span class="math inline">\(\|C\|^2 \leq nP\)</span> yields finite capacity <span class="math inline">\(C=\dfrac 1 2 \log(1+P)\)</span>.</p>
+<p>We wish to find a codebook <span class="math inline">\(c_1, \dots, c_M\)</span> such that <span class="math inline">\(P_e(C) \leq \epsilon\)</span>,
+and that <span class="math inline">\(\|C_j\|^2 \leq nP\)</span>. In short, we have to place our codeword
+in a sphere of radius <span class="math inline">\(\sqrt{nP}\)</span>. Each codeword will be roughly
+spent to a sphere of radius <span class="math inline">\(\|\mathcal N(0, I_n)\| \approx \sqrt n\)</span>.
+The output will land with high probability within the sphere with radius
+<span class="math display">\[
+    \mathbb E\|C + \mathcal N(0, I_n)\|^2 \approx n(1+p)
+\]</span>
+How many spheres <span class="math inline">\(\sqrt n B^{n-1}\)</span> can we pack inside <span class="math inline">\(\sqrt{n(1+p)}B\)</span>?
+An upper bound is <span class="math inline">\((1+p)^{n/2}\)</span>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-135" class="definition"><strong>Definition 14.5  (channel with constraints) </strong></span>Given a channel and a cost <span class="math inline">\(c:\mathcal X\to \mathbb R_+\)</span>,
+an encoder-decoder <span class="math inline">\((f, g)\)</span> is an <span class="math inline">\((n, M, \epsilon, P)\)</span> code if
+<span class="math display">\[
+    \dfrac 1 n \sum_j \mathrm{Pr}[g(y)\neq j|X=f(j)] \leq \epsilon, \quad
+    \forall j, c_n(f(j)) \leq nP
+\]</span>
+<span style="color:green">
+Note that we are amortizing w.r.t. blocklength and randomness of the encoder,
+but the constraint should be uniformly obeyed by all elements of the alphabet.
+</span></p>
+</div>
+<p>For AWGN, <span class="math inline">\(c(x)=x^2\)</span>. Further, for memoryless channels, the constrained
+capacity is
+<span class="math display">\[
+    C^{(I)}(P) = \sup_{\mathbb Ec(X_1)\leq P} I(X_1; Y_1)
+\]</span></p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-136" class="proposition"><strong>Proposition 14.9  (properties of capacity-cost function) </strong></span></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P\mapsto C^{(I)}(P)\)</span> is concave, increasing, and continuous on interior.</li>
+<li><span class="math inline">\(C(P)\leq C^{(I)}(P)\)</span>.</li>
+</ol>
+</div>
+<p><em>Proof:</em> Concavity follows by averaging the capacity-achieving distributions.
+The second part follows from applying the weak converse.
+Take a <span class="math inline">\((n, M, \epsilon, P)\)</span>-code, .</p>
+</div>
+</div>
+<div id="nov-20.-quantization" class="section level2 unnumbered hasAnchor">
+<h2>Nov 20. Quantization<a href="lecture-notes.html#nov-20.-quantization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Agenda:</p>
+<ol style="list-style-type: decimal">
+<li>Finish capacity of Gaussian cahannel with cost</li>
+<li>Quantization: scalar case</li>
+<li>Definition of vector case</li>
+</ol>
+<p>Channel coding with constraint:</p>
+<p><span class="math display">\[
+    C^{(I)}(P) = \liminf_{n\to \infty} \dfrac 1 n \sup_{
+        \mathbb E\left[\frac 1 n \sum c(X_t)\right]
+    } I(X^n; Y^n)
+\]</span>
+By (1) the concavity of the capacity-cost function, and
+(2) tensorization of MI, we can tensorize both the extremized
+quantity as well as the condition.</p>
+<p>Due to the concavity of the capacity-cost function,
+maximum communication per unit cost is achieved by having vanishing rate
+since <span class="math inline">\(C^{(I)}(P) / P\)</span> is maximized <span class="math inline">\(P\to 0\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-137" class="theorem"><strong>Theorem 14.12  (Fano's inequality under constraint) </strong></span><span class="math inline">\(C(P) \leq C^{(I)}(P)\)</span>.</p>
+</div>
+<p>The information stability criterion
+<span class="math display">\[
+    \dfrac 1 n i(X^n; Y^n)\xrightarrow{\mathbb P} C^{(I)}(P)
+\]</span>
+is equivalent to demanding the equivalent analogue of
+law of large numbers holding for non-stationary channels.</p>
+<p>For AWGN, we have <span class="math inline">\(C^{(I)}(P) = \dfrac 1 2 \log(1+P)\)</span>,
+and recalling our previous discussion,
+<span class="math display">\[
+    \sup_P \dfrac{\frac 1 2 \log(1+P)}{P} = \dfrac{\log e}{2}
+    = -1.6\mathrm{dB} \dfrac{\mathrm{bit}}{\mathrm{Joule}}
+\]</span>
+is the a fundamental limit in deep-space communication.</p>
+<div id="water-filling" class="section level3 unnumbered hasAnchor">
+<h3>Water-filling<a href="lecture-notes.html#water-filling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider a non-stationary memoryless Gaussian channel
+<span class="math display">\[
+    Y_t = X_t + Z_t, \quad Z_t \sim \mathcal N(0, \sigma_t^2)
+\]</span>
+Using tensorization, we obtain
+<span class="math display">\[
+    I(X^n; Y^n) \leq \sum_t I(X_t; X_t + Z_t)
+\]</span>
+with inequality saturated by independent Gaussians.
+Fixing the power allocation <span class="math inline">\(P_t\)</span> for each letter, we obtain
+<span class="math display">\[
+    I(X^n; Y^n) \leq \dfrac 1 2 \sum_{t=1}^n \log \left(
+        1 + \dfrac{P_t}{\sigma_t^2}
+    \right) \text{ subject to } \sum P_t \leq n P
+\]</span>
+This is a convex problem. Using Lagrange multipliers,
+we obtain
+</p>
+<p>Consider a non-white Gaussian noise channel
+<span class="math inline">\(Y_t = X_t + Z_t\)</span>, where <span class="math inline">\(Z_1, \dots, X_n, \dots\)</span> is a
+zero-mean stationary Gaussian process, which means:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\mathbb EZ_t^2 = \sigma^2, \forall t\)</span>.</li>
+<li><span class="math inline">\(\mathbb E[Z_t Z_{t+k}] = \psi(k)\)</span> is a function of <span class="math inline">\(k\)</span> only.
+The auto-correlation can be represented as a Fourier transform
+<span class="math display">\[
+\psi(k) = \dfrac 1 {2\pi} \int_{-\pi}^\pi \cos(k\omega) f_z(\omega)\, d\omega
+\]</span>
+In this case <span class="math inline">\(f_z\)</span> is the power spectral density (PSD) of noise.</li>
+</ol>
+<p>To compute the capacity, note that we cannot apply tensorization
+anymore since the channel is not memoryless. The main idea is to
+diagonalize the covariance matrix by rotating the input. Effectively,
+we whiten the channel noise by jointly transforming the input and channel.</p>
+<p>It turns out that the eigenvalues of the covariance matrix
+<span class="math inline">\((\Sigma_n)_{kl} = \psi_n(k, l)\)</span> has very nice structure, since
+the covariance matrix is a Toeplitz matrix.</p>
+<p>In short, we obtain
+<span class="math display">\[
+    C(P) = \dfrac 1 2 \int{-\pi}^\pi \log_+ \dfrac{T}{f_z(w)}\, dw, \quad
+    \int |T - f_Z(\omega)|_+\, d\omega = P
+\]</span></p>
+</div>
+<div id="metric-entropy" class="section level3 unnumbered hasAnchor">
+<h3>Metric-entropy<a href="lecture-notes.html#metric-entropy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider a Hamming game:</p>
+<ol style="list-style-type: decimal">
+<li>Player A writs down 100 bits distributed i.i.d.</li>
+<li>Player B looks at the 100 bits, then writes down 50 bits.
+The original 100 bits are erased.</li>
+<li>Player C looks at the written 50 bits, then tries to reconstruct the 100 bits.</li>
+</ol>
+<p>Approaches to solving this problem:</p>
+<ol style="list-style-type: decimal">
+<li>Record 50 bits, this yields 50% error.</li>
+<li>Compress the 100 bits.</li>
+<li>The optimal answer is 11% error.</li>
+</ol>
+<p>The key idea is that, due to asymptotic equipartition property, we can
+stare at typical sequences. The main idea is to try covering the
+Hamming cube <span class="math inline">\(\{0, 1\}^{100}\)</span> using <span class="math inline">\(2^{50}\)</span> Hamming balls with
+radius as small as possible. The decoding then looks at the indexed sphere
+and outputs its center.</p>
+</div>
+</div>
+<div id="nov-25-rate-distortion-theorem" class="section level2 unnumbered hasAnchor">
+<h2>Nov 25: Rate-distortion theorem<a href="lecture-notes.html#nov-25-rate-distortion-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Agenda:</p>
+<ol style="list-style-type: decimal">
+<li>Scalar quantization.</li>
+<li>Define <span class="math inline">\(R(D)\)</span>.</li>
+<li>Random coding bound.</li>
+<li>(Next time): asymptotics.</li>
+</ol>
+</div>
+<div id="scalar-quantization" class="section level2 unnumbered hasAnchor">
+<h2>Scalar quantization<a href="lecture-notes.html#scalar-quantization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Two change of perspectives in transmitting continuous signals:</p>
+<ol style="list-style-type: decimal">
+<li>PCM (A. Reeves): Binning of continuous numbers.</li>
+<li>Sampling (Nyquist): without loss of generality
+we can consider discrete signals, i.e. discretizing the
+time axis.</li>
+</ol>
+<p>Quantization is the replacement of <span class="math inline">\(\mathbb R\)</span>-valued things with discrete things.
+Given a signal <span class="math inline">\(X_1^n = [X_1, \dots, X_n]\in \mathbb R^n\)</span>, map to
+<span class="math inline">\(f_S(X_1^n)=\hat X_1^n \in [M]^n\subset \mathbb R^n\)</span>. We wish to minimize
+<span class="math display">\[
+    \mathbb E|X - \hat X|^2
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>First idea: split into quantiles, this maximizes the entropy of the codeword.
+However, this turns out not to be the best idea: why?</li>
+<li>Second idea: uniform quantization, just split the compact domain
+into equi-measure components.</li>
+</ol>
+<p>For uniform quantization, the limit <span class="math inline">\(M\to \infty\)</span> makes the conditional
+distribution of <span class="math inline">\(X\in \Delta_j\)</span> roughly uniform. Let <span class="math inline">\(|\Delta_j| = \dfrac{2A}{M},
+M=2^R\)</span>, we obtain
+<span class="math display">\[\begin{align}
+    \mathbb E|X - \hat X|^2
+    &amp;= \sum_j \mathrm{Pr}[X\in \Delta_j] \mathbb E_{|X\in \Delta_j} |X - \hat X|^2 \\
+    &amp;= \sum_{j=1}^M \mathrm{Pr}[X\in \Delta_j] \dfrac{A^2} {3M^2}
+    = \dfrac{A^2}{3M^2} = \dfrac{A^2}{3} 2^{-2R}
+\end{align}\]</span>
+The improvement of 1 bit in quantization leads to 4-fold drop (6dB) in rmse.</p>
+<p>Panter-Dite ’51 asked the question: what is the best possible
+way to arrange <span class="math inline">\(c_j\)</span>’s? Again, the discrete combinatorial problem is hard:
+even for <span class="math inline">\(M=4\)</span> and Gaussian the solution is unknown.</p>
+<ul>
+<li>Fixing a partition <span class="math inline">\(c_j\)</span>, the decision rule is easy: just pick the nearest point!</li>
+<li>Fixing <span class="math inline">\(\Delta_j\)</span>’s, the optimal <span class="math inline">\(c_j\)</span> are the centroids i.e. conditional means
+<span class="math inline">\(c_j\)</span>
+<ul>
+<li>Note that, fixing <span class="math inline">\(\Delta_j\)</span>’s and computed <span class="math inline">\(c_j\)</span>’s, the quantization
+intervals <span class="math inline">\(\Delta_j\)</span>’s are not optimal anymore. This leads to Lloyd-Max:
+start with <span class="math inline">\(c_j\)</span>’s, compute <span class="math inline">\(\Delta_j\)</span>’s, then compute <span class="math inline">\(c_j\)</span>’s, and
+repeat by computing <span class="math inline">\(\Delta_j\)</span>’s again such that they’re equidistant
+from the <span class="math inline">\(c_j\)</span>’s.</li>
+<li>Lloyd-Max yields the <strong>CVT</strong> (Centroidal Voronoi Tesselation), and
+the optimal quantization is always a CVT.
+Lloyd-Max yields a (not-necessarily optima) CVT.</li>
+</ul></li>
+<li>One key idea is to consider the point density <span class="math inline">\(\lambda\geq 0\)</span> with
+<span class="math inline">\(\int \lambda = 1\)</span>.</li>
+</ul>
+<p>In the continuum limit of the entropy-maximizing method and fixing <span class="math inline">\(\lambda(x)\)</span>,
+let’s parameterize <span class="math inline">\(c_j\)</span> in terms of a free parameter <span class="math inline">\(\lambda_j\)</span> by the following equation:
+<span class="math display">\[\begin{align}
+    c_j
+    &amp;= \int_{-\infty}^{c_j} = \dfrac j m \\
+    |\Delta_j| \cdot \lambda(c_j)
+    &amp;\approx \dfrac 1 M \implies |\Delta_j| = \dfrac 1 {M \lambda(c_j)} \\
+    \mathbb E|X - \hat X|^2
+    &amp;=\sum \mathrm{Pr}[X\in \Delta_j] \mathbb E_{|X\in \Delta_j} |X - c_j|^2 \\
+    &amp;\approx \sum \mathrm{Pr}[\lambda \in \Delta_j] \dfrac{|\Delta_j|^2}{12}
+    = \sum \mathrm{Pr}[X \in \Delta_j] \dfrac 1 {12M^2} \dfrac 1 {\lambda^2(c_j)} \\
+    &amp;\approx \dfrac 1 {12M^2} \int p_X(x) \dfrac 1 {\lambda^2(x)}\, dx
+\end{align}\]</span>
+This variational problem can be solved to yield <span class="math inline">\(\lambda^*(x) = c \cdot p(x)^{1/3}\)</span>.
+<strong>This generalizes to non-quadratic losses</strong>!
+In other words, to extremize the rmse, we should maximize the entropy
+(i.e. have uniform distribution) of <span class="math inline">\(f_X^{1/3}\)</span>. It turns out that
+<span class="math display">\[
+    D_{\mathrm{scalar}}(R) = \dfrac{\pi \sqrt 3}{2} \sigma^2 2^{-2R}, \quad R\gg 1
+\]</span>
+<strong>Quantization for quantum systems?</strong></p>
+<div id="vector-quantization" class="section level3 unnumbered hasAnchor">
+<h3>Vector quantization<a href="lecture-notes.html#vector-quantization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>By <strong>vector quantization</strong>, we mean i.i.d <span class="math inline">\(X_j\)</span>. For i.i.d Gaussians,
+we obtain <span class="math inline">\(1.65\)</span> better in RMSE, or 0.72 bit / sample
+better (i.e. <span class="math inline">\(R\mapsto R+0.72\)</span> kills the constant factor).
+<span class="math display">\[
+    D(R) = \sigma^2 2^{-2R}, \quad \forall R&gt;0
+\]</span>
+Given <span class="math inline">\(X^n\sim P_X\)</span> i.i.d on <span class="math inline">\(\mathcal A\)</span> with reconstruction alphabet <span class="math inline">\(\hat A\)</span>,
+the distortion metric <span class="math inline">\(d(x, \hat x):\mathcal A\times \hat {\mathcal A}\to \bar{\mathbb R}\)</span>.
+I.i.d. assumption is not as important, but the separability of distortion metric is:
+<span class="math display">\[
+    d(x^n, \hat x^n) = \dfrac 1 n \sum_{t=1}^n d(x_t, \hat x_t)
+\]</span>
+Define an <span class="math inline">\((n, M, D)\)</span>-code (or vector quantizer) to be the pair <span class="math inline">\((f, g)\)</span> with
+<span class="math display">\[
+    X^n\xrightarrow f W\in [M] \xrightarrow g \hat X^n\in \hat{\mathcal A}
+\]</span>
+such that <span class="math inline">\(\mathbb E[d(X^n, \hat X^n)] \leq D\)</span>. Every scalar quantizer can be tensorized
+into a vector quantizer. Similarly, define the fundamental limit
+<span class="math display">\[
+    M^*(n, D) = \inf_{\exists(N, M, D)-\mathrm{code}} M
+\]</span>
+Note that this is subadditive, since
+<span class="math display">\[
+    \log M^*(n_1+n_2, D)\leq \log M^*(n_1, D) + \log M^*(n_2, D)
+\]</span>
+The rate distortion function is defined as the normalized
+limit of this function
+<span class="math display">\[
+    R(D) = \lim_{n\to \infty} \dfrac 1 n \log M^*(n, D)
+\]</span>
+For the non-separable metric <span class="math inline">\(d_n(X^n, \hat X^n) = 1_{X^n=\hat X^n}\)</span>
+we obtain lossless compression. The information version of the distortion rate is
+<span class="math display">\[\begin{align}
+    R^{(I)}(D)
+    &amp;= \lim_{n\to \infty} \dfrac 1 n
+    \inf_{P_{\hat X^n|X^n} | \mathbb Ed_n(X^n, \hat X^n) \leq D}
+    I(X^n; \hat X^n)
+\end{align}\]</span>
+For i.i.d. source and separable distortion, applying tensorization yields
+<span class="math display">\[
+    R^{(I)}(D) = \inf_{\mathbb Ed(X_1, \hat X_1)\leq D} I(X_1; \hat X_1)
+\]</span>
+Moreover, the map <span class="math inline">\(D\mapsto R^{(I)}(D)\)</span> is convex (follows by mixing the
+rate-achieving channels and applying convexity of MI).</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-138" class="theorem"><strong>Theorem 14.13  </strong></span>For every <span class="math inline">\((n, M, D)\)</span>-code, <span class="math inline">\(\log M \geq n R^{(I)}(D)\)</span>.</p>
+</div>
+<p>By definition, <span class="math inline">\(I(X^n; \hat X^n) \geq R^{(I)}(D)\)</span>;
+on the other hand, the MI is upper-bounded by the entropy of the bottleneck
+<span class="math inline">\(\log M\)</span>.</p>
 
+</div>
 </div>
 </div>
             </section>
