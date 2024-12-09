@@ -1243,7 +1243,7 @@ Agenda:
 3. Random coding bound. 
 4. (Next time): asymptotics. 
 
-## Scalar quantization {-}
+### Scalar quantization {-}
 
 Two change of perspectives in transmitting continuous signals: 
 
@@ -1370,3 +1370,290 @@ maximal entropy of the bottleneck $\log M$.
 
 The converse bound (analogous to shannon's noisy coding theorem) 
 is obtained by a similar random coding technique. 
+
+## Dec 4: Density estimation {-}
+
+Agenda: 
+
+1. Review of metric entropy. 
+2. $\log N \propto 1/\epsilon$. 
+3. Density estimation. 
+4. Yang-Barron method. 
+5. Lower bound. 
+
+Rule of thumb: the minimax rate of a class 
+\[ 
+    R_n^* \approx \inf_\epsilon \epsilon^2 + \df 1 n \log N(\epsilon)
+\] 
+
+### Review of metric entropy {-}
+
+Given $\Theta\subset V$ a metric space, define the metric entropy 
+$N(\epsilon; \Theta)$ to be the minimum number of $\epsilon$-balls 
+which cover $\Theta$. This characterizes how "compact" the space $\Theta$ is. 
+
+Similarly, the packing number $M(\epsilon; \Theta)$ is the maximum number 
+of pointwise $\epsilon$-far points contained in $\Theta$. We have shown that 
+\[ 
+    M(\epsilon) \geq N(\epsilon) \geq M(2\epsilon)
+\] 
+We also considered the class $\mca F_\beta^d(C)$ as the class of 
+pdf's such that $f^{\lfloor \beta\rfloor}$ is $(\beta-\lfloor \beta\rfloor)$-Holder. 
+An $\alpha$-Holder function satisfies $|g(x) - g(y)| \leq C^\alpha |x-y|^\alpha$. 
+
+Foundational theorem: for $L_{p\in [1, \infty]}$-distances, 
+$\log N(\epsilon, \mca F_\beta^d) = \Omega\, (1/\epsilon)^{d/\beta}$. 
+
+One immediate implication is the proof (of non-existence) of 
+Hilbert's 13-th problem for $1$-Lipschitzz problems. 
+
+Consider samples $X_1, \dots, X_n$ drawn i.i.d from 
+$f\in \mca F_\beta^d$ on $[0, 1]^d$, or the collection of 
+$\lceil \beta\rceil$-differentiable densities which are $(\beta - \lfloor \beta\rfloor)$-Holder. 
+
+Define the minimax rate to be 
+\[ 
+    R_{n, \mrm{dist}}^*(\mca F_\beta^d) 
+    = \inf_{\hat f_n:X^n\to \mca F_\beta^d} \sup_{f\in \mca F_\beta^d} 
+    \Exp \, \mrm{dist}(\hat f_n, f)
+\] 
+Note that $L_{p\neq 1}$ are nonstatistical as in a homogeneous rescaling 
+of the whole space will change the distance. 
+The foundational result in nonparametric statistics is as follows, 
+\[ 
+    R^*_{n, L_p} = \Omega\, n^{-\beta/(2\beta + d} 
+    = \left(\df{\log n}{n}\right)^{\beta/(2\beta+d)} \text{ for }p=\infty 
+\] 
+Today we will prove for $p=2$. Note that for $p\to \infty$, 
+the rate goes as $\sqrt{1/n}$, which is a parametric rate! 
+
+Proceeding to the proof, define the contracted class 
+\[ 
+    F_\beta' = \df 1 2 U + \df 1 2 \mca F_\beta 
+\] 
+
+We first work with a contracted class with common support. 
+
+:::{.lemma}
+$R_{n, L_p}^*(\mca F_\beta')$ is the same as that 
+of $\mca F_\beta$ up to a factor of $2$. 
+:::
+_Proof:_ One direction is trivial: 
+$\mca F_\beta'\subset \mca F_\beta \implies R_n^*(\mca F_\beta') \leq 
+R_n^*(\mca F_\beta)$. Next, given data from $\mca F_\beta$, 
+use $R_{n, L_p}^*(\mca F_\beta')$ to select an estimator for 
+the mixture with $U$ (which belongs in $\mca F_\beta'$) and apply 
+Markov's inequality. 
+
+<span style="color:green">
+Usually, the bottleneck in proving entropic characterizations is proving 
+$H^2 \approx D$. Yang-Barron is one of the first applications 
+of information theory to obtain a statistical upper-bound. 
+</span>
+
+:::{.lemma}
+$\forall f, g\in \mca F_\beta'$, up to global constants 
+the $H^2, KL, \chi^2, L_2^2$ are equivalent. 
+:::
+_Proof:_ 
+
+1. First note that $f, g\geq 1/2$, and there exists a upper bound $C_{\beta, d}$ 
+    such that $f, g\leq C_{\beta, d}$. 
+2. This immediately yields $\chi^2 \sim L_2$ using the universal constant 
+\[ 
+    \chi^2(f\|g) = \int \df{(f-g)^2}{f} \approx \int (f-g)^2 
+\] 
+The same applies to Hellinger with $(\sqrt x-1)^2 \geq c(x-1)^2$, so 
+$H^2 \geq c\cdot L_2^2$. 
+
+
+Proceeding to prove the Yang-Barron method, we first use the 
+online-to-batch conversion: given $X_j$ sampled i.i.d from $P_{\theta\in \Theta}$
+and an estimator $\hat \theta_n(X_1, \dots, X_n)$. 
+
+1. The batch minimax risk $R_n^*(\Theta) = \inf_{\hat \theta_n}
+    \sup_{\theta\in \Theta} \Exp\, l(\theta, \hat \theta_n)$. 
+2. The online (cumulative) risk 
+\[ 
+    C_n^*(\Theta) = \inf_{\hat \theta_1, \dots, \theta_n} 
+    \sup_{\theta \in \Theta} \sum_{t=1}^n \Exp\, l(\theta, \hat \theta_t)
+\] 
+
+:::{.proposition}
+$(n+1)R_n^*(\Theta) \leq C_{n+1}(\Theta)$. Moreover, 
+if $C_n \approx n^{\alpha>0}$, then $R_n^*\approx n^{\alpha - 1}$. 
+:::
+
+The main constructive step in Yang-Barron is to take $\theta\leftrightarrow f$, 
+and $\hat \theta_t \leftrightarrow \hat f_t(\cdot; X_1, \dots, X_{t-1})$. 
+Take $l(\theta, \hat \theta_t) = D(f\|\hat f_t)$. 
+
+- The batch loss is exactly the $L_2$ risk for KL.
+-  What about the cumulative loss?
+\begin{align}
+    C_n(\mca F) 
+    &= \inf_{\hat f_0, \dots, \hat f_{n-1}} \sup_f \sum_{t=0}^{n-1} D(f\|\hat f_t) \\ 
+    &= \inf \sup D(f^{\ot n} \| \hat f_0\times \dots \times \hat f_{n-1})
+\end{align}
+But the choice of $\hat f_0, \dots, \hat f_{n-1}$. 
+The cumulative minimax risk in KL for density estimation is 
+\[ 
+    C_n(\mca F) = \inf_{Q_{X^n}} \sup_{f\in \mca F} D(f^{\ot n} \| Q_{X^n}) 
+    = \sup_{\pi \in \mca P(\mca F)} I(f; X^n) 
+\] 
+Note that we can upper-bound the capacity using the metric entropy. 
+
+The final Yang-Barron estimator is an online exponential-
+
+A recap of the proof sketch:
+
+1. Reduce $\mca F_\beta\to \mca F_\beta'$ 
+    to a manageable class with common support. 
+2. Demonstrate that on $\mca F_\beta'$, KL and $L^2$ 
+    are equivalent up to universal constants. 
+3. Apply the online-to-batch reduction and recognize the 
+    cumulative risk in terms of metric entropy. 
+
+
+Proceeding to prove the lower-bund, given a family $\Theta$, 
+let $M_H(\epsilon, \Theta)$ be the packing number unfer Hellinger. 
+The capacity 
+\[ 
+    C_n(\Theta) \geq \min \left[\df{\log e}{2} n \epsilon^2, 
+    \log M_H(\epsilon)\right] - \log 2 
+\] 
+To prove the lower bound, take $\theta_1, \dots, \theta_M$ 
+such that $H^2(P_{\theta_j}, P_{\theta_k}) \geq \epsilon^2$. 
+Recall that there exists hypothesis test for 
+$P_{\theta_j}^{\ot n}$ against $P_{\theta_k}^{\ot n}$ such that 
+(using TV-$H^2$ comparison and tensorization of $H^2$): 
+\[ 
+    P_e \leq \exp \left[
+        n H^2(P_{\theta_j}, P_{\theta_k})/2 
+    \right]
+\] 
+To conduct $M$-ary hypothesis, take the decoded value $\hat \theta$ 
+to be the winner of all pairwise tests (else error), then 
+\[ 
+    \Pr[\theta \neq \hat \theta] \leq M e^{-n\epsilon^2/2}
+\] 
+Suppose $\Pr[\theta \neq \hat \theta]<1/2$, 
+then use Fano's inequality to lower-bound the mutual information
+\[ 
+    C_n \geq I(\theta; X^n) \geq I(\theta; \hat \theta) \geq 
+    \df 1 2 \log M - \log 2 
+\] 
+
+## Dec 9. Strong DPI {-}
+
+Agenda: 
+
+1. Wrap-up relation between statistics and information theory. 
+2. Definition of SDPI. 
+3. Less noisy preorder. 
+4. Spiked Wigner model. 
+
+### Minimax stats {-}
+
+Recall that we wish to estimate $\theta\in \Theta$ 
+and observe $X\sim P_\theta$. 
+The metric is $\Exp l(\theta, \hat \theta)$ to be minimized. 
+
+Density estimation falls under this example: $\theta$ is a pdf, 
+    the observation consists of i.i.d. samples, and the metric is 
+    KL, $H^2$, or TV. 
+
+**Lower bound:** If there exists $\epsilon$-estimator $\hat \theta$ 
+for $\theta$, then $I(\theta; \hat \theta)\leq I(\theta; X)$ 
+implies that the metric entropy of $\Theta \leq$ the capacity of 
+$\theta\to X$ channel. This is called the M.I.M. 
+
+- The metric entropy of $\Theta$ can be 
+    bounded by a packing of $\Theta$ in the $l$-metric. 
+- The capacity of $\theta\to X$ can be bounded by a covering in KL. 
+
+The difficulty of learning (statistically estimating) 
+high-dimensional statistical classes may be captured by metric entropy. 
+The metric entropy gives us a rough estimate of "how hard" it is 
+to estimate a class. 
+
+### Combinatorial statistics {-}
+
+Recall the DPI graph $(P_X, Q_X)\xrightarrow {P_{Y|X}} (P_Y, Q_Y)$ 
+and $D(P_X\|Q_X) \geq D(P_Y \| Q_Y)$. Strong DPI aims to prove the 
+existence of $\eta<1$ such that 
+\[ 
+    \eta\, D(P_X\|Q_X) \geq D(P_Y\|Q_Y)
+\] 
+
+:::{.definition name="SDPI constant"}
+Given $P_{Y|X}$, define the (input-independent) SDPI constant 
+\[ 
+    \eta_f(P_{Y|X}) = \sup \df{D_f(Q_Y\|P_Y)}{D_f(Q_X\|P_X)}
+\] 
+the supremum is taken over all $Q_X, P_X$ 
+such that the expression makes sense. The input-dependent SDPI 
+constant $\eta_f(P_X, P_{Y|X})$ is the supremum of the same 
+ratio over $Q_X$. 
+:::
+
+Intuition: $\eta_{\mrm{KL}}$ is basically the modified log-sobelev inequalities, 
+and $\eta_{\chi^2}$ is the spectral gap for Markov chains. 
+We'll be mostly focused on the input-independent SDPI constant. 
+
+:::{.proposition}
+The SDPI constant for $f$-divergence and $f$-MI are equivalent. 
+:::
+
+How do we show that SDPI is not 1? 
+
+:::{.proposition name="properties of SDPI"}
+1. $\eta_{\mrm{TV}} = \mrm{diam}_{\mrm{TV}} = \sup_{x, x'} \mrm{TV}(P_{Y|X=x}, P_{Y|X=x'})$. 
+2. $\eta_f \leq \eta_{\mrm{TV}}$. 
+3. $\eta_{\mrm{KL}} = \eta_{\chi^2} = \eta_{H^2} = \eta_f$ 
+    for $f$ if $f$ is twice-differentiable and operator-convex. 
+4. $\eta_{\chi^2} = \sup_{P_X, f, g} \rho^2(f(X), g(Y))$ 
+    i.e. maximum correlation coefficient squared. 
+5. For $\mca X$ is binary, let $P_{Y|X=0} = P_0$ and $P_{Y|X=1}=P_1$, then 
+\[ 
+    \eta_{\mrm{KL}} = \sup_{0<\beta<1} LC_\beta(P_0\| P_1)
+\] 
+6. Up to a coefficient of $1/2$, $\eta_{\mrm{KL}}$ is always given by Hellinger. 
+\[ 
+    \df 1 2 H^2(P_0, P_1)\leq \eta_{\mrm{KL}} \leq H^2(P_0, P_1)
+\] 
+7. For any $\mca X$, the SDPI constant $\eta_{\mrm{KL}}$ is equal to that 
+    of the worst binary subchannel (Bernoulli on two-atom support). 
+8. Corollary: $\df 1 2 \mrm{diam}_{H^2} \leq \eta_{\mrm{KL}}(P_{Y|X}) \leq \mrm{diam}_{H^2}$. 
+:::
+
+:::{.proposition}
+$\eta_{KL}(\mrm{BSC}_\delta) = (1-2\delta)^2$. 
+:::
+To prove this, use $\eta_{\mrm{KL}} = 1 - (1 - \frac 1 2 H^2(\mrm{Ber}_\delta, 
+\mrm{Ber}_{\bar \delta}))$. Achievability is proven by taking $\mrm{BSC}_{\alpha\to 1/2}$ 
+and comparing MI. 
+
+
+:::{.definition name="less noisy comparison"}
+$P_{Y|X}\leq_{ln} P_{Z|X}$ if $\forall P_{U, X}$ in the chain 
+$U\to X\to (Y, X)$, we have $I(U; Y) \leq I(U; Z)$. 
+:::
+
+We also have the following result: 
+$\eta_{\mrm{KL}}(P_{Y|X}) = 1 - \tau\iff P_{Y|X} \leq_{ln} \mrm{Erasure}_\tau$. 
+
+
+:::{.theorem name="tensorization"}
+The less-noisy definition tensorizes: 
+\[ 
+    P_{Y_j|X_j} \leq_{ln} P_{Z_j|X_j} \implies \prod P_{Y_j|X_j} \leq_{ln} \prod P_{Z_j|X_j}
+\] 
+i.e. given $I(U; Y_j)\leq I(U; Z_j)$, we wish to show $I(U; Y_1, Y_2)\leq I(U; Z_1, Z_2)$. 
+:::
+To show this, use the chain 
+\begin{align}
+    I(U; Y_1, Y_2) 
+    &= I(U; Y_1) + I(U; Y_2|Y_1) 
+    \leq I(U; Y_1) + I(U; Z_2|Y_1) = I(U; Y_1, Z_2)
+\end{align}

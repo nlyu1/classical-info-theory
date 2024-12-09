@@ -225,6 +225,15 @@ def:unlabeled-div-135
 prp:unlabeled-div-136
 thm:unlabeled-div-137
 thm:unlabeled-div-138
+lem:unlabeled-div-139
+lem:unlabeled-div-140
+prp:unlabeled-div-141
+def:unlabeled-div-142
+prp:unlabeled-div-143
+prp:unlabeled-div-144
+prp:unlabeled-div-145
+def:unlabeled-div-146
+thm:unlabeled-div-147
 entropy
 entropy-method-in-combinatorics
 kullback-leibler-divergence
@@ -237,5 +246,4 @@ statistical-decision-applications
 lossless-compression
 hypothesis-testing-large-deviations
 noisy-channel-coding
-channel-capacity
 lecture-notes

@@ -119,7 +119,7 @@ For $P_{XY}\ll P_XP_Y$ we have $i(x; y) = \log \df{P_{XY}(x, y)}{P_X(x)P_Y(y)}$ 
 $I(X; Y) = \Exp[i(x; y)]$. 
 :::
 
-# Channel Capacity 
+## Channel Capacity {-}
 
 :::{.definition name="channel"}
 Fixing input alphabet $\mca A$ and output alphabet $\mca B$, 

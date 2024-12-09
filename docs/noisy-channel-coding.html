@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-11-25" />
+<meta name="date" content="2024-12-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="hypothesis-testing-large-deviations.html"/>
-<link rel="next" href="channel-capacity.html"/>
+<link rel="next" href="lecture-notes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -155,9 +155,9 @@
 <ul>
 <li class="chapter" data-level="" data-path="noisy-channel-coding.html"><a href="noisy-channel-coding.html#optimal-decoder-weak-converse"><i class="fa fa-check"></i>Optimal decoder, weak converse</a></li>
 <li class="chapter" data-level="" data-path="noisy-channel-coding.html"><a href="noisy-channel-coding.html#random-and-maximal-coding"><i class="fa fa-check"></i>Random and maximal coding</a></li>
+<li class="chapter" data-level="" data-path="noisy-channel-coding.html"><a href="noisy-channel-coding.html#channel-capacity"><i class="fa fa-check"></i>Channel Capacity</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="channel-capacity.html"><a href="channel-capacity.html"><i class="fa fa-check"></i><b>13</b> Channel Capacity</a></li>
-<li class="chapter" data-level="14" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>14</b> Lecture notes</a>
+<li class="chapter" data-level="13" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>13</b> Lecture notes</a>
 <ul>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#oct-2-fisher-information-classical-minimax-estimation"><i class="fa fa-check"></i>Oct 2: Fisher information, classical minimax estimation</a>
 <ul>
@@ -193,10 +193,19 @@
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#water-filling"><i class="fa fa-check"></i>Water-filling</a></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#metric-entropy"><i class="fa fa-check"></i>Metric-entropy</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-25-rate-distortion-theorem"><i class="fa fa-check"></i>Nov 25: Rate-distortion theorem</a></li>
-<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#scalar-quantization"><i class="fa fa-check"></i>Scalar quantization</a>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#nov-25-rate-distortion-theorem"><i class="fa fa-check"></i>Nov 25: Rate-distortion theorem</a>
 <ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#scalar-quantization"><i class="fa fa-check"></i>Scalar quantization</a></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#vector-quantization"><i class="fa fa-check"></i>Vector quantization</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#dec-4-density-estimation"><i class="fa fa-check"></i>Dec 4: Density estimation</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#review-of-metric-entropy"><i class="fa fa-check"></i>Review of metric entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#dec-9.-strong-dpi"><i class="fa fa-check"></i>Dec 9. Strong DPI</a>
+<ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#minimax-stats"><i class="fa fa-check"></i>Minimax stats</a></li>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#combinatorial-statistics"><i class="fa fa-check"></i>Combinatorial statistics</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
@@ -332,6 +341,26 @@ For <span class="math inline">\(P_{XY}\ll P_XP_Y\)</span> we have <span class="m
 <span class="math inline">\(I(X; Y) = \mathbb E[i(x; y)]\)</span>.</p>
 </div>
 </div>
+<div id="channel-capacity" class="section level2 unnumbered hasAnchor">
+<h2>Channel Capacity<a href="noisy-channel-coding.html#channel-capacity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:unlabeled-div-107" class="definition"><strong>Definition 12.5  (channel) </strong></span>Fixing input alphabet <span class="math inline">\(\mathcal A\)</span> and output alphabet <span class="math inline">\(\mathcal B\)</span>,
+a channel is a sequence of kernels <span class="math inline">\(P_{Y^n|X^n}:\mathcal A^n\to \mathcal B^n\)</span>,
+where the index is called the <em>blocklength</em>.</p>
+<ul>
+<li>A channel is <u>non-anticipatory</u> if, fixing <span class="math inline">\(n\)</span>,
+<span class="math inline">\(P_{Y^{\forall k\leq n}|X^k} = P_{Y^k|X^n}\)</span> and
+coincides with <span class="math inline">\(P_{Y^k|X^k}\)</span> in the sequence. This formalizes
+the notion that the channel only depends causally upon the input.</li>
+<li>It is discrete if <span class="math inline">\(\mathcal A, \mathcal B\)</span> are finite.</li>
+<li>It is additive-noise if <span class="math inline">\(\mathcal A=\mathcal B\)</span> are abelian groups and
+<span class="math inline">\(Y^n=X^n+Z^n\)</span> and <span class="math inline">\(Z^n\perp\!\!\!\perp X^n\)</span>.</li>
+<li>A channel is <em>memoryless</em> if it is a product channel.</li>
+<li>It is stationary memoryless if it is the product of the same single-letter channel.</li>
+</ul>
+</div>
+
+</div>
 </div>
             </section>
 
@@ -339,7 +368,7 @@ For <span class="math inline">\(P_{XY}\ll P_XP_Y\)</span> we have <span class="m
         </div>
       </div>
 <a href="hypothesis-testing-large-deviations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="channel-capacity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lecture-notes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
