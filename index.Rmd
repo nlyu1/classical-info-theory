@@ -52,6 +52,10 @@ link-citations: true
 
 # Preface {-}
 
+Course notes accompanying Fall 2024's iteration of 
+_Information Theory: from Coding to Learning_ [@Polyanskiy_Wu_2025]. 
+Mostly follows the textbook. 
+
 ## Recurring themes {-}
 Fundamentally, information and entropy captures 
 how our uncertainty in a quantity changes after 
@@ -165,30 +169,3 @@ Nontrivial results in this book include:
     single-letter case (theorem \@ref(thm:ldeInfoProj)). 
 10. The frameworks for understanding channel coding (lossy and lossless) 
     as well as rate distortion are very similar. 
-
-
-## Administrative trivia {-}
-Professor email: `yp@mit.edu`. 
-
-Office Hours: LIDS ($6$th floor of $D$-tower, lobby). 
-
-## Motivation {-}
-
-1. Why is training GPT $\iff$ building a great text compressor? 
-2. Given $2$ families of distributions 
-$P_\theta, \theta\in \Theta_1, \Theta_2$. 
-To have $P_{\mrm{err}} \leq \delta$, the number of samples 
-is asymptotically 
-$\left(\min D(P_{\theta_1}\|P_{\theta_2})\right)^{-1} \log(1/\delta)$ 
-3. Noisy channel coding. 
-4. Cramer-Rau bound
-\[ 
-    \min_{\hat \theta} 
-    \max_{\theta\in \Theta} \Exp[(\theta - \hat \theta^2]
-    \asymp \df 1 {n\min \mca I_F(\theta)}
-\] 
-5. How many bits to represent a random function / signal / picture 
-with fidelity $\epsilon$. 
-
-Key concepts: entropy, KL-divergence, mutual information, 
-fisher information, mutual information. 

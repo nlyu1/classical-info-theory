@@ -59,6 +59,29 @@
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 </head>
 
@@ -76,8 +99,6 @@
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#recurring-themes"><i class="fa fa-check"></i>Recurring themes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#insightful-proof-techniques"><i class="fa fa-check"></i>Insightful proof techniques</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#administrative-trivia"><i class="fa fa-check"></i>Administrative trivia</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i>Motivation</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="entropy.html"><a href="entropy.html"><i class="fa fa-check"></i><b>1</b> Entropy</a>
 <ul>
@@ -232,6 +253,9 @@
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Course notes accompanying Fall 2024’s iteration of
+<em>Information Theory: from Coding to Learning</em> <span class="citation">(<a href="#ref-Polyanskiy_Wu_2025">Polyanskiy and Wu 2025</a>)</span>.
+Mostly follows the textbook.</p>
 <div id="recurring-themes" class="section level2 unnumbered hasAnchor">
 <h2>Recurring themes<a href="index.html#recurring-themes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Fundamentally, information and entropy captures
@@ -373,34 +397,13 @@ single-letter case (theorem <a href="hypothesis-testing-large-deviations.html#th
 <li>The frameworks for understanding channel coding (lossy and lossless)
 as well as rate distortion are very similar.</li>
 </ol>
-</div>
-<div id="administrative-trivia" class="section level2 unnumbered hasAnchor">
-<h2>Administrative trivia<a href="index.html#administrative-trivia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Professor email: <code>yp@mit.edu</code>.</p>
-<p>Office Hours: LIDS (<span class="math inline">\(6\)</span>th floor of <span class="math inline">\(D\)</span>-tower, lobby).</p>
-</div>
-<div id="motivation" class="section level2 unnumbered hasAnchor">
-<h2>Motivation<a href="index.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ol style="list-style-type: decimal">
-<li>Why is training GPT <span class="math inline">\(\iff\)</span> building a great text compressor?</li>
-<li>Given <span class="math inline">\(2\)</span> families of distributions
-<span class="math inline">\(P_\theta, \theta\in \Theta_1, \Theta_2\)</span>.
-To have <span class="math inline">\(P_{\mathrm{err}} \leq \delta\)</span>, the number of samples
-is asymptotically
-<span class="math inline">\(\left(\min D(P_{\theta_1}\|P_{\theta_2})\right)^{-1} \log(1/\delta)\)</span></li>
-<li>Noisy channel coding.</li>
-<li>Cramer-Rau bound
-<span class="math display">\[
-\min_{\hat \theta}
-\max_{\theta\in \Theta} \mathbb E[(\theta - \hat \theta^2]
-\asymp \dfrac 1 {n\min \mathcal I_F(\theta)}
-\]</span></li>
-<li>How many bits to represent a random function / signal / picture
-with fidelity <span class="math inline">\(\epsilon\)</span>.</li>
-</ol>
-<p>Key concepts: entropy, KL-divergence, mutual information,
-fisher information, mutual information.</p>
 
+</div>
+</div>
+<h3>Bibliography<a href="bibliography.html#bibliography" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-Polyanskiy_Wu_2025" class="csl-entry">
+Polyanskiy, Yury, and Yihong Wu. 2025. <em>Information Theory: From Coding to Learning</em>. Cambridge University Press.
 </div>
 </div>
             </section>
