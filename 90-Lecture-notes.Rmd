@@ -1657,3 +1657,99 @@ To show this, use the chain
     &= I(U; Y_1) + I(U; Y_2|Y_1) 
     \leq I(U; Y_1) + I(U; Z_2|Y_1) = I(U; Y_1, Z_2)
 \end{align}
+
+## Dec 11: SDPI, Distributed Estimation {-}
+
+Agenda: 
+
+1. Review SDPI. 
+2. Finish Spiked Wigner. 
+3. Correlation estimation (Gap Hamming problem in TCS) 
+    and distributed mean estimation (machine learning). 
+
+Recall the S-DPI constant 
+\[ 
+    \df 1 2 \mrm{diam}_{H^2}\leq \eta_{\mrm{KL}}(P_{Y|X}) 
+    \leq \mrm{diam}_{H^2}(P_{Y|X})
+\] 
+Also recall the less-noisy definition: 
+
+- For all $P_{UX}$, we have $I(U; X)\leq I(U; Z)\implies P_{Y|X}\prec_{ln}P_{Z|X}$, so 
+    $Z$ is less noisy than $Y$. 
+- Consider another "natural" definition: forall $P_X$, we have $I(X; Y) \leq I(X; Z)$; 
+    this says that $P_{Y|X}\prec_{mc}P_{Z|X}$ i.e. $Z|X$ is more capable than $Y|X$. 
+
+Why is less noisy better than more capable? First, it's stronger, and it additionally 
+ensures that not only is the whole input $X$ "better preseved," but also any 
+subobject of $X$. Properties of less noisy comparison: 
+
+1. Tensorization: $P_{Y|X}\preceq_{ln}P_{Z|X} \iff 
+    \forall n: P_{Y|X}^{\ot n}\preceq_{ln}P_{Z|X}^{\ot n}$. 
+2. $\eta_{KL}(P_{Y|X})\leq 1-\tau \iff P_{Y|X} \preceq_{ln} EC_\tau$. 
+
+### Spiked Wigner {-}
+
+Consider an ambient $W_{jk}=W_{kj} \sim \mca N(0, 1)$, and 
+$X_j\sim \mrm{Unif}\{\pm 1\}$ for some "signal", we observe 
+\[ 
+    Y = \sqrt{\df \lambda n} XX^T + W 
+\] 
+and estimator $\hat X(Y)$, 
+
+1. If $\lambda \leq 1$, then $\forall X: \df 1 n \Exp|\hat X^TX|\to 0$. 
+    i.e. if the signal is small, then asymptotically we cannot even learn about planted signals. 
+2. If $\lambda>1$, then for $\hat X$ being the top eigenvalue of $Y$, the correlation is bounded 
+    away from $0$: $\df 1 n \Exp |\hat X^TX|\geq \epsilon_0(\lambda)>0$. 
+    - This follows from random matrix theory. 
+
+Recall inference on graphs: consider a graph with vertices $X_j\sim \mrm{Unif}\pm 1$. 
+For every edge $e=(u, v)$, we have access to a channel $P_{Y_e|X_e}$. 
+For the spiked wigner problem, we have a complete graph and 
+\[ 
+    Y_e = \sqrt{\df \lambda n} X_uX_v + \mca N(0, 1)
+\] 
+Consider the channel $P_{Z_l|X_l} = EC_\tau(X_uX_v)$. 
+How to compute $I(X_1; X_2|Z_E)$? 
+
+- If there is an open path (i.e. without erasure) between $X_1, X_2$, 
+    then we know $X_1X_2$ with certainty. 
+
+Unrolling the definition yields 
+\[ 
+    I(X_1; X_2|Z_E) = \Pr[\exists\text{open path in } ER(1-\tau, n)]
+\] 
+Theorem (Erdos-Renyi random graph model): 
+$ER(\lambda/n, n)$ for $\lambda<1$ are of size $O(\log n)$; in this regime, 
+the probability that $X_1, X_2$ are connected goes as $\log n / n \to 0$. 
+
+For $\lambda>1$, there exists a giant connected component of size $\Omega(n)$. 
+
+Back to spiked Wigner, we compute the $\eta_{KL}$ of 
+$(X_1, X_2)\mapsto X_1X_2\mapsto Y=\sqrt{\lambda/n} X_1X_2 = W$, 
+apply less noisy reduction. Retracing the steps: 
+
+1. Start with random matrix theory, 
+    we recognized the reduction to graph inference. 
+2. Graph inference is easily bounded for the $EC_\tau$ channel using ER theory. 
+3. Reduction to the relatively easy $EC_\tau$ is done using SDPI theory. 
+
+### Correlation estimation {-}
+
+Given i.i.d. pairs $(X_j, Y_j)$ drawn from $P_{XY}$ with uniform marginal on $\pm 1$ 
+and correlation $\rho$; equivalently, 
+$X\xrightarrow{\mrm{BSC}_\delta} Y$ with $1-2\delta = \rho$. 
+
+Suppose we wish to estimate $\rho$ between two different partieis 
+holding $X, Y$ respectively, using $B$ bits. Claim: 
+\[ 
+    \Exp (\rho - \hat \rho)^2 = \df 1 {2\log 2} \cdot \df{1+o(1)}{B}
+\] 
+
+- Contraction coefficient tensorizes (invariant) assuming independent inputs. 
+- Removing this constraint, the SDPI coefficient always goes to $\infty$ due to the 
+    existence of error-correcting codes. 
+
+
+Yury's great quote: popularity is not quality; 
+Macdonalds produce billions of dollars of gross scales, 
+but the Michelin restaurants are not upset about it. 
