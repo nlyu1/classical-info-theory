@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Lecture notes | 6.7480 Notes</title>
   <meta name="description" content="12 Lecture notes | 6.7480 Notes" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Lecture notes | 6.7480 Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicholas Lyu" />
 
 
-<meta name="date" content="2024-12-11" />
+<meta name="date" content="2025-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -64,7 +64,6 @@
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -284,10 +283,7 @@ Recall that Donsker-varadhan is not linear in <span class="math inline">\(\mathb
 but there is a standard trick to rewrite the expectation.</p>
 <p>We now apply the variational characterization to <span class="math inline">\(\chi^2\)</span>;</p>
 <div class="proposition">
-<p><span id="prp:unlabeled-div-103" class="proposition"><strong>Proposition 12.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q)
-= \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[
-    h(X) + \dfrac{h(X)^2}{4}
-\right]\)</span></p>
+<p><span id="prp:unlabeled-div-103" class="proposition"><strong>Proposition 12.1  (variational characterization of χ²) </strong></span><span class="math inline">\(\chi^2(P \|Q) = \sup_{h:\mathcal X\to \mathbb R} \mathbb E_p h(X) - \mathbb E_Q \left[  h(X) + \dfrac{h(X)^2}{4} \right]\)</span></p>
 </div>
 <p>Expanding this out, the first term is very useful;
 but the second is not. The first step is to break a single
@@ -455,8 +451,7 @@ in a connected interval open interval about <span class="math inline">\(\theta_0
 \dfrac{\dot p^t(x)^2}{p^0(x)} &lt; \infty
 \]</span></li>
 </ol>
-<p>Then <span class="math inline">\(\chi^2(P^{\theta_0 + \delta} \| P^{\theta_0})
-    + \delta^2 \mathcal J_F(\theta_0) + o(\delta^2)\)</span>.</p>
+<p>Then <span class="math inline">\(\chi^2(P^{\theta_0 + \delta} \| P^{\theta_0})  + \delta^2 \mathcal J_F(\theta_0) + o(\delta^2)\)</span>.</p>
 </div>
 <p>The quadratic local behavior of <span class="math inline">\(\chi^2\)</span> requires
 not only finite Fisher information at <span class="math inline">\(\theta_0\)</span>;
@@ -1024,8 +1019,7 @@ noise perturbations.</p>
 hypothesis testing; if we require <span class="math inline">\(\epsilon\to 0\)</span>,
 then <span class="math inline">\(M^*(\epsilon)\to 0\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-122" class="theorem"><strong>Theorem 12.9  (Fano's bound) </strong></span><span class="math inline">\(\log M^*_{\mathrm{max}}(\epsilon) \leq \log M^*(\epsilon)
-\leq \dfrac{\sup_X I(X; Y) + \log 2}{1-\epsilon}\)</span>.</p>
+<p><span id="thm:unlabeled-div-122" class="theorem"><strong>Theorem 12.9  (Fano's bound) </strong></span><span class="math inline">\(\log M^*_{\mathrm{max}}(\epsilon) \leq \log M^*(\epsilon) \leq \dfrac{\sup_X I(X; Y) + \log 2}{1-\epsilon}\)</span>.</p>
 </div>
 <p><em>Proof:</em> Again, to prove impossibility bounds
 begin with the easy case.
@@ -1075,8 +1069,7 @@ is the <strong>block length</strong>.
 <span class="math inline">\(P_{B^n | A^n}(b^n|a^n) = \delta^d(1-\delta)^{n-d}\)</span>,
 where <span class="math inline">\(d=d_M(a^n, b^n)\)</span> is the Hamming distance between
 the two strings.
-- Equivalently, <span class="math inline">\(B^n = A^n + Z^n\mod 2, \quad
-    Z_j\sim \mathrm{Ber}(\delta)\)</span> i.i.d.</p>
+- Equivalently, <span class="math inline">\(B^n = A^n + Z^n\mod 2, \quad  Z_j\sim \mathrm{Ber}(\delta)\)</span> i.i.d.</p>
 <p>More generally, a discrete stationary memoryless channel (DMC)
 is just a tensorized channel which acts i.i.d on the input components.</p>
 <div class="definition">
@@ -1106,8 +1099,7 @@ take an <span class="math inline">\((n, M, \tilde \epsilon)\)</span> code and de
 For every average-prob error code, we can apply the same idea
 behind Markov’s inequality to select a max-probability sub-code.</p>
 <div class="corollary">
-<p><span id="cor:unlabeled-div-125" class="corollary"><strong>Corollary 12.2  </strong></span><span class="math inline">\(C_\epsilon \geq C_\epsilon^{\mathrm{max}}
-\geq \lim_{\delta \to 0^-} C_{\epsilon - \delta} \implies C^{\mathrm{max}} = C\)</span>.</p>
+<p><span id="cor:unlabeled-div-125" class="corollary"><strong>Corollary 12.2  </strong></span><span class="math inline">\(C_\epsilon \geq C_\epsilon^{\mathrm{max}} \geq \lim_{\delta \to 0^-} C_{\epsilon - \delta} \implies C^{\mathrm{max}} = C\)</span>.</p>
 </div>
 <p>One perspective on <span class="math inline">\(C\)</span> is that it is the maximal rate of
 asymptotically reliable communication. In other words,
@@ -1415,8 +1407,7 @@ However, this turns out not to be the best idea: why?</li>
 into equi-measure components.</li>
 </ol>
 <p>For uniform quantization, the limit <span class="math inline">\(M\to \infty\)</span> makes the conditional
-distribution of <span class="math inline">\(X\in \Delta_j\)</span> roughly uniform. Let <span class="math inline">\(|\Delta_j| = \dfrac{2A}{M},
-M=2^R\)</span>, we obtain
+distribution of <span class="math inline">\(X\in \Delta_j\)</span> roughly uniform. Let <span class="math inline">\(|\Delta_j| = \dfrac{2A}{M}, M=2^R\)</span>, we obtain
 <span class="math display">\[\begin{align}
     \mathbb E|X - \hat X|^2
     &amp;= \sum_j \mathrm{Pr}[X\in \Delta_j] \mathbb E_{|X\in \Delta_j} |X - \hat X|^2 \\
@@ -1581,8 +1572,7 @@ the rate goes as <span class="math inline">\(\sqrt{1/n}\)</span>, which is a par
 of <span class="math inline">\(\mathcal F_\beta\)</span> up to a factor of <span class="math inline">\(2\)</span>.</p>
 </div>
 <p><em>Proof:</em> One direction is trivial:
-<span class="math inline">\(\mathcal F_\beta&#39;\subset \mathcal F_\beta \implies R_n^*(\mathcal F_\beta&#39;) \leq
-R_n^*(\mathcal F_\beta)\)</span>. Next, given data from <span class="math inline">\(\mathcal F_\beta\)</span>,
+<span class="math inline">\(\mathcal F_\beta&#39;\subset \mathcal F_\beta \implies R_n^*(\mathcal F_\beta&#39;) \leq R_n^*(\mathcal F_\beta)\)</span>. Next, given data from <span class="math inline">\(\mathcal F_\beta\)</span>,
 use <span class="math inline">\(R_{n, L_p}^*(\mathcal F_\beta&#39;)\)</span> to select an estimator for
 the mixture with <span class="math inline">\(U\)</span> (which belongs in <span class="math inline">\(\mathcal F_\beta&#39;\)</span>) and apply
 Markov’s inequality.</p>
@@ -1610,8 +1600,7 @@ The same applies to Hellinger with <span class="math inline">\((\sqrt x-1)^2 \ge
 online-to-batch conversion: given <span class="math inline">\(X_j\)</span> sampled i.i.d from <span class="math inline">\(P_{\theta\in \Theta}\)</span>
 and an estimator <span class="math inline">\(\hat \theta_n(X_1, \dots, X_n)\)</span>.</p>
 <ol style="list-style-type: decimal">
-<li>The batch minimax risk <span class="math inline">\(R_n^*(\Theta) = \inf_{\hat \theta_n}
-\sup_{\theta\in \Theta} \mathbb E\, l(\theta, \hat \theta_n)\)</span>.</li>
+<li>The batch minimax risk <span class="math inline">\(R_n^*(\Theta) = \inf_{\hat \theta_n}  \sup_{\theta\in \Theta} \mathbb E\, l(\theta, \hat \theta_n)\)</span>.</li>
 <li>The online (cumulative) risk
 <span class="math display">\[
 C_n^*(\Theta) = \inf_{\hat \theta_1, \dots, \theta_n}
@@ -1762,8 +1751,7 @@ of the worst binary subchannel (Bernoulli on two-atom support).</li>
 <div class="proposition">
 <p><span id="prp:unlabeled-div-140" class="proposition"><strong>Proposition 12.13  </strong></span><span class="math inline">\(\eta_{KL}(\mathrm{BSC}_\delta) = (1-2\delta)^2\)</span>.</p>
 </div>
-<p>To prove this, use <span class="math inline">\(\eta_{\mathrm{KL}} = 1 - (1 - \frac 1 2 H^2(\mathrm{Ber}_\delta,
-\mathrm{Ber}_{\bar \delta}))\)</span>. Achievability is proven by taking <span class="math inline">\(\mathrm{BSC}_{\alpha\to 1/2}\)</span>
+<p>To prove this, use <span class="math inline">\(\eta_{\mathrm{KL}} = 1 - (1 - \frac 1 2 H^2(\mathrm{Ber}_\delta, \mathrm{Ber}_{\bar \delta}))\)</span>. Achievability is proven by taking <span class="math inline">\(\mathrm{BSC}_{\alpha\to 1/2}\)</span>
 and comparing MI.</p>
 <div class="definition">
 <p><span id="def:unlabeled-div-141" class="definition"><strong>Definition 12.7  (less noisy comparison) </strong></span><span class="math inline">\(P_{Y|X}\leq_{ln} P_{Z|X}\)</span> if <span class="math inline">\(\forall P_{U, X}\)</span> in the chain
@@ -1811,8 +1799,7 @@ this says that <span class="math inline">\(P_{Y|X}\prec_{mc}P_{Z|X}\)</span> i.e
 ensures that not only is the whole input <span class="math inline">\(X\)</span> “better preseved,” but also any
 subobject of <span class="math inline">\(X\)</span>. Properties of less noisy comparison:</p>
 <ol style="list-style-type: decimal">
-<li>Tensorization: <span class="math inline">\(P_{Y|X}\preceq_{ln}P_{Z|X} \iff
-\forall n: P_{Y|X}^{\otimes n}\preceq_{ln}P_{Z|X}^{\otimes n}\)</span>.</li>
+<li>Tensorization: <span class="math inline">\(P_{Y|X}\preceq_{ln}P_{Z|X} \iff  \forall n: P_{Y|X}^{\otimes n}\preceq_{ln}P_{Z|X}^{\otimes n}\)</span>.</li>
 <li><span class="math inline">\(\eta_{KL}(P_{Y|X})\leq 1-\tau \iff P_{Y|X} \preceq_{ln} EC_\tau\)</span>.</li>
 </ol>
 <div id="spiked-wigner" class="section level3 unnumbered hasAnchor">

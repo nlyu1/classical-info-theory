@@ -3,7 +3,7 @@
 Key takeaways:
 
 1. The Neyman-Pearson region is reducible to the 
-    closure of convex hull of deterministic tests \ref(thm:detReduction). 
+    closure of convex hull of deterministic tests \@ref(thm:detReduction). 
     Use the layer-cake representation to argue convexity. 
 2. The Neyman-Pearson lemma fundamentally follows from the 
     convexity of $\mca R(P, Q)$ and that the supporting 
@@ -21,10 +21,6 @@ Key takeaways:
     information projection (theorem \@ref(thm:ldeInfoProj)). 
 7. For any event $E$ with $P_X[E]>0$, we have 
     $\log \frac 1 {P_X(E)} = D(P_{X|X\in E} \| P_X)$
-
-<span style="color:red">
-Justification of the infimum in 15.13
-</span>
 
 ## Neyman-Pearson {#npFormulation -}
 
